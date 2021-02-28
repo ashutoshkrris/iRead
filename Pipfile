@@ -8,6 +8,7 @@ django = "*"
 python-decouple = "*"
 psycopg2-binary = "*"
 pillow = "*"
+django-ckeditor = "*"
 
 [dev-packages]
 autopep8 = "*"
