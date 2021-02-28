@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'ckeditor',
     'ckeditor_uploader',
-    'django.contrib.sites',
     'authentication',
     'core',
 ]
@@ -144,7 +143,7 @@ MEDIA_URL = '/media/'
 # CKEditor Configurations
 CKEDITOR_UPLOAD_PATH = "blog/uploads/"
 CKEDITOR_IMAGE_BACKEND = "pillow"
-CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+# CKEDITOR_THUMBNAIL_SIZE = (300, 300)
 CKEDITOR_IMAGE_QUALITY = 40
 CKEDITOR_BROWSE_SHOW_DIRS = True
 CKEDITOR_ALLOW_NONIMAGE_FILES = True
