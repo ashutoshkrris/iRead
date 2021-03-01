@@ -41,7 +41,7 @@ def single(request, slug):
             'tags': tags,
             'popular_posts': popular_posts
         }
-        return render(request, "core/single.html", context)
+        return render(request, "core/blog-single.html", context)
     except Exception as e:
         print(e)
         raise Http404()
