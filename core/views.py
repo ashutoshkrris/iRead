@@ -45,3 +45,6 @@ def single(request, slug):
     except Exception as e:
         print(e)
         raise Http404()
+
+def base(request):
+    return render(request, "core/base.html")
