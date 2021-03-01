@@ -5,7 +5,7 @@
     <title>{% block title %}{% endblock title %} | iRead</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
@@ -36,9 +36,9 @@
               </div>
               <div class="col-3 search-top">
                 <!-- <a href="#"><span class="fa fa-search"></span></a> -->
-                <form action="#" class="search-top-form">
+                <form action="{% url 'search' %}" method="GET" class="search-top-form">
                   <span class="icon fa fa-search"></span>
-                  <input type="text" id="s" placeholder="Type keyword to search...">
+                  <input type="text" id="s" name="query" placeholder="Type keyword to search...">
                 </form>
               </div>
             </div>
@@ -91,7 +91,7 @@
 {% block content %}
   
 {% endblock content %}
-<div class="col-md-12 col-lg-4 sidebar">
+      <div class="col-md-12 col-lg-4 sidebar">
             
             <!-- END sidebar-box -->
             <div class="sidebar-box">
@@ -195,7 +195,7 @@
             <div class="col-md-4">
               <h3>About Us</h3>
               <p class="mb-4">
-                <img src="images/img_1.jpg" alt="Image placeholder" class="img-fluid">
+                <img src="{% static 'images/favicon.png' %}" alt="Image placeholder" class="img-fluid">
               </p>
 
               <p>Lorem ipsum dolor sit amet sa ksal sk sa, consectetur adipisicing elit. Ipsa harum inventore reiciendis. <a href="#">Read More</a></p>
@@ -213,7 +213,7 @@
                           <div class="text">
                             <h4>{{post.title}}</h4>
                             <div class="post-meta">
-                              <span class="mr-2">{{post.timestamp}}</span>
+                              <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>
                               </div>
                           </div>
                         </a>
