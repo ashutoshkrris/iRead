@@ -19,6 +19,6 @@ from .views import index, about, single, contact
 urlpatterns = [
     path('', index, name='home'),
     path('about', about, name='about'),
-    path('single', single, name='single'),
+    path('posts/<slug>', single, name='single'),
     path('contact', contact, name='contact'),
 ]

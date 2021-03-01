@@ -31,7 +31,7 @@ class Post(models.Model):
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
     thumbnail = models.ImageField(upload_to="blog/thumbnails")
     published = models.BooleanField(default=True)
-    categories = models.ManyToManyField(Category)
+    categories = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     tags = models.ManyToManyField(Tag)
     views = models.IntegerField(default=0)
 
