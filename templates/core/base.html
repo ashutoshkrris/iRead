@@ -29,10 +29,10 @@
           <div class="container">
             <div class="row">
               <div class="col-9 social">
-                <a href="#"><span class="fa fa-twitter"></span></a>
-                <a href="#"><span class="fa fa-facebook"></span></a>
-                <a href="#"><span class="fa fa-instagram"></span></a>
-                <a href="#"><span class="fa fa-youtube-play"></span></a>
+                <a href="{{links.twitter}}"><span class="fa fa-twitter"></span></a>
+                <a href="{{links.facebook}}"><span class="fa fa-facebook"></span></a>
+                <a href="{{links.instagram}}"><span class="fa fa-instagram"></span></a>
+                <a href="{{links.portfolio}}"><span class="fa fa-globe"></span></a>
               </div>
               <div class="col-3 search-top">
                 <!-- <a href="#"><span class="fa fa-search"></span></a> -->
@@ -67,7 +67,7 @@
                   <a class="nav-link dropdown-toggle" id="category" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
                     {% for category in categories %}
-                    <a class="dropdown-item" href="category.html">{{category}}</a>  
+                    <a class="dropdown-item" href="{% url 'category' category.name %}">{{category}}</a>  
                     {% endfor %}
                   </div>
 
@@ -96,16 +96,16 @@
             <!-- END sidebar-box -->
             <div class="sidebar-box">
               <div class="bio text-center">
-                <img src="images/person_1.jpg" alt="Image Placeholder" class="img-fluid">
+                <img src="{% static 'images/circle-cropped.png' %}" alt="Image Placeholder" class="img-fluid">
                 <div class="bio-body">
-                  <h2>Meagan Smith</h2>
+                  <h2>Ashutosh Krishna</h2>
                   <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Exercitationem facilis sunt repellendus excepturi beatae porro debitis voluptate nulla quo veniam fuga sit molestias minus.</p>
-                  <p><a href="#" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
+                  <p><a href="{% url 'about' %}" class="btn btn-primary btn-sm rounded">Read my bio</a></p>
                   <p class="social">
-                    <a href="#" class="p-2"><span class="fa fa-facebook"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-instagram"></span></a>
-                    <a href="#" class="p-2"><span class="fa fa-youtube-play"></span></a>
+                    <a href="{{links.facebook}}" class="p-2"><span class="fa fa-facebook"></span></a>
+                    <a href="{{links.twitter}}" class="p-2"><span class="fa fa-twitter"></span></a>
+                    <a href="{{links.instagram}}" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="{{links.portfolio}}" class="p-2"><span class="fa fa-globe"></span></a>
                   </p>
                 </div>
               </div>
@@ -115,39 +115,21 @@
               <h3 class="heading">Popular Posts</h3>
               <div class="post-entry-sidebar">
                 <ul>
+                  {% for post in popular_posts %}
+                    
                   <li>
                     <a href="">
-                      <img src="images/img_2.jpg" alt="Image placeholder" class="mr-4">
+                      <img src="{{post.thumbnail.url}}" alt="Image placeholder" class="mr-4">
                       <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
+                        <h4>{{post.title}}</h4>
                         <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
+                          <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
                         </div>
                       </div>
                     </a>
                   </li>
-                  <li>
-                    <a href="">
-                      <img src="images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="">
-                      <img src="images/img_12.jpg" alt="Image placeholder" class="mr-4">
-                      <div class="text">
-                        <h4>There’s a Cool New Way for Men to Wear Socks and Sandals</h4>
-                        <div class="post-meta">
-                          <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                      </div>
-                    </a>
-                  </li>
+
+                  {% endfor %}
                 </ul>
               </div>
             </div>
@@ -156,11 +138,11 @@
             <div class="sidebar-box">
               <h3 class="heading">Categories</h3>
               <ul class="categories">
-                <li><a href="#">Food <span>(12)</span></a></li>
-                <li><a href="#">Travel <span>(22)</span></a></li>
-                <li><a href="#">Lifestyle <span>(37)</span></a></li>
-                <li><a href="#">Business <span>(42)</span></a></li>
-                <li><a href="#">Adventure <span>(14)</span></a></li>
+                {% for category in categories %}
+                
+                <li><a href="{% url 'category' category.name %}">{{category.name}} <span></span></a></li>
+                
+                {% endfor %}
               </ul>
             </div>
             <!-- END sidebar-box -->
@@ -168,18 +150,11 @@
             <div class="sidebar-box">
               <h3 class="heading">Tags</h3>
               <ul class="tags">
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Food</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Freelancing</a></li>
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Food</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Freelancing</a></li>
+                {% for tag in tags %}
+                  
+                <li><a href="{% url 'tag' tag.name %}">{{tag.name}}</a></li>
+                
+                {% endfor %}
               </ul>
             </div>
           </div>
@@ -230,22 +205,19 @@
                     <h3>Quick Links</h3>
                     <ul class="list-unstyled">
                       <li><a href="#">About Us</a></li>
-                      <li><a href="#">Travel</a></li>
-                      <li><a href="#">Adventure</a></li>
-                      <li><a href="#">Courses</a></li>
                       <li><a href="#">Categories</a></li>
+                      <li><a href="#">Contact</a></li>
                     </ul>
                   </div>
                   
                   <div class="mb-5">
                     <h3>Social</h3>
                     <ul class="list-unstyled footer-social">
-                      <li><a href="#"><span class="fa fa-twitter"></span> Twitter</a></li>
-                      <li><a href="#"><span class="fa fa-facebook"></span> Facebook</a></li>
-                      <li><a href="#"><span class="fa fa-instagram"></span> Instagram</a></li>
-                      <li><a href="#"><span class="fa fa-vimeo"></span> Vimeo</a></li>
-                      <li><a href="#"><span class="fa fa-youtube-play"></span> Youtube</a></li>
-                      <li><a href="#"><span class="fa fa-snapchat"></span> Snapshot</a></li>
+                      <li><a href="{{links.twitter}}"><span class="fa fa-twitter"></span> Twitter</a></li>
+                      <li><a href="{{links.facebook}}"><span class="fa fa-facebook"></span> Facebook</a></li>
+                      <li><a href="{{links.instagram}}"><span class="fa fa-instagram"></span> Instagram</a></li>
+                      <li><a href="{{links.portfolio}}"><span class="fa fa-globe"></span> Portfolio</a></li>
+                      
                     </ul>
                   </div>
                 </div>
@@ -256,7 +228,7 @@
             <div class="col-md-12 text-center">
               <p class="small">
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-            Copyright &copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All Rights Reserved | This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a>
+            Copyright &copy; <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>document.write(new Date().getFullYear());</script> All Rights Reserved <br> This template is made with <i class="fa fa-heart text-danger" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" >Colorlib</a> and powered by Django.
             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
             </p>
             </div>

@@ -70,6 +70,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'core.context_processors.latest_posts',
                 'core.context_processors.categories',
+                'core.context_processors.tags',
+                'core.context_processors.popular_posts',
+                'core.context_processors.social_links',
             ],
         },
     },
@@ -182,5 +185,6 @@ CKEDITOR_CONFIGS = {
         "extraPlugins": ",".join(["image2", "codesnippet"]),
         "removePlugins": ",".join(["image"]),
         "codeSnippet_theme": "xcode",
+        "extraAllowedContent": "script[src]",
     },
 }

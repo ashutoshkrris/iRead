@@ -33,7 +33,7 @@
                     <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({{post.thumbnail.url}});"></div>
                     <span class="text">
                       <div class="post-meta">
-                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.first_name}}</span>&bullet;
+                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
                         <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span> &bullet;
                         <span class="mr-2">{{post.categories.name}}</span>
                       </div>

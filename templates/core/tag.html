@@ -1,12 +1,12 @@
 {% extends "core/base.html" %}
 {% load static %}
-{% block title %}{{category.name}}{% endblock title %}
+{% block title %}{{tag.name}}{% endblock title %}
 
 
 {% block content %}
         <div class="row mb-4">
           <div class="col-md-6">
-            <h2 class="mb-4">{{category.name}}</h2>
+            <h2 class="mb-4">#{{tag.name}}</h2>
           </div>
         </div>
         <div class="row blog-entries">
@@ -22,8 +22,7 @@
                     <span class="text">
                       <div class="post-meta">
                         <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
-                        <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span> &bullet;
-                        <span class="mr-2">{{post.categories.name}}</span>
+                        <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
                       </div>
                       <h2>{{post.title}}</h2>
                     </span>
