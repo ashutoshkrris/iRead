@@ -1,0 +1,66 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Sign Up{% endblock title %}
+
+    {% block content %}
+        <div class="row mb-4">
+          <div class="col-md-6 text-center">
+            <h1>Sign Up</h1>
+          </div>
+        </div>
+        <div class="row blog-entries">
+          <div class="col-md-12 col-lg-8 main-content">
+            
+            <form action="{% url 'contact' %}" method="post">
+              {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="name">First Name</label>
+                      <input type="text" id="fname" name="lname" class="form-control " required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="name">Last Name</label>
+                      <input type="text" id="lname" name="lname" class="form-control " required>
+                    </div>
+                    
+                    <div class="col-md-6 form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" name="email" class="form-control " required>
+                        <small>Please enter correct email only, we'll confirm.</small>
+                    </div>
+                    <div class="emailFeedBackArea invalid-feedback" style="display:none"></div>
+                    <div class="col-md-6 form-group">
+                      <label for="username">Username</label>
+                      <input type="text" id="username" name="username" class="form-control " required>
+                    </div>
+                    <div class="usernameFeedBackArea invalid-feedback" style="display:none"></div>
+                  <div class="col-md-6 form-group">
+                      <label for="password1">Password</label>
+                      <input type="password" id="password1" name="password1" class="form-control " required>
+                    </div>
+                  <div class="col-md-6 form-group">
+                      <label for="password2">Confirm Password</label>
+                      <input type="password" id="password2" name="password2" class="form-control " required>
+                    </div>
+                    <div class="passwordFeedBackArea invalid-feedback" style="display:none"></div>
+                    </div>
+                  <div class="row mt-3">
+                      <div class="col-md-4"></div>
+                    <div class="col-md-4 form-group">
+                      <input type="submit" id="signupBtn" value="Send Message" class="btn btn-primary">
+                    </div>
+                      <div class="col-md-4"></div>
+                  </div>
+                </form>
+            
+
+          </div>
+  
+{% endblock content %}
+{% block js_down %}
+<script src="{% static 'js/register.js' %}"></script>
+  <script>
+    var element = document.getElementById("signup")
+    element.classList.add("active");
+  </script>
+{% endblock js_down %}

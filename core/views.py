@@ -1,14 +1,18 @@
 from django.http.response import Http404
 from django.shortcuts import render
-from .models import Post, Category, Tag
+from .models import Contact, Post, Category, Tag
 import random
 from django.db.models import Q
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.mail import EmailMultiAlternatives
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
 
 
 # Create your views here.
 
 def index(request):
-    posts = Post.objects.filter(published=True)
+    posts = Post.objects.filter(published=True).order_by('-timestamp')
     categories = Category.objects.all()
     tags = Tag.objects.all()
     popular_posts = posts.order_by('-views')[:3]
@@ -16,8 +20,17 @@ def index(request):
         random_posts = random.sample(list(posts), 2)
     except ValueError:
         random_posts = random.choice(posts)
+
+    all_posts = Paginator(posts, 8)
+    page = request.GET.get('page')
+    try:
+        page_posts = all_posts.page(page)
+    except PageNotAnInteger:
+        page_posts = all_posts.page(1)
+    except EmptyPage:
+        page_posts = all_posts.page(all_posts.num_pages)
     context = {
-        'posts': posts,
+        'posts': page_posts,
         'categories': categories,
         'tags': tags,
         'popular_posts': popular_posts,
@@ -31,6 +44,30 @@ def about(request):
 
 
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        new_contact = Contact(name=name, email=email, subject=subject, message=message)
+        new_contact.save()
+        try:
+            context = {
+                "name":name.split(" ")[0].capitalize()
+            }
+            html_content = render_to_string("emails/email.html", context)
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                f"Thanks for contacting iRead",
+                text_content,
+                "iRead <no-reply@iread.tk>",
+                [email]
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+        except Exception as e:
+            print(e)
     return render(request, "core/contact.html")
 
 
@@ -52,7 +89,8 @@ def category(request, category_name):
 def single(request, slug):
     try:
         post = Post.objects.get(slug=slug)
-        related_posts = Post.objects.filter(Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()
+        related_posts = Post.objects.filter(
+            Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()
         post.views += 1
         post.save()
         context = {
