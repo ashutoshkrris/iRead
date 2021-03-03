@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}"/>
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700" rel="stylesheet">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/animate.css' %}">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}">
@@ -63,12 +63,12 @@
                 <li class="nav-item">
                   <a class="nav-link" id="home" href="{% url 'home' %}">Home</a>
                 </li>
-                {% if user.is_authetnicated %}
+                {% if request.session.user_id %}
                   <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" id="category" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
                     <a class="dropdown-item" href="">View Profile</a>
-                    <a class="dropdown-item" href="">Log Out</a>
+                    <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                   </div>
                 </li>
                 {% endif %}
@@ -86,12 +86,12 @@
                 <li class="nav-item">
                   <a class="nav-link" id="contact" href="{% url 'contact' %}">Contact</a>
                 </li>
-                {% if not user.is_authetnicated %}
+                {% if not request.session.user_id %}
                   <li class="nav-item">
-                    <a class="nav-link" id="signup" href="">Sign Up</a>
+                    <a class="nav-link" id="signup" href="{% url 'signup' %}">Sign Up</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" id="logout" href="">Log In</a>
+                    <a class="nav-link" id="login" href="{% url 'login' %}">Log In</a>
                   </li>
                 {% endif %}
               </ul>
@@ -256,7 +256,7 @@
     </div>
 <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
     <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
     <script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>

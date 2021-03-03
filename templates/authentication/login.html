@@ -1,0 +1,98 @@
+{% extends "core/base.html" %} {% load static %} {% block title %}Log In{%endblock title %} {% block content %}
+<div class="row mb-4">
+  <div class="col-md-8 text-center">
+    <h1>Log In</h1>
+  </div>
+</div>
+<div class="row blog-entries">
+  <div class="col-md-12 col-lg-8 main-content">
+      {% if error %}
+        <div
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{error}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+        {% if message %}
+        <div
+          class="alert alert-success alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+    <form action="{% url 'login' %}" method="post" id="loginForm">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6 form-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            class="form-control"
+            required
+          />
+          <div
+            class="emailFeedBackArea invalid-feedback"
+            style="display: none"
+          ></div>
+        </div>
+        <div class="col-md-6 form-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            class="form-control"
+            required
+          />
+        </div>
+      </div>
+      <div class="row mt-3">
+          <div class="col-md-4">
+                <a href="{% url 'signup' %}">New User?</a>
+          </div>
+        <div class="col-md-4 form-group">
+           <center> 
+            <button
+              type="submit"
+              id="loginBtn"
+              class="btn btn-primary"
+            >
+              Log In
+            </button>
+            </center>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'signup' %}">Forgot Password?</a>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  {% endblock content %} {% block js_down %}
+  <script src="{% static 'js/login.js' %}"></script>
+  <script>
+    var element = document.getElementById("login");
+    element.classList.add("active");
+  </script>
+  {% endblock js_down %}
+</div>

@@ -14,8 +14,20 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import signup
+from .views import find_email, forgot_password, password_validation, signup, email_validation, username_validation, match_passwords,send_otp,check_otp, Login, logout
+from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
+    path('find-email/', csrf_exempt(find_email), name='find_email'),
+    path('validate-email/', csrf_exempt(email_validation), name='email_validate'),
+    path('validate-username/', csrf_exempt(username_validation), name='username_validate'),
+    path('validate-password/', csrf_exempt(password_validation),name='password_validate'),
+    path('match-passwords/', csrf_exempt(match_passwords),name='password_match'),
+    path('send-otp/', send_otp, name='send_otp'),
+    path('check-otp/',check_otp, name='check_otp'),
     path("signup", signup, name="signup"),
+    path("login", Login.as_view(), name="login"),
+    path("logout", logout, name="logout"),
+    path('forgot-password/', forgot_password, name='forgot_password'),
+
 ]

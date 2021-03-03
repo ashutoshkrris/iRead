@@ -4,6 +4,8 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 # Create your models here.
 
+
+
 class SocialLinks(models.Model):
     youtube_url = models.URLField(verbose_name='youtube link', blank=True)
     facebook_url = models.URLField(verbose_name='facebook link', blank=True)
@@ -99,3 +101,14 @@ class Account(AbstractBaseUser):
     # Does this user have permission to view this app? (ALWAYS YES FOR SIMPLICITY)
     def has_module_perms(self, app_label):
         return True
+
+# For OTP
+
+
+class OTPModel(models.Model):
+    user = models.EmailField(max_length=127)
+    timestamp = models.DateTimeField(auto_now_add=True)
+    otp = models.IntegerField()
+
+    class Meta:
+        verbose_name = 'OTP'
