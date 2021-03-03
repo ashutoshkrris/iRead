@@ -67,7 +67,7 @@
                   <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" id="category" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    <a class="dropdown-item" href="">View Profile</a>
+                    <a class="dropdown-item" href="{% url 'profile' %}">View Profile</a>
                     <a class="dropdown-item" href="{% url 'logout' %}">Log Out</a>
                   </div>
                 </li>
@@ -107,10 +107,11 @@
 {% block content %}
   
 {% endblock content %}
+{% if not request.path == '/accounts/profile' %}
       <div class="col-md-12 col-lg-4 sidebar">
             
             <!-- END sidebar-box -->
-            <div class="sidebar-box" style="margin-top: 140px;">
+            <!-- <div class="sidebar-box" style="margin-top: 140px;">
               <div class="bio text-center">
                 <img src="{% static 'images/circle-cropped.png' %}" alt="Image Placeholder" class="img-fluid">
                 <div class="bio-body">
@@ -125,7 +126,7 @@
                   </p>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- END sidebar-box -->  
             <div class="sidebar-box">
               <h3 class="heading">Popular Posts</h3>
@@ -175,6 +176,8 @@
             </div>
           </div>
           <!-- END sidebar -->
+            
+{% endif %}
 
         </div>
 </div>

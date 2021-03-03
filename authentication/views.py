@@ -3,6 +3,7 @@ from django.http import JsonResponse
 import json
 import re
 from .models import Account, OTPModel
+from core.models import Post
 from random import randint
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -123,6 +124,7 @@ def signup(request):
         return redirect('home')
     return render(request, "authentication/signup.html")
 
+
 def check_user(email):
     return Account.objects.filter(email=email).exists()
 
@@ -169,6 +171,7 @@ def find_email(request):
         return JsonResponse({'email_error': 'You are not registered. Please signup to continue.'}, status=404)
     return JsonResponse({'email_valid': True})
 
+
 def forgot_password(request):
     if request.method == "POST":
         try:
@@ -181,3 +184,13 @@ def forgot_password(request):
         except Exception:
             return render(request, "authentication/reset-password.html", {"error": "Password could not be changed, please try again."})
     return render(request, "authentication/reset-password.html")
+
+
+def profile(request):
+    user = Account.objects.get(id=request.session.get('user_id'))
+    latest_posts = Post.objects.filter(published=True, author=user)
+    context = {
+        'user': user,
+        'latest_posts': latest_posts
+    }
+    return render(request, "authentication/profile.html", context)

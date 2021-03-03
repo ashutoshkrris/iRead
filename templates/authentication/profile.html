@@ -1,0 +1,49 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}{{user.get_full_name}}{% endblock title %}
+
+
+{% block content %}
+
+  <div class="bio text-center">
+                <img src="{{user.profile_image.url}}" alt="Image Placeholder" class="img-fluid">
+                <div class="bio-body">
+                  <h2>{{user.get_full_name}}</h2>
+                  <p>{{user.about}}</p>
+                  
+                  <p class="social">
+                    <a href="{{user.social_links.facebook_url}}" class="p-2"><span class="fa fa-facebook"></span></a>
+                    <a href="{{user.social_links.twitter_url}}" class="p-2"><span class="fa fa-twitter"></span></a>
+                    <a href="{{user.social_links.instagram_url}}" class="p-2"><span class="fa fa-instagram"></span></a>
+                  </p>
+                </div>
+              </div>
+              {% if latest_posts|length > 0 %}
+                
+            
+              <div class="row mb-5 mt-5 ">
+              <div class="col-md-12 mb-5">
+                <h2>My Latest Posts</h2>
+              </div>
+              <div class="col-md-12">
+                {% for post in latest_posts %}
+                  
+                <div class="post-entry-horzontal">
+                  <a href="{% url 'single' post.slug %}">
+                    <div class="image" style="background-image: url({{post.thumbnail.url}});"></div>
+                    <span class="text">
+                      <div class="post-meta">
+                        <span class="mr-2">March 15, 2018 </span>
+                      </div>
+                      <h2>{{post.title}}</h2>
+                    </span>
+                  </a>
+                </div>
+                <!-- END post -->
+                {% endfor %}
+
+              </div>
+            </div>
+            
+              {% endif %}
+{% endblock content %}
