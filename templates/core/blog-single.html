@@ -1,209 +1,204 @@
-{% extends "core/base.html" %}
-{% load static %}
-{% block title %}{{post.title}}{% endblock title %}
+{% extends "core/base.html" %} {% load static %} {% block title %}{{post.title}}{% endblock title %} {% block content %}
 
-      {% block content %}
-        
-        <div class="row blog-entries element-animate">
+<div class="row blog-entries element-animate">
+  <div class="col-md-12 col-lg-8 main-content">
+    <div class="post-meta">
+      <span class="author mr-2"
+        ><img
+          src="{{post.author.profile_image.url}}"
+          alt="Colorlib"
+          class="mr-2"
+        />
+        {{post.author.get_full_name}}</span
+      >&bullet;
+      <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
+    </div>
+    <h1 class="mb-4">{{post.title}}</h1>
+    <a class="category mb-5" href="#">{{post.categories.name}}</a>
+    <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" />
+    <div class="post-content-body">{{post.content|safe}}</div>
 
-          <div class="col-md-12 col-lg-8 main-content">
-            
-             <div class="post-meta">
-                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib" class="mr-2"> {{post.author.get_full_name}}</span>&bullet;
-                        <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
-                      </div>
-            <h1 class="mb-4">{{post.title}}</h1>
-            <a class="category mb-5" href="#">{{post.categories.name}}</a>
-           <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5">
-            <div class="post-content-body">
-              {{post.content|safe}}
-            </div>
+    <div class="pt-3">
+      <p>
+        Tags: {% for tag in post.tags.all %} {% if not forloop.last %}
+        <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>, {% else %}
+        <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>
+        {% endif %} {% endfor %}
+      </p>
+    </div>
 
-            
-            <div class="pt-5">
-              <p>Tags: 
-                {% for tag in post.tags.all %}
-                {% if not forloop.last %}
-                  <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>,
-                {% else %}
-                  <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>
-                {% endif %}
-                  
-                {% endfor %}
-              </p>
-            </div>
+    <div class="share-btn-container pt-3">
+      <h3>
+        Share on : &nbsp;
+        <a href="#" class="facebook-btn" target="_blank">
+          <i class="fa fa-facebook"></i>
+        </a> &nbsp;
+        <a href="#" class="twitter-btn" target="_blank">
+          <i class="fa fa-twitter"></i>
+        </a> &nbsp;
+        <a href="#" class="linkedin-btn" target="_blank">
+          <i class="fa fa-linkedin"></i>
+        </a> &nbsp;
+        <a href="#" class="whatsapp-btn" target="_blank">
+          <i class="fa fa-whatsapp"></i>
+        </a> &nbsp;
+      </h3>
+    </div>
 
+    <div class="pt-5">
+      <h3 class="mb-5"> {{post.comments}} Comments</h3>
+      <ul class="comment-list">
+        {% for c in comments %}
+        <li class="comment">
+          <div class="vcard">
+            <img src="{{c.0.user.profile_image.url}}" alt="Image placeholder" />
+          </div>
+          <div class="comment-body">
+            <h3>{{c.0.user.get_full_name}}</h3>
+            <div class="meta">{{c.0.timestamp}}</div>
+            <p>{{c.0.message}}</p>
+            {% if request.session.user_id %}
+            <p id="{{c.0.id}}"><button onclick="ReplyForm('{{c.0.id}}')" class="btn btn-primary btn-sm">Reply</button></p>
+            {% endif %}
+          </div>
 
-            <div class="pt-5">
-              <h3 class="mb-5">6 Comments</h3>
-              <ul class="comment-list">
-                <li class="comment">
-                  <div class="vcard">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply rounded">Reply</a></p>
-                  </div>
-                </li>
+          <ul class="children">
+            {% for sc in c.1 %}
 
-                <li class="comment">
-                  <div class="vcard">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply rounded">Reply</a></p>
-                  </div>
-
-                  <ul class="children">
-                    <li class="comment">
-                      <div class="vcard">
-                        <img src="images/person_1.jpg" alt="Image placeholder">
-                      </div>
-                      <div class="comment-body">
-                        <h3>Jean Doe</h3>
-                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply rounded">Reply</a></p>
-                      </div>
-
-
-                      <ul class="children">
-                        <li class="comment">
-                          <div class="vcard">
-                            <img src="images/person_1.jpg" alt="Image placeholder">
-                          </div>
-                          <div class="comment-body">
-                            <h3>Jean Doe</h3>
-                            <div class="meta">January 9, 2018 at 2:21pm</div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                            <p><a href="#" class="reply rounded">Reply</a></p>
-                          </div>
-
-                            <ul class="children">
-                              <li class="comment">
-                                <div class="vcard">
-                                  <img src="images/person_1.jpg" alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                  <h3>Jean Doe</h3>
-                                  <div class="meta">January 9, 2018 at 2:21pm</div>
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                                  <p><a href="#" class="reply rounded">Reply</a></p>
-                                </div>
-                              </li>
-                            </ul>
-                        </li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-
-                <li class="comment">
-                  <div class="vcard">
-                    <img src="images/person_1.jpg" alt="Image placeholder">
-                  </div>
-                  <div class="comment-body">
-                    <h3>Jean Doe</h3>
-                    <div class="meta">January 9, 2018 at 2:21pm</div>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                    <p><a href="#" class="reply rounded">Reply</a></p>
-                  </div>
-                </li>
-              </ul>
-              <!-- END comment-list -->
-              
-              <div class="comment-form-wrap pt-5">
-                <h3 class="mb-5">Leave a comment</h3>
-                <form action="#" class="p-5 bg-light">
-                  <div class="form-group">
-                    <label for="name">Name *</label>
-                    <input type="text" class="form-control" id="name">
-                  </div>
-                  <div class="form-group">
-                    <label for="email">Email *</label>
-                    <input type="email" class="form-control" id="email">
-                  </div>
-                  <div class="form-group">
-                    <label for="website">Website</label>
-                    <input type="url" class="form-control" id="website">
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <input type="submit" value="Post Comment" class="btn btn-primary">
-                  </div>
-
-                </form>
+            <li class="comment">
+              <div class="vcard">
+                <img
+                  src="{{sc.user.profile_image.url}}"
+                  alt="Image placeholder"
+                />
               </div>
-            </div>
-
-          </div>
-
-          <!-- END main-content -->
-
-          
-          <!-- END sidebar -->
-
-        {% endblock content %}
-
-    <section class="py-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h2 class="mb-3 ">Related Post</h2>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <a href="#" class="a-block sm d-flex align-items-center height-md" style="background-image: url('images/img_2.jpg'); ">
-              <div class="text">
-                <div class="post-meta">
-                  <span class="category">Lifestyle</span>
-                  <span class="mr-2">March 15, 2018 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+              <div class="comment-body">
+                <h3>{{sc.user.get_full_name}}</h3>
+                <div class="meta">{{sc.timestamp}}</div>
+                <p>{{sc.message}}</p>
               </div>
-            </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </li>
+        {% endfor %}
+      </ul>
+      <!-- END comment-list -->
+      <script type="text/javascript">
+        function ReplyForm(id) {
+          let elm = `<form method="POST" class="p-5 bg-light">
+                                    {% csrf_token %}
+                        <div class="form-group">
+                        <input type='text' value='${id}' name = 'comm_id' style="display:none;" readonly/>
+                          <label for="message">Reply</label>
+                          <textarea name="comm" id="message" cols="30" rows="3" class="form-control"></textarea>
+                        </div>
+                        <div class="form-group">
+                          <input type="submit" value="Reply" class="btn btn-primary btn-sm">
+                        </div>
+      
+                      </form>`;
+          document.getElementById(id).innerHTML = elm;
+        }
+      </script>
+
+      {% if request.session.user_id %}
+      <div class="comment-form-wrap pt-5">
+        <h3 class="mb-5">Leave a comment</h3>
+        <form method="POST" class="p-5 bg-light">
+          {% csrf_token %}
+          <div class="form-group">
+            <label for="message">Comment</label>
+            <textarea
+              name="comm"
+              id="message"
+              cols="30"
+              rows="3"
+              class="form-control"
+            ></textarea>
           </div>
-          <div class="col-md-6 col-lg-4">
-            <a href="#" class="a-block sm d-flex align-items-center height-md" style="background-image: url('images/img_3.jpg'); ">
-              <div class="text">
-                <div class="post-meta">
-                  <span class="category">Travel</span>
-                  <span class="mr-2">March 15, 2018 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-              </div>
-            </a>
+          <div class="form-group">
+            <input type="submit" value="Post Comment" class="btn btn-primary" />
           </div>
-          <div class="col-md-6 col-lg-4">
-            <a href="#" class="a-block sm d-flex align-items-center height-md" style="background-image: url('images/img_4.jpg'); ">
-              <div class="text">
-                <div class="post-meta">
-                  <span class="category">Food</span>
-                  <span class="mr-2">March 15, 2018 </span> &bullet;
-                  <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                </div>
-                <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-              </div>
-            </a>
-          </div>
+        </form>
+      </div>
+      {% else %}
+      <p>
+        To add a comment, please <a href="{% url 'signup' %}">Signup</a> or
+        <a href="{% url 'login' %}">Login</a>
+      </p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- END main-content -->
+
+  <!-- END sidebar -->
+
+  {% endblock content %}
+
+  <section class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="mb-3">Related Post</h2>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6 col-lg-4">
+          <a
+            href="#"
+            class="a-block sm d-flex align-items-center height-md"
+            style="background-image: url('images/img_2.jpg')"
+          >
+            <div class="text">
+              <div class="post-meta">
+                <span class="category">Lifestyle</span>
+                <span class="mr-2">March 15, 2018 </span> &bullet;
+                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+              </div>
+              <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a
+            href="#"
+            class="a-block sm d-flex align-items-center height-md"
+            style="background-image: url('images/img_3.jpg')"
+          >
+            <div class="text">
+              <div class="post-meta">
+                <span class="category">Travel</span>
+                <span class="mr-2">March 15, 2018 </span> &bullet;
+                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+              </div>
+              <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+            </div>
+          </a>
+        </div>
+        <div class="col-md-6 col-lg-4">
+          <a
+            href="#"
+            class="a-block sm d-flex align-items-center height-md"
+            style="background-image: url('images/img_4.jpg')"
+          >
+            <div class="text">
+              <div class="post-meta">
+                <span class="category">Food</span>
+                <span class="mr-2">March 15, 2018 </span> &bullet;
+                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+              </div>
+              <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- END section -->
+</div>
 
-
-    </section>
-    <!-- END section -->
-  
-    
+{% block js_down %}
+  <script src="{% static 'js/single_post.js' %}"></script>
+{% endblock js_down %}

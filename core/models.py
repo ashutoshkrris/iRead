@@ -34,6 +34,7 @@ class Post(models.Model):
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
     tags = models.ManyToManyField(Tag)
     views = models.IntegerField(default=0)
+    comments = models.IntegerField(default=0)
 
     class Meta:
         ordering = ['-id']
@@ -48,16 +49,14 @@ class Post(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    name = models.CharField(max_length=63)
-    email = models.EmailField()
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
 
 
 class SubComment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    name = models.CharField(max_length=63)
-    email = models.EmailField()
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)
     message = models.TextField()
     comment = models.ForeignKey(Comment, on_delete=models.CASCADE)

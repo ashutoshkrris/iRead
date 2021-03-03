@@ -135,7 +135,7 @@
                   {% for post in popular_posts %}
                     
                   <li>
-                    <a href="">
+                    <a href="{% url 'single' post.slug %}">
                       <img src="{{post.thumbnail.url}}" alt="Image placeholder" class="mr-4">
                       <div class="text">
                         <h4>{{post.title}}</h4>

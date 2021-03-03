@@ -1,10 +1,11 @@
+from authentication.models import Account
 from django.http.response import Http404
 from django.shortcuts import render
-from .models import Contact, Post, Category, Tag
+from .models import Contact, Post, Category, Tag, Comment, SubComment
 import random
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.mail import EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives, message
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 
@@ -49,11 +50,12 @@ def contact(request):
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
-        new_contact = Contact(name=name, email=email, subject=subject, message=message)
+        new_contact = Contact(name=name, email=email,
+                              subject=subject, message=message)
         new_contact.save()
         try:
             context = {
-                "name":name.split(" ")[0].capitalize()
+                "name": name.split(" ")[0].capitalize()
             }
             html_content = render_to_string("emails/email.html", context)
             text_content = strip_tags(html_content)
@@ -93,9 +95,28 @@ def single(request, slug):
             Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()
         post.views += 1
         post.save()
+        if request.method == 'POST':
+            comm = request.POST.get('comm')
+            comm_id = request.POST.get('comm_id')
+            user = Account.objects.get(id=request.session.get('user_id'))
+            if comm_id:
+                SubComment(post=post,
+                            user=user,
+                            message=comm,
+                            comment=Comment.objects.get(id=int(comm_id))
+                    ).save()
+            else:
+                Comment(post=post, user=user, message=comm).save()
+                post.comments += 1
+                post.save()
+        comments = []
+        for comment in Comment.objects.filter(post=post):
+            comments.append(
+                [comment, SubComment.objects.filter(comment=comment)])
         context = {
             'post': post,
-            'related_posts': related_posts
+            'related_posts': related_posts,
+            'comments': comments
         }
         return render(request, "core/blog-single.html", context)
     except Exception as e:
