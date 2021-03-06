@@ -90,10 +90,14 @@ def category(request, category_name):
 
 def single(request, slug):
     posts = Post.objects.filter(published=True)
-    user = Account.objects.get(id=request.session.get('user_id'))
-    
-    liked = [post for post in posts if Like.objects.filter(
-        post=post, user=user)]
+    liked = []
+    try:
+        user = Account.objects.get(id=request.session.get('user_id'))
+        
+        liked = [post for post in posts if Like.objects.filter(
+            post=post, user=user)]
+    except Exception:
+        pass
     try:
         post = Post.objects.get(slug=slug)
         related_posts = Post.objects.filter(
@@ -118,9 +122,11 @@ def single(request, slug):
         for comment in Comment.objects.filter(post=post):
             comments.append(
                 [comment, SubComment.objects.filter(comment=comment)])
-
-        like_obj = Like.objects.get(post=post)
-        total_likes = like_obj.user.count()
+        try:
+            like_obj = Like.objects.get(post=post)
+            total_likes = like_obj.user.count()
+        except Exception:
+            total_likes = 0
         context = {
             'post': post,
             'related_posts': related_posts,
@@ -136,18 +142,20 @@ def single(request, slug):
 
 def like_dislike_post(request):
     post = Post.objects.get(id=request.GET.get('id'))
-    user = Account.objects.get(id=request.session.get('user_id'))
-    is_liked = False
-    if Like.objects.filter(user=user, post=post).exists():
-        Like.dislike(user=user, post=post)
-    else:
-        Like.like(user=user, post=post)
-        is_liked = True
+    try:
+        user = Account.objects.get(id=request.session.get('user_id'))
+        is_liked = False
+        if Like.objects.filter(user=user, post=post).exists():
+            Like.dislike(user=user, post=post)
+        else:
+            Like.like(user=user, post=post)
+            is_liked = True
 
-    like_obj = Like.objects.get(post=post)
-    total_likes = like_obj.user.count()
-    return JsonResponse({'is_liked': is_liked, 'total_likes': total_likes})
-
+        like_obj = Like.objects.get(post=post)
+        total_likes = like_obj.user.count()
+        return JsonResponse({'is_liked': is_liked, 'total_likes': total_likes})
+    except Exception:
+        return JsonResponse({'like_error': 'You are not logged in.'})
 
 def search(request):
     query = request.GET.get('query')

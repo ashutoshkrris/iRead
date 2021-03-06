@@ -32,6 +32,7 @@ function init() {
 init();
 
 $(".like").click(function (e) {
+  const likeFeedBackArea = document.querySelector(".likeFeedBackArea");
   var id = this.id;
   var href = $(".like").find("a").attr("href");
   e.preventDefault();
@@ -47,9 +48,12 @@ $(".like").click(function (e) {
       if (data.is_liked == true) {
         ele.className = "fa fa-thumbs-up"
         ele.innerHTML = ` ${data.total_likes}`
-      } else {
+      } else if(data.is_liked == false) {
         ele.className = "fa fa-thumbs-o-up";
         ele.innerHTML = ` ${data.total_likes}`;
+      } else {
+        likeFeedBackArea.style.display = "block";
+        likeFeedBackArea.innerHTML = `<p>${data.like_error}</p>`;
       }
     }
   })
