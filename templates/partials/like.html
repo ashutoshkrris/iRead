@@ -1,0 +1,14 @@
+{{total_likes}} Like {{total_likes|pluralize}} {% if request.session.user_id %}
+<form action="{% url 'like_post' %}" method="post">
+  {% csrf_token %} 
+  {% if is_liked %}
+  <button type="submit" name="post_id" value="{{post.id}}">
+    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+  </button>
+  {% else %}
+  <button type="submit" name="post_id" value="{{post.id}}">
+    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+  </button>
+  {% endif %}
+</form>
+{% endif %}
