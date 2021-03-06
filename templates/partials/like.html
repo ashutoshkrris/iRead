@@ -1,14 +1,27 @@
-{{total_likes}} Like {{total_likes|pluralize}} {% if request.session.user_id %}
-<form action="{% url 'like_post' %}" method="post">
-  {% csrf_token %} 
-  {% if is_liked %}
-  <button type="submit" name="post_id" value="{{post.id}}">
-    <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-  </button>
-  {% else %}
-  <button type="submit" name="post_id" value="{{post.id}}">
-    <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-  </button>
+
+<button
+  class="btn btn-light mr-3 like"
+  id="{{post.id}}"
+  style="border: none; padding: 0; background: none;"
+>
+{% if post in liked_posts %}
+  <a href="{% url 'like_dislike_post' %}"
+    ><i
+      class="fa fa-thumbs-up"
+      aria-hidden="true"
+      style="color: blue"
+      id="like_dislike"
+    > {{total_likes}}</i
+  ></a>
+</button>
+{% else %}
+  <a href="{% url 'like_dislike_post' %}"
+    ><i
+      class="fa fa-thumbs-o-up"
+      aria-hidden="true"
+      style="color: blue"
+      id="like_dislike"
+    > {{total_likes}}</i
+  ></a>
   {% endif %}
-</form>
-{% endif %}
+</button>

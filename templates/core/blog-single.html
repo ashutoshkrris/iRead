@@ -29,26 +29,33 @@
       </p>
     </div>
 
-    <div id="like-section">
+    <!-- <div id="like-section">
       {% include "partials/like.html" %}
-    </div>
+    </div> -->
 
-    <div class="share-btn-container pt-3">
-      <h3>
-        Share on : &nbsp;
-        <a href="#" class="facebook-btn" target="_blank">
-          <i class="fa fa-facebook"></i>
-        </a> &nbsp;
-        <a href="#" class="twitter-btn" target="_blank">
-          <i class="fa fa-twitter"></i>
-        </a> &nbsp;
-        <a href="#" class="linkedin-btn" target="_blank">
-          <i class="fa fa-linkedin"></i>
-        </a> &nbsp;
-        <a href="#" class="whatsapp-btn" target="_blank">
-          <i class="fa fa-whatsapp"></i>
-        </a> &nbsp;
-      </h3>
+    <div class="share-btn-container pt-3" style="display: flex; justify-content: space-between">
+      
+        <div>
+          {% include "partials/like.html" %}
+        </div>
+        <div>
+          <h4>
+            Share on : &nbsp;
+            <a href="#" class="facebook-btn" target="_blank">
+              <i class="fa fa-facebook"></i>
+            </a> &nbsp;
+            <a href="#" class="twitter-btn" target="_blank">
+              <i class="fa fa-twitter"></i>
+            </a> &nbsp;
+            <a href="#" class="linkedin-btn" target="_blank">
+              <i class="fa fa-linkedin"></i>
+            </a> &nbsp;
+            <a href="#" class="whatsapp-btn" target="_blank">
+              <i class="fa fa-whatsapp"></i>
+            </a> &nbsp;
+          </h4>
+      </div>
+      
     </div>
 
     <div class="pt-5">

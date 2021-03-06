@@ -1,7 +1,7 @@
 from authentication.models import Account
-from django.http.response import Http404
+from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import render
-from .models import Contact, Post, Category, Tag, Comment, SubComment
+from .models import Contact, Post, Category, Tag, Comment, SubComment, Like
 import random
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -89,6 +89,11 @@ def category(request, category_name):
 
 
 def single(request, slug):
+    posts = Post.objects.filter(published=True)
+    user = Account.objects.get(id=request.session.get('user_id'))
+    
+    liked = [post for post in posts if Like.objects.filter(
+        post=post, user=user)]
     try:
         post = Post.objects.get(slug=slug)
         related_posts = Post.objects.filter(
@@ -101,10 +106,10 @@ def single(request, slug):
             user = Account.objects.get(id=request.session.get('user_id'))
             if comm_id:
                 SubComment(post=post,
-                            user=user,
-                            message=comm,
-                            comment=Comment.objects.get(id=int(comm_id))
-                    ).save()
+                           user=user,
+                           message=comm,
+                           comment=Comment.objects.get(id=int(comm_id))
+                           ).save()
             else:
                 Comment(post=post, user=user, message=comm).save()
                 post.comments += 1
@@ -113,15 +118,35 @@ def single(request, slug):
         for comment in Comment.objects.filter(post=post):
             comments.append(
                 [comment, SubComment.objects.filter(comment=comment)])
+
+        like_obj = Like.objects.get(post=post)
+        total_likes = like_obj.user.count()
         context = {
             'post': post,
             'related_posts': related_posts,
-            'comments': comments
+            'comments': comments,
+            'liked_posts': liked,
+            'total_likes': total_likes
         }
         return render(request, "core/blog-single.html", context)
     except Exception as e:
         print(e)
         raise Http404()
+
+
+def like_dislike_post(request):
+    post = Post.objects.get(id=request.GET.get('id'))
+    user = Account.objects.get(id=request.session.get('user_id'))
+    is_liked = False
+    if Like.objects.filter(user=user, post=post).exists():
+        Like.dislike(user=user, post=post)
+    else:
+        Like.like(user=user, post=post)
+        is_liked = True
+
+    like_obj = Like.objects.get(post=post)
+    total_likes = like_obj.user.count()
+    return JsonResponse({'is_liked': is_liked, 'total_likes': total_likes})
 
 
 def search(request):

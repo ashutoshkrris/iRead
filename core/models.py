@@ -31,7 +31,8 @@ class Post(models.Model):
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
     thumbnail = models.ImageField(upload_to="blog/thumbnails")
     published = models.BooleanField(default=True)
-    categories = models.ForeignKey(Category, on_delete=models.CASCADE, default=1)
+    categories = models.ForeignKey(
+        Category, on_delete=models.CASCADE, default=1)
     tags = models.ManyToManyField(Tag)
     views = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
@@ -46,6 +47,23 @@ class Post(models.Model):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
+
+class Like(models.Model):
+    user = models.ManyToManyField(Account, related_name='liking_user')
+    post = models.OneToOneField(Post, on_delete=models.CASCADE)
+
+    @classmethod
+    def like(cls, post, user):
+        obj, create = cls.objects.get_or_create(post=post)
+        obj.user.add(user)
+
+    @classmethod
+    def dislike(cls, post, user):
+        obj, create = cls.objects.get_or_create(post=post)
+        obj.user.remove(user)
+
+    def __str__(self) -> str:
+        return f'{self.post.title}'
 
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

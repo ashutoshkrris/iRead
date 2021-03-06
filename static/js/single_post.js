@@ -30,3 +30,27 @@ function init() {
 }
 
 init();
+
+$(".like").click(function (e) {
+  var id = this.id;
+  var href = $(".like").find("a").attr("href");
+  e.preventDefault();
+  $.ajax({
+    url: href,
+    data: {
+      'id': id
+    },
+    success: function (data) {
+      console.log(data)
+      var ele = document.getElementById("like_dislike");
+      console.log(ele)
+      if (data.is_liked == true) {
+        ele.className = "fa fa-thumbs-up"
+        ele.innerHTML = ` ${data.total_likes}`
+      } else {
+        ele.className = "fa fa-thumbs-o-up";
+        ele.innerHTML = ` ${data.total_likes}`;
+      }
+    }
+  })
+})

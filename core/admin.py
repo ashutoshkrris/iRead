@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from .models import Category, Tag, Post, Comment, SubComment, Contact
+from .models import Category, Like, Tag, Post, Comment, SubComment, Contact
 
 
 # Register your models here.
@@ -18,7 +18,7 @@ admin.site.register(Category)
 admin.site.register(Tag)
 admin.site.register(Comment)
 admin.site.register(SubComment)
-
+admin.site.register(Like)
 
 @admin.register(Contact)
 class ContactAdmin(ModelAdmin):
