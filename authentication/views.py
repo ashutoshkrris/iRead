@@ -1,8 +1,9 @@
+from django.http.response import Http404
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import JsonResponse
 import json
 import re
-from .models import Account, OTPModel
+from .models import Account, OTPModel, SocialLinks, Work
 from core.models import Post
 from random import randint
 from django.template.loader import render_to_string
@@ -195,3 +196,63 @@ def profile(request, username):
         'latest_posts': latest_posts
     }
     return render(request, "authentication/profile.html", context)
+
+def edit_profile(request,username):
+    user = Account.objects.get(id=request.session.get('user_id'))
+    if user.username == username:
+        context = {
+            'user': user,
+        }
+
+        if request.method == "POST":
+            fname = request.POST.get('fname')
+            lname = request.POST.get('lname')
+            about = request.POST.get('about')
+            location = request.POST.get('location')
+            title = request.POST.get('title')
+            institution = request.POST.get('institution')
+            education = request.POST.get('education')
+            facebook = request.POST.get('facebook')
+            youtube = request.POST.get('youtube')
+            instagram = request.POST.get('instagram')
+            dribble = request.POST.get('dribble')
+            github = request.POST.get('github')
+            gitlab = request.POST.get('gitlab')
+            medium = request.POST.get('medium')
+            twitter = request.POST.get('twitter')
+            linkedin = request.POST.get('linkedin')
+            portfolio = request.POST.get('portfolio')
+            user.first_name=fname
+            user.last_name=lname
+            user.about=about
+            user.location=location
+            user.work.employer_title = title
+            user.work.employer_name = institution
+            user.work.education=education
+            user.social_links.youtube_url=youtube
+            user.social_links.facebook_url=facebook
+            user.social_links.dribble_url=dribble
+            user.social_links.instagram_url=instagram
+            user.social_links.github_url=github
+            user.social_links.gitlab_url=gitlab
+            user.social_links.medium_url=medium
+            user.social_links.twitter_url=twitter
+            user.social_links.linkedin_url=linkedin
+            user.social_links.portfolio_url=portfolio
+            user.work.save()
+            user.social_links.save()
+            user.save()
+        return render(request, 'authentication/edit_profile.html', context)
+    else:
+        raise Http404()
+
+def edit_profile_image(request,username):
+    if request.method == 'POST':
+        profile_image = request.FILES.get('profile_image')
+        try:
+            user = Account.objects.get(username=username)
+            user.profile_image = profile_image
+            user.save()
+            return JsonResponse({'image_updated': 'Profile Image changed successfully.'})
+        except Exception:
+            return JsonResponse({'image_error': 'Could not upload image.'})

@@ -187,7 +187,7 @@ CKEDITOR_CONFIGS = {
         "toolbarGroups": None,
         "extraPlugins": ",".join(["image2", "codesnippet", "oembed", "widget"]),
         "removePlugins": ",".join(["image"]),
-        "codeSnippet_theme": "xcode",
+        "codeSnippet_theme": "monokai",
         "extraAllowedContent": "script[src]",
     },
 }

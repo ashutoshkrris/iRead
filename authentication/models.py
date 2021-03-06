@@ -3,9 +3,6 @@ from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
 
 # Create your models here.
-
-
-
 class SocialLinks(models.Model):
     youtube_url = models.URLField(verbose_name='youtube link', blank=True)
     facebook_url = models.URLField(verbose_name='facebook link', blank=True)
@@ -16,6 +13,10 @@ class SocialLinks(models.Model):
     medium_url = models.URLField(verbose_name='medium link', blank=True)
     twitter_url = models.URLField(verbose_name='twitter link', blank=True)
     linkedin_url = models.URLField(verbose_name='linkedin link', blank=True)
+    portfolio_url = models.URLField(verbose_name='portfolio link', blank=True)
+
+    class Meta:
+        verbose_name_plural = 'Social Links'
 
 
 class Work(models.Model):
@@ -65,7 +66,7 @@ class Account(AbstractBaseUser):
     last_name = models.CharField(max_length=30, blank=True)
     about = models.TextField(blank=True)
     profile_image = models.ImageField(
-        upload_to="authentication/profile_images")
+        upload_to="authentication/profile_images", default="authentication/profile_images/favicon-512.png")
     location = models.CharField(max_length=63)
     social_links = models.ForeignKey(
         SocialLinks, on_delete=models.PROTECT, blank=True, null=True)
@@ -102,9 +103,8 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+
 # For OTP
-
-
 class OTPModel(models.Model):
     user = models.EmailField(max_length=127)
     timestamp = models.DateTimeField(auto_now_add=True)

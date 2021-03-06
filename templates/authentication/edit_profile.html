@@ -1,0 +1,186 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}{{user.get_full_name}}{% endblock title %}
+
+
+{% block content %}
+<section class="site-section pt-5" style="margin-top: 30px;">
+      <div class="container" >
+            <div class="bio text-center" id="profile-container">
+                <img src="{{user.profile_image.url}}" alt="Image Placeholder" id="profileImage" class="img-fluid">
+                <div class="mb-4" id="profile-container">
+                <form action="" method="post" enctype="multipart/form-data" id="image_update_form">
+                    {% csrf_token %}
+                    <input id="imageUpload" type="file" name="profile_image" placeholder="Photo" capture>
+                    
+                </form>
+                </div>
+                <div class="bio-body">
+                  <h2>{{user.get_full_name}}</h2>
+                  <p>{{user.about}}</p>
+                  
+                  <p class="social">
+                    <a href="{{user.social_links.facebook_url}}" class="p-2"><span class="fa fa-facebook"></span></a>
+                    <a href="{{user.social_links.twitter_url}}" class="p-2"><span class="fa fa-twitter"></span></a>
+                    <a href="{{user.social_links.instagram_url}}" class="p-2"><span class="fa fa-instagram"></span></a>
+                    <a href="{{user.social_links.portfolio_url}}" class="p-2"><span class="fa fa-globe"></span></a>
+                  </p>
+                </div>
+            </div>
+            <form action="{% url 'edit_profile' user.username %}" method="post">
+              {% csrf_token %}
+            <div>
+              <div class="separator" style="margin-top: 50px; margin-bottom: 30px;"><h2>Overview</h2></div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="fname">First Name</label>
+                      <input type="text" id="fname" name="fname" class="form-control" value="{{user.first_name}}" required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="lname">Last Name</label>
+                      <input type="text" id="lname" name="lname" class="form-control" value="{{user.last_name}}">
+                    </div>
+                    
+                    
+                    <div class="col-md-6 form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" name="email" value="{{user.email}}" class="form-control" required disabled>
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="username">Username</label>
+                      <input type="text" id="username" name="username" value="{{user.username}}" class="form-control" required disabled>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                      <label for="about">About</label>
+                      <textarea name="about" id="about" name="about" class="form-control " cols="30" rows="3">{{user.about}}</textarea>
+                    </div>
+                  
+                  <div class="col-md-12 form-group">
+                      <label for="location">Location</label>
+                      <input type="text" id="location" name="location" class="form-control" value="{{user.location}}" required>
+                    </div>
+                    </div>
+
+                    <div class="separator" style="margin-top: 30px; margin-bottom: 30px;"><h2>Work / Education</h2></div>  
+
+                    <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="title">Title</label>
+                      <input type="text" id="title" name="title" class="form-control" value="{{user.work.employer_title}}" required>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label for="institution">Institution / Organisation</label>
+                      <input type="text" id="institution" name="institution" class="form-control" value="{{user.work.employer_name}}">
+                    </div>
+                    
+                    <div class="col-md-12 form-group">
+                      <label for="education">Education</label>
+                      <input type="text" id="education" name="education" value="{{user.work.education}}" class="form-control">
+                    </div>
+                    </div>
+                              
+                    <div class="separator" style="margin-top: 30px; margin-bottom: 30px;"><h2>Social Links</h2></div>
+
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <label for="facebook">Facebook URL</label>
+                      <input type="url" id="facebook" name="facebook" class="form-control" value="{{user.social_links.facebook_url}}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="youtube">YouTube URL</label>
+                      <input type="url" id="youtube" name="youtube" class="form-control" value="{{user.social_links.youtube_url}}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="instagram">Instagram URL</label>
+                      <input type="url" id="instagram" name="instagram" class="form-control" value="{{user.social_links.instagram_url}}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="dribble">Dribble URL</label>
+                      <input type="url" id="dribble" name="dribble" class="form-control" value="{{user.social_links.dribble_url}}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="github">Github URL</label>
+                      <input type="url" id="github" name="github" class="form-control" value="{{user.social_links.github_url}}" >
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="gitlab">Gitlab URL</label>
+                      <input type="url" id="gitlab" name="gitlab" class="form-control" value="{{user.social_links.gitlab_url}}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="medium">Medium URL</label>
+                      <input type="url" id="medium" name="medium" class="form-control" value="{{user.social_links.medium_url}}" >
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="twitter">Twitter URL</label>
+                      <input type="url" id="twitter" name="twitter" class="form-control" value="{{user.social_links.twitter_url}}">
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="linkedin">LinkedIn URL</label>
+                      <input type="url" id="linkedin" name="linkedin" class="form-control" value="{{user.social_links.linkedin_url}}" >
+                    </div>
+                    <div class="col-md-6 form-group">
+                      <label for="portfolio">Portfolio URL</label>
+                      <input type="url" id="portfolio" name="portfolio" class="form-control" value="{{user.social_links.portfolio_url}}">
+                    </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 form-group" style="margin-top: 30px;">
+                        <center><input type="submit" value="Update Profile" class="btn btn-primary"></center>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </form>
+            </div>
+          </div>
+          </section>
+{% endblock content %}
+
+{% block js_down %}
+  <script>
+    //   $("#profileImage").click(function(e) {
+    //     $("#imageUpload").click();
+    // });
+
+    function fasterPreview( uploader ) {
+        if ( uploader.files && uploader.files[0] ){
+            $('#profileImage').attr('src', 
+                window.URL.createObjectURL(uploader.files[0]) );
+        }
+    }
+
+    $("#imageUpload").change(function(){
+        fasterPreview( this );
+    });
+  </script>
+
+  <script type="text/javascript">
+    // form upload
+    $('#image_update_form').change(function(e){
+        e.preventDefault();
+        $form = $(this)
+        var formData = new FormData(this);
+        $.ajax({
+            url: "{% url 'edit_profile_image' user.username %}",
+            type: 'POST',
+            data: formData,
+            success: function (response) {
+                $('.error').remove();
+                console.log(response)
+                if(response.image_error){
+                    error = '<small class="text-muted error">' + error + '</small>'
+                    $form.find('[name=' + name + ']').after(error);
+                }
+                else{
+                    window.location = ""
+                }
+            },
+            cache: false,
+            contentType: false,
+            processData: false
+        });
+    });
+    // end
+   </script>
+{% endblock js_down %}
