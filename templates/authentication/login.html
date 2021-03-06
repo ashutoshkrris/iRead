@@ -1,4 +1,6 @@
 {% extends "core/base.html" %} {% load static %} {% block title %}Log In{%endblock title %} {% block content %}
+<section class="site-section">
+  <div class="container">
 <div class="row mb-4">
   <div class="col-md-8 text-center">
     <h1>Log In</h1>
@@ -87,6 +89,10 @@
       </div>
     </form>
   </div>
+  {% include "core/sidebar.html" %}
+</div>
+  </div>
+</section>
 
   {% endblock content %} {% block js_down %}
   <script src="{% static 'js/login.js' %}"></script>

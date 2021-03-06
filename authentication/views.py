@@ -147,6 +147,7 @@ class Login(View):
             flag = check_password(password, user.password)
             if flag:
                 request.session['user_id'] = user.id
+                request.session['username'] = user.username
                 if Login.return_url:
                     return HttpResponseRedirect(Login.return_url)
                 else:
@@ -186,8 +187,8 @@ def forgot_password(request):
     return render(request, "authentication/reset-password.html")
 
 
-def profile(request):
-    user = Account.objects.get(id=request.session.get('user_id'))
+def profile(request, username):
+    user = Account.objects.get(username=username)
     latest_posts = Post.objects.filter(published=True, author=user)
     context = {
         'user': user,

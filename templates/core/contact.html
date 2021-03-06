@@ -3,6 +3,8 @@
 {% block title %}Contact{% endblock title %}
 
     {% block content %}
+    <section class="site-section">
+      <div class="container">
         <div class="row mb-4">
           <div class="col-md-6">
             <h1>Contact Me</h1>
@@ -44,6 +46,10 @@
             
 
           </div>
+          {% include "core/sidebar.html" %}
+        </div>
+      </div>
+    </section>
   
 {% endblock content %}
 {% block js_down %}

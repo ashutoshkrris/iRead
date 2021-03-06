@@ -29,6 +29,6 @@ urlpatterns = [
     path("login", Login.as_view(), name="login"),
     path("logout", logout, name="logout"),
     path('forgot-password/', forgot_password, name='forgot_password'),
-    path('profile', profile, name='profile'),
+    path('profile/<username>', profile, name='profile'),
 
 ]

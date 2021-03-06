@@ -1,5 +1,7 @@
 {% extends "core/base.html" %} {% load static %} {% block title %}{{post.title}}{% endblock title %} {% block content %}
 
+<section class="site-section py-lg">
+      <div class="container">
 <div class="row blog-entries element-animate">
   <div class="col-md-12 col-lg-8 main-content">
     <div class="post-meta">
@@ -9,7 +11,7 @@
           alt="Colorlib"
           class="mr-2"
         />
-        {{post.author.get_full_name}}</span
+        <a href="{% url 'profile' post.author.username %}">{{post.author.get_full_name}}</a></span
       >&bullet;
       <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
     </div>
@@ -131,74 +133,51 @@
     </div>
   </div>
 
-  <!-- END main-content -->
-
-  <!-- END sidebar -->
-
-  {% endblock content %}
-
+  {% include "core/sidebar.html" %}
+  
+  {% if related_posts|length > 0 %}
+    
   <section class="py-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h2 class="mb-3">Related Post</h2>
+          <h2 class="mb-3">Related Posts</h2>
         </div>
       </div>
       <div class="row">
+        {% for post in related_posts %}
+          
         <div class="col-md-6 col-lg-4">
           <a
-            href="#"
+            href="{% url 'single' post.slug %}"
             class="a-block sm d-flex align-items-center height-md"
-            style="background-image: url('images/img_2.jpg')"
+            style="background-image: url('{{post.thumbnail.url}}')"
           >
             <div class="text">
               <div class="post-meta">
-                <span class="category">Lifestyle</span>
-                <span class="mr-2">March 15, 2018 </span> &bullet;
-                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                <span class="category">{{post.categories.name}}</span>
+                <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
               </div>
-              <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
+              <h3>{{post.title}}</h3>
             </div>
           </a>
         </div>
-        <div class="col-md-6 col-lg-4">
-          <a
-            href="#"
-            class="a-block sm d-flex align-items-center height-md"
-            style="background-image: url('images/img_3.jpg')"
-          >
-            <div class="text">
-              <div class="post-meta">
-                <span class="category">Travel</span>
-                <span class="mr-2">March 15, 2018 </span> &bullet;
-                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-              </div>
-              <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-            </div>
-          </a>
-        </div>
-        <div class="col-md-6 col-lg-4">
-          <a
-            href="#"
-            class="a-block sm d-flex align-items-center height-md"
-            style="background-image: url('images/img_4.jpg')"
-          >
-            <div class="text">
-              <div class="post-meta">
-                <span class="category">Food</span>
-                <span class="mr-2">March 15, 2018 </span> &bullet;
-                <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-              </div>
-              <h3>There’s a Cool New Way for Men to Wear Socks and Sandals</h3>
-            </div>
-          </a>
-        </div>
+        
+        {% endfor %}
       </div>
     </div>
   </section>
+  
+  {% endif %}
   <!-- END section -->
 </div>
+      </div>
+</section>
+{% endblock content %}
 
 {% block js_down %}
   <script src="{% static 'js/single_post.js' %}"></script>
+  <script>
+    $('.post-content-body img').addClass('img-fluid');
+  </script>
 {% endblock js_down %}

@@ -135,7 +135,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = BASE_DIR / 'static'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
 
 STATICFILES_DIRS = [
     BASE_DIR / "static",
@@ -169,12 +170,14 @@ CUSTOM_TOOLBAR = [
             "NumberedList", "BulletedList", "-",
             "Outdent", "Indent", "-",
             "Link", "Unlink", "-",
-            "Image", "CodeSnippet", "Table", "HorizontalRule", "Smiley", "SpecialChar", "-",
+            "Image", "CodeSnippet", "Table", "HorizontalRule", "Oembed", "Smiley", "SpecialChar", "-",
             "Blockquote", "-",
             "ShowBlocks", "Maximize",
         ],
     },
 ]
+
+
 
 CKEDITOR_CONFIGS = {
     "default": DEFAULT_CONFIG,
@@ -182,7 +185,7 @@ CKEDITOR_CONFIGS = {
         "skin": "moono-lisa",
         "toolbar": CUSTOM_TOOLBAR,
         "toolbarGroups": None,
-        "extraPlugins": ",".join(["image2", "codesnippet"]),
+        "extraPlugins": ",".join(["image2", "codesnippet", "oembed", "widget"]),
         "removePlugins": ",".join(["image"]),
         "codeSnippet_theme": "xcode",
         "extraAllowedContent": "script[src]",

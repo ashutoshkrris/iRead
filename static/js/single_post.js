@@ -5,7 +5,6 @@ const whatsappBtn = document.querySelector(".whatsapp-btn");
 
 
 function init() {
-  console.log("hello");
   let postUrl = encodeURI(document.location.href);
   let postTitle = encodeURI("Hi everyone, please check this post on iRead: ");
 

@@ -4,6 +4,8 @@
 
 
 {% block content %}
+<section class="site-section">
+      <div class="container">
         <div class="row mb-4">
             {% if results|length < 1 %}
               <div class="col-md-6">
@@ -33,7 +35,7 @@
                     <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({{post.thumbnail.url}});"></div>
                     <span class="text">
                       <div class="post-meta">
-                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
+                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"><a href="{% url 'profile' post.author.username %}"> {{post.author.get_full_name}}</a></span>&bullet;
                         <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span> &bullet;
                         <span class="mr-2">{{post.categories.name}}</span>
                       </div>
@@ -48,6 +50,10 @@
             </div>
 
           </div>
+          {% include "core/sidebar.html" %}
+        </div>
+      </div>
+    </section>
         
   
     {% endblock content %}

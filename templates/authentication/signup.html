@@ -3,6 +3,8 @@
 {% block title %}Sign Up{% endblock title %}
 
     {% block content %}
+    <section class="site-section">
+      <div class="container">
         <div class="row mb-4">
           <div class="col-md-6 text-center">
             <h1>Sign Up</h1>
@@ -76,6 +78,10 @@
                 </form>
             
           </div>
+          {% include "core/sidebar.html" %}
+        </div>
+      </div>
+    </section>
   
 {% endblock content %}
 {% block js_down %}
