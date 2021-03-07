@@ -153,12 +153,12 @@
             <div class="col-md-6 ml-auto">
               <div class="row">
                 <div class="col-md-7">
-                  <h3>Latest Post</h3>
+                  <h3>Latest Posts</h3>
                   <div class="post-entry-sidebar">
                     <ul>
                       {% for post in latest_posts %}
                         <li>
-                        <a href="">
+                        <a href="{% url 'single' post.slug %}">
                           <img src="{{post.thumbnail.url}}" alt="Image placeholder" class="mr-4">
                           <div class="text">
                             <h4>{{post.title}}</h4>
