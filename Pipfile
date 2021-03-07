@@ -9,6 +9,7 @@ python-decouple = "*"
 psycopg2-binary = "*"
 pillow = "*"
 django-ckeditor = "*"
+django-cloudinary-storage = "*"
 
 [dev-packages]
 autopep8 = "*"

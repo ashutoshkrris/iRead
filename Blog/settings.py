@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary_storage',
+    'cloudinary',
     'ckeditor',
     'ckeditor_uploader',
     'authentication',
@@ -201,3 +203,12 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'iRead <no-reply@iread.tk>'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+# Cloudinary
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': config("CLOUD_NAME"),
+        'API_KEY': config("API_KEY"),
+        'API_SECRET': config("API_SECRET")
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
