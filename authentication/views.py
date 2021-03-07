@@ -14,7 +14,21 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from .middlewares.auth import login_excluded
 
+
 # Create your views here.
+
+
+# exception 404 view
+def error_404(request, exception):
+
+    data = {}
+    return render(request, 'error/404.html', data)
+
+
+# exception 500 view
+def error_500(request):
+    data = {}
+    return render(request, 'error/500.html', data)
 
 
 def email_validation(request):
@@ -140,6 +154,7 @@ class Login(View):
 
     @method_decorator(login_excluded(redirect_to='home'))
     def post(self, request):
+
         email = request.POST['email']
         password = request.POST['password']
         error_msg = None
@@ -197,7 +212,8 @@ def profile(request, username):
     }
     return render(request, "authentication/profile.html", context)
 
-def edit_profile(request,username):
+
+def edit_profile(request, username):
     user = Account.objects.get(id=request.session.get('user_id'))
     if user.username == username:
         context = {
@@ -222,23 +238,23 @@ def edit_profile(request,username):
             twitter = request.POST.get('twitter')
             linkedin = request.POST.get('linkedin')
             portfolio = request.POST.get('portfolio')
-            user.first_name=fname
-            user.last_name=lname
-            user.about=about
-            user.location=location
+            user.first_name = fname
+            user.last_name = lname
+            user.about = about
+            user.location = location
             user.work.employer_title = title
             user.work.employer_name = institution
-            user.work.education=education
-            user.social_links.youtube_url=youtube
-            user.social_links.facebook_url=facebook
-            user.social_links.dribble_url=dribble
-            user.social_links.instagram_url=instagram
-            user.social_links.github_url=github
-            user.social_links.gitlab_url=gitlab
-            user.social_links.medium_url=medium
-            user.social_links.twitter_url=twitter
-            user.social_links.linkedin_url=linkedin
-            user.social_links.portfolio_url=portfolio
+            user.work.education = education
+            user.social_links.youtube_url = youtube
+            user.social_links.facebook_url = facebook
+            user.social_links.dribble_url = dribble
+            user.social_links.instagram_url = instagram
+            user.social_links.github_url = github
+            user.social_links.gitlab_url = gitlab
+            user.social_links.medium_url = medium
+            user.social_links.twitter_url = twitter
+            user.social_links.linkedin_url = linkedin
+            user.social_links.portfolio_url = portfolio
             user.work.save()
             user.social_links.save()
             user.save()
@@ -246,7 +262,8 @@ def edit_profile(request,username):
     else:
         raise Http404()
 
-def edit_profile_image(request,username):
+
+def edit_profile_image(request, username):
     if request.method == 'POST':
         profile_image = request.FILES.get('profile_image')
         try:

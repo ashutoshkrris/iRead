@@ -40,7 +40,7 @@ $(".like").click(function (e) {
     url: href,
     data: {
       'id': id
-    },
+    }, 
     success: function (data) {
       console.log(data)
       var ele = document.getElementById("like_dislike");

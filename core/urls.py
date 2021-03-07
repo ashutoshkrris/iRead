@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.urls import path
 from .views import index, about, like_dislike_post, single, contact, search, category, tag
+from authentication.middlewares.auth import auth_middleware, login_excluded
+
 
 urlpatterns = [
     path('', index, name='home'),
