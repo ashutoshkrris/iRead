@@ -146,6 +146,17 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
+
+# Cloudinary
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': config("CLOUD_NAME"),
+        'API_KEY': config("API_KEY"),
+        'API_SECRET': config("API_SECRET")
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 # Media Files
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
@@ -205,12 +216,3 @@ EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'iRead <no-reply@iread.ga>'
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-
-# Cloudinary
-if not DEBUG:
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': config("CLOUD_NAME"),
-        'API_KEY': config("API_KEY"),
-        'API_SECRET': config("API_SECRET")
-    }
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
