@@ -72,7 +72,7 @@ def contact(request):
             email = EmailMultiAlternatives(
                 f"Thanks for contacting iRead",
                 text_content,
-                "iRead <no-reply@iread.tk>",
+                "iRead <no-reply@iread.ga>",
                 [email]
             )
             email.attach_alternative(html_content, "text/html")
@@ -274,13 +274,19 @@ def update_post(request, slug):
     }
     if request.method == 'POST':
         try:
+            
             title = request.POST.get('title')
-            banner = request.FILES.get('banner_image')
+            try:
+                print("Hiiiiiiiiiii")
+                banner = request.FILES['banner_image']
+                post.thumbnail = banner
+            except:
+                pass
             overview = request.POST.get('overview')
             content = request.POST.get('editor1')
 
             post.title = title
-            post.thumbnail = banner
+            
             post.seo_overview = overview
             post.content = content
             post.save()
