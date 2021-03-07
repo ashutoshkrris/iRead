@@ -97,7 +97,11 @@
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script>
     CKEDITOR.replace('editor1', {
-      height: 500
+      height: 500,
+      extraPlugins: 'filebrowser',
+      filebrowserBrowseUrl: '{% url "ckeditor_browse" %}',
+      filebrowserUploadMethod: 'form',
+      filebrowserUploadUrl: '{% url "ckeditor_upload" %}'
     });
   </script>
   <script>

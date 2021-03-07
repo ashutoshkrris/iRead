@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary_storage',
-    'cloudinary',
     'ckeditor',
     'ckeditor_uploader',
+    'cloudinary',
     'authentication',
     'core',
 ]
