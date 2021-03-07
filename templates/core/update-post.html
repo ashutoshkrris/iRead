@@ -38,7 +38,7 @@
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="content">Content</label>
-                            <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample-short required>{{post.content}}</textarea>
+                            <textarea cols="80" id="editor1" name="editor1" rows="20" data-sample-short required>{{post.content}}</textarea>
                         </div>
                     </div>
                     <div class="row">
@@ -81,7 +81,7 @@
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script>
     CKEDITOR.replace('editor1', {
-      
+      height: 500
     });
   </script>
 

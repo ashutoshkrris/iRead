@@ -145,10 +145,10 @@
             <div class="col-md-4">
               <h3>About Us</h3>
               <p class="mb-4">
-                <img src="{% static 'images/favicon.png' %}" alt="Image placeholder" class="img-fluid">
+                <img src="{% static 'images/favicon.png' %}" alt="Image placeholder" class="img-fluid" width="150" height="150">
               </p>
 
-              <p>Lorem ipsum dolor sit amet sa ksal sk sa, consectetur adipisicing elit. Ipsa harum inventore reiciendis. <a href="#">Read More</a></p>
+              <p>Anyone can write on iRead. Thought-leaders, journalists, experts, and individuals with unique perspectives share their thinking here. <a href="{% url 'about' %}">Read More</a></p>
             </div>
             <div class="col-md-6 ml-auto">
               <div class="row">
@@ -179,7 +179,7 @@
                   <div class="mb-5">
                     <h3>Quick Links</h3>
                     <ul class="list-unstyled">
-                      <li><a href="{% url 'home' %}">About Us</a></li>
+                      <li><a href="{% url 'about' %}">About Us</a></li>
                       <!-- <li><a href="#">Categories</a></li> -->
                       <li><a href="{% url 'contact' %}">Contact</a></li>
                     </ul>
