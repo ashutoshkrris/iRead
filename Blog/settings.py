@@ -119,6 +119,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
@@ -186,7 +187,7 @@ CKEDITOR_CONFIGS = {
     "default": DEFAULT_CONFIG,
     "my-custom-toolbar": {
         "skin": "moono-lisa",
-        "toolbar": CUSTOM_TOOLBAR,
+        "toolbar": 'full',
         "toolbarGroups": None,
         "extraPlugins": ",".join(["image2", "codesnippet", "autooembed", "widget", "devtools", "embed", "embedbase","embedsemantic","iframe", "iframedialog","language", "sourcedialog"]),
         "removePlugins": ",".join(["image"]),
