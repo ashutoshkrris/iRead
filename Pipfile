@@ -10,6 +10,8 @@ psycopg2-binary = "*"
 pillow = "*"
 django-ckeditor = "*"
 django-cloudinary-storage = "*"
+gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 autopep8 = "*"
