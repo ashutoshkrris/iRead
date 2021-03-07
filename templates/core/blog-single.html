@@ -14,6 +14,10 @@
         <a href="{% url 'profile' post.author.username %}">{{post.author.get_full_name}}</a></span
       >&bullet;
       <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
+      {% if request.session.user_id %}
+        <span class="ml-2"><a href="{% url 'update_post' post.slug %}">Edit</a></span>
+        <span class="ml-2"><a id="delBtn" style="color: red;cursor: pointer;">Delete</a></span>
+      {% endif %}
     </div>
     <h1 class="mb-4">{{post.title}}</h1>
     <a class="category mb-5" href="#">{{post.categories.name}}</a>
@@ -191,8 +195,20 @@
 {% endblock content %}
 
 {% block js_down %}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
   <script src="{% static 'js/single_post.js' %}"></script>
   <script>
     $('.post-content-body img').addClass('img-fluid');
+  </script>
+  <script>
+    $("#delBtn").click(function(e){
+      Swal.fire({
+      title: 'Sure ?',
+      text: 'Do you want to continue ?',
+      type: 'warning',
+      showCancelButton: true,
+      confirmButtonText: `<a href="{% url 'delete_post' post.slug %}" style="color: white;">Yeah!</a>`
+    })
+    })
   </script>
 {% endblock js_down %}

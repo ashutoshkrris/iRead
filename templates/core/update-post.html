@@ -1,4 +1,4 @@
-{% extends "core/base.html" %} {% load static %} {% block title %}New Post{% endblock title %} {% block content %}
+{% extends "core/base.html" %} {% load static %} {% block title %}{{post.title}}{% endblock title %} {% block content %}
 
 <section class="site-section py-lg">
       <div class="container">
@@ -20,47 +20,31 @@
           </button>
         </div>
         {% endif %}
-                <form action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'update_post' post.slug %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-12 form-group">
                             <label for="title">Title</label>
-                            <input type="text" id="title" name="title" class="form-control" required>
+                            <input type="text" id="title" name="title" value="{{post.title}}" class="form-control" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="banner">Banner</label>
-                            <img src="{% static 'images/default-preview.png' %}" alt="Image" class="img-fluid mb-5" id="bannerImage" />
+                            <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" id="bannerImage" />
                             <input id="imageUpload" type="file" name="banner_image" placeholder="Photo" capture required>
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="content">Overview <small>(For SEO Preview)</small> </label>
-                            <textarea cols="80" id="overview" name="overview" rows="3" required></textarea>
+                            <textarea cols="80" id="overview" name="overview" rows="3" required>{{post.seo_overview}}</textarea>
                         </div>
                         <div class="col-md-12 form-group">
                             <label for="content">Content</label>
-                            <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample-short required></textarea>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label for="category">Category</label>
-                            <select name="category" id="category" class="js-example-basic-single" style="width: 200px;" required>
-                                {% for category in categories %}
-                                    <option value="{{category}}">{{category}}</option>
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="col-md-6 form-group">
-                            <label for="tags">Tags</label>
-                            <select name="tags" id="tags" class="js-example-basic-multiple" multiple="multiple" style="width:300px;">
-                                {% for tag in tags %}
-                                    <option value="{{tag}}">{{tag}}</option>
-                                {% endfor %}
-                            </select>
+                            <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample-short required>{{post.content}}</textarea>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4"></div>
                         <div class="col-md-4 form-group" style="margin-top: 30px;">
-                        <center><input type="submit" value="Create Post" class="btn btn-primary"></center>
+                        <center><input type="submit" value="Update Post" class="btn btn-primary"></center>
                         </div>
                         <div class="col-md-4"></div>
                     </div>
@@ -100,8 +84,5 @@
       
     });
   </script>
-  <script>
-    var element = document.getElementById("new_post")
-    element.classList.add("active");
-  </script>
+
 {% endblock js_down %}

@@ -197,7 +197,6 @@ def new_post(request):
             content = request.POST.get('editor1')
             category = request.POST.get('category')
             tags = request.POST.getlist('tags')
-            print(tags, type(tags))
             
             cat = Category.objects.get(name=category)
             user = Account.objects.get(id=request.session.get('user_id'))
@@ -213,3 +212,31 @@ def new_post(request):
             context['error'] = 'One or more fields is missing.'
             return render(request, "core/new-post.html", context)
     return render(request, "core/new-post.html", context)
+
+def update_post(request, slug):
+    post =Post.objects.get(slug=slug)
+    context = {
+        'post': post
+    }
+    if request.method == 'POST':
+        try:
+            title = request.POST.get('title')
+            banner = request.FILES.get('banner_image')
+            overview = request.POST.get('overview')
+            content = request.POST.get('editor1')
+
+            post.title = title
+            post.thumbnail = banner
+            post.seo_overview = overview
+            post.content = content
+            post.save()
+            return redirect('single', slug=post.slug)
+        except ValueError:
+            context['error'] = 'One or more fields is missing.'
+            return render(request, "core/update-post.html", context)
+    return render(request, "core/update-post.html", context)
+
+def delete_post(request, slug):
+    post = Post.objects.get(slug=slug)
+    post.delete()
+    return redirect('home')
