@@ -242,19 +242,30 @@ def edit_profile(request, username):
             user.last_name = lname
             user.about = about
             user.location = location
-            user.work.employer_title = title
-            user.work.employer_name = institution
-            user.work.education = education
-            user.social_links.youtube_url = youtube
-            user.social_links.facebook_url = facebook
-            user.social_links.dribble_url = dribble
-            user.social_links.instagram_url = instagram
-            user.social_links.github_url = github
-            user.social_links.gitlab_url = gitlab
-            user.social_links.medium_url = medium
-            user.social_links.twitter_url = twitter
-            user.social_links.linkedin_url = linkedin
-            user.social_links.portfolio_url = portfolio
+            if user.work:
+                user.work.employer_title = title
+                user.work.employer_name = institution
+                user.work.education = education
+            else:
+                new_work = Work(employer_title=title,employer_name=institution,education=education)
+                new_work.save()
+                user.work = new_work
+            if user.social_links:
+                user.social_links.youtube_url = youtube
+                user.social_links.facebook_url = facebook
+                user.social_links.dribble_url = dribble
+                user.social_links.instagram_url = instagram
+                user.social_links.github_url = github
+                user.social_links.gitlab_url = gitlab
+                user.social_links.medium_url = medium
+                user.social_links.twitter_url = twitter
+                user.social_links.linkedin_url = linkedin
+                user.social_links.portfolio_url = portfolio
+            else:
+                new_social = SocialLinks(youtube_url=youtube, facebook_url=facebook, dribble_url=dribble, instagram_url=instagram, github_url=github,
+                                         gitlab_url=gitlab, medium_url=medium, twitter_url=twitter, linkedin_url=linkedin, portfolio_url=portfolio)
+                new_social.save()
+                user.social_links = new_social
             user.work.save()
             user.social_links.save()
             user.save()

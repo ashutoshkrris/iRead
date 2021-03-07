@@ -18,7 +18,7 @@ def index(request):
     tags = Tag.objects.all()
     popular_posts = posts.order_by('-views')[:3]
     try:
-        random_posts = random.sample(list(posts), 2)
+        random_posts = random.sample(list(posts), 3)
     except ValueError:
         random_posts = random.choice(posts)
 
