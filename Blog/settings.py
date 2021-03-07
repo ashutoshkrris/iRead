@@ -185,12 +185,13 @@ CKEDITOR_CONFIGS = {
         "skin": "moono-lisa",
         "toolbar": CUSTOM_TOOLBAR,
         "toolbarGroups": None,
-        "extraPlugins": ",".join(["image2", "codesnippet", "oembed", "widget"]),
+        "extraPlugins": ",".join(["image2", "codesnippet", "autooembed", "widget", "devtools", "embed", "embedbase","embedsemantic","iframe", "iframedialog","language", "sourcedialog"]),
         "removePlugins": ",".join(["image"]),
         "codeSnippet_theme": "monokai",
         "extraAllowedContent": "script[src]",
     },
 }
+
 
 # email 
 EMAIL_HOST = "smtp.gmail.com"

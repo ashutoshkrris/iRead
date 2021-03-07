@@ -1,0 +1,107 @@
+{% extends "core/base.html" %} {% load static %} {% block title %}New Post{% endblock title %} {% block content %}
+
+<section class="site-section py-lg">
+      <div class="container">
+        <div class="row blog-entries">
+            <div class="col-md-12 col-lg-8 main-content">
+                {% if error %}
+        <div
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{error}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+                <form action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label for="title">Title</label>
+                            <input type="text" id="title" name="title" class="form-control" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="banner">Banner</label>
+                            <img src="{% static 'images/default-preview.png' %}" alt="Image" class="img-fluid mb-5" id="bannerImage" />
+                            <input id="imageUpload" type="file" name="banner_image" placeholder="Photo" capture>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="content">Overview <small>(For SEO Preview)</small> </label>
+                            <textarea cols="80" id="overview" name="overview" rows="3"></textarea>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <label for="content">Content</label>
+                            <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample-short></textarea>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="category">Category</label>
+                            <select name="category" id="category" class="js-example-basic-single" style="width: 200px;">
+                                {% for category in categories %}
+                                    <option value="{{category}}">{{category}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label for="tags">Tags</label>
+                            <select name="tags" id="tags" class="js-example-basic-multiple" multiple="multiple" style="width:300px;">
+                                {% for tag in tags %}
+                                    <option value="{{tag}}">{{tag}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4 form-group" style="margin-top: 30px;">
+                        <center><input type="submit" value="Create Post" class="btn btn-primary"></center>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                </form>
+            </div>
+            {% include "partials/sidebar.html" %}
+        </div>
+    </div>
+</section>
+{% endblock content %}
+
+{% block js_down %}
+<script>
+    $(document).ready(function() {
+        $('.js-example-basic-single').select2();
+    });
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
+<script>
+    function fasterPreview( uploader ) {
+        if ( uploader.files && uploader.files[0] ){
+            $('#bannerImage').attr('src', 
+                window.URL.createObjectURL(uploader.files[0]) );
+        }
+    }
+
+    $("#imageUpload").change(function(){
+        fasterPreview( this );
+    });
+  </script>
+  <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script>
+    CKEDITOR.replace('editor1', {
+      
+    });
+  </script>
+  <script>
+    var element = document.getElementById("new_post")
+    element.classList.add("active");
+  </script>
+{% endblock js_down %}

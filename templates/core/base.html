@@ -15,9 +15,14 @@
     <link rel="stylesheet" href="{% static 'fonts/ionicons/css/ionicons.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/fontawesome/css/font-awesome.min.css' %}">
     <link rel="stylesheet" href="{% static 'fonts/flaticon/font/flaticon.css' %}">
+    
 
     <!-- Theme Style -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+   
     <style>
     .separator {
       display: flex;
@@ -88,6 +93,9 @@
                   <a class="nav-link" id="home" href="{% url 'home' %}">Home</a>
                 </li>
                 {% if request.session.user_id %}
+                  <li class="nav-item">
+                    <a class="nav-link" id="new_post" href="{% url 'new_post' %}">Create Post</a>
+                  </li>
                   <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" id="category" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Account</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
@@ -208,7 +216,7 @@
 <!-- loader -->
     <div id="loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#f4b214"/></svg></div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <!-- <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script> -->
     <script src="{% static 'js/jquery-migrate-3.0.0.js' %}"></script>
     <script src="{% static 'js/popper.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>

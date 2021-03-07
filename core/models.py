@@ -33,7 +33,7 @@ class Post(models.Model):
     published = models.BooleanField(default=True)
     categories = models.ForeignKey(
         Category, on_delete=models.CASCADE, default=1)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
     views = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
 

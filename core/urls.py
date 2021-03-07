@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import index, about, like_dislike_post, single, contact, search, category, tag
+from .views import index, about, like_dislike_post, new_post, single, contact, search, category, tag
 from authentication.middlewares.auth import auth_middleware, login_excluded
 
 
@@ -27,4 +27,5 @@ urlpatterns = [
     path('tags/<tag_name>', tag, name='tag'),
     path('search', search, name='search'),
     path('like_dislike', like_dislike_post, name='like_dislike_post'),
+    path('new-post', new_post, name='new_post'),
 ]

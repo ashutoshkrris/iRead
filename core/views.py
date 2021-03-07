@@ -1,6 +1,6 @@
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from .models import Contact, Post, Category, Tag, Comment, SubComment, Like
 import random
 from django.db.models import Q
@@ -93,7 +93,7 @@ def single(request, slug):
     liked = []
     try:
         user = Account.objects.get(id=request.session.get('user_id'))
-        
+
         liked = [post for post in posts if Like.objects.filter(
             post=post, user=user)]
     except Exception:
@@ -157,6 +157,7 @@ def like_dislike_post(request):
     except Exception:
         return JsonResponse({'like_error': 'You are not logged in.'})
 
+
 def search(request):
     query = request.GET.get('query')
     results = Post.objects.filter(Q(title__icontains=query) | Q(
@@ -181,3 +182,34 @@ def tag(request, tag_name):
     except Exception as e:
         print(e)
         return Http404()
+
+
+def new_post(request):
+    context = {
+        'categories': Category.objects.all(),
+        'tags': Tag.objects.all()
+    }
+    if request.method == 'POST':
+        try:
+            title = request.POST.get('title')
+            banner = request.FILES.get('banner_image')
+            overview = request.POST.get('overview')
+            content = request.POST.get('editor1')
+            category = request.POST.get('category')
+            tags = request.POST.getlist('tags')
+            print(tags, type(tags))
+            
+            cat = Category.objects.get(name=category)
+            user = Account.objects.get(id=request.session.get('user_id'))
+            new_post = Post(title=title, seo_overview=overview,
+                            thumbnail=banner, content=content, author=user, categories=cat)
+            new_post.save()
+            post = Post.objects.get(title=title, author=user)
+            for tag in tags:
+                post.tags.add(Tag.objects.get(name=tag))
+            post.save()
+            return redirect('single', slug=post.slug)
+        except ValueError:
+            context['error'] = 'One or more fields is missing.'
+            return render(request, "core/new-post.html", context)
+    return render(request, "core/new-post.html", context)
