@@ -13,6 +13,7 @@ from django.contrib.auth.hashers import make_password, check_password
 from django.views import View
 from django.utils.decorators import method_decorator
 from .middlewares.auth import login_excluded
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 # Create your views here.
@@ -206,10 +207,25 @@ def forgot_password(request):
 def profile(request, username):
     user = Account.objects.get(username=username)
     latest_posts = Post.objects.filter(published=True, author=user)
-    context = {
-        'user': user,
-        'latest_posts': latest_posts
-    }
+    if len(latest_posts) > 3:
+        all_posts = Paginator(latest_posts, 3)
+        page = request.GET.get('page')
+        try:
+            page_posts = all_posts.page(page)
+        except PageNotAnInteger:
+            page_posts = all_posts.page(1)
+        except EmptyPage:
+            page_posts = all_posts.page(all_posts.num_pages)
+        context = {
+            'user': user,
+            'latest_posts': page_posts,
+            'pagination': True
+        }
+    else:
+        context = {
+            'user': user,
+            'latest_posts': latest_posts
+        }
     return render(request, "authentication/profile.html", context)
 
 

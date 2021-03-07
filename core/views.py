@@ -21,22 +21,31 @@ def index(request):
         random_posts = random.sample(list(posts), 3)
     except ValueError:
         random_posts = random.choice(posts)
-
-    all_posts = Paginator(posts, 8)
-    page = request.GET.get('page')
-    try:
-        page_posts = all_posts.page(page)
-    except PageNotAnInteger:
-        page_posts = all_posts.page(1)
-    except EmptyPage:
-        page_posts = all_posts.page(all_posts.num_pages)
-    context = {
-        'posts': page_posts,
-        'categories': categories,
-        'tags': tags,
-        'popular_posts': popular_posts,
-        'random_posts': random_posts,
-    }
+    if len(posts) > 8:
+        all_posts = Paginator(posts, 8)
+        page = request.GET.get('page')
+        try:
+            page_posts = all_posts.page(page)
+        except PageNotAnInteger:
+            page_posts = all_posts.page(1)
+        except EmptyPage:
+            page_posts = all_posts.page(all_posts.num_pages)
+        context = {
+            'posts': page_posts,
+            'categories': categories,
+            'tags': tags,
+            'popular_posts': popular_posts,
+            'random_posts': random_posts,
+            'pagination': True
+        }
+    else:
+        context = {
+            'posts': posts,
+            'categories': categories,
+            'tags': tags,
+            'popular_posts': popular_posts,
+            'random_posts': random_posts,
+        }
     return render(request, "core/index.html", context)
 
 
@@ -78,10 +87,25 @@ def category(request, category_name):
         category = Category.objects.filter(name=category_name).first()
         posts = Post.objects.filter(
             published=True, categories__name=category_name)
-        context = {
-            'category': category,
-            'posts': posts
-        }
+        if len(posts) > 3:
+            all_posts = Paginator(posts, 3)
+            page = request.GET.get('page')
+            try:
+                page_posts = all_posts.page(page)
+            except PageNotAnInteger:
+                page_posts = all_posts.page(1)
+            except EmptyPage:
+                page_posts = all_posts.page(all_posts.num_pages)
+            context = {
+                'category': category,
+                'posts': page_posts,
+                'pagination': True
+            }
+        else:
+            context = {
+                'category': category,
+                'posts': posts
+            }
         return render(request, "core/category.html", context)
     except Exception as e:
         print(e)
@@ -162,10 +186,25 @@ def search(request):
     query = request.GET.get('query')
     results = Post.objects.filter(Q(title__icontains=query) | Q(
         seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
-    context = {
-        'results': results,
-        'query': query,
-    }
+    if len(results) > 5:
+        all_posts = Paginator(results, 5)
+        page = request.GET.get('page')
+        try:
+            page_posts = all_posts.page(page)
+        except PageNotAnInteger:
+            page_posts = all_posts.page(1)
+        except EmptyPage:
+            page_posts = all_posts.page(all_posts.num_pages)
+        context = {
+            'query': query,
+            'results': page_posts,
+            'pagination': True
+        }
+    else:
+        context = {
+            'query': query,
+            'results': results
+        }
     return render(request, "core/search.html", context)
 
 
@@ -174,10 +213,25 @@ def tag(request, tag_name):
         tag = Tag.objects.filter(name=tag_name).first()
         posts = Post.objects.filter(
             published=True, tags__name=tag_name)
-        context = {
-            'tag': tag,
-            'posts': posts
-        }
+        if len(posts) > 3:
+            all_posts = Paginator(posts, 3)
+            page = request.GET.get('page')
+            try:
+                page_posts = all_posts.page(page)
+            except PageNotAnInteger:
+                page_posts = all_posts.page(1)
+            except EmptyPage:
+                page_posts = all_posts.page(all_posts.num_pages)
+            context = {
+                'tag': tag,
+                'posts': page_posts,
+                'pagination': True
+            }
+        else:
+            context = {
+                'tag': tag,
+                'posts': posts
+            }
         return render(request, "core/tag.html", context)
     except Exception as e:
         print(e)

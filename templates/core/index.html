@@ -65,12 +65,14 @@
                 {% endfor %}
               </div>
 
+              {% if pagination %}
+                
               <div class="row mt-5">
                 <div class="col-md-12 text-center">
                   <nav aria-label="Page navigation" class="text-center">
                     <ul class="pagination">
                       {% if posts.has_previous %}
-                        <li class="page-item"><a class="page-link" href="#">&lt;</a></li>
+                        <li class="page-item"><a class="page-link" href="?page={{posts.previous_page_number}}">&lt;</a></li>
                       {% else %}
                         <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
                       {% endif %}
@@ -84,6 +86,8 @@
                   </nav>
                 </div>
               </div>
+              
+              {% endif %}
             </div>
             {% include "partials/sidebar.html" %}
           </div>

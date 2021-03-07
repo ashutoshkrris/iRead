@@ -35,7 +35,7 @@
                     <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({{post.thumbnail.url}});"></div>
                     <span class="text">
                       <div class="post-meta">
-                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"><a href="{% url 'profile' post.author.username %}"> {{post.author.get_full_name}}</a></span>&bullet;
+                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
                         <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span> &bullet;
                         <span class="mr-2">{{post.categories.name}}</span>
                       </div>
@@ -48,7 +48,29 @@
 
               </div>
             </div>
-
+            {% if pagination %}
+              
+            <div class="row mt-5">
+              <div class="col-md-12 text-center">
+                <nav aria-label="Page navigation" class="text-center">
+                  <ul class="pagination">
+                    {% if posts.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{posts.previous_page_number}}">&lt;</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
+                      {% endif %}
+                        <li class="page-item"><a class="page-link active" href="">{{posts.number}}</a></li>
+                      {% if posts.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{posts.next_page_number}}">&gt;</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" style="pointer-events: none;">&gt;</a></li>
+                      {% endif %}
+                  </ul>
+                </nav>
+              </div>
+            </div>
+            
+            {% endif %}
           </div>
           {% include "partials/sidebar.html" %}
         </div>
