@@ -148,13 +148,13 @@ STATICFILES_DIRS = [
 
 
 # Cloudinary
-if not DEBUG:
-    CLOUDINARY_STORAGE = {
-        'CLOUD_NAME': config("CLOUD_NAME"),
-        'API_KEY': config("API_KEY"),
-        'API_SECRET': config("API_SECRET")
-    }
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+# if not DEBUG:
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': config("CLOUD_NAME"),
+    'API_KEY': config("API_KEY"),
+    'API_SECRET': config("API_SECRET")
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Media Files
