@@ -1,5 +1,6 @@
 {% extends "core/base.html" %} {% load static %} {% block title %}New Post{% endblock title %} {% block content %}
 
+
 <section class="site-section py-lg">
       <div class="container">
         <div class="row blog-entries">
@@ -107,5 +108,13 @@
   <script>
     var element = document.getElementById("new_post")
     element.classList.add("active");
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script>
+    Swal.fire(
+    'Storage Issue',
+    'Currently, we <strong>do not support adding images in post content</strong> due to low storage.',
+    'info'
+    )
   </script>
 {% endblock js_down %}
