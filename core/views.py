@@ -303,7 +303,7 @@ def delete_post(request, slug):
 
 def new_category(request):
     if request.method == 'POST':
-        if request.session['user_id']:
+        if request.session.get('user_id'):
             data = json.loads(request.body)
             category_name = data['category_name']
             capitalized_category = " ".join([
@@ -328,7 +328,7 @@ def new_category(request):
 
 def new_tag(request):
     if request.method == 'POST':
-        if request.session['user_id']:
+        if request.session.get('user_id'):
             data = json.loads(request.body)
             tag_name = data['tag_name']
             lower_tag = "_".join([
