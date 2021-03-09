@@ -156,7 +156,8 @@ def single(request, slug):
             'related_posts': related_posts,
             'comments': comments,
             'liked_posts': liked,
-            'total_likes': total_likes
+            'total_likes': total_likes,
+            'meta' : True
         }
         return render(request, "core/blog-single.html", context)
     except Exception as e:
