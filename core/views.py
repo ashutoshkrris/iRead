@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import EmailMultiAlternatives, message
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
+import json
 
 
 # Create your views here.
@@ -78,7 +79,7 @@ def contact(request):
             email.attach_alternative(html_content, "text/html")
             email.send()
         except Exception as e:
-            print(e)
+            pass
     return render(request, "core/contact.html")
 
 
@@ -108,7 +109,6 @@ def category(request, category_name):
             }
         return render(request, "core/category.html", context)
     except Exception as e:
-        print(e)
         return Http404()
 
 
@@ -160,7 +160,6 @@ def single(request, slug):
         }
         return render(request, "core/blog-single.html", context)
     except Exception as e:
-        print(e)
         raise Http404()
 
 
@@ -234,7 +233,6 @@ def tag(request, tag_name):
             }
         return render(request, "core/tag.html", context)
     except Exception as e:
-        print(e)
         return Http404()
 
 
@@ -251,7 +249,7 @@ def new_post(request):
             content = request.POST.get('editor1')
             category = request.POST.get('category')
             tags = request.POST.getlist('tags')
-            
+
             cat = Category.objects.get(name=category)
             user = Account.objects.get(id=request.session.get('user_id'))
             new_post = Post(title=title, seo_overview=overview,
@@ -267,26 +265,26 @@ def new_post(request):
             return render(request, "core/new-post.html", context)
     return render(request, "core/new-post.html", context)
 
+
 def update_post(request, slug):
-    post =Post.objects.get(slug=slug)
+    post = Post.objects.get(slug=slug)
     context = {
         'post': post
     }
     if request.method == 'POST':
         try:
-            
+
             title = request.POST.get('title')
             try:
-                print("Hiiiiiiiiiii")
                 banner = request.FILES['banner_image']
                 post.thumbnail = banner
-            except:
+            except Exception:
                 pass
             overview = request.POST.get('overview')
             content = request.POST.get('editor1')
 
             post.title = title
-            
+
             post.seo_overview = overview
             post.content = content
             post.save()
@@ -296,7 +294,57 @@ def update_post(request, slug):
             return render(request, "core/update-post.html", context)
     return render(request, "core/update-post.html", context)
 
+
 def delete_post(request, slug):
     post = Post.objects.get(slug=slug)
     post.delete()
     return redirect('home')
+
+
+def new_category(request):
+    if request.method == 'POST':
+        if request.session['user_id']:
+            data = json.loads(request.body)
+            category_name = data['category_name']
+            capitalized_category = " ".join([
+                word.capitalize()
+                for word in category_name.split(" ")
+            ])
+            if not Category.objects.filter(name=capitalized_category).exists():
+                try:
+                    new_category = Category(name=capitalized_category)
+                    new_category.save()
+                    print("Created new")
+                    return JsonResponse({'category_created': 'Category created successfully.'})
+                except Exception:
+                    return JsonResponse({'category_error': 'Error while creating category.'})
+            else:
+                return JsonResponse({'category_error': 'Category already exists.'})
+        else:
+            return JsonResponse({'category_error': 'You are not logged in.'})
+    else:
+        return JsonResponse({'category_error': 'Unable to create new category'})
+
+
+def new_tag(request):
+    if request.method == 'POST':
+        if request.session['user_id']:
+            data = json.loads(request.body)
+            tag_name = data['tag_name']
+            lower_tag = "_".join([
+                word.lower()
+                for word in tag_name.split(" ")
+            ])
+            if not Tag.objects.filter(name=lower_tag).exists():
+                try:
+                    new_tag = Tag(name=lower_tag)
+                    new_tag.save()
+                    return JsonResponse({'tag_created': 'Tag created successfully.'})
+                except Exception:
+                    return JsonResponse({'tag_error': 'Error while creating tag.'})
+            else:
+                return JsonResponse({'tag_error': 'Tag already exists.'})
+        else:
+            return JsonResponse({'tag_error': 'You are not logged in.'})
+    else:
+        return JsonResponse({'tag_error': 'Unable to create new tag'})
