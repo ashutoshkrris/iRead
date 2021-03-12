@@ -1,0 +1,44 @@
+<!-- END sidebar-box -->
+<div class="sidebar-box" style="margin-top: 140px">
+  <div class="bio text-center">
+    <img
+      src="{{post.author.profile_image.url}}"
+      alt="Image Placeholder"
+      class="img-fluid"
+    />
+    <div class="bio-body">
+      <h2>{{post.author.get_full_name}}</h2>
+      <p>
+        {{post.author.about}}
+      </p>
+      <p>
+        <a href="{% url 'profile' post.author.username %}" class="btn btn-primary btn-sm rounded"
+          >Read my bio</a
+        >
+      </p>
+      <p class="social">
+          {% if post.author.social_links.facebook_url %}
+            <a href="{{post.author.social_links.facebook_url}}" class="p-2"
+            ><span class="fa fa-facebook"></span
+            ></a>
+          {% endif %}
+          {% if post.author.social_links.twitter_url %}
+            <a href="{{post.author.social_links.twitter_url}}" class="p-2"
+            ><span class="fa fa-twitter"></span
+            ></a>
+          {% endif %}
+          {% if post.author.social_links.instagram_url %}
+            <a href="{{post.author.social_links.instagram_url}}" class="p-2"
+          ><span class="fa fa-instagram"></span
+        ></a>
+          {% endif %}
+          {% if post.author.social_links.portfolio_url %}
+            <a href="{{post.author.social_links.portfolio_url}}" class="p-2"
+          ><span class="fa fa-globe"></span
+        ></a>
+          {% endif %}
+      </p>
+    </div>
+  </div>
+</div>
+<!-- END sidebar-box -->

@@ -127,7 +127,7 @@ def single(request, slug):
     try:
         post = Post.objects.get(slug=slug)
         related_posts = Post.objects.filter(
-            Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()
+            Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()[:3]
         post.views += 1
         post.save()
         if request.method == 'POST':

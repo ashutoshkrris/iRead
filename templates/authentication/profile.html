@@ -20,9 +20,26 @@
                   <p>{{user.about}}</p>
                   
                   <p class="social">
-                    <a href="{{user.social_links.facebook_url}}" class="p-2"><span class="fa fa-facebook"></span></a>
-                    <a href="{{user.social_links.twitter_url}}" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="{{user.social_links.instagram_url}}" class="p-2"><span class="fa fa-instagram"></span></a>
+                    {% if user.social_links.facebook_url %}
+                      <a href="{{user.social_links.facebook_url}}" class="p-2"
+                      ><span class="fa fa-facebook"></span
+                      ></a>
+                    {% endif %}
+                    {% if user.social_links.twitter_url %}
+                      <a href="{{user.social_links.twitter_url}}" class="p-2"
+                      ><span class="fa fa-twitter"></span
+                      ></a>
+                    {% endif %}
+                    {% if user.social_links.instagram_url %}
+                      <a href="{{user.social_links.instagram_url}}" class="p-2"
+                    ><span class="fa fa-instagram"></span
+                  ></a>
+                    {% endif %}
+                    {% if user.social_links.portfolio_url %}
+                      <a href="{{user.social_links.portfolio_url}}" class="p-2"
+                    ><span class="fa fa-globe"></span
+                  ></a>
+                    {% endif %}
                   </p>
                 </div>
               </div>
