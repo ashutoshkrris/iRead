@@ -148,13 +148,13 @@ STATICFILES_DIRS = [
 
 
 # Cloudinary
-# if not DEBUG:
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config("CLOUD_NAME"),
-    'API_KEY': config("API_KEY"),
-    'API_SECRET': config("API_SECRET")
-}
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+if not DEBUG:
+    CLOUDINARY_STORAGE = {
+        'CLOUD_NAME': config("CLOUD_NAME"),
+        'API_KEY': config("API_KEY"),
+        'API_SECRET': config("API_SECRET")
+    }
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
 # Media Files
@@ -162,12 +162,20 @@ MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
 # CKEditor Configurations
-CKEDITOR_UPLOAD_PATH = "blog/uploads/"
-# CKEDITOR_IMAGE_BACKEND = "pillow"
-# CKEDITOR_THUMBNAIL_SIZE = (300, 300)
-# CKEDITOR_IMAGE_QUALITY = 40
-CKEDITOR_BROWSE_SHOW_DIRS = False
-CKEDITOR_ALLOW_NONIMAGE_FILES = False
+if not DEBUG:
+    CKEDITOR_UPLOAD_PATH = "blog/uploads/"
+    
+    # CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+    # CKEDITOR_IMAGE_QUALITY = 40
+    CKEDITOR_BROWSE_SHOW_DIRS = False
+    CKEDITOR_ALLOW_NONIMAGE_FILES = False
+else:
+    CKEDITOR_UPLOAD_PATH = "blog/uploads/"
+    CKEDITOR_IMAGE_BACKEND = "pillow"
+    # CKEDITOR_THUMBNAIL_SIZE = (300, 300)
+    # CKEDITOR_IMAGE_QUALITY = 40
+    CKEDITOR_BROWSE_SHOW_DIRS = False
+    CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 CUSTOM_TOOLBAR = [
     {

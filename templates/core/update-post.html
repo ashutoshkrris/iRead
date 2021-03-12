@@ -40,6 +40,18 @@
                             <label for="content">Content</label>
                             <textarea cols="80" id="editor1" name="editor1" rows="20" data-sample-short required>{{post.content}}</textarea>
                         </div>
+                        {% if post.published %}
+                          <div class="col-md-6 form-group">
+                            <input type="checkbox" id="published" name="published" value="{{post.published}}" checked>
+                            <label for="published"> Published</label><br>
+                          </div>
+                        {% else %}
+                          <div class="col-md-6 form-group">
+                            <input type="checkbox" id="published" name="published" value="{{post.published}}">
+                            <label for="published"> Published</label><br>
+                          </div>
+                        {% endif %}
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-4"></div>
@@ -88,13 +100,5 @@
       filebrowserUploadUrl: '{% url "ckeditor_upload" %}'
     });
   </script>
-  <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-  <script>
-    Swal.fire(
-    'Storage Issue',
-    'Currently, we <strong>do not support adding images in post content</strong> due to low storage.',
-    'info'
-    )
-  </script> -->
 
 {% endblock js_down %}

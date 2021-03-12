@@ -43,7 +43,20 @@
                       <span class="text">
                         <div class="post-meta">
                           <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>&bullet;
-                          <span class="mr-2">{{post.categories.name}}</span>
+                          {% if request.session.user_id %}
+                            <span class="mr-2">{{post.categories.name}}</span>&bullet;
+                            {% if request.session.user_id == post.author.id %}
+                              <span class="mr-2">
+                                {% if post.published %}
+                                  <span>Published</span>
+                                {% else %}
+                                  <span>Not Published</span>
+                                {% endif %}
+                              </span>
+                            {% endif %}
+                          {% else %}
+                            <span class="mr-2">{{post.categories.name}}</span>
+                          {% endif %}
                         </div>
                         <h2>{{post.title}}</h2>
                       </span>

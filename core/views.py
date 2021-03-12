@@ -250,11 +250,12 @@ def new_post(request):
             content = request.POST.get('editor1')
             category = request.POST.get('category')
             tags = request.POST.getlist('tags')
+            published = request.POST.get('published')
 
             cat = Category.objects.get(name=category)
             user = Account.objects.get(id=request.session.get('user_id'))
             new_post = Post(title=title, seo_overview=overview,
-                            thumbnail=banner, content=content, author=user, categories=cat)
+                            thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
             new_post.save()
             post = Post.objects.get(title=title, author=user)
             for tag in tags:
@@ -283,11 +284,11 @@ def update_post(request, slug):
                 pass
             overview = request.POST.get('overview')
             content = request.POST.get('editor1')
-
+            published = request.POST.get('published')
             post.title = title
-
             post.seo_overview = overview
             post.content = content
+            post.published = bool(published)
             post.save()
             return redirect('single', slug=post.slug)
         except ValueError:

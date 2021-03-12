@@ -4,7 +4,7 @@
       <div class="container">
 <div class="row blog-entries element-animate">
   <div class="col-md-12 col-lg-8 main-content">
-    <div class="post-meta">
+    <div class="post-meta">  
       <span class="author mr-2"
         ><img
           src="{{post.author.profile_image.url}}"
@@ -17,7 +17,14 @@
       {% if request.session.user_id == post.author.id %}
         <span class="ml-2"><a href="{% url 'update_post' post.slug %}">Edit</a></span>
         <span class="ml-2"><a id="delBtn" style="color: red;cursor: pointer;">Delete</a></span>
-      {% endif %}
+        <span class="ml-4">
+          {% if post.published %}
+            <a class="category mb-5" href="#" style="background-color: grey;">PUBLISHED</a>
+          {% else %}
+            <a class="category mb-5" href="#" style="background-color: grey;">NOT PUBLISHED</a>
+          {% endif %}
+        </span>
+        {% endif %}
     </div>
     <h1 class="mb-4">{{post.title}}</h1>
     <a class="category mb-5" href="#">{{post.categories.name}}</a>

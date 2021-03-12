@@ -206,7 +206,10 @@ def forgot_password(request):
 
 def profile(request, username):
     user = Account.objects.get(username=username)
-    latest_posts = Post.objects.filter(published=True, author=user)
+    if request.session.get('user_id') == user.id:
+        latest_posts = Post.objects.filter(author=user)
+    else:
+        latest_posts = Post.objects.filter(published=True,author=user)
     if len(latest_posts) > 3:
         all_posts = Paginator(latest_posts, 3)
         page = request.GET.get('page')
