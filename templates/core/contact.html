@@ -12,8 +12,39 @@
         </div>
         <div class="row blog-entries">
           <div class="col-md-12 col-lg-8 main-content">
-            
-            <form action="{% url 'contact' %}" method="post">
+            {% if error %}
+        <div
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{error}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+        {% if message %}
+        <div
+          class="alert alert-success alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+            <form action="{% url 'contact' %}" method="post" id="contactForm">
               {% csrf_token %}
                   <div class="row">
                     <div class="col-md-12 form-group">
@@ -39,7 +70,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 form-group">
-                      <input type="submit" value="Send Message" class="btn btn-primary">
+                      <input type="submit" id="sendMsg" value="Send Message" class="btn btn-primary">
                     </div>
                   </div>
                 </form>

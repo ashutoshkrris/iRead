@@ -74,13 +74,14 @@ def contact(request):
             email = EmailMultiAlternatives(
                 f"Thanks for contacting iRead",
                 text_content,
-                "iRead <no-reply@iread.ga>",
+                "iRead <contact@iread.ga>",
                 [email]
             )
             email.attach_alternative(html_content, "text/html")
             email.send()
-        except Exception as e:
-            pass
+            return render(request, "core/contact.html", {'message':"We have received your details. We'll contact you soon."})
+        except Exception:
+            return render(request, "core/contact.html", {'error': "We are facing error this time. Please contact later."})
     return render(request, "core/contact.html")
 
 

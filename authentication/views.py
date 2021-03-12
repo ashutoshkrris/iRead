@@ -98,7 +98,7 @@ def send_otp(request):
         email = EmailMultiAlternatives(
             f"One Time Password | iRead",
             text_content,
-            "iRead <no-reply@iRead.tk>",
+            "iRead <no-reply@iRead.ga>",
             [user_email]
         )
         print("sending email")

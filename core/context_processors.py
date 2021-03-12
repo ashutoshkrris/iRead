@@ -25,7 +25,7 @@ def popular_posts(request):
 def social_links(request):
     links = {
         'facebook': 'https://facebook.com/ashutoshkrris',
-        'twitter': 'https://twitter.com/ashutoshkrris',
+        'twitter': 'https://twitter.com/iReadBot',
         'instagram': 'https://instagram.com/ashutoshkrris',
         'linkedin': 'https://linkedin.com/in/ashutoshkrris',
         'portfolio': 'https://ashutoshkrris.tk'
