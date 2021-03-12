@@ -17,7 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.decorators import login_required
+from authentication.middlewares.auth import auth_middleware
+from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
 from django.conf.urls import url
 from ckeditor_uploader import views
@@ -25,10 +26,10 @@ from ckeditor_uploader import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('ckeditor/', include('ckeditor_uploader.urls')),
-    url(r"^ckeditor/upload/", login_required(views.upload), name="ckeditor_upload"),
+    url(r"^ckeditor/upload/", csrf_exempt(auth_middleware(views.upload)), name="ckeditor_upload"),
     url(
         r"^ckeditor/browse/",
-        never_cache(login_required(views.browse)),
+        csrf_exempt(never_cache(auth_middleware(views.browse))),
         name="ckeditor_browse",
     ),
     path('accounts/',include('authentication.urls')),
