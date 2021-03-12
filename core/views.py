@@ -9,6 +9,7 @@ from django.core.mail import EmailMultiAlternatives, message
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
+from django.core.serializers import serialize
 
 
 # Create your views here.
@@ -157,7 +158,7 @@ def single(request, slug):
             'comments': comments,
             'liked_posts': liked,
             'total_likes': total_likes,
-            'meta' : True
+            'meta': True
         }
         return render(request, "core/blog-single.html", context)
     except Exception as e:
@@ -350,3 +351,11 @@ def new_tag(request):
             return JsonResponse({'tag_error': 'You are not logged in.'})
     else:
         return JsonResponse({'tag_error': 'Unable to create new tag'})
+
+
+# Public API to fetch all posts
+
+def pub_api(request):
+    posts = Post.objects.filter(published=True)
+    data = serialize("json", posts, fields=('title','slug', 'timestamp',))
+    return HttpResponse(data, content_type="application/json")
