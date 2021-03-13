@@ -1249,7 +1249,7 @@ blockquote {
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  padding: 5em 0;
+  padding-top: 3em;
   background: #262626; }
   .site-footer .post-entry-sidebar ul li a h4 {
     color: #fff; }

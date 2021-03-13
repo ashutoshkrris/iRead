@@ -65,6 +65,7 @@ class Like(models.Model):
     def __str__(self) -> str:
         return f'{self.post.title}'
 
+
 class Comment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
@@ -87,3 +88,21 @@ class Contact(models.Model):
     subject = models.CharField(max_length=127)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+
+class Recurring(models.Model):
+    name = models.CharField(max_length=25)
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+
+class BulletinSubscriber(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    category = models.ForeignKey(Category, on_delete=models.PROTECT)
+    subs_type = models.ForeignKey(Recurring, on_delete=models.PROTECT)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) -> str:
+        return f"{self.email}"

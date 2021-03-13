@@ -1,7 +1,7 @@
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from .models import Contact, Post, Category, Tag, Comment, SubComment, Like
+from .models import BulletinSubscriber, Contact, Post, Category, Recurring, Tag, Comment, SubComment, Like
 import random
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -79,7 +79,7 @@ def contact(request):
             )
             email.attach_alternative(html_content, "text/html")
             email.send()
-            return render(request, "core/contact.html", {'message':"We have received your details. We'll contact you soon."})
+            return render(request, "core/contact.html", {'message': "We have received your details. We'll contact you soon."})
         except Exception:
             return render(request, "core/contact.html", {'error': "We are facing error this time. Please contact later."})
     return render(request, "core/contact.html")
@@ -354,9 +354,28 @@ def new_tag(request):
         return JsonResponse({'tag_error': 'Unable to create new tag'})
 
 
+# For bulletins registration
+def bulletin_registration(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        name = data["name"]
+        email = data['email']
+        if BulletinSubscriber.objects.filter(email=email).exists():
+            return JsonResponse({'registration_duplicate': True})
+        category_id = data['category']
+        recurring_id = data['recurring']
+        category = Category.objects.get(id=category_id)
+        recurring = Recurring.objects.get(id=recurring_id)
+        new_subscriber = BulletinSubscriber(
+            name=name, email=email, category=category, subs_type=recurring)
+        new_subscriber.save()
+        return JsonResponse({'registration_success': True, 'category': category.name,'recurring':recurring.name})
+    return JsonResponse({'registration_failure': True})
+
+
 # Public API to fetch all posts
 
 def pub_api(request):
     posts = Post.objects.filter(published=True)
-    data = serialize("json", posts, fields=('title','slug', 'timestamp',))
+    data = serialize("json", posts, fields=('title', 'slug', 'timestamp',))
     return HttpResponse(data, content_type="application/json")

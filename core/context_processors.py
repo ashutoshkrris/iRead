@@ -1,4 +1,4 @@
-from .models import Category, Post, Tag
+from .models import Category, Post, Recurring, Tag
 
 
 def latest_posts(request):
@@ -15,6 +15,10 @@ def categories(request):
 def tags(request):
     tags = Tag.objects.all()
     return {'tags': tags}
+
+def recurrings(request):
+    recurrings = Recurring.objects.all()
+    return {'recurrings': recurrings}
 
 
 def popular_posts(request):
