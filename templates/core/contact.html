@@ -90,4 +90,68 @@
     var element = document.getElementById("contact")
     element.classList.add("active");
   </script>
+  {% if unsubscribe %}
+    
+  <script>
+      Swal.fire({
+        title: 'Unubscribe Bulletins',
+        html: `<form action="" method="POST" id="bltForm">
+          {% csrf_token %}
+        <input type="email" id="email" name="email" class="swal2-input" placeholder="Email address">
+        </form>
+        `,
+        confirmButtonText: 'Confirm',
+        focusConfirm: false,
+        customClass: {
+          confirmButton: 'btn btn-primary btn-lg',
+        },
+        preConfirm: () => {
+          const email = Swal.getPopup().querySelector('#email').value
+          const csrftoken = $("input[name=csrfmiddlewaretoken]").val()
+          var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/; 
+          if (!email) {
+            Swal.showValidationMessage(`Email address is missing.`)
+          } else if(String(email).search(pattern) == -1){
+            Swal.showValidationMessage(`Enter a valid email address`)
+          }
+          return { email: email, csrftoken: csrftoken }
+        }
+      }).then((result) => {
+        if(result.value){
+          fetch("/bulletins/unsubscribe",{
+            body: JSON.stringify({
+              email: result.value.email,
+            }),
+            headers:{
+              "X-CSRFToken": result.value.csrftoken
+            },
+            method: "POST"
+          })
+          .then((res)=> res.json())
+          .then((data)=>{
+                   if (data.not_found){
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Not Found',
+                    text: `${data.not_found}`,
+                  })
+                } else if (data.unsubscribed){
+                  Swal.fire({
+                    icon: 'success',
+                    title: 'Unubscribed',
+                    text: `${data.unsubscribed}`,
+                  })
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: 'Oops..',
+                    text: `We've encountered some error while unsubscribing. Please try again.`,
+                  })
+                }
+          })
+        }
+      })
+    </script>
+    
+  {% endif %}
 {% endblock js_down %}

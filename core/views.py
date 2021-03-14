@@ -18,7 +18,7 @@ def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
     categories = Category.objects.all()
     tags = Tag.objects.all()
-    popular_posts = posts.order_by('-views')[:3]
+    popular_posts = posts.order_by('-likes')[:3]
     try:
         random_posts = random.sample(list(posts), 3)
     except ValueError:
@@ -48,6 +48,7 @@ def index(request):
             'popular_posts': popular_posts,
             'random_posts': random_posts,
         }
+
     return render(request, "core/index.html", context)
 
 
@@ -179,6 +180,8 @@ def like_dislike_post(request):
 
         like_obj = Like.objects.get(post=post)
         total_likes = like_obj.user.count()
+        post.likes = total_likes
+        post.save()
         return JsonResponse({'is_liked': is_liked, 'total_likes': total_likes})
     except Exception:
         return JsonResponse({'like_error': 'You are not logged in.'})
@@ -369,8 +372,64 @@ def bulletin_registration(request):
         new_subscriber = BulletinSubscriber(
             name=name, email=email, category=category, subs_type=recurring)
         new_subscriber.save()
-        return JsonResponse({'registration_success': True, 'category': category.name,'recurring':recurring.name})
+        return JsonResponse({'registration_success': True, 'category': category.name, 'recurring': recurring.name})
     return JsonResponse({'registration_failure': True})
+
+
+def bulletin_unsubscribe(request):
+    context = {
+        'unsubscribe': True
+    }
+    if request.method == "POST":
+        data = json.loads(request.body)
+        email = data['email']
+        try:
+            subscriber = BulletinSubscriber.objects.get(email=email)
+            subscriber.delete()
+            return JsonResponse({'unsubscribed': 'We hope you had great time with us.'})
+        except BulletinSubscriber.DoesNotExist:
+            return JsonResponse({'not_found': 'You were not subscribed to our bulletins.'})
+        except Exception:
+            return JsonResponse({'error': 'Something went wrong.'})
+    return render(request, "core/contact.html", context)
+
+
+def bulletin_email():
+    subscribers = BulletinSubscriber.objects.all()
+    for sub in subscribers:
+        sub_type = sub.subs_type.name
+        latest_posts = Post.objects.filter(
+            categories__id=sub.category.id).order_by('-timestamp')[:2]
+        lp1, lp2 = latest_posts[0], latest_posts[1]
+
+        popular_posts = Post.objects.filter(
+            categories__id=sub.category.id).order_by('-likes')[:2]
+        pp1, pp2 = popular_posts[0], popular_posts[1]
+
+        context = {
+            'lp1': lp1,
+            'lp2': lp2,
+            'pp1': pp1,
+            'pp2': pp2,
+            'category': sub.category.name,
+            'sub_type': sub_type,
+            'email': sub.email
+        }
+        try:
+            html_content = render_to_string("emails/bulletins.html", context)
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                f"{sub_type.capitalize()} Bulletins For You | iRead",
+                text_content,
+                "iRead <bulletins@iread.ga>",
+                [sub.email]
+            )
+            email.attach_alternative(html_content, "text/html")
+            email.send()
+        except Exception as e:
+            print(e)
+            pass
 
 
 # Public API to fetch all posts

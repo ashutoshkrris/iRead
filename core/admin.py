@@ -6,11 +6,11 @@ from .models import BulletinSubscriber, Category, Like, Recurring, Tag, Post, Co
 # Register your models here.
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
-    list_display = ('id', 'title', 'author', 'views',
+    list_display = ('id', 'title', 'author', 'views', 'likes',
                     'published', 'timestamp',)
     search_fields = ('title', 'author')
     ordering = ('-timestamp',)
-    readonly_fields = ('slug','views',)
+    readonly_fields = ('slug', 'views',)
     list_filter = ('categories', 'tags', 'published')
 
 
@@ -20,6 +20,7 @@ admin.site.register(Recurring)
 admin.site.register(Comment)
 admin.site.register(SubComment)
 admin.site.register(Like)
+
 
 @admin.register(Contact)
 class ContactAdmin(ModelAdmin):

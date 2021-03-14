@@ -22,7 +22,7 @@ def recurrings(request):
 
 
 def popular_posts(request):
-    popular_posts = Post.objects.filter(published=True).order_by('-views')[:3]
+    popular_posts = Post.objects.filter(published=True).order_by('-likes')[:3]
     return {'popular_posts': popular_posts}
 
 

@@ -35,6 +35,7 @@ class Post(models.Model):
         Category, on_delete=models.CASCADE, default=1)
     tags = models.ManyToManyField(Tag, blank=True)
     views = models.IntegerField(default=0)
+    likes = models.IntegerField(default=0)
     comments = models.IntegerField(default=0)
 
     class Meta:
