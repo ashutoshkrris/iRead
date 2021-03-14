@@ -63,6 +63,15 @@ def password_validation(request):
         return JsonResponse({'password_error': 'Password must be 8-20 characters long and must contain atleast one uppercase letter, one lowercase letter, one number(0-9) and one special character(@,#,$,%,&,_)'})
 
 
+def check_passwords(request):
+    if request.method=="POST":
+        user = Account.objects.get(id=request.session.get('user_id'))
+        data = json.loads(request.body)
+        password = data['oldPassword']
+        if check_password(password, user.password):
+            return JsonResponse({'password_correct': True})
+        return JsonResponse({'password_error': True})
+
 def match_passwords(request):
     data = json.loads(request.body)
     password1 = data['password1']
@@ -203,6 +212,18 @@ def forgot_password(request):
             return render(request, "authentication/reset-password.html", {"error": "Password could not be changed, please try again."})
     return render(request, "authentication/reset-password.html")
 
+def change_password(request):
+    if request.method == 'POST':
+        try:
+            user = Account.objects.get(id=request.session.get('user_id'))
+            password = request.POST.get('newPassword1')
+            user.set_password(password)
+            user.save()
+            request.session.clear()
+            return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password."})
+        except Exception:
+            return render(request, "authentication/change-password.html", {"error": "Password could not be changed, please try again."})
+    return render(request, "authentication/change-password.html")
 
 def profile(request, username):
     user = Account.objects.get(username=username)

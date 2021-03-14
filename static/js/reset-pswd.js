@@ -56,6 +56,7 @@ function sendOTP() {
   });
 }
 
+
 function verifyOTP() {
   let otp = $("#otp").val();
   let email = $("#email").val();
