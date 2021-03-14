@@ -1,4 +1,5 @@
 from .models import Category, Post, Recurring, Tag
+from .bot import get_latest_tweet
 
 
 def latest_posts(request):
@@ -15,6 +16,7 @@ def categories(request):
 def tags(request):
     tags = Tag.objects.all()
     return {'tags': tags}
+
 
 def recurrings(request):
     recurrings = Recurring.objects.all()
@@ -35,3 +37,8 @@ def social_links(request):
         'portfolio': 'https://ashutoshkrris.tk'
     }
     return {'links': links}
+
+
+def latest_tweet(request):
+    link, tweet_id, full_text = get_latest_tweet()
+    return {'link': link, 'tweet_id': tweet_id, 'full_text': full_text}

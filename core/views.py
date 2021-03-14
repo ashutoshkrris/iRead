@@ -10,6 +10,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
 from django.core.serializers import serialize
+from .bot import tweet_new_post
 
 
 # Create your views here.
@@ -266,6 +267,8 @@ def new_post(request):
             for tag in tags:
                 post.tags.add(Tag.objects.get(name=tag))
             post.save()
+            if post.published:
+                tweet_new_post(post,tags)
             return redirect('single', slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'

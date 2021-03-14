@@ -77,6 +77,7 @@ TEMPLATES = [
                 'core.context_processors.recurrings',
                 'core.context_processors.popular_posts',
                 'core.context_processors.social_links',
+                'core.context_processors.latest_tweet',
             ],
         },
     },

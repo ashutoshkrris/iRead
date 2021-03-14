@@ -12,6 +12,7 @@ django-ckeditor = "*"
 django-cloudinary-storage = "*"
 gunicorn = "*"
 whitenoise = "*"
+tweepy = "*"
 
 [dev-packages]
 autopep8 = "*"
