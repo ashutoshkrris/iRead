@@ -13,8 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from payment.views import dashboard, invoice, paytm_handler
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
+    path('dashboard', dashboard, name='dashboard'),
+    path('paytm/handler/', csrf_exempt(paytm_handler), name='paytm_handler'),
+    path('invoice', invoice, name='invoice'),
 ]

@@ -13,6 +13,7 @@ django-cloudinary-storage = "*"
 gunicorn = "*"
 whitenoise = "*"
 tweepy = "*"
+pycryptodome = "*"
 
 [dev-packages]
 autopep8 = "*"

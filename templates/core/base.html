@@ -236,6 +236,11 @@
                     >Contact</a
                   >
                 </li>
+                <li class="nav-item">
+                  <a class="nav-link" id="sponsor" href="{% url 'dashboard' %}"
+                    >Sponsor</a
+                  >
+                </li>
                 {% if not request.session.user_id %}
                 <li class="nav-item">
                   <a class="nav-link" id="signup" href="{% url 'signup' %}"
@@ -318,6 +323,7 @@
                       <li>
                         <a class="bulletin" style="color:white;cursor: pointer">Bulletins</a>
                       </li>
+                      <li><a href="{% url 'dashboard' %}">Sponsor</a></li>
                     </ul>
                   </div>
 

@@ -1,0 +1,149 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Sponsorship Dashboard{% endblock title %}
+
+    {% block content %}
+    <section class="site-section">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h1>Sponsor Us</h1>
+          </div>
+        </div>
+        <div class="row blog-entries">
+          <div class="col-md-12 col-lg-8 main-content">
+            {% if error %}
+        <div
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{error}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+        {% if message %}
+        <div
+          class="alert alert-success alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+            <form action="{% url 'dashboard' %}" method="post" id="sponsorForm">
+              {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="name">Name</label>
+                      <input type="text" id="name" name="name" class="form-control " required>
+                    </div>
+                    
+                    <div class="col-md-12 form-group">
+                      <label for="email">Email</label>
+                      <input type="email" id="email" name="email" class="form-control " required>
+                    </div>
+                  
+                    <div class="col-md-4 form-group">
+                      <label for="subject">Amount</label>
+                      <div class="input-group-prepend">
+                        <div class="input-group-text">₹</div>
+                      <input type="number" id="amount" name="amount" class="form-control " required>
+                      </div>
+                    </div>
+                    <div class="col-md-8 form-group" style="margin-top: 40px;">
+                        <label for="gateway" style="margin-right: 30px;">Choose Gateway</label>
+                        <label for="paytm">
+                        <input type="radio" id="paytm" name="gateway" value="paytm"> Paytm</label>
+                        <label for="paypal">
+                        <input type="radio" id="paypal" name="gateway" value="paypal"> PayPal</label>
+                    </div>
+                </div>
+                  <div class="row">
+                      <div class="col-md-4"></div>
+                    <div class="col-md-4 form-group">
+                      <center><input type="button" onClick="confirmPay()" id="sponsorBtn" value="Sponsor Now" class="btn btn-primary m-4"></center>
+                    </div>
+                    <div class="col-md-4"></div>
+                  </div>
+                </form>
+          </div>
+          {% include "partials/sidebar.html" %}
+        </div>
+      </div>
+    </section>
+  
+{% endblock content %}
+{% block js_down %}
+  <script>
+    var element = document.getElementById("sponsor")
+    element.classList.add("active");
+  </script>
+  <script>
+      function confirmPay(){
+          const amount = document.getElementById("amount").value;
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("name").value;
+          const gateway_names = document.getElementsByName("gateway");
+          let gateway
+          for(i = 0; i < gateway_names.length; i++) { 
+                if(gateway_names[i].checked) 
+                 gateway = gateway_names[i].value; 
+            }
+          if (!name || !email || !amount || !gateway){
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: `Looks like you've missed one or more field(s)`
+                })
+          } else {
+              if(gateway == 'paytm'){
+                Swal.fire({
+                    imageUrl: '{% static "images/paytm.png" %}',
+                    imageHeight: 88,
+                    imageWidth: 88,
+                    imageAlt: 'Paytm Logo',
+                    title: `Do you want to pay an amount of ₹ ${amount} ?`,
+                    showCancelButton: true,
+                    confirmButtonText: `Yes!`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            const form = document.getElementById("sponsorForm");
+                            form.submit();
+                        }
+                    })
+              } else if(gateway == 'paypal'){
+                Swal.fire({
+                    imageUrl: '{% static "images/paypal.png" %}',
+                    imageHeight: 88,
+                    imageWidth: 88,
+                    imageAlt: 'PayPal Logo',
+                    title: `Do you want to pay an amount of ₹ ${amount} ?`,
+                    showCancelButton: true,
+                    confirmButtonText: `Yes!`,
+                    }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                        if (result.isConfirmed) {
+                            const form = document.getElementById("sponsorForm");
+                            form.submit();
+                        }
+                    })
+              }
+        }
+    }
+  </script>
+{% endblock js_down %}
