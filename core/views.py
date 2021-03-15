@@ -268,7 +268,7 @@ def new_post(request):
                 post.tags.add(Tag.objects.get(name=tag))
             post.save()
             if post.published:
-                tweet_new_post(post,tags)
+                tweet_new_post(post, tags)
             return redirect('single', slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
@@ -435,7 +435,19 @@ def bulletin_email():
             pass
 
 
+def privacy_policy(request):
+    return render(request, "core/important-docs/privacy-policy.html")
+
+
+def terms_conditions(request):
+    return render(request, "core/important-docs/tnc.html")
+
+
+def refund_policy(request):
+    return render(request, "core/important-docs/refund-policy.html")
+
 # Public API to fetch all posts
+
 
 def pub_api(request):
     posts = Post.objects.filter(published=True)

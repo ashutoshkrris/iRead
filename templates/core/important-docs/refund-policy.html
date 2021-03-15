@@ -1,0 +1,31 @@
+{% extends "core/base.html" %} {% load static %} {% block title %}Refund Policy{% endblock title %} {% block content %}
+<section class="site-section">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h1>Refund Policy</h1>
+      </div>
+    </div>
+    <div class="row blog-entries">
+      <div class="col-md-12 col-lg-8 main-content">
+
+        <p>
+          Thanks for sponsoring us at <a href="{% url 'home' %}">iRead</a> operated by Ashutosh Krishna.
+        </p>
+
+        <p>Please allow 1-2 weeks for your refund to be processed.</p>
+
+        <p>
+          We are unable to issue a refund without actual receipt of the payment(s) done.
+        </p>
+
+        <p>
+            In order to process your refund, reach to us at <a href="mailto:payment@iread.ga">payments@iread.ga </a>
+        </p>
+      </div>
+      {% include "partials/sidebar.html" %}
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

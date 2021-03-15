@@ -14,12 +14,15 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_tag, pub_api, single, contact, search, category, tag, update_post
+from .views import bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_tag, privacy_policy, pub_api, refund_policy, single, contact, search, category, tag, terms_conditions, update_post
 from authentication.middlewares.auth import auth_middleware, login_excluded
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
     path('', index, name='home'),
+    path('about/privacy-policy', privacy_policy, name='privacy_policy'),
+    path('about/terms-conditions', terms_conditions, name='terms_conditions'),
+    path('about/refund-policy', refund_policy, name='refund_policy'),
     path('about', about, name='about'),
     path('posts/<slug>', single, name='single'),
     path('contact', contact, name='contact'),
@@ -36,5 +39,5 @@ urlpatterns = [
          name='bulletin_registration'),
     path('bulletins/unsubscribe', bulletin_unsubscribe,
          name='bulletin_unsubscribe'),
-    path('api/posts', pub_api, name='public_api')
+    path('api/posts', pub_api, name='public_api'),
 ]
