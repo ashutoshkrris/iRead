@@ -68,8 +68,8 @@
                         <label for="gateway" style="margin-right: 30px;">Choose Gateway</label>
                         <label for="paytm">
                         <input type="radio" id="paytm" name="gateway" value="paytm"> Paytm</label>
-                        <label for="paypal">
-                        <input type="radio" id="paypal" name="gateway" value="paypal"> PayPal</label>
+                        <label for="razorpay">
+                        <input type="radio" id="razorpay" name="gateway" value="razorpay"> Razorpay</label>
                     </div>
                 </div>
                   <div class="row">
@@ -126,12 +126,11 @@
                             form.submit();
                         }
                     })
-              } else if(gateway == 'paypal'){
+              } else if(gateway == 'razorpay'){
                 Swal.fire({
-                    imageUrl: '{% static "images/paypal.png" %}',
-                    imageHeight: 88,
-                    imageWidth: 88,
-                    imageAlt: 'PayPal Logo',
+                    imageUrl: '{% static "images/razorpay.png" %}',
+                    imageHeight: 44,
+                    imageAlt: 'Razorpay Logo',
                     title: `Do you want to pay an amount of ₹ ${amount} ?`,
                     showCancelButton: true,
                     confirmButtonText: `Yes!`,

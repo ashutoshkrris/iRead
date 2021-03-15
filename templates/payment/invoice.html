@@ -71,12 +71,14 @@
         </div>
         <div class="col text-right">
           <h1>Invoice</h1>
-          <p class="mb-0 font-weight-bold">Invoice No.</p>
+          <p class="mb-0 font-weight-bold">Order ID</p>
           <p class="mb-0">{{orderid}}</p>
+          {% if not 'order' in request.path %}
           <p class="mb-0 font-weight-bold">Invoice Details</p>
           <p class="mb-0">INV{{invoice_num}}</p>
+          {% endif %}
           <p class="mb-0 font-weight-bold">Invoice Date</p>
-          <p class="mb-0">{{date}}</p>
+          <p class="mb-0">{{txn_date|slice:":19"}}</p>
         </div>
       </div>
     </div>
@@ -87,6 +89,7 @@
           <tr>
             <th scope="col">S. No.</th>
             <th scope="col">Description</th>
+            <th scope="col">Status</th>
             <th scope="col">GST</th>
             <th scope="col">Amount</th>
           </tr>
@@ -95,6 +98,7 @@
           <tr>
             <th scope="row">1</th>
             <td>Sponsorship Payment</td>
+            <td>{{status}}</td>
             <td>0%</td>
             <td>{{amount}}</td>
           </tr>
@@ -125,7 +129,7 @@
         text-align: center;
       "
     >
-      <a href="/">Jagrati</a> Copyright © 2021
+      <a href="/">iRead</a> Copyright © 2021
     </div>
 
     <script>

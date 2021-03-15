@@ -1,0 +1,227 @@
+{% extends "core/base.html" %} {% load static %} {% block title %}Razorpay
+Payment Page{% endblock title %} {% block js_up %}
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+{% endblock js_up %} {% block content %}
+<section class="site-section">
+  <div class="container">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <h1>Sponsor Us</h1>
+      </div>
+    </div>
+    <div class="row blog-entries">
+      <div class="col-md-12 col-lg-8 main-content">
+        {% if error %}
+        <div
+          class="alert alert-danger alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{error}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %} {% if message %}
+        <div
+          class="alert alert-success alert-dismissible fade show text-center"
+          role="alert"
+        >
+          {{message}}
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endif %}
+        <form action="" method="post" id="sponsorForm">
+          {% csrf_token %}
+          <div class="row">
+            <div class="col-md-12 form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="col-md-12 form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <div class="col-md-4 form-group">
+              <label for="subject">Amount</label>
+              <div class="input-group-prepend">
+                <div class="input-group-text">₹</div>
+                <input
+                  type="number"
+                  id="amount"
+                  name="amount"
+                  class="form-control"
+                  required
+                />
+              </div>
+            </div>
+            <div class="col-md-8 form-group" style="margin-top: 40px">
+              <label for="gateway" style="margin-right: 30px"
+                >Choose Gateway</label
+              >
+              <label for="paytm">
+                <input type="radio" id="paytm" name="gateway" value="paytm" />
+                Paytm</label
+              >
+              <label for="razorpay">
+                <input
+                  type="radio"
+                  id="razorpay"
+                  name="gateway"
+                  value="razorpay"
+                />
+                Razorpay</label
+              >
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4"></div>
+            <div class="col-md-4 form-group">
+              <center>
+                <input
+                  type="button"
+                  onClick="confirmPay()"
+                  id="sponsorBtn"
+                  value="Sponsor Now"
+                  class="btn btn-primary m-4"
+                />
+              </center>
+            </div>
+            <div class="col-md-4"></div>
+          </div>
+        </form>
+      </div>
+      {% include "partials/sidebar.html" %}
+    </div>
+  </div>
+</section>
+
+{% endblock content %} {% block js_down %}
+<script>
+  var element = document.getElementById("sponsor");
+  element.classList.add("active");
+</script>
+<script>
+  var options = {
+    key: "{{razorpay_id}}", // Enter the Key ID generated from the Dashboard
+    amount: "{{payment.amount}}", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    currency: "{{currency}}",
+    name: "iRead",
+    description: "Sponsorship",
+    image: "{% static 'images/favicon.png' %}",
+    order_id: "{{payment.id}}", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    handler: function (response) {
+      $.ajax({
+        url: "{% url 'razorpay_handler' %}",
+        type: "POST",
+        data: {
+          server_order: "{{payment.id}}",
+          payment_id: response.razorpay_payment_id,
+          order_id: response.razorpay_order_id,
+          sign: response.razorpay_signature,
+        },
+        success: function (data) {
+          var v = data;
+          if (data.success == true) {
+            Swal.fire({
+              icon: "success",
+              title: "Hurray...!",
+              text: "Payment Success!",
+            });
+            window.location.replace("{% url 'invoice' payment.id %}");
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "Something went wrong!",
+              footer: '<a href="{% url "home" %}">Return to Homepage</a>',
+            });
+          }
+        },
+      });
+    },
+    modal: {
+      ondismiss: function () {
+        window.location.replace("/payment/dashboard");
+      },
+    },
+    prefill: {
+      name: "{{name}}",
+      email: "{{email}}",
+    },
+    notes: {
+      address: "iRead Office",
+    },
+    theme: {
+      color: "#8540f5",
+    },
+  };
+  var rzp1 = new Razorpay(options);
+  rzp1.on("payment.failed", function (response) {
+    $.ajax({
+      url: "{% url 'failed_payment' %}",
+      type: "POST",
+      data: {
+        server_order: "{{payment.id}}",
+        payment_id: response.error.metadata.payment_id,
+        order_id: response.error.metadata.order_id,
+        reason: response.error.reason,
+        step: response.error.step,
+        source: response.error.source,
+        description: response.error.description,
+        code: response.error.code,
+      },
+      success: function (data) {
+        var v = data;
+        if (data.success == true) {
+          Swal.fire({
+            icon: "error",
+            title: "Payment Failed",
+            html:
+          `${description}<br><br> Order ID : <strong>${order_id}</strong>`,
+            footer: '<a href="{% url "home" %}">Return to Homepage</a>',
+          });
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Payment was unsuccessful",
+            html:
+          `${description}<br><br> Order ID : <strong>${order_id}</strong>`,
+            footer:
+              '<a href="{% url "dashboard" %}">Return to Sponsor Page</a>',
+          });
+        }
+      },
+    });
+  });
+  window.addEventListener("load", function (e) {
+    rzp1.open();
+    e.preventDefault();
+  });
+</script>
+{% endblock js_down %}
