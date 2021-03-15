@@ -1,5 +1,6 @@
 import tweepy
 from decouple import config
+
 # Keys and Tokens
 CONSUMER_KEY = config("TWITTER_API_KEY")
 CONSUMER_SECRET_KEY = config("TWITTER_API_SECRET_KEY")

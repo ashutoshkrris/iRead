@@ -1,5 +1,5 @@
 from .models import Category, Post, Recurring, Tag
-from .bot import get_latest_tweet, like_follow
+from .bot import get_latest_tweet
 
 
 def latest_posts(request):
