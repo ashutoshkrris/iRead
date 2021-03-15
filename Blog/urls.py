@@ -34,6 +34,7 @@ urlpatterns = [
     ),
     path('accounts/',include('authentication.urls')),
     path('',include('core.urls')),
+    path('payment/',include('payment.urls')),
 ]
 
 if settings.DEBUG:

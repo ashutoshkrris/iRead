@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'authentication',
     'core',
+    'payment',
 ]
 
 MIDDLEWARE = [
