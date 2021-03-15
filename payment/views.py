@@ -20,6 +20,7 @@ RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET")
 
 # Create your views here.
 def dashboard(request):
+    print(request.scheme, request.get_host())
     if request.method == 'POST':
         global name
         global email
@@ -28,6 +29,7 @@ def dashboard(request):
         email = request.POST.get("email")
         amount = request.POST.get("amount")
         gateway = request.POST.get("gateway")
+        
         if gateway == 'paytm':
             order_id = f"IREAD{date.today().year}{datetime.now().strftime('%d%m%f')}"
             param_dict = {
@@ -38,7 +40,7 @@ def dashboard(request):
                 'INDUSTRY_TYPE_ID': 'Retail',
                 'WEBSITE': 'WEBSTAGING',
                 'CHANNEL_ID': 'WEB',
-                'CALLBACK_URL': f'http://{get_current_site(request)}/payment/paytm/handler/',
+                'CALLBACK_URL': f'{request.scheme}://{request.get_host()}/payment/paytm/handler/',
             }
             param_dict['CHECKSUMHASH'] = generate_checksum(
                 param_dict, PAYTM_MERCHANT_KEY)

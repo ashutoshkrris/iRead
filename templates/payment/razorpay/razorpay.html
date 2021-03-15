@@ -1,5 +1,4 @@
-{% extends "core/base.html" %} {% load static %} {% block title %}Razorpay
-Payment Page{% endblock title %} {% block js_up %}
+{% extends "core/base.html" %} {% load static %} {% block title %}Razorpay Payment Page{% endblock title %} {% block js_up %}
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 {% endblock js_up %} {% block content %}
 <section class="site-section">
@@ -11,110 +10,7 @@ Payment Page{% endblock title %} {% block js_up %}
     </div>
     <div class="row blog-entries">
       <div class="col-md-12 col-lg-8 main-content">
-        {% if error %}
-        <div
-          class="alert alert-danger alert-dismissible fade show text-center"
-          role="alert"
-        >
-          {{error}}
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        {% endif %} {% if message %}
-        <div
-          class="alert alert-success alert-dismissible fade show text-center"
-          role="alert"
-        >
-          {{message}}
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        {% endif %}
-        <form action="" method="post" id="sponsorForm">
-          {% csrf_token %}
-          <div class="row">
-            <div class="col-md-12 form-group">
-              <label for="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="form-control"
-                required
-              />
-            </div>
-
-            <div class="col-md-12 form-group">
-              <label for="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="form-control"
-                required
-              />
-            </div>
-
-            <div class="col-md-4 form-group">
-              <label for="subject">Amount</label>
-              <div class="input-group-prepend">
-                <div class="input-group-text">₹</div>
-                <input
-                  type="number"
-                  id="amount"
-                  name="amount"
-                  class="form-control"
-                  required
-                />
-              </div>
-            </div>
-            <div class="col-md-8 form-group" style="margin-top: 40px">
-              <label for="gateway" style="margin-right: 30px"
-                >Choose Gateway</label
-              >
-              <label for="paytm">
-                <input type="radio" id="paytm" name="gateway" value="paytm" />
-                Paytm</label
-              >
-              <label for="razorpay">
-                <input
-                  type="radio"
-                  id="razorpay"
-                  name="gateway"
-                  value="razorpay"
-                />
-                Razorpay</label
-              >
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 form-group">
-              <center>
-                <input
-                  type="button"
-                  onClick="confirmPay()"
-                  id="sponsorBtn"
-                  value="Sponsor Now"
-                  class="btn btn-primary m-4"
-                />
-              </center>
-            </div>
-            <div class="col-md-4"></div>
-          </div>
-        </form>
+        
       </div>
       {% include "partials/sidebar.html" %}
     </div>

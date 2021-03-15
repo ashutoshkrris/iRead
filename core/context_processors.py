@@ -1,5 +1,5 @@
 from .models import Category, Post, Recurring, Tag
-from .bot import get_latest_tweet
+from .bot import get_latest_tweet, like_follow
 
 
 def latest_posts(request):
@@ -40,5 +40,5 @@ def social_links(request):
 
 
 def latest_tweet(request):
-    link, tweet_id, full_text = get_latest_tweet()
-    return {'link': link, 'tweet_id': tweet_id, 'full_text': full_text}
+    link, tweet_id, full_text, retweeted = get_latest_tweet()
+    return {'link': link, 'tweet_id': tweet_id, 'full_text': full_text, 'retweeted': retweeted}

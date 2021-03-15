@@ -1,6 +1,5 @@
 import tweepy
 from decouple import config
-
 # Keys and Tokens
 CONSUMER_KEY = config("TWITTER_API_KEY")
 CONSUMER_SECRET_KEY = config("TWITTER_API_SECRET_KEY")
@@ -38,7 +37,11 @@ def get_latest_tweet():
     response = iread_bot.user_timeline(
         id="iReadBot", count=1, tweet_mode="extended")[0]
     data = response._json
-    link = data['entities']['urls'][0]['url']
+    try:
+        link = data['entities']['urls'][0]['url']
+    except:
+        link = ""
     tweet_id = data['id_str']
     full_text = data['full_text']
-    return link, tweet_id, full_text
+    retweeted = bool(data["retweeted"])
+    return link, tweet_id, full_text, retweeted
