@@ -20,7 +20,6 @@ RAZORPAY_KEY_SECRET = config("RAZORPAY_KEY_SECRET")
 
 # Create your views here.
 def dashboard(request):
-    print(request.scheme, request.get_host())
     if request.method == 'POST':
         global name
         global email
@@ -144,8 +143,8 @@ def failed_payment(request):
         source = request.POST.get('source')
         description = request.POST.get('description')
         code = request.POST.get('code')
-        transaction = Transaction.objects.create(payment_mode=code, order_id=order_id, mid=payment_id, txn_amount=0, gateway_name=source,
-                                                 currency='INR', response_msg="Step : " + step + ", Reason : " + reason + ", Desc: " + description, status='TXN_FAILURE')
+        transaction = Transaction.objects.create(name=name,email=email,payment_mode=code, order_id=order_id, mid=payment_id, txn_amount=0, gateway_name=source,
+                                                 currency='INR', response_msg="Step : " + step + ", Reason : " + reason + ", Desc: " + description, status='TXN_FAILURE', txn_date=datetime.now())
         return JsonResponse({'success': True})
 
 
@@ -164,3 +163,6 @@ def invoice(request, id):
         return render(request, 'payment/invoice.html', context)
     except Exception:
         raise Http404()
+
+def show_invoice(request):
+    return render(request, "payment/invoice.html")

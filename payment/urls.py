@@ -13,15 +13,16 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from payment.views import dashboard, failed_payment, invoice, paytm_handler, razorpay_handler
+from payment.views import dashboard, failed_payment, invoice, paytm_handler, razorpay_handler, show_invoice
 from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
-    path('dashboard', csrf_exempt(dashboard), name='dashboard'),
+    path('dashboard', dashboard, name='dashboard'),
     path('paytm/handler/', csrf_exempt(paytm_handler), name='paytm_handler'),
     path("razorpay/handler/", csrf_exempt(razorpay_handler),
          name="razorpay_handler"),
     path('razorpay/failed', csrf_exempt(failed_payment), name='failed_payment'),
-    path('invoice/<str:id>/', invoice, name='invoice'),
+    path('invoice/<str:id>', invoice, name='invoice'),
+    path('receipt',show_invoice, name='show_invoice'),
 ]

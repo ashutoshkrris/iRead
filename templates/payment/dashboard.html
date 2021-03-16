@@ -80,6 +80,22 @@
                     <div class="col-md-4"></div>
                   </div>
                 </form>
+                <div class="row">
+                  <p><strong>Note : The above implementations are for Test Mode only. Please find the Test Cards and UPI Details <a href="https://razorpay.com/docs/payment-gateway/test-card-upi-details/">here</a> for Razorpay and <a href="https://developer.paytm.com/docs/test-instruments/testing-integration/">here</a> for Paytm.</strong></p>
+                  <br>
+                  <p>If you wish to sponsor us, use the below buttons :</p>
+                  <!-- <div class="col-md-6" style="margin-top: 10px;">
+                    <script type="text/javascript" src="https://cdnjs.buymeacoffee.com/1.0.0/button.prod.min.js" data-name="bmc-button" data-slug="ashutoshkrris" data-color="#8540f5" data-emoji="💰"  data-font="Cookie" data-text="Sponsor Us" data-outline-color="#000000" data-font-color="#ffffff" data-coffee-color="#FFDD00"></script>
+                  </div>
+                  <div class="col-md-6" style="margin-top: 10px;">
+                    <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Sponsor Us on Ko-fi', '#8540f5', 'Y8Y320QYE');kofiwidget2.draw();</script> 
+                  </div> -->
+                  <center><script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Sponsor Us on Ko-fi', '#8540f5', 'Y8Y320QYE');kofiwidget2.draw();</script> </center>
+                  <br><br>
+                  <center>
+                    <a href="https://www.buymeacoffee.com/ashutoshkrris"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=ashutoshkrris&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00" style="margin-bottom: 50px;"></a>
+                  </center>
+                </div>
           </div>
           {% include "partials/sidebar.html" %}
         </div>
@@ -88,6 +104,15 @@
   
 {% endblock content %}
 {% block js_down %}
+<script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('ashutoshkrris', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support Us',
+      'floating-chat.donateButton.background-color': '#794bc4',
+      'floating-chat.donateButton.text-color': '#fff'
+    });
+  </script>
   <script>
     var element = document.getElementById("sponsor")
     element.classList.add("active");
