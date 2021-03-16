@@ -26,10 +26,16 @@
                     </div>
                   </a>
                 </div>
-                
+                {% empty %}
+                <div>
+                  <a href="" class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/empty.png' %}'); ">
+                    <div class="text half-to-full">
+                      
+                    </div>
+                  </a>
+                </div>
                 {% endfor %}
               </div>
-              
             </div>
           </div>
         </div>
@@ -63,7 +69,17 @@
                     </div>
                   </a>
                 </div>   
-                
+                {% empty %}
+                <div class="col-md-6">
+                  <a href="" class="blog-entry element-animate" data-animate-effect="fadeIn">
+                    
+                    <img src="{% static 'images/empty.png' %}" height alt="Image placeholder">
+                    <div class="blog-content-body">
+                      
+                      <h2>No Post Yet</h2>
+                    </div>
+                  </a>
+                </div> 
                 {% endfor %}
               </div>
 
