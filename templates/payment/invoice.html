@@ -73,8 +73,10 @@
           <h1>Invoice</h1>
           <p class="mb-0 font-weight-bold">Order ID</p>
           <p class="mb-0">{{orderid}}</p>
-          {% if not 'order' in request.path %}
           <p class="mb-0 font-weight-bold">Invoice Details</p>
+          {% if 'order' in request.path %}
+          <p class="mb-0">{{mid}}</p>
+          {% else %}
           <p class="mb-0">INV{{invoice_num}}</p>
           {% endif %}
           <p class="mb-0 font-weight-bold">Invoice Date</p>
@@ -131,12 +133,15 @@
     >
       <a href="/">iRead</a> Copyright © 2021
     </div>
-
+    {% if status == "TXN_SUCCESS" %}
+      
     <script>
       Swal.fire({
         icon: "success",
         title: "Thanks for your support!",
       });
     </script>
+    
+    {% endif %}
   </body>
 </html>

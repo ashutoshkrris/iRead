@@ -158,7 +158,8 @@ def invoice(request, id):
             'amount': txn.txn_amount,
             'txn_date': txn.txn_date,
             'invoice_num': id[5:],
-            'status': txn.status
+            'status': txn.status,
+            'mid': txn.mid
         }
         return render(request, 'payment/invoice.html', context)
     except Exception:
