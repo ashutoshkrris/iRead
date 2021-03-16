@@ -4,6 +4,20 @@ from .models import BulletinSubscriber, Category, Like, Recurring, Tag, Post, Co
 
 
 # Register your models here.
+
+def toggle_published(modeladmin,request,queryset):
+    for obj in queryset:
+        if obj.published:
+            obj.published = False
+        else:
+            obj.published = True
+            
+        obj.save()
+
+
+toggle_published.short_description = "Toggle the published status of posts"
+
+
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
     list_display = ('id', 'title', 'author', 'views', 'likes',
@@ -12,6 +26,7 @@ class PostAdmin(ModelAdmin):
     ordering = ('-timestamp',)
     readonly_fields = ('slug', 'views',)
     list_filter = ('categories', 'tags', 'published')
+    actions = [toggle_published]
 
 
 admin.site.register(Category)

@@ -17,12 +17,10 @@ from .bot import tweet_new_post
 
 def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
-    categories = Category.objects.all()
-    tags = Tag.objects.all()
-    popular_posts = posts.order_by('-likes')[:3]
-    try:
+    random_posts = []
+    if len(posts) > 3:
         random_posts = random.sample(list(posts), 3)
-    except ValueError:
+    elif 0<len(posts)<=3:
         random_posts = random.choice(posts)
     if len(posts) > 8:
         all_posts = Paginator(posts, 8)
@@ -35,18 +33,12 @@ def index(request):
             page_posts = all_posts.page(all_posts.num_pages)
         context = {
             'posts': page_posts,
-            'categories': categories,
-            'tags': tags,
-            'popular_posts': popular_posts,
             'random_posts': random_posts,
             'pagination': True
         }
     else:
         context = {
             'posts': posts,
-            'categories': categories,
-            'tags': tags,
-            'popular_posts': popular_posts,
             'random_posts': random_posts,
         }
 
