@@ -1,3 +1,4 @@
+from datetime import datetime
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -5,7 +6,7 @@ from .models import BulletinSubscriber, Contact, Post, Category, Recurring, Tag,
 import random
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.mail import EmailMultiAlternatives, message
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
@@ -389,6 +390,31 @@ def bulletin_unsubscribe(request):
     return render(request, "core/contact.html", context)
 
 
+
+def privacy_policy(request):
+    return render(request, "core/important-docs/privacy-policy.html")
+
+
+def terms_conditions(request):
+    return render(request, "core/important-docs/tnc.html")
+
+
+def refund_policy(request):
+    return render(request, "core/important-docs/refund-policy.html")
+
+# Public API to fetch all posts
+
+
+def pub_api(request):
+    posts = Post.objects.filter(published=True)
+    data = serialize("json", posts, fields=('title', 'slug', 'timestamp',))
+    return HttpResponse(data, content_type="application/json")
+
+
+
+TODAY_DATE = datetime.today().day
+TODAY_DAY = datetime.now().strftime("%A")
+
 def bulletin_email():
     subscribers = BulletinSubscriber.objects.all()
     for sub in subscribers:
@@ -421,27 +447,14 @@ def bulletin_email():
                 [sub.email]
             )
             email.attach_alternative(html_content, "text/html")
-            email.send()
+            if (sub_type == 'Weekly' and TODAY_DAY == 'Tuesday'):
+                email.send()
+                print(f"Email sent to {sub.email}")
+            if (sub_type == 'Monthly' and TODAY_DATE == 16):
+                email.send()
+                print(f"Email sent to {sub.email}")
+            if sub_type == 'Daily':
+                email.send()
+                print(f"Email sent to {sub.email}")
         except Exception as e:
             print(e)
-            pass
-
-
-def privacy_policy(request):
-    return render(request, "core/important-docs/privacy-policy.html")
-
-
-def terms_conditions(request):
-    return render(request, "core/important-docs/tnc.html")
-
-
-def refund_policy(request):
-    return render(request, "core/important-docs/refund-policy.html")
-
-# Public API to fetch all posts
-
-
-def pub_api(request):
-    posts = Post.objects.filter(published=True)
-    data = serialize("json", posts, fields=('title', 'slug', 'timestamp',))
-    return HttpResponse(data, content_type="application/json")

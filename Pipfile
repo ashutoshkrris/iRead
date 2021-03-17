@@ -15,6 +15,9 @@ whitenoise = "*"
 tweepy = "*"
 pycryptodome = "*"
 razorpay = "*"
+django-redis = "*"
+apscheduler = "*"
+django-apscheduler = "*"
 
 [dev-packages]
 autopep8 = "*"

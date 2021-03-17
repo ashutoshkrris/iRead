@@ -5,13 +5,13 @@ from .models import BulletinSubscriber, Category, Like, Recurring, Tag, Post, Co
 
 # Register your models here.
 
-def toggle_published(modeladmin,request,queryset):
+def toggle_published(modeladmin, request, queryset):
     for obj in queryset:
         if obj.published:
             obj.published = False
         else:
             obj.published = True
-            
+
         obj.save()
 
 
@@ -45,5 +45,6 @@ class ContactAdmin(ModelAdmin):
 
 @admin.register(BulletinSubscriber)
 class BulletinSubscriberAdmin(ModelAdmin):
-    list_display = ('id', 'name', 'email', 'timestamp',)
+    list_display = ('id', 'name', 'email', 'subs_type', 'timestamp',)
     ordering = ('-timestamp',)
+    list_filter = ('subs_type',)

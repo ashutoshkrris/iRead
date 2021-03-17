@@ -27,7 +27,8 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['iread-blog.herokuapp.com', '127.0.0.1', 'localhost', 'iread.ga']
+ALLOWED_HOSTS = ['iread-blog.herokuapp.com',
+                 '127.0.0.1', 'localhost', 'iread.ga']
 
 
 # Application definition
@@ -44,8 +45,9 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'cloudinary',
     'authentication',
-    'core',
+    'core.apps.CoreConfig',
     'payment',
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
@@ -167,7 +169,7 @@ MEDIA_URL = '/media/'
 # CKEditor Configurations
 if not DEBUG:
     CKEDITOR_UPLOAD_PATH = "blog/uploads/"
-    
+
     # CKEDITOR_THUMBNAIL_SIZE = (300, 300)
     # CKEDITOR_IMAGE_QUALITY = 40
     CKEDITOR_BROWSE_SHOW_DIRS = False
@@ -204,14 +206,13 @@ CUSTOM_TOOLBAR = [
 ]
 
 
-
 CKEDITOR_CONFIGS = {
     "default": DEFAULT_CONFIG,
     "my-custom-toolbar": {
         "skin": "moono-lisa",
         "toolbar": 'full',
         "toolbarGroups": None,
-        "extraPlugins": ",".join(["image2", "codesnippet", "autooembed", "widget", "devtools", "embed", "embedbase","embedsemantic","iframe", "iframedialog","language", "sourcedialog"]),
+        "extraPlugins": ",".join(["image2", "codesnippet", "autooembed", "widget", "devtools", "embed", "embedbase", "embedsemantic", "iframe", "iframedialog", "language", "sourcedialog"]),
         "removePlugins": ",".join(["image"]),
         "codeSnippet_theme": "monokai",
         "extraAllowedContent": "script[src]",
@@ -219,10 +220,19 @@ CKEDITOR_CONFIGS = {
 }
 
 
-# email 
+# email
 EMAIL_HOST = "smtp.gmail.com"
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": config("REDIS_URL"),
+    }
+}
+
