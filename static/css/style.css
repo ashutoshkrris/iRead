@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap');
+
 body {
   background: #ccc url("../images/photography.png") repeat;
   font-family: "Inconsolata", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
@@ -5,6 +7,12 @@ body {
   font-size: 18px;
   line-height: 1.9;
   color: #6c757d; }
+
+.post-content-body {
+  font-family: 'Roboto Slab', serif;
+  color: #000;
+  font-weight:normal;
+}
 
 a {
   -webkit-transition: .3s all ease;

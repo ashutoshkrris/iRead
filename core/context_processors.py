@@ -32,7 +32,7 @@ def social_links(request):
     links = {
         'facebook': 'https://facebook.com/ashutoshkrris',
         'twitter': 'https://twitter.com/iReadBot',
-        'instagram': 'https://instagram.com/ashutoshkrris',
+        'instagram': 'https://instagram.com/ireadblog',
         'linkedin': 'https://linkedin.com/in/ashutoshkrris',
         'portfolio': 'https://ashutoshkrris.tk'
     }
