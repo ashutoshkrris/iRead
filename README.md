@@ -14,6 +14,7 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 ## Features of iRead
  Currently we support the following features :
 * Authentication and Authorization with OTP Verification
+* Social Login with Google OAuth2
 * CRUD on User's Profile
 * CRUD on Blog Posts
 * Rich Text Editor(using CKEditor) with Media Files Storage(using Cloudinary)
@@ -23,9 +24,6 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 * Twitter Bot to tweet about posts published on website as well as retweet and like user's post (if they share it on Twitter)
 * Bulletins(Newsletter) Subscription/Unsubscription
 * Payment Integration using Paytm and Razorpay
-
-## To Do
-- [ ] Integrate Google OAuth2 
 
 ## Technology Stack
 
@@ -63,6 +61,8 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
     CLOUD_NAME='cloudinary-cloud-name'
     API_KEY='cloudinary-api-key'
     API_SECRET='cloudinary-api-secret'
+    GOOGLE_OAUTH_CLIENT_ID='google-key'
+    GOOGLE_OAUTH_CLIENT_SECRET='google-secret'
     TWITTER_API_KEY='twitter-api-key'
     TWITTER_API_SECRET_KEY='twitter-api-secret-key'
     TWITTER_ACCESS_TOKEN='twitter-access-token'
