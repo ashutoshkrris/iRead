@@ -36,8 +36,11 @@ def error_500(request):
 def email_validation(request):
     data = json.loads(request.body)
     email = data['email']
+    pattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if Account.objects.filter(email=email).exists():
         return JsonResponse({'email_error': 'You are already registered. Please login to continue.'}, status=409)
+    if not bool(re.match(pattern, email)):
+        return JsonResponse({'email_error':'Please enter a valid email address.'})
     return JsonResponse({'email_valid': True})
 
 
@@ -147,7 +150,7 @@ def signup(request):
         new_user.password = make_password(new_user.password)
         new_user.is_active = True
         new_user.save()
-        return redirect('home')
+        return render(request, "authentication/login.html", {"message": "You can now login."})
     return render(request, "authentication/signup.html")
 
 
