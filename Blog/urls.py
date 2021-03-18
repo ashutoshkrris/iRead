@@ -33,6 +33,7 @@ urlpatterns = [
         name="ckeditor_browse",
     ),
     path('accounts/',include('authentication.urls')),
+    path('accounts/social/',include('social_django.urls'), name='social'),
     path('',include('core.urls')),
     path('payment/',include('payment.urls')),
 ]

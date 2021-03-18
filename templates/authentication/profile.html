@@ -45,14 +45,14 @@
               </div>
               <div class="row blog-entries">
                 <div class="col-md-12 main-content">
-              {% if latest_posts|length > 0 %}
+              {% if user_posts|length > 0 %}
                 
                 <div class="row mb-5 mt-5 ">
                 <div class="col-md-12 mb-5">
                   <h2>Latest Posts</h2>
                 </div>
                 <div class="col-md-12">
-                  {% for post in latest_posts %}
+                  {% for post in user_posts %}
                     
                   <div class="post-entry-horzontal">
                     <a href="{% url 'single' post.slug %}">
@@ -92,14 +92,14 @@
               <div class="col-md-12 text-center">
                 <nav aria-label="Page navigation" class="text-center">
                   <ul class="pagination">
-                    {% if latest_posts.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{latest_posts.previous_page_number}}">&lt;</a></li>
+                    {% if user_posts.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?page={{user_posts.previous_page_number}}">&lt;</a></li>
                       {% else %}
                         <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
                       {% endif %}
-                        <li class="page-item"><a class="page-link active" href="">{{latest_posts.number}}</a></li>
-                      {% if latest_posts.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{latest_posts.next_page_number}}">&gt;</a></li>
+                        <li class="page-item"><a class="page-link active" href="">{{user_posts.number}}</a></li>
+                      {% if user_posts.has_next %}
+                        <li class="page-item"><a class="page-link" href="?page={{user_posts.next_page_number}}">&gt;</a></li>
                       {% else %}
                         <li class="page-item"><a class="page-link" style="pointer-events: none;">&gt;</a></li>
                       {% endif %}

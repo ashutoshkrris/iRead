@@ -4,7 +4,6 @@ from datetime import datetime, date
 from .paytm import generate_checksum, verify_checksum
 from .models import Transaction
 from decouple import config
-from django.contrib.sites.shortcuts import get_current_site
 from django.http import HttpResponse
 import razorpay
 import hmac

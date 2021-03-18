@@ -14,6 +14,7 @@ from django.views import View
 from django.utils.decorators import method_decorator
 from .middlewares.auth import login_excluded
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.urls.base import reverse
 
 
 # Create your views here.
@@ -206,6 +207,7 @@ def forgot_password(request):
             email = request.POST.get('email')
             user = Account.objects.get(email=email)
             user.set_password(password)
+            user.pwd_changed = True
             user.save()
             return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password."})
         except Exception:
@@ -218,6 +220,7 @@ def change_password(request):
             user = Account.objects.get(id=request.session.get('user_id'))
             password = request.POST.get('newPassword1')
             user.set_password(password)
+            user.pwd_changed = True
             user.save()
             request.session.clear()
             return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password."})
@@ -228,11 +231,11 @@ def change_password(request):
 def profile(request, username):
     user = Account.objects.get(username=username)
     if request.session.get('user_id') == user.id:
-        latest_posts = Post.objects.filter(author=user)
+        user_posts = Post.objects.filter(author=user)
     else:
-        latest_posts = Post.objects.filter(published=True,author=user)
-    if len(latest_posts) > 3:
-        all_posts = Paginator(latest_posts, 3)
+        user_posts = Post.objects.filter(published=True,author=user)
+    if len(user_posts) > 3:
+        all_posts = Paginator(user_posts, 3)
         page = request.GET.get('page')
         try:
             page_posts = all_posts.page(page)
@@ -242,13 +245,13 @@ def profile(request, username):
             page_posts = all_posts.page(all_posts.num_pages)
         context = {
             'user': user,
-            'latest_posts': page_posts,
+            'user_posts': page_posts,
             'pagination': True
         }
     else:
         context = {
             'user': user,
-            'latest_posts': latest_posts
+            'user_posts': user_posts
         }
     return render(request, "authentication/profile.html", context)
 
@@ -324,3 +327,8 @@ def edit_profile_image(request, username):
             return JsonResponse({'image_updated': 'Profile Image changed successfully.'})
         except Exception:
             return JsonResponse({'image_error': 'Could not upload image.'})
+
+
+def collect_password(request):
+    request.session['local_password'] = 'Yourpassword@123'
+    return redirect(reverse('social:complete', args=('google-oauth2',)))

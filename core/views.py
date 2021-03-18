@@ -17,6 +17,7 @@ from .bot import tweet_new_post
 # Create your views here.
 
 def index(request):
+    print(request.session['username'])
     posts = Post.objects.filter(published=True).order_by('-timestamp')
     random_posts = []
     if len(posts) > 3:

@@ -72,6 +72,8 @@ class Account(AbstractBaseUser):
         SocialLinks, on_delete=models.PROTECT, blank=True, null=True)
     work = models.ForeignKey(
         Work, on_delete=models.PROTECT, blank=True, null=True)
+    pwd_changed = models.BooleanField(default=False)
+    pwd_mail_sent = models.BooleanField(default=False)
     date_joined = models.DateTimeField(
         verbose_name='date joined', auto_now_add=True)
     last_login = models.DateTimeField(verbose_name='last login', auto_now=True)

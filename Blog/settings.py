@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'payment',
     'django_apscheduler',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -81,6 +82,8 @@ TEMPLATES = [
                 'core.context_processors.popular_posts',
                 'core.context_processors.social_links',
                 'core.context_processors.latest_tweet',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
@@ -236,3 +239,33 @@ CACHES = {
     }
 }
 
+# Social Auth
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = config("GOOGLE_OAUTH_CLIENT_ID")
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = config("GOOGLE_OAUTH_CLIENT_SECRET")
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.google.GoogleOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+USER_FIELDS = ['first_name', 'email', 'username']
+
+
+SOCIAL_AUTH_PIPELINE = (
+    'social_core.pipeline.social_auth.social_details',
+    'social_core.pipeline.social_auth.social_uid',
+    'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.user.get_username',
+    'social_core.pipeline.social_auth.associate_by_email',
+    'social_core.pipeline.user.create_user',
+    'social_core.pipeline.social_auth.associate_user',
+    'social_core.pipeline.social_auth.load_extra_data',
+    'social_core.pipeline.user.user_details',
+    'authentication.pipeline.set_user_password.collect_password',
+)
+
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['user_id', 'username', 'local_password',]
+
+SOCIAL_AUTH_JSONFIELD_ENABLED = True
+
+LOGIN_REDIRECT_URL = '/'
