@@ -134,7 +134,7 @@ def check_otp(request):
     else:
         return JsonResponse({'otp_mismatch': 'OTP does not match.'})
 
-
+@login_excluded('home')
 def signup(request):
     if request.method == "POST":
         fname = request.POST.get('fname')
@@ -185,7 +185,6 @@ class Login(View):
         else:
             error_msg = "You are not registered yet."
         return render(request, "authentication/login.html", {'error': error_msg})
-
 
 def logout(request):
     request.session.clear()

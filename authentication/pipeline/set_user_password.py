@@ -37,7 +37,7 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
             text_content = strip_tags(html_content)
 
             email = EmailMultiAlternatives(
-                f"One Time Password | iRead",
+                f"Temporary Password | iRead",
                 text_content,
                 "iRead <no-reply@iRead.ga>",
                 [user_email]

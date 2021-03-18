@@ -9,6 +9,8 @@ const sendOtpBtn = document.querySelector("#sendOtpBtn");
 const otpFeedBackArea = document.querySelector(".otpFeedBackArea");
 const verifyOTPFeedback = document.querySelector(".OTPFeedBackArea");
 const verifyOtpBtn = document.querySelector("#verifyOtpBtn");
+const togglePassword1 = document.querySelector("#togglePassword1");
+const togglePassword2 = document.querySelector("#togglePassword2");
 
 emailField.addEventListener("keyup", (e) => {
   const emailVal = e.target.value;
@@ -167,3 +169,22 @@ function verifyOTP() {
     },
   });
 }
+
+
+togglePassword1.addEventListener("click", function (e) {
+  // toggle the type attribute
+  const type =
+    password1Field.getAttribute("type") === "password" ? "text" : "password";
+  password1Field.setAttribute("type", type);
+  // toggle the eye slash icon
+  this.classList.toggle("fa-eye-slash");
+});
+
+togglePassword2.addEventListener("click", function (e) {
+  // toggle the type attribute
+  const type =
+    password2Field.getAttribute("type") === "password" ? "text" : "password";
+  password2Field.setAttribute("type", type);
+  // toggle the eye slash icon
+  this.classList.toggle("fa-eye-slash");
+});

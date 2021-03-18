@@ -98,3 +98,35 @@ password2Field.addEventListener("keyup", (e) => {
       });
   }
 });
+
+
+const togglePassword1 = document.querySelector("#togglePassword1");
+const togglePassword2 = document.querySelector("#togglePassword2");
+const togglePassword3 = document.querySelector("#togglePassword3");
+
+togglePassword1.addEventListener("click", function (e) {
+  // toggle the type attribute
+  const type =
+    oldPasswordField.getAttribute("type") === "password" ? "text" : "password";
+  oldPasswordField.setAttribute("type", type);
+  // toggle the eye slash icon
+  this.classList.toggle("fa-eye-slash");
+});
+
+togglePassword2.addEventListener("click", function (e) {
+  // toggle the type attribute
+  const type =
+    password1Field.getAttribute("type") === "password" ? "text" : "password";
+  password1Field.setAttribute("type", type);
+  // toggle the eye slash icon
+  this.classList.toggle("fa-eye-slash");
+});
+
+togglePassword3.addEventListener("click", function (e) {
+  // toggle the type attribute
+  const type =
+    password2Field.getAttribute("type") === "password" ? "text" : "password";
+  password2Field.setAttribute("type", type);
+  // toggle the eye slash icon
+  this.classList.toggle("fa-eye-slash");
+});

@@ -1,4 +1,9 @@
-{% extends "core/base.html" %} {% load static %} {% block title %}Log In{%endblock title %} {% block content %}
+{% extends "core/base.html" %} {% load static %} {% block title %}Log In{%endblock title %}
+{% block js_up %}
+  <link rel="stylesheet" href="{% static 'css/simple-notify.min.css' %}" />
+  <script src="{% static 'js/simple-notify.min.js' %}"></script>
+{% endblock js_up %}
+{% block content %}
 <section class="site-section">
   <div class="container">
 <div class="row mb-4">
@@ -59,6 +64,7 @@
         </div>
         <div class="col-md-6 form-group">
           <label for="password">Password</label>
+          <span class="icon fa fa-eye toggle-password-icon" style="top: 75%; right: 30px;" id="togglePassword"></span>
           <input
             type="password"
             id="password"
@@ -108,5 +114,14 @@
     var element = document.getElementById("login");
     element.classList.add("active");
   </script>
+  {% if 'return_url' in request.get_full_path %}
+  <script>
+    new Notify ({
+    title: 'Error',
+    text: 'You must be logged in to access that.',
+    status: 'error'
+    })
+    </script>
+  {% endif %}
   {% endblock js_down %}
 </div>

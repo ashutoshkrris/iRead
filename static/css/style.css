@@ -1413,3 +1413,12 @@ blockquote {
 .share-btn-container a:hover {
   transform: scale(1.2);
 }
+
+.toggle-password-icon {
+  position: absolute;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  font-size: 15px;
+  cursor: pointer;
+   }
