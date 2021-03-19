@@ -18,7 +18,7 @@ from django.urls import path
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
-    path('dashboard', dashboard, name='dashboard'),
+    path('dashboard', csrf_exempt(dashboard), name='dashboard'),
     path('paytm/handler/', csrf_exempt(paytm_handler), name='paytm_handler'),
     path("razorpay/handler/", csrf_exempt(razorpay_handler),
          name="razorpay_handler"),
