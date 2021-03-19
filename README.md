@@ -33,6 +33,9 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 
 And additional requirements are in [**requirements.txt**](https://github.com/ashutoshkrris/iRead/blob/master/requirements.txt) or [**Pipfile**](https://github.com/ashutoshkrris/iRead/blob/master/Pipfile).
 
+## Demo
+
+[![Demo Video](https://img.youtube.com/vi/cnbilA25Gms/0.jpg)](https://youtu.be/cnbilA25Gms)
 
 ## Contributing
 
