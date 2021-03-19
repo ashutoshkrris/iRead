@@ -5,7 +5,8 @@ import json
 import re
 from .models import Account, OTPModel, SocialLinks, Work
 from core.models import Post
-from random import randint
+import string
+from random import randint, choice
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
@@ -15,6 +16,12 @@ from django.utils.decorators import method_decorator
 from .middlewares.auth import login_excluded
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls.base import reverse
+
+
+UPPERCASE = list(string.ascii_uppercase)
+LOWECASE = string.ascii_lowercase
+NUMBER = string.digits
+SYMBOLS = ['@', '#', '$', '%', '&', '_']
 
 
 # Create your views here.
@@ -40,7 +47,7 @@ def email_validation(request):
     if Account.objects.filter(email=email).exists():
         return JsonResponse({'email_error': 'You are already registered. Please login to continue.'}, status=409)
     if not bool(re.match(pattern, email)):
-        return JsonResponse({'email_error':'Please enter a valid email address.'})
+        return JsonResponse({'email_error': 'Please enter a valid email address.'})
     return JsonResponse({'email_valid': True})
 
 
@@ -68,13 +75,14 @@ def password_validation(request):
 
 
 def check_passwords(request):
-    if request.method=="POST":
+    if request.method == "POST":
         user = Account.objects.get(id=request.session.get('user_id'))
         data = json.loads(request.body)
         password = data['oldPassword']
         if check_password(password, user.password):
             return JsonResponse({'password_correct': True})
         return JsonResponse({'password_error': True})
+
 
 def match_passwords(request):
     data = json.loads(request.body)
@@ -137,6 +145,7 @@ def check_otp(request):
     else:
         return JsonResponse({'otp_mismatch': 'OTP does not match.'})
 
+
 @login_excluded('home')
 def signup(request):
     if request.method == "POST":
@@ -189,6 +198,7 @@ class Login(View):
             error_msg = "You are not registered yet."
         return render(request, "authentication/login.html", {'error': error_msg})
 
+
 def logout(request):
     request.session.clear()
     return redirect('login')
@@ -216,6 +226,7 @@ def forgot_password(request):
             return render(request, "authentication/reset-password.html", {"error": "Password could not be changed, please try again."})
     return render(request, "authentication/reset-password.html")
 
+
 def change_password(request):
     if request.method == 'POST':
         try:
@@ -230,12 +241,13 @@ def change_password(request):
             return render(request, "authentication/change-password.html", {"error": "Password could not be changed, please try again."})
     return render(request, "authentication/change-password.html")
 
+
 def profile(request, username):
     user = Account.objects.get(username=username)
     if request.session.get('user_id') == user.id:
         user_posts = Post.objects.filter(author=user)
     else:
-        user_posts = Post.objects.filter(published=True,author=user)
+        user_posts = Post.objects.filter(published=True, author=user)
     if len(user_posts) > 3:
         all_posts = Paginator(user_posts, 3)
         page = request.GET.get('page')
@@ -292,7 +304,8 @@ def edit_profile(request, username):
                 user.work.employer_name = institution
                 user.work.education = education
             else:
-                new_work = Work(employer_title=title,employer_name=institution,education=education)
+                new_work = Work(employer_title=title,
+                                employer_name=institution, education=education)
                 new_work.save()
                 user.work = new_work
             if user.social_links:
@@ -332,5 +345,7 @@ def edit_profile_image(request, username):
 
 
 def collect_password(request):
-    request.session['local_password'] = 'Yourpassword@123'
+    data = list(UPPERCASE) + list(LOWECASE) + list(NUMBER) + SYMBOLS
+    password = ''.join(choice(data) for _ in range(12))
+    request.session['local_password'] = password
     return redirect(reverse('social:complete', args=('google-oauth2',)))
