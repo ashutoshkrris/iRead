@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'authentication',
     'core',
     'payment',
-    'django_apscheduler',
     'social_django',
 ]
 
