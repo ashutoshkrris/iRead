@@ -16,8 +16,6 @@ tweepy = "*"
 pycryptodome = "*"
 razorpay = "*"
 django-redis = "*"
-apscheduler = "*"
-django-apscheduler = "*"
 social-auth-app-django = "*"
 
 [dev-packages]

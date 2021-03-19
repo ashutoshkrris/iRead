@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "dc0f6c85401bdc6fa26828404e79ac908600199e41b0457f6800cb60d7247df1"
+            "sha256": "5f60c7f0f76343e774bd86db1db8d609e34db29ce610b96a806175eb3d8ae8ef"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -16,14 +16,6 @@
         ]
     },
     "default": {
-        "apscheduler": {
-            "hashes": [
-                "sha256:1cab7f2521e107d07127b042155b632b7a1cd5e02c34be5a28ff62f77c900c6a",
-                "sha256:c06cc796d5bb9eb3c4f77727f6223476eb67749e7eea074d1587550702a7fbe3"
-            ],
-            "index": "pypi",
-            "version": "==3.7.0"
-        },
         "asgiref": {
             "hashes": [
                 "sha256:5ee950735509d04eb673bd7f7120f8fa1c9e2df495394992c73234d526907e17",
@@ -128,14 +120,6 @@
             ],
             "index": "pypi",
             "version": "==3.1.7"
-        },
-        "django-apscheduler": {
-            "hashes": [
-                "sha256:2fd042ef1ef4111b4fcd61df10c4c138f6d5f449366b8ca873d93c11da9d7a43",
-                "sha256:dfe31474d8a71584689fdae78896236f0d2edfd2ce62019052f202288482c431"
-            ],
-            "index": "pypi",
-            "version": "==0.5.2"
         },
         "django-ckeditor": {
             "hashes": [
@@ -429,13 +413,6 @@
             ],
             "index": "pypi",
             "version": "==3.10.0"
-        },
-        "tzlocal": {
-            "hashes": [
-                "sha256:643c97c5294aedc737780a49d9df30889321cbe1204eac2c2ec6134035a92e44",
-                "sha256:e2cb6c6b5b604af38597403e9852872d7f534962ae2954c7f35efcb1ccacf4a4"
-            ],
-            "version": "==2.1"
         },
         "urllib3": {
             "hashes": [

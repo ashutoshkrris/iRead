@@ -21,7 +21,7 @@ def index(request):
     random_posts = []
     if len(posts) > 3:
         random_posts = random.sample(list(posts), 3)
-    elif 0<len(posts)<=3:
+    elif 0 < len(posts) <= 3:
         random_posts = random.choice(posts)
     if len(posts) > 8:
         all_posts = Paginator(posts, 8)
@@ -390,7 +390,6 @@ def bulletin_unsubscribe(request):
     return render(request, "core/contact.html", context)
 
 
-
 def privacy_policy(request):
     return render(request, "core/important-docs/privacy-policy.html")
 
@@ -411,9 +410,9 @@ def pub_api(request):
     return HttpResponse(data, content_type="application/json")
 
 
-
 TODAY_DATE = datetime.today().day
 TODAY_DAY = datetime.now().strftime("%A")
+
 
 def bulletin_email():
     subscribers = BulletinSubscriber.objects.all()
@@ -436,25 +435,31 @@ def bulletin_email():
             'sub_type': sub_type,
             'email': sub.email
         }
-        try:
-            html_content = render_to_string("emails/bulletins.html", context)
-            text_content = strip_tags(html_content)
+        
+        html_content = render_to_string("emails/bulletins.html", context)
+        text_content = strip_tags(html_content)
 
-            email = EmailMultiAlternatives(
-                f"{sub_type.capitalize()} Bulletins For You | iRead",
-                text_content,
-                "iRead <bulletins@iread.ga>",
-                [sub.email]
-            )
-            email.attach_alternative(html_content, "text/html")
-            if (sub_type == 'Weekly' and TODAY_DAY == 'Tuesday'):
-                email.send()
-                print(f"Email sent to {sub.email}")
-            if (sub_type == 'Monthly' and TODAY_DATE == 16):
-                email.send()
-                print(f"Email sent to {sub.email}")
-            if sub_type == 'Daily':
-                email.send()
-                print(f"Email sent to {sub.email}")
-        except Exception as e:
-            print(e)
+        email = EmailMultiAlternatives(
+            f"{sub_type.capitalize()} Bulletins For You | iRead",
+            text_content,
+            "iRead <bulletins@iread.ga>",
+            [sub.email]
+        )
+        email.attach_alternative(html_content, "text/html")
+        if (sub_type == 'Weekly' and TODAY_DAY == 'Monday'):
+            email.send()
+            print(f"Email sent to {sub.email}")
+        if (sub_type == 'Monthly' and TODAY_DATE == 1):
+            email.send()
+            print(f"Email sent to {sub.email}")
+        if sub_type == 'Daily':
+            email.send()
+            print(f"Email sent to {sub.email}")
+
+
+def send_bulletin_email(request):
+    try:
+        bulletin_email()
+        return JsonResponse({'success': True})
+    except Exception:
+        return JsonResponse({'success': False})

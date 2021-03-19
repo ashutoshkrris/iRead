@@ -62,6 +62,8 @@
       {% endfor %}
     </ul>
   </div>
+  {% if connected %}
+    
   <div class="sidebar-box">
     {% if retweeted %}
       <h3 class="heading">Latest Retweet</h3>
@@ -69,9 +71,11 @@
       <h3 class="heading">Latest Tweet</h3>
     {% endif %}
 
-    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">{{full_text}}</p>&mdash; iRead (@iReadBot) <a href="https://twitter.com/iReadBot/status/{{tweet_id}}?ref_src=twsrc%5Etfw">March 12, 2021</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <blockquote class="twitter-tweet"><p lang="en" dir="ltr">{{full_text}}</p>&mdash; iRead (@iReadBot) <a href="https://twitter.com/iReadBot/status/{{tweet_id}}?ref_src=twsrc%5Etfw">{{date}}</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </div>
 </div>
 <!-- END sidebar -->
+
+  {% endif %}
 
 <script src="{% static 'js/sidebar.js' %}"></script>

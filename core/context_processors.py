@@ -40,5 +40,8 @@ def social_links(request):
 
 
 def latest_tweet(request):
-    link, tweet_id, full_text, retweeted = get_latest_tweet()
-    return {'link': link, 'tweet_id': tweet_id, 'full_text': full_text, 'retweeted': retweeted}
+    try:
+        link, tweet_id, full_text, retweeted, date = get_latest_tweet()
+        return {'connected': True, 'link': link, 'tweet_id': tweet_id, 'full_text': full_text, 'retweeted': retweeted, 'date': date}
+    except Exception:
+        return {'connected': False}

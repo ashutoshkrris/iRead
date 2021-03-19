@@ -45,4 +45,5 @@ def get_latest_tweet():
     tweet_id = data['id_str']
     full_text = data['full_text']
     retweeted = bool(data["retweeted"])
-    return link, tweet_id, full_text, retweeted
+    date = data["created_at"]
+    return link, tweet_id, full_text, retweeted, date

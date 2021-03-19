@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'cloudinary',
     'authentication',
-    'core.apps.CoreConfig',
+    'core',
     'payment',
     'django_apscheduler',
     'social_django',
