@@ -30,7 +30,7 @@ def popular_posts(request):
 
 def social_links(request):
     links = {
-        'facebook': 'https://facebook.com/ashutoshkrris',
+        'facebook': 'https://www.facebook.com/ireadblog',
         'twitter': 'https://twitter.com/iReadBot',
         'instagram': 'https://instagram.com/ireadblog',
         'linkedin': 'https://linkedin.com/in/ashutoshkrris',

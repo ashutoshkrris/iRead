@@ -93,13 +93,16 @@ def paytm_handler(request):
         if response_dict['RESPCODE'] == '01':
             order_id = response_dict['ORDERID']
             txn_amount = response_dict['TXNAMOUNT']
+            txn_status = response_dict['STATUS']
             context = {
                 'orderid': order_id,
                 'name': name,
                 'email': email,
                 'amount': txn_amount,
                 'date': date.today(),
-                'invoice_num': order_id[5:]
+                'invoice_num': order_id[5:],
+                'status': txn_status,
+
             }
             return render(request, 'payment/invoice.html', context)
         return render(request, 'payment/paytm/payment_status.html', {'response': response_dict})
