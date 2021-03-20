@@ -32,6 +32,7 @@
       type="image/png"
       href="{% static 'images/favicon.png' %}"
     />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/themes/prism-okaidia.css">
     <link
       href="https://fonts.googleapis.com/css?family=Josefin+Sans:300, 400,700|Inconsolata:400,700"
       rel="stylesheet"
@@ -68,11 +69,9 @@
       rel="stylesheet"
     />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-    <script
-      data-ad-client="ca-pub-8354103933180400"
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/components/prism-core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/show-language/prism-show-language.js"></script>
     {% block js_up %}
       
     {% endblock js_up %}
@@ -496,14 +495,12 @@
                     icon: 'error',
                     title: 'Already Subscribed',
                     text: `You've already subscribed to our bulletins`,
-                    footer: 'This feature will roll out soon.'
                   })
                 } else if (data.registration_success){
                   Swal.fire({
                     icon: 'success',
                     title: 'Subscribed',
                     html: `We'll send you <strong>${data.category}</strong> related bulletins ${data.recurring.toLowerCase()}`,
-                    footer: 'This feature will roll out soon.'
                   })
                 } else {
                   Swal.fire({
