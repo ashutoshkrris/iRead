@@ -8,6 +8,7 @@ from django.http import HttpResponse
 import razorpay
 import hmac
 import hashlib
+from django.conf import settings
 
 
 PAYTM_MERCHANT_ID = config("PAYTM_MERCHANT_ID")
@@ -27,7 +28,11 @@ def dashboard(request):
         email = request.POST.get("email")
         amount = request.POST.get("amount")
         gateway = request.POST.get("gateway")
-        
+        if settings.DEBUG:
+            scheme = 'http'
+        else:
+            scheme = 'https'
+
         if gateway == 'paytm':
             order_id = f"IREAD{date.today().year}{datetime.now().strftime('%d%m%f')}"
             param_dict = {
@@ -38,7 +43,7 @@ def dashboard(request):
                 'INDUSTRY_TYPE_ID': 'Retail',
                 'WEBSITE': 'WEBSTAGING',
                 'CHANNEL_ID': 'WEB',
-                'CALLBACK_URL': f'{request.scheme}://{request.get_host()}/payment/paytm/handler/',
+                'CALLBACK_URL': f'{scheme}://{request.get_host()}/payment/paytm/handler/',
             }
             param_dict['CHECKSUMHASH'] = generate_checksum(
                 param_dict, PAYTM_MERCHANT_KEY)
