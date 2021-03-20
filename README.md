@@ -37,6 +37,10 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 
 [![Demo Video](https://img.youtube.com/vi/cnbilA25Gms/0.jpg)](https://youtu.be/cnbilA25Gms)
 
+## Bulletin Email
+
+<img src="https://i.imgur.com/KcsuXsw.jpg" alt="Bulletin email" height=1000>
+
 ## Contributing
 
 ### Setting-up the project
