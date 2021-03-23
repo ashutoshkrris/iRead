@@ -235,7 +235,6 @@ def tag(request, tag_name):
     except Exception as e:
         return Http404()
 
-
 def new_post(request):
     context = {
         'categories': Category.objects.all(),
@@ -435,7 +434,7 @@ def bulletin_email():
             'sub_type': sub_type,
             'email': sub.email
         }
-        
+
         html_content = render_to_string("emails/bulletins.html", context)
         text_content = strip_tags(html_content)
 

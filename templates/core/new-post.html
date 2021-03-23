@@ -41,15 +41,16 @@
                             <label for="content">Content</label>
                             <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample-short required></textarea>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group" id="cat_select">
                             <label for="category">Category</label>
-                            <select name="category" id="category" class="js-example-basic-single" style="width: 200px;" required>
+                            <select name="category" id="category" style="width: 200px;" required>
+                                <option disabled value selected>Select Category</option>
                                 {% for category in categories %}
-                                    <option value="{{category}}">{{category}}</option>
+                                    <option value="{{category.id}}">{{category}}</option>
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-6 form-group" id="tag_select">
                             <label for="tags">Tags</label>
                             <select name="tags" id="tags" class="js-example-basic-multiple" multiple="multiple" style="width:300px;">
                                 {% for tag in tags %}
@@ -81,9 +82,11 @@
 <script>
     $(document).ready(function() {
         $('.js-example-basic-single').select2();
+        
     });
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2();
+        
     });
 </script>
 <script>

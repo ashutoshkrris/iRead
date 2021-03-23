@@ -21,9 +21,9 @@ $("#new_cat").click(function (e) {
             throw new Error(response.category_error);
           } else if (response.category_created) {
             Swal.fire(`${response.category_created}`);
-            setInterval(function () {
-              window.location.reload();
-            }, 1000);
+              $("#cat_box").load(window.location.href + " #cat_box");
+              
+              $("#cat_select").load(window.location.href + " #cat_select");
           }
         })
         .catch((error) => {
@@ -61,9 +61,9 @@ $("#new_tag").click(function (e) {
             throw new Error(response.tag_error);
           } else if (response.tag_created) {
             Swal.fire(`${response.tag_created}`);
-            setInterval(function () {
-              window.location.reload();
-            }, 1000);
+            $("#tag_box").load(window.location.href + " #tag_box");
+            $("#tag_select").load(window.location.href + " #tag_select");
+          
           }
         })
         .catch((error) => {
