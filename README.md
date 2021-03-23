@@ -25,6 +25,11 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 * Bulletins(Newsletter) Subscription/Unsubscription
 * Payment Integration using Paytm and Razorpay
 
+## Upcoming Features
+
+* Follow/Unfollow Users
+* Show Notifications on Follow, Like and Comment
+
 ## Technology Stack
 
 **Frontend:** HTML, CSS(+ Bootstrap 4), JavaScript  
