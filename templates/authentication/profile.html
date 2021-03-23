@@ -14,36 +14,71 @@
                     {% if request.session.user_id == user.id %}
 
                     <a href="{% url 'edit_profile' user.username %}"><i class="fa fa-pencil-square-o ml-2" aria-hidden="true" style="color: black;"></i></a>
-
+                    {% else %}
+                    <a href=""><i class="fa fa-plus" aria-hidden="true"></i></a>
                     {% endif %}
+                    
                   </h2>
-                  <p>{{user.about}}</p>
-                  
-                  <p class="social">
-                    {% if user.social_links.facebook_url %}
-                      <a href="{{user.social_links.facebook_url}}" class="p-2"
-                      ><span class="fa fa-facebook"></span
-                      ></a>
-                    {% endif %}
-                    {% if user.social_links.twitter_url %}
-                      <a href="{{user.social_links.twitter_url}}" class="p-2"
-                      ><span class="fa fa-twitter"></span
-                      ></a>
-                    {% endif %}
-                    {% if user.social_links.instagram_url %}
-                      <a href="{{user.social_links.instagram_url}}" class="p-2"
-                    ><span class="fa fa-instagram"></span
-                  ></a>
-                    {% endif %}
-                    {% if user.social_links.portfolio_url %}
-                      <a href="{{user.social_links.portfolio_url}}" class="p-2"
-                    ><span class="fa fa-globe"></span
-                  ></a>
-                    {% endif %}
-                  </p>
+                  <p>{{user.about}}<br>{{user.location}}</p>
                 </div>
               </div>
               <div class="row blog-entries">
+                {% if user_posts.number == 1 %}
+                  
+                <div class="separator" style="margin-top: 30px; margin-bottom: 30px;"><h2>Work / Education</h2></div>
+                <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="title">Title</label>
+                      <input type="text" id="title" name="title" class="form-control" value="{{user.work.employer_title}}" disabled readonly>
+                    </div>
+                    <div class="col-md-12 form-group">
+                      <label for="institution">Institution / Organisation</label>
+                      <input type="text" id="institution" name="institution" class="form-control" value="{{user.work.employer_name}}" disabled readonly>
+                    </div>
+                    
+                    <div class="col-md-12 form-group">
+                      <label for="education">Education</label>
+                      <input type="text" id="education" name="education" value="{{user.work.education}}" class="form-control" disabled readonly>
+                    </div>
+                    </div>
+
+                <div class="separator" style="margin-top: 30px; margin-bottom: 30px;"><h2>Social Media Links</h2></div>
+                    <div class="row text-center mr-4">
+                      <h1>
+                        {% if user.social_links.facebook_url %}
+                          <a href="{{user.social_links.facebook_url}}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.youtube_url %}
+                          <a href="{{user.social_links.youtube_url}}"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.instagram_url %}
+                          <a href="{{user.social_links.instagram_url}}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.dribble_url %}
+                          <a href="{{user.social_links.dribble_url}}"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.github_url %}
+                          <a href="{{user.social_links.github_url}}"><i class="fa fa-github" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.gitlab_url %}
+                          <a href="{{user.social_links.gitlab_url}}"><i class="fa fa-gitlab" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.medium_url %}
+                          <a href="{{user.social_links.medium_url}}"><i class="fa fa-medium" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.twitter_url %}
+                          <a href="{{user.social_links.twitter_url}}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.linkedin_url %}
+                          <a href="{{user.social_links.linkedin_url}}"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+                        {% endif %}
+                        {% if user.social_links.portfolio_url %}
+                          <a href="{{user.social_links.portfolio_url}}"><i class="fa fa-globe" aria-hidden="true"></i></a>
+                        {% endif %}
+                      </h1>
+                    </div>
+                
+                {% endif %}
                 <div class="col-md-12 main-content">
               {% if user_posts|length > 0 %}
                 
