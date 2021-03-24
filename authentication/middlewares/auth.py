@@ -6,7 +6,6 @@ def auth_middleware(get_response):
 
     def middleware(request, *args, **kwargs):
         return_url = request.META['PATH_INFO']
-        print(request.session.get('user_id'))
         if not request.session.get('user_id'):
             return redirect(f'/accounts/login?return_url={return_url}')
 

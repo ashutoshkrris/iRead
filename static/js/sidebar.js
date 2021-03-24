@@ -38,7 +38,7 @@ $("#new_cat").click(function (e) {
   });
 });
 
-// For new category
+// For new tag
 $("#new_tag").click(function (e) {
   Swal.fire({
     title: "Enter New Tag",

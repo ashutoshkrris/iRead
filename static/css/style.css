@@ -1422,3 +1422,7 @@ blockquote {
   font-size: 15px;
   cursor: pointer;
    }
+
+   
+   .btn.btn-round {
+    border-radius: 40px; }

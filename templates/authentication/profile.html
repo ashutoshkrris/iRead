@@ -15,7 +15,11 @@
 
                     <a href="{% url 'edit_profile' user.username %}"><i class="fa fa-pencil-square-o ml-2" aria-hidden="true" style="color: black;"></i></a>
                     {% else %}
-                    <a href=""><i class="fa fa-plus" aria-hidden="true"></i></a>
+                    <br>
+                    <button type="button" class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round"" id="msgBtn">
+                      Message <i class="fa fa-envelope" aria-hidden="true"></i>
+                    </button>
+
                     {% endif %}
                     
                   </h2>
@@ -150,3 +154,52 @@
           </div>
           </section>
 {% endblock content %}
+
+
+{% block js_down %}
+  <script>
+    let cookie = document.cookie
+    let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
+    $("#msgBtn").click(function (e) {
+    Swal.fire({
+      title: "Write Your Message",
+      input: "textarea",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Send",
+      showLoaderOnConfirm: true,
+      preConfirm: (message) => {
+        return fetch(`{% url 'send_message' user.username %}`, {
+          body: JSON.stringify({ message: message }),
+          method: "POST",
+          headers: {
+              "X-CSRFToken": csrfToken
+          }
+        })
+          .then((res) => res.json())
+          .then((response) => {
+            if (response.message_error) {
+              throw new Error(response.message_error);
+            } else if (response.message_success) {
+              icon: 'success',
+              Swal.fire(`${response.message_success}`);
+            }
+          })
+          .catch((error) => {
+            Swal.showValidationMessage(`${error}`);
+          });
+      },
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      if (result.message_success) {
+        Swal.fire({
+            icon: 'success',
+            title: `${result.message_success}`,
+        });
+      }
+    });
+  });
+  </script>
+{% endblock js_down %}

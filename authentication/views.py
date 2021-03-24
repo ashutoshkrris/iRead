@@ -3,6 +3,8 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import JsonResponse
 import json
 import re
+
+from django.views.decorators.csrf import csrf_exempt
 from .models import Account, OTPModel, SocialLinks, Work
 from core.models import Post
 import string
@@ -349,3 +351,39 @@ def collect_password(request):
     password = ''.join(choice(data) for _ in range(12))
     request.session['local_password'] = password
     return redirect(reverse('social:complete', args=('google-oauth2',)))
+
+
+def send_message(request, username):
+    if request.method == 'POST':
+        if request.session.get('user_id'):
+            sender = Account.objects.get(id=request.session.get('user_id'))
+            data = json.loads(request.body)
+            message = data["message"]
+            receiver = Account.objects.get(username=username)
+            context = {
+                "sender": sender.get_full_name(),
+                "receiver": receiver.first_name,
+                "sender_email": sender.email,
+                "message": message
+            }
+            html_content = render_to_string("emails/message.html", context)
+            text_content = strip_tags(html_content)
+
+            email = EmailMultiAlternatives(
+                f"New Message Received | iRead",
+                text_content,
+                "iRead <no-reply@iRead.ga>",
+                [receiver.email]
+            )
+            print("sending email")
+            email.attach_alternative(html_content, "text/html")
+            try:
+                email.send()
+                return JsonResponse({'message_success': 'Message sent successfully.'})
+            except Exception:
+                return JsonResponse({'message_error': 'Something went wrong.'})
+            print("Sent")
+        else:
+            return JsonResponse({'message_error': 'You are not logged in.'})
+    else:
+        return JsonResponse({'message_error': 'Unable to send new message'})
