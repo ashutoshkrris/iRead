@@ -5,8 +5,8 @@ import json
 import re
 
 from django.views.decorators.csrf import csrf_exempt
-from .models import Account, OTPModel, SocialLinks, Work
-from core.models import Post
+from .models import Account, FollowersModel, OTPModel, SocialLinks, Work
+from core.models import Notification, Post
 import string
 from random import randint, choice
 from django.template.loader import render_to_string
@@ -161,6 +161,8 @@ def signup(request):
         new_user.password = make_password(new_user.password)
         new_user.is_active = True
         new_user.save()
+        user = Account.objects.get(username=username)
+        FollowersModel(user=user).save()
         return render(request, "authentication/login.html", {"message": "You can now login."})
     return render(request, "authentication/signup.html")
 
@@ -246,11 +248,21 @@ def change_password(request):
 
 def profile(request, username):
     user = Account.objects.get(username=username)
+    logged_in_user = Account.objects.get(id=request.session.get('user_id'))
+    is_following = []
+    following_obj = FollowersModel.objects.get(user=user)
+    followers, followings = following_obj.follower.count(), following_obj.following.count()
     if request.session.get('user_id') == user.id:
         user_posts = Post.objects.filter(author=user)
     else:
         user_posts = Post.objects.filter(published=True, author=user)
-    if len(user_posts) > 3:
+        try:
+            is_following = FollowersModel.objects.get(
+                user=logged_in_user, following=user)
+        except Exception:
+            pass
+    total_posts = len(user_posts)
+    if total_posts > 3:
         all_posts = Paginator(user_posts, 3)
         page = request.GET.get('page')
         try:
@@ -262,12 +274,20 @@ def profile(request, username):
         context = {
             'user': user,
             'user_posts': page_posts,
-            'pagination': True
+            'pagination': True,
+            'total_posts': total_posts,
+            'is_following': is_following,
+            'followers': followers,
+            'followings': followings
         }
     else:
         context = {
             'user': user,
-            'user_posts': user_posts
+            'user_posts': user_posts,
+            'total_posts': total_posts,
+            'is_following': is_following,
+            'followers': followers,
+            'followings': followings
         }
     return render(request, "authentication/profile.html", context)
 
@@ -387,3 +407,26 @@ def send_message(request, username):
             return JsonResponse({'message_error': 'You are not logged in.'})
     else:
         return JsonResponse({'message_error': 'Unable to send new message'})
+
+
+def follow_user(request, username):
+    logged_user = Account.objects.get(id=request.session.get('user_id'))
+    try:
+        to_follow = Account.objects.get(username=username)
+    except Exception:
+        return Http404()
+
+    following_rel = FollowersModel.objects.filter(
+        user=logged_user, following=to_follow)
+    is_following = True if following_rel else False
+
+    if is_following:
+        FollowersModel.unfollow(logged_user, to_follow)
+        is_following = False
+    else:
+        FollowersModel.follow(logged_user, to_follow)
+        is_following = True
+        Notification(
+            notification_type=3, to_user=to_follow, from_user=logged_user).save()
+
+    return JsonResponse({'is_following': is_following})

@@ -180,7 +180,6 @@ def like_dislike_post(request):
             Notification(
                 notification_type=1, to_user=post.author, from_user=user, post=post).save()
 
-
         like_obj = Like.objects.get(post=post)
         total_likes = like_obj.user.count()
         post.likes = total_likes
@@ -485,14 +484,29 @@ class PostNotification(View):
         return redirect('single', slug=slug)
 
 
+class FollowNotification(View):
+    def get(self, request, notification_id, username, *args, **kwargs):
+        notification = Notification.objects.get(id=notification_id)
+        profile = Account.objects.get(username=username)
+
+        notification.user_has_seen = True
+        notification.save()
+
+        return redirect('profile', username=username)
+
+
 class RemoveNotification(View):
-    def delete(self, request, notification_id, *args, **kwargs):
+    def delete(self, request, notification_id, to_user, *args, **kwargs):
         try:
+            print(to_user)
+            # to_user = Account.objects.get(id=to_user_id)
             notification = Notification.objects.get(id=notification_id)
 
             notification.user_has_seen = True
             notification.save()
-            all_noti = Notification.objects.filter(user_has_seen=False)
+            all_noti = Notification.objects.filter(
+                to_user__email=to_user, user_has_seen=False)
             return JsonResponse({'success': True, 'noti_count': len(all_noti)})
-        except Exception:
+        except Exception as e:
+            print(e)
             return JsonResponse({'error': True})

@@ -114,3 +114,23 @@ class OTPModel(models.Model):
 
     class Meta:
         verbose_name = 'OTP'
+
+
+# For Follow Model
+class FollowersModel(models.Model):
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
+    following = models.ManyToManyField(Account, related_name='following')
+    follower = models.ManyToManyField(Account, related_name='follower')
+
+    @classmethod
+    def follow(cls, user, another_account):
+        obj, create = cls.objects.get_or_create(user=user)
+        obj.following.add(another_account)
+
+    @classmethod
+    def unfollow(cls, user, another_account):
+        obj, create = cls.objects.get_or_create(user=user)
+        obj.following.remove(another_account)
+
+    def __str__(self) -> str:
+        return f'{self.user}'

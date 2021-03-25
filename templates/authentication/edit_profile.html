@@ -16,15 +16,8 @@
                 </form>
                 </div>
                 <div class="bio-body">
-                  <h2>{{user.get_full_name}}</h2>
-                  <p>{{user.about}}</p>
-                  
-                  <p class="social">
-                    <a href="{{user.social_links.facebook_url}}" class="p-2"><span class="fa fa-facebook"></span></a>
-                    <a href="{{user.social_links.twitter_url}}" class="p-2"><span class="fa fa-twitter"></span></a>
-                    <a href="{{user.social_links.instagram_url}}" class="p-2"><span class="fa fa-instagram"></span></a>
-                    <a href="{{user.social_links.portfolio_url}}" class="p-2"><span class="fa fa-globe"></span></a>
-                  </p>
+                  <h2>{{user.get_full_name}} (@{{user.username}})</h2>
+                  <p>{{user.about}}<br>{{user.location}}</p>
                 </div>
             </div>
             <form action="{% url 'edit_profile' user.username %}" method="post">

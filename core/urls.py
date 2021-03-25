@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_tag, privacy_policy, pub_api, refund_policy, send_bulletin_email, single, contact, search, category, tag, terms_conditions, update_post
+from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_tag, privacy_policy, pub_api, refund_policy, send_bulletin_email, single, contact, search, category, tag, terms_conditions, update_post
 from authentication.middlewares.auth import auth_middleware, login_excluded
 from django.views.decorators.csrf import csrf_exempt
 
@@ -42,7 +42,9 @@ urlpatterns = [
     path('send-bulletin-email',send_bulletin_email, name='send_bulletin_email'),
     path('notification/<int:notification_id>/post/<slug>',
          PostNotification.as_view(), name='post-notification'),
-    path('notification/delete/<int:notification_id>',
+    path('notification/<int:notification_id>/profile/<username>',
+         FollowNotification.as_view(), name='follow-notification'),
+    path('notification/delete/<int:notification_id>/<to_user>',
          RemoveNotification.as_view(), name='notification-delete'),
     path('api/posts', pub_api, name='public_api'),
 ]

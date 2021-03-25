@@ -10,19 +10,31 @@
                 <img src="{{user.profile_image.url}}" alt="Image Placeholder" class="img-fluid">
                 <div class="bio-body">
                   <h2>
-                    {{user.get_full_name}} 
+                    {{user.get_full_name}} (@{{user.username}})
                     {% if request.session.user_id == user.id %}
 
                     <a href="{% url 'edit_profile' user.username %}"><i class="fa fa-pencil-square-o ml-2" aria-hidden="true" style="color: black;"></i></a>
                     {% else %}
                     <br>
-                    <button type="button" class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round"" id="msgBtn">
+                    {% if is_following %}
+                      <a type="button" class="btn mb-2 mt-2 mb-md-0 btn-danger btn-round" style="width: 128.5px; height: 44px; color: white;" id="followBtn" role="button" href="{% url 'follow_user' user.username %}">
+                      Unollow <i class="fa fa-user-times" aria-hidden="true"></i>
+                      </a>
+                    {% else %}
+                      <a type="button" class="btn mb-2 mt-2 mb-md-0 btn-success btn-round" style="width: 128.5px; height: 44px; color: white;" id="followBtn" role="button" href="{% url 'follow_user' user.username %}">
+                      Follow <i class="fa fa-user-plus" aria-hidden="true"></i>
+                      </a>
+                    {% endif %}
+                    
+                    <button type="button" class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round" id="msgBtn">
                       Message <i class="fa fa-envelope" aria-hidden="true"></i>
                     </button>
-
+                    
                     {% endif %}
                     
                   </h2>
+                  <p id="p_posts"><strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong>{{followers}}</strong> followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</p>
+                  <small id="small_posts"><strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong>{{followers}}</strong> followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</small>
                   <p>{{user.about}}<br>{{user.location}}</p>
                 </div>
               </div>
@@ -201,5 +213,24 @@
       }
     });
   });
+  </script>
+  <script>
+    $('#followBtn').click(function(e){
+      e.preventDefault();
+      $.ajax({
+        url: this.href,
+        success: function(response){
+          if (response['is_following']){
+            $('#followBtn').html(`Unfollow <i class="fa fa-user-times" aria-hidden="true"></i>`)
+            $('#followBtn').removeClass('btn-success')
+            $('#followBtn').addClass('btn-danger')
+          } else {
+            $('#followBtn').html(`Follow <i class="fa fa-user-plus" aria-hidden="true"></i>`)
+            $('#followBtn').removeClass('btn-danger')
+            $('#followBtn').addClass('btn-success')
+          }
+        }
+      })
+    })
   </script>
 {% endblock js_down %}

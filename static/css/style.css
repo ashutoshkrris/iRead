@@ -1481,3 +1481,14 @@ blockquote {
 	transition: 0.3s;
 	cursor: pointer;
 }
+
+@media (max-width: 767.98px) {
+      #p_posts{
+        display: none;
+      } }
+
+@media (min-width: 767.98px){
+    #small_posts{
+    display: none;
+  }
+}

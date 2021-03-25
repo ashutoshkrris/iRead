@@ -28,9 +28,10 @@ function removeNotification(removeNotificationURL, notificationId) {
   fetch(`${removeNotificationURL}`, {
     method: "DELETE",
     headers: {
-      'X-CSRFToken': csrftoken
-    }
-  }).then((res) => res.json())
+      "X-CSRFToken": csrftoken,
+    },
+  })
+    .then((res) => res.json())
     .then((data) => {
       if (data.error) {
         new Notify({
@@ -41,10 +42,9 @@ function removeNotification(removeNotificationURL, notificationId) {
       } else {
         const container = document.getElementById(`noti_${notificationId}`);
         container.classList.add("d-none");
-        // document.getElementById("noti_count").contentWindow.location.reload(true);
         $("#noti_count").html(
           `<i class="fa fa-bell" aria-hidden="true"></i> ${data.noti_count}`
         );
       }
-    })
+    });
 }
