@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,7 +48,8 @@
     <link rel="stylesheet" href="{% static 'css/animate.css' %}" />
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css' %}" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
+    <link rel="stylesheet" href="{% static 'css/simple-notify.min.css' %}" />
+  <script src="{% static 'js/simple-notify.min.js' %}"></script>
     <link
       rel="stylesheet"
       href="{% static 'fonts/ionicons/css/ionicons.min.css' %}"
@@ -121,20 +123,26 @@
         <div class="top-bar">
           <div class="container">
             <div class="row">
-              <div class="col-9 social">
-                <a href="{{links.twitter}}"
-                  ><span class="fa fa-twitter"></span
-                ></a>
-                <a href="{{links.facebook}}"
-                  ><span class="fa fa-facebook"></span
-                ></a>
-                <a href="{{links.instagram}}"
-                  ><span class="fa fa-instagram"></span
-                ></a>
-                <a href="{{links.portfolio}}"
-                  ><span class="fa fa-globe"></span
-                ></a>
+              {% if request.session.user_id %}
+              <div class="col-9">
+                {% show_notifications %}
               </div>
+              {% else %}
+                <div class="col-9 social">
+                  <a href="{{links.twitter}}"
+                    ><span class="fa fa-twitter"></span
+                  ></a>
+                  <a href="{{links.facebook}}"
+                    ><span class="fa fa-facebook"></span
+                  ></a>
+                  <a href="{{links.instagram}}"
+                    ><span class="fa fa-instagram"></span
+                  ></a>
+                  <a href="{{links.portfolio}}"
+                    ><span class="fa fa-globe"></span
+                  ></a>
+                </div>
+              {% endif %}
               <div class="col-3 search-top">
                 <!-- <a href="#"><span class="fa fa-search"></span></a> -->
                 <form
@@ -525,6 +533,7 @@
       })
     })
     </script>
+    <script src="{% static 'js/notification.js' %}"></script>
     {% block js_down %} {% endblock js_down %}
   </body>
 </html>

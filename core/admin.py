@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from .models import BulletinSubscriber, Category, Like, Recurring, Tag, Post, Comment, SubComment, Contact
+from .models import BulletinSubscriber, Category, Like, Notification, Recurring, Tag, Post, Comment, SubComment, Contact
 
 
 # Register your models here.
@@ -35,6 +35,7 @@ admin.site.register(Recurring)
 admin.site.register(Comment)
 admin.site.register(SubComment)
 admin.site.register(Like)
+admin.site.register(Notification)
 
 
 @admin.register(Contact)

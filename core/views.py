@@ -2,7 +2,7 @@ from datetime import datetime
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from .models import BulletinSubscriber, Contact, Post, Category, Recurring, Tag, Comment, SubComment, Like
+from .models import BulletinSubscriber, Contact, Notification, Post, Category, Recurring, Tag, Comment, SubComment, Like
 import random
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -12,6 +12,7 @@ from django.utils.html import strip_tags
 import json
 from django.core.serializers import serialize
 from .bot import tweet_new_post
+from django.views import View
 
 
 # Create your views here.
@@ -135,8 +136,13 @@ def single(request, slug):
                            message=comm,
                            comment=Comment.objects.get(id=int(comm_id))
                            ).save()
+                comment = Comment.objects.get(id=comm_id)
+                Notification(
+                    notification_type=2, to_user=comment.user, from_user=user, post=post).save()
             else:
                 Comment(post=post, user=user, message=comm).save()
+                Notification(
+                    notification_type=2, to_user=post.author, from_user=user, post=post).save()
                 post.comments += 1
                 post.save()
         comments = []
@@ -171,6 +177,9 @@ def like_dislike_post(request):
         else:
             Like.like(user=user, post=post)
             is_liked = True
+            Notification(
+                notification_type=1, to_user=post.author, from_user=user, post=post).save()
+
 
         like_obj = Like.objects.get(post=post)
         total_likes = like_obj.user.count()
@@ -234,6 +243,7 @@ def tag(request, tag_name):
         return render(request, "core/tag.html", context)
     except Exception as e:
         return Http404()
+
 
 def new_post(request):
     context = {
@@ -462,3 +472,27 @@ def send_bulletin_email(request):
         return JsonResponse({'success': True})
     except Exception:
         return JsonResponse({'success': False})
+
+
+class PostNotification(View):
+    def get(self, request, notification_id, slug, *args, **kwargs):
+        notification = Notification.objects.get(id=notification_id)
+        post = Post.objects.get(slug=slug)
+
+        notification.user_has_seen = True
+        notification.save()
+
+        return redirect('single', slug=slug)
+
+
+class RemoveNotification(View):
+    def delete(self, request, notification_id, *args, **kwargs):
+        try:
+            notification = Notification.objects.get(id=notification_id)
+
+            notification.user_has_seen = True
+            notification.save()
+            all_noti = Notification.objects.filter(user_has_seen=False)
+            return JsonResponse({'success': True, 'noti_count': len(all_noti)})
+        except Exception:
+            return JsonResponse({'error': True})

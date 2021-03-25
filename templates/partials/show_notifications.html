@@ -1,0 +1,33 @@
+
+<div class="dropdown">
+	<span class="badge bg-primary notification-badge" id="noti_count" onclick="showNotifications()"><i class="fa fa-bell" aria-hidden="true"></i> {{ notifications.count }}</span>
+	<div class="dropdown-content d-none" id="notification-container">
+		{% for notification in notifications %}
+			{% if notification.post %}
+				{% if notification.notification_type == 1 %}
+				<div class="dropdown-item-parent" id="noti_{{notification.id}}">
+					<a href="{% url 'post-notification' notification.id notification.post.slug %}"><i class="fa fa-thumbs-up" aria-hidden="true"></i> {{ notification.from_user.get_full_name }} liked your post</a>
+					<span class="dropdown-item-close" onclick="removeNotification(`{% url 'notification-delete' notification.id %}`, `{{ notification.id }}`)">&times;</span>
+				</div>
+				{% elif notification.notification_type == 2 %}
+				<div class="dropdown-item-parent" id="noti_{{notification.id}}">
+					<a href="{% url 'post-notification' notification.id notification.post.slug %}"><i class="fa fa-comment" aria-hidden="true"></i> {{ notification.from_user.get_full_name }} commented on your post</a>
+					<span class="dropdown-item-close" onclick="removeNotification(`{% url 'notification-delete' notification.id %}`, `{{ notification.id }}`)">&times;</span>
+				</div>
+				{% endif %}
+			{% elif notification.comment %}
+				{% if notification.notification_type == 2 %}
+				<div class="dropdown-item-parent" id="noti_{{notification.id}}">
+					<a href="{% url 'post-notification' notification.id notification.comment.post.slug %}">{{ notification.from_user.get_full_name }} replied to your comment</a>
+					<span class="dropdown-item-close" onclick="removeNotification(`{% url 'notification-delete' notification.id %}`, `{{ notification.id }}`)">&times;</span>
+				</div>
+				{% endif %}
+			{% else %}
+			<div class="dropdown-item-parent" id="noti_{{notification.id}}">
+					<a href="{% url 'follow-notification' notification.id notification.from_user.id %}">{{ notification.from_user.get_full_name }} has started following you</a>
+					<span class="dropdown-item-close" onclick="removeNotification(`{% url 'notification-delete' notification.id %}`, `{{ notification.id }}`)">&times;</span>
+				</div>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
