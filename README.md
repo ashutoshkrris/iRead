@@ -21,14 +21,11 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 * Search Blogs
 * Categories and Tags Filters
 * Like/Dislike/Comment/Reply/Share on Blog Posts
+* Follow/Unfollow Users
+* Show Notifications on Follow, Like and Comment
 * Twitter Bot to tweet about posts published on website as well as retweet and like user's post (if they share it on Twitter)
 * Bulletins(Newsletter) Subscription/Unsubscription
 * Payment Integration using Paytm and Razorpay
-
-## Upcoming Features
-
-* Follow/Unfollow Users
-* Show Notifications on Follow, Like and Comment
 
 ## Technology Stack
 
