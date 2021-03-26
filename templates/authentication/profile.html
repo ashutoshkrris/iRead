@@ -169,9 +169,24 @@
 
 
 {% block js_down %}
+<script>
+  function getCookie(name) {
+    var cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        var cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = jQuery.trim(cookies[i]);
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+    }
+</script>
   <script>
-    let cookie = document.cookie
-    let csrfToken = cookie.substring(cookie.indexOf('=') + 1)
     $("#msgBtn").click(function (e) {
     Swal.fire({
       title: "Write Your Message",
@@ -186,9 +201,10 @@
         return fetch(`{% url 'send_message' user.username %}`, {
           body: JSON.stringify({ message: message }),
           method: "POST",
+          credentials: 'same-origin',
           headers: {
-              "X-CSRFToken": csrfToken
-          }
+              "X-CSRFToken": getCookie("csrftoken")
+          },
         })
           .then((res) => res.json())
           .then((response) => {

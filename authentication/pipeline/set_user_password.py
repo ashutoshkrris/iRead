@@ -1,5 +1,5 @@
 from django.shortcuts import redirect
-from authentication.models import Account
+from authentication.models import Account, FollowersModel
 from social_core.pipeline.partial import partial
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
@@ -48,6 +48,7 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
             print(e)
         user.pwd_mail_sent = True
         user.save()
+        FollowersModel(user=user).save()
     strategy.session_set('user_id',user.id)
     strategy.session_set('username',user.username)
     

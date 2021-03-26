@@ -248,7 +248,10 @@ def change_password(request):
 
 def profile(request, username):
     user = Account.objects.get(username=username)
-    logged_in_user = Account.objects.get(id=request.session.get('user_id'))
+    try:
+        logged_in_user = Account.objects.get(id=request.session.get('user_id'))
+    except Exception:
+        pass
     is_following = []
     following_obj = FollowersModel.objects.get(user=user)
     followers, followings = following_obj.follower.count(), following_obj.following.count()
