@@ -1,3 +1,5 @@
+from django.db.models.functions import Concat
+from django.db.models import Value as V
 from datetime import datetime
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
@@ -191,10 +193,13 @@ def like_dislike_post(request):
 
 def search(request):
     query = request.GET.get('query')
+    users = Account.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name')).filter(Q(full_name__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query))
+    categories = Category.objects.filter(Q(name__icontains=query)).distinct()
+    tags = Tag.objects.filter(Q(name__icontains=query)).distinct()
     results = Post.objects.filter(Q(title__icontains=query) | Q(
         seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
-    if len(results) > 5:
-        all_posts = Paginator(results, 5)
+    if len(results) > 3:
+        all_posts = Paginator(results, 3)
         page = request.GET.get('page')
         try:
             page_posts = all_posts.page(page)
@@ -205,12 +210,18 @@ def search(request):
         context = {
             'query': query,
             'results': page_posts,
-            'pagination': True
+            'pagination': True,
+            'users': users[:3],
+            'categories_res': categories,
+            'tags': tags
         }
     else:
         context = {
             'query': query,
-            'results': results
+            'results': results,
+            'users': users[:3],
+            'categories_res': categories,
+            'tags': tags
         }
     return render(request, "core/search.html", context)
 

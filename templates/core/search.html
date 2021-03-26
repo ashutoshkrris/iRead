@@ -7,7 +7,7 @@
 <section class="site-section">
       <div class="container">
         <div class="row mb-4">
-            {% if results|length < 1 %}
+            {% if results|length < 1 and users|length < 1 and categories_res|length < 1 and tags|length < 1 %}
               <div class="col-md-6">
             <h2 class="mb-4">Your search - <strong>{{query}}</strong> - did not match any documents.</h2>
             <p>Suggestions:</p>
@@ -25,9 +25,29 @@
         </div>
         <div class="row blog-entries">
           <div class="col-md-12 col-lg-8 main-content">
-            <div class="row mb-5 mt-5">
+            <div class="row mb-5">
 
               <div class="col-md-12">
+                {% if users %}
+                  <div class="separator" style="margin-top: 10px; margin-bottom: 10px;"><h2>Users</h2></div>
+                {% endif %}
+                {% for user in users %}
+                  <div class="post-entry-horzontal">
+                  <a href="{% url 'profile' user.username %}">
+                    <div class="image element-animate" data-animate-effect="fadeIn" style="background-image: url({{user.profile_image.url}}); border-radius: 50%;"></div>
+                    <span class="text">
+                      <h2>{{user.get_full_name}}</h2>
+                      <div class="post-meta">
+                        <span class="mr-2">{{user.username}} </span> &bullet;
+                        <span class="mr-2">{{user.email}}</span>
+                      </div>
+                    </span>
+                  </a>
+                </div>
+                {% endfor %}
+                {% if results %}
+                  <div class="separator" style="margin-top: 10px; margin-bottom: 30px;"><h2>Posts</h2></div>
+                {% endif %}
                 {% for post in results %}
                   
                 <div class="post-entry-horzontal">
@@ -54,14 +74,14 @@
               <div class="col-md-12 text-center">
                 <nav aria-label="Page navigation" class="text-center">
                   <ul class="pagination">
-                    {% if posts.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{posts.previous_page_number}}">&lt;</a></li>
+                    {% if results.has_previous %}
+                        <li class="page-item"><a class="page-link" href="?query={{query}}&page={{results.previous_page_number}}">&lt;</a></li>
                       {% else %}
                         <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
                       {% endif %}
-                        <li class="page-item"><a class="page-link active" href="">{{posts.number}}</a></li>
-                      {% if posts.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{posts.next_page_number}}">&gt;</a></li>
+                        <li class="page-item"><a class="page-link active" href="">{{results.number}}</a></li>
+                      {% if results.has_next %}
+                        <li class="page-item"><a class="page-link" href="?query={{query}}&page={{results.next_page_number}}">&gt;</a></li>
                       {% else %}
                         <li class="page-item"><a class="page-link" style="pointer-events: none;">&gt;</a></li>
                       {% endif %}
@@ -71,6 +91,29 @@
             </div>
             
             {% endif %}
+             {% if categories_res %}
+                  <div class="separator" style="margin-top: 10px; margin-bottom: 10px;"><h2>Categories</h2></div>
+              {% endif %}
+              {% for category in categories_res %}
+              <ul class="categories">
+              <li>
+                <a href="{% url 'category' category.name %}"
+                  >{{category.name}} <span></span
+                ></a>
+              </li>
+            </ul>
+
+              {% endfor %}
+              {% if tags %}
+                  <div class="separator" style="margin-top: 10px; margin-bottom: 10px;"><h2>Tags</h2></div>
+              {% endif %}
+              <ul class="tags">
+                {% for tag in tags %}
+
+                <li><a href="{% url 'tag' tag.name %}">{{tag.name}}</a></li>
+
+                {% endfor %}
+              </ul>
           </div>
           {% include "partials/sidebar.html" %}
         </div>
