@@ -253,7 +253,10 @@ def profile(request, username):
     except Exception:
         pass
     is_following = []
-    following_obj = FollowersModel.objects.get(user=user)
+    try:
+        following_obj = FollowersModel.objects.get(user=user)
+    except FollowersModel.DoesNotExist:
+        FollowersModel(user=user).save()
     followers, followings = following_obj.follower.count(), following_obj.following.count()
     if request.session.get('user_id') == user.id:
         user_posts = Post.objects.filter(author=user)
