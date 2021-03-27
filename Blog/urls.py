@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
 from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
@@ -36,6 +37,8 @@ urlpatterns = [
     path('accounts/social/',include('social_django.urls'), name='social'),
     path('',include('core.urls')),
     path('payment/',include('payment.urls')),
+    path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml',
+                                          content_type='text/xml')),
 ]
 
 if settings.DEBUG:
