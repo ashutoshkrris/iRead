@@ -37,7 +37,7 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 
 ## Demo
 
-[![Demo Video](https://img.youtube.com/vi/cnbilA25Gms/0.jpg)](https://youtu.be/cnbilA25Gms)
+[![Demo Video](https://i.imgur.com/n18yerL.png)](https://srty.me/iread-demo)
 
 ## Bulletin Email
 
