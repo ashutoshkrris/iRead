@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://iread.ga">
-        <img src="static/images/favicon.png" width="20%">
+        <img src="https://github.com/ashutoshkrris/iRead/blob/master/static/images/favicon.png" width="20%">
     </a>
 </p>
 
