@@ -70,7 +70,7 @@
                   </div>
                   <div class="row">
                     <div class="col-md-6 form-group">
-                      <input type="submit" id="sendMsg" value="Send Message" class="btn btn-primary">
+                      <input type="submit" id="sendMsg" value="Send Message" class="btn btn-primary" onclick="change()">
                     </div>
                   </div>
                 </form>
@@ -90,6 +90,21 @@
     var element = document.getElementById("contact")
     element.classList.add("active");
   </script>
+
+  <script>
+    function change(){
+      var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+      console.log(name,email,subject,message)
+      if (!name=="" && !email=="" && !subject=="" && !message==""){
+        var btn = document.getElementById("sendMsg");
+        btn.value = 'Sending'
+      }
+    }
+  </script>
+
   {% if unsubscribe %}
     
   <script>
