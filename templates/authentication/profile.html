@@ -16,6 +16,8 @@
                     <a href="{% url 'edit_profile' user.username %}"><i class="fa fa-pencil-square-o ml-2" aria-hidden="true" style="color: black;"></i></a>
                     {% else %}
                     <br>
+                    {% if request.session.user_id %}
+                      
                     {% if is_following %}
                       <a type="button" class="btn mb-2 mt-2 mb-md-0 btn-danger btn-round" style="width: 128.5px; height: 44px; color: white;" id="followBtn" role="button" href="{% url 'follow_user' user.username %}">
                       Unollow <i class="fa fa-user-times" aria-hidden="true"></i>
@@ -29,6 +31,8 @@
                     <button type="button" class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round" id="msgBtn">
                       Message <i class="fa fa-envelope" aria-hidden="true"></i>
                     </button>
+                    
+                    {% endif %}
                     
                     {% endif %}
                     
