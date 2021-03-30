@@ -535,6 +535,25 @@
     })
     </script>
     <script src="{% static 'js/notification.js' %}"></script>
+    {% if error %}
+      <script>
+        new Notify ({
+        title: 'Error',
+        text: `{{error|safe}}`,
+        status: 'error'
+        })
+      </script>
+    {% endif %}
+
+    {% if message %}
+      <script>
+        new Notify ({
+        title: 'Success',
+        text: `{{message|safe}}`,
+        status: 'success'
+        })
+      </script>
+    {% endif %}
     {% block js_down %} {% endblock js_down %}
   </body>
 </html>

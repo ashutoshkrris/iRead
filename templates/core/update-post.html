@@ -4,22 +4,6 @@
       <div class="container">
         <div class="row blog-entries">
             <div class="col-md-12 col-lg-8 main-content">
-                {% if error %}
-        <div
-          class="alert alert-danger alert-dismissible fade show text-center"
-          role="alert"
-        >
-          {{error}}
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        {% endif %}
                 <form action="{% url 'update_post' post.slug %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
