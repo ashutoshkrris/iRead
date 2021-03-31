@@ -87,6 +87,7 @@
   </script>
   <script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/plugin.js' %}"></script>
 <script>
     CKEDITOR.replace('editor1', {
       height: 500,
@@ -96,10 +97,6 @@
       filebrowserUploadUrl: '{% url "ckeditor_upload" %}'
     });
   </script>
-<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/show-language/prism-show-language.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/download-button/prism-download-button.js"></script>
-    
   <script>
     var element = document.getElementById("new_post")
     element.classList.add("active");
