@@ -1,4 +1,5 @@
 {% extends "core/base.html" %}
+{% load custom_tags %}
 {% load static %}
 {% block title %}Home{% endblock title %}
 
@@ -18,7 +19,8 @@
                       <div class="post-meta">
                         
                         <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
-                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>
+                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>&bullet;
+                        <span class="mr-2">{{post.content|readtime}}</span>
                         
                       </div>
                       <h3>{{post.title}}</h3>
@@ -63,7 +65,8 @@
                       
                       <div class="post-meta">
                         <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
-                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>
+                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>&bullet;
+                        <span class="mr-2">{{post.content|readtime}}</span>
                       </div>
                       <h2>{{post.title}}</h2>
                     </div>

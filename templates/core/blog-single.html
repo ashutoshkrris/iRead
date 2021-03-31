@@ -1,4 +1,5 @@
-{% extends "core/base.html" %} {% load static %} {% block title %}{{post.title}}{% endblock title %} {% block content %}
+{% extends "core/base.html" %}
+{% load custom_tags %} {% load static %} {% block title %}{{post.title}}{% endblock title %} {% block content %}
 
 <section class="site-section py-lg">
       <div class="container">
@@ -13,7 +14,8 @@
         />
         <a href="{% url 'profile' post.author.username %}">{{post.author.get_full_name}}</a></span
       >&bullet;
-      <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
+      <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>&bullet;
+      <span class="mr-2">{{post.content|readtime}}</span>
       {% if request.session.user_id == post.author.id %}
         <span class="ml-2"><a href="{% url 'update_post' post.slug %}">Edit</a></span>
         <span class="ml-2"><a id="delBtn" style="color: red;cursor: pointer;">Delete</a></span>

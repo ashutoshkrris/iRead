@@ -20,7 +20,7 @@ from django.views import View
 
 def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
-    most_viewed = Post.objects.filter(published=True).order_by('-views')
+    most_viewed = Post.objects.filter(published=True).order_by('-views')[:3]
     if len(posts) > 8:
         all_posts = Paginator(posts, 8)
         page = request.GET.get('page')
@@ -188,6 +188,10 @@ def like_dislike_post(request):
 
 def search(request):
     query = request.GET.get('query')
+    if 'signup' in query or 'sign up' in query or 'register' in query:
+        return redirect('signup')
+    if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
+        return redirect('login')
     users = Account.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name')).filter(Q(full_name__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query))
     categories = Category.objects.filter(Q(name__icontains=query)).distinct()
     tags = Tag.objects.filter(Q(name__icontains=query)).distinct()

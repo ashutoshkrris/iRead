@@ -17,6 +17,7 @@ pycryptodome = "*"
 razorpay = "*"
 django-redis = "*"
 social-auth-app-django = "*"
+readtime = "*"
 
 [dev-packages]
 autopep8 = "*"

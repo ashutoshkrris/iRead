@@ -1,3 +1,5 @@
+
+{% load custom_tags %}
 {% load static %}
 
 <div class="col-md-12 col-lg-4 sidebar mt-4">
@@ -24,7 +26,8 @@
               <h4>{{post.title}}</h4>
               <div class="post-meta">
                 <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>&bullet;
-                <span class="mr-2">{{post.categories.name}}</span>
+                <span class="mr-2">{{post.categories.name}}</span>&bullet;
+                <span class="mr-2">{{post.content|readtime}}</span>
               </div>
             </div>
           </a>
