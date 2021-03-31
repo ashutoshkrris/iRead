@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import JsonResponse
 import json
 import re
-
+from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from .models import Account, FollowersModel, OTPModel, SocialLinks, Work
 from core.models import Notification, Post
@@ -191,6 +191,8 @@ class Login(View):
             if flag:
                 request.session['user_id'] = user.id
                 request.session['username'] = user.username
+                user.last_login = datetime.now()
+                user.save()
                 if Login.return_url:
                     return HttpResponseRedirect(Login.return_url)
                 else:
