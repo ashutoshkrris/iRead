@@ -5,7 +5,6 @@ from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
 from .models import BulletinSubscriber, Contact, Notification, Post, Category, Recurring, Tag, Comment, SubComment, Like
-import random
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import EmailMultiAlternatives
@@ -21,11 +20,7 @@ from django.views import View
 
 def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
-    random_posts = []
-    if len(posts) > 3:
-        random_posts = random.sample(list(posts), 3)
-    elif 0 < len(posts) <= 3:
-        random_posts = random.choice(posts)
+    most_viewed = Post.objects.filter(published=True).order_by('-views')
     if len(posts) > 8:
         all_posts = Paginator(posts, 8)
         page = request.GET.get('page')
@@ -37,13 +32,13 @@ def index(request):
             page_posts = all_posts.page(all_posts.num_pages)
         context = {
             'posts': page_posts,
-            'random_posts': random_posts,
+            'most_viewed_posts': most_viewed,
             'pagination': True
         }
     else:
         context = {
             'posts': posts,
-            'random_posts': random_posts,
+            'most_viewed_posts': most_viewed,
         }
 
     return render(request, "core/index.html", context)

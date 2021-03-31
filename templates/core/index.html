@@ -9,7 +9,7 @@
             <div class="col-md-12">
 
               <div class="owl-carousel owl-theme home-slider">
-                {% for post in random_posts %}
+                {% for post in most_viewed_posts %}
                 
                 <div>
                   <a href="{% url 'single' post.slug %}" class="a-block d-flex align-items-center height-lg" style="background-image: url('{{post.thumbnail.url}}'); ">
