@@ -3,7 +3,6 @@ const twitterBtn = document.querySelector(".twitter-btn");
 const linkedinBtn = document.querySelector(".linkedin-btn");
 const whatsappBtn = document.querySelector(".whatsapp-btn");
 
-
 function init() {
   let postUrl = encodeURI(document.location.href);
   let postTitle = encodeURI("Hi everyone, please check this post on iRead: ");
@@ -39,22 +38,48 @@ $(".like").click(function (e) {
   $.ajax({
     url: href,
     data: {
-      'id': id
-    }, 
+      id: id,
+    },
     success: function (data) {
-      console.log(data)
+      console.log(data);
       var ele = document.getElementById("like_dislike");
-      console.log(ele)
+      console.log(ele);
       if (data.is_liked == true) {
-        ele.className = "fa fa-thumbs-up"
-        ele.innerHTML = ` ${data.total_likes}`
-      } else if(data.is_liked == false) {
+        ele.className = "fa fa-thumbs-up";
+        ele.innerHTML = ` ${data.total_likes}`;
+      } else if (data.is_liked == false) {
         ele.className = "fa fa-thumbs-o-up";
         ele.innerHTML = ` ${data.total_likes}`;
       } else {
         likeFeedBackArea.style.display = "block";
         likeFeedBackArea.innerHTML = `<p>${data.like_error}</p>`;
       }
-    }
-  })
-})
+    },
+  });
+});
+
+function copyLink(link) {
+  Swal.fire({
+    html:
+      `<input id="text_to_be_copied" class="swal2-input" readonly value='${link}'>` +
+      '<button type="button" class="btn btn-primary swal-confirm" id="btn-copy">Copy Link</button>' +
+      "</div>",
+    showConfirmButton: false,
+    type: "success",
+    onOpen: () => {
+      $("#btn-copy").click(() => {
+
+        $("#text_to_be_copied").select();
+        document.execCommand("copy");
+        var btn = document.getElementById("btn-copy");
+        btn.innerHTML = 'Link Copied';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-success');
+      });
+
+      $("#btn-ok").click(() => {
+        Swal.close();
+      });
+    },
+  });
+}

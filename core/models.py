@@ -1,3 +1,5 @@
+from random import choice
+import string
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
@@ -45,7 +47,8 @@ class Post(models.Model):
         return f"{self.title}"
 
     def save(self, *args, **kwargs):
-        self.slug = slugify(self.title)
+        random_text = ''.join([choice(string.ascii_lowercase) for _ in range(8)])
+        self.slug = slugify(self.title) + f'-{random_text}'
         super(Post, self).save(*args, **kwargs)
 
 
