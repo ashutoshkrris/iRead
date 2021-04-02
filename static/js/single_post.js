@@ -58,27 +58,49 @@ $(".like").click(function (e) {
   });
 });
 
-function copyLink(link) {
+function copyLink(link, api_key) {
   Swal.fire({
     html:
       `<input id="text_to_be_copied" class="swal2-input" readonly value='${link}'>` +
-      '<button type="button" class="btn btn-primary swal-confirm" id="btn-copy">Copy Link</button>' +
+      '<div class="linkFeedBackArea invalid-feedback" style="display: none"><p>Unable to shorten link</p></div>' +
+      '<button type="button" class="btn btn-primary swal-confirm" style="margin-left:5px" id="btn-copy">Copy Link</button>' +
+      '<button type="button" class="btn btn-success swal-confirm" style="margin-left:15px;" id="btn-shorten">Shorten Link</button>' +
       "</div>",
     showConfirmButton: false,
     type: "success",
     onOpen: () => {
-      $("#btn-copy").click(() => {
+      const linkFeedBackArea = document.querySelector(".linkFeedBackArea");
+      linkFeedBackArea.style.display = "none";
 
+      $("#btn-copy").click(() => {
         $("#text_to_be_copied").select();
         document.execCommand("copy");
         var btn = document.getElementById("btn-copy");
-        btn.innerHTML = 'Link Copied';
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-success');
+        btn.innerHTML = "Link Copied";
+        btn.classList.remove("btn-primary");
+        btn.classList.add("btn-success");
       });
 
-      $("#btn-ok").click(() => {
-        Swal.close();
+      $("#btn-shorten").click(() => {
+        fetch("https://srty.me/api/shorten/", {
+          body: JSON.stringify({
+            api_key: api_key,
+            original: link,
+          }),
+          method: "POST",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.error) {
+              linkFeedBackArea.style.display = "block";
+            } else {
+              document.getElementById("text_to_be_copied").value = data.short;
+              document.getElementById("btn-shorten").style.display = "none";
+              document
+                .getElementById("btn-copy")
+                .style.removeProperty("margin-left");
+            }
+          });
       });
     },
   });

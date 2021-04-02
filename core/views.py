@@ -14,7 +14,7 @@ import json
 from django.core.serializers import serialize
 from .bot import tweet_new_post
 from django.views import View
-
+from decouple import config
 
 # Create your views here.
 
@@ -157,7 +157,8 @@ def single(request, slug):
             'comments': comments,
             'liked_posts': liked,
             'total_likes': total_likes,
-            'meta': True
+            'meta': True,
+            'shorty_api_key': config("SHORTY_API_KEY")
         }
         return render(request, "core/blog-single.html", context)
     except Exception as e:
