@@ -47,8 +47,7 @@ class Post(models.Model):
         return f"{self.title}"
 
     def save(self, *args, **kwargs):
-        random_text = ''.join([choice(string.ascii_lowercase) for _ in range(8)])
-        self.slug = slugify(self.title) + f'-{random_text}'
+        self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
 
 
