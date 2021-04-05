@@ -63,8 +63,8 @@ function copyLink(link, api_key) {
     html:
       `<input id="text_to_be_copied" class="swal2-input" readonly value='${link}'>` +
       '<div class="linkFeedBackArea invalid-feedback" style="display: none"><p>Unable to shorten link</p></div>' +
-      '<button type="button" class="btn btn-primary swal-confirm" style="margin-left:5px" id="btn-copy">Copy Link</button>' +
-      '<button type="button" class="btn btn-success swal-confirm" style="margin-left:15px;" id="btn-shorten">Shorten Link</button>' +
+      '<button type="button" class="btn btn-primary swal-confirm" style="margin-left:5px; margin-top: 5px;" id="btn-copy" >Copy Link</button>' +
+      '<button type="button" class="btn btn-success swal-confirm" style="margin-left:15px; margin-top: 5px;" id="btn-shorten">Shorten Link</button>' +
       "</div>",
     showConfirmButton: false,
     type: "success",
@@ -79,6 +79,8 @@ function copyLink(link, api_key) {
         btn.innerHTML = "Link Copied";
         btn.classList.remove("btn-primary");
         btn.classList.add("btn-success");
+        document.getElementById("btn-shorten").classList.remove("btn-success");
+        document.getElementById("btn-shorten").classList.add("btn-primary");
       });
 
       $("#btn-shorten").click(() => {
@@ -99,6 +101,7 @@ function copyLink(link, api_key) {
               document
                 .getElementById("btn-copy")
                 .style.removeProperty("margin-left");
+              document.getElementById("btn-copy").innerHTML = 'Copy Link'
             }
           });
       });
