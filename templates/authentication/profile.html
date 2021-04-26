@@ -122,9 +122,9 @@
                             {% if request.session.user_id == post.author.id %}
                               <span class="mr-2">
                                 {% if post.published %}
-                                  <span>Published</span>
+                                  <span>&bullet; Published</span>
                                 {% else %}
-                                  <span>Not Published</span>
+                                  <span>&bullet; Not Published</span>
                                 {% endif %}
                               </span>
                             {% endif %}
