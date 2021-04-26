@@ -1,127 +1,211 @@
-{% extends "core/base.html" %}
-{% load custom_tags %}
-{% load static %}
-{% block title %}Home{% endblock title %}
+{% extends "core/base.html" %} 
+{% load custom_tags %} 
+{% load static %} 
+{% block title %}Home{% endblock title %} 
 
-      {% block content %}
-      <section class="site-section pt-5 pb-5">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
+{% block content %}
+<section class="site-section pt-5 pb-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="owl-carousel owl-theme home-slider">
+          {% for post in most_viewed_posts %}
 
-              <div class="owl-carousel owl-theme home-slider">
-                {% for post in most_viewed_posts %}
-                
-                <div>
-                  <a href="{% url 'single' post.slug %}" class="a-block d-flex align-items-center height-lg" style="background-image: url('{{post.thumbnail.url}}'); ">
-                    <div class="text half-to-full">
-                      <span class="category mb-5">{{post.categories.name}}</span>
-                      <div class="post-meta">
-                        
-                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
-                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>&bullet;
-                        <span class="mr-2">{{post.content|readtime}}</span>
-                        
-                      </div>
-                      <h3>{{post.title}}</h3>
-                      <p>{{post.seo_overview}}</p>
-                    </div>
-                  </a>
+          <div>
+            <a
+              href="{% url 'single' post.slug %}"
+              class="a-block d-flex align-items-center height-lg"
+              style="background-image: url('{{post.thumbnail.url}}'); "
+            >
+              <div class="text half-to-full">
+                <span class="category mb-5">{{post.categories.name}}</span>
+                <div class="post-meta">
+                  <span class="author mr-2"
+                    ><img
+                      src="{{post.author.profile_image.url}}"
+                      alt="Colorlib"
+                    />
+                    {{post.author.get_full_name}}</span
+                  >&bullet;
+                  <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span
+                  >&bullet;
+                  <span class="mr-2">{{post.content|readtime}}</span>
                 </div>
-                {% empty %}
-                <div>
-                  <a href="" class="a-block d-flex align-items-center height-lg" style="background-image: url('{% static 'images/empty.png' %}'); ">
-                    <div class="text half-to-full">
-                      
-                    </div>
-                  </a>
-                </div>
-                {% endfor %}
+                <h3>{{post.title}}</h3>
+                <p>{{post.seo_overview}}</p>
               </div>
-            </div>
+            </a>
+          </div>
+          {% empty %}
+          <div>
+            <a
+              href=""
+              class="a-block d-flex align-items-center height-lg"
+              style="background-image: url('{% static 'images/empty.png' %}')"
+            >
+              <div class="text half-to-full"></div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- END section -->
+
+<section class="site-section py-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="mb-4">Latest Posts</h2>
+      </div>
+    </div>
+    <div class="row blog-entries">
+      <div class="col-md-12 col-lg-8 main-content">
+        <div class="row">
+          {% for post in posts %}
+
+          <div class="col-md-6">
+            <a
+              href="{% url 'single' post.slug %}"
+              class="blog-entry element-animate"
+              data-animate-effect="fadeIn"
+            >
+              <img src="{{post.thumbnail.url}}" alt="Image placeholder" />
+              <div class="blog-content-body">
+                <div class="post-meta">
+                  <span class="author mr-2"
+                    ><img
+                      src="{{post.author.profile_image.url}}"
+                      alt="Colorlib"
+                    />
+                    {{post.author.get_full_name}}</span
+                  >&bullet;
+                  <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span
+                  >&bullet;
+                  <span class="mr-2">{{post.content|readtime}}</span>
+                </div>
+                <h2>{{post.title}}</h2>
+              </div>
+            </a>
+          </div>
+          {% empty %}
+          <div class="col-md-6">
+            <a
+              href=""
+              class="blog-entry element-animate"
+              data-animate-effect="fadeIn"
+            >
+              <img
+                src="{% static 'images/empty.png' %}"
+                height
+                alt="Image placeholder"
+              />
+              <div class="blog-content-body">
+                <h2>No Post Yet</h2>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+        </div>
+
+        {% if pagination %}
+
+        <div class="row mt-5">
+          <div class="col-md-12 text-center">
+            <nav aria-label="Page navigation" class="text-center">
+              <ul class="pagination">
+                {% if posts.has_previous %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    href="?page={{posts.previous_page_number}}"
+                    >&lt;</a
+                  >
+                </li>
+                {% else %}
+                <li class="page-item">
+                  <a
+                    class="page-link"
+                    style="pointer-events: none"
+                    aria-disabled="true"
+                    >&lt;</a
+                  >
+                </li>
+                {% endif %}
+                <li class="page-item">
+                  <a class="page-link active" href="">{{posts.number}}</a>
+                </li>
+                {% if posts.has_next %}
+                <li class="page-item">
+                  <a class="page-link" href="?page={{posts.next_page_number}}"
+                    >&gt;</a
+                  >
+                </li>
+                {% else %}
+                <li class="page-item">
+                  <a class="page-link" style="pointer-events: none">&gt;</a>
+                </li>
+                {% endif %}
+              </ul>
+            </nav>
           </div>
         </div>
-      </section>
-         
-      <!-- END section -->
 
-      <section class="site-section py-sm ">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-6">
-              <h2 class="mb-4">Latest Posts</h2>
-            </div>
-          </div>
-          <div class="row blog-entries">
-            <div class="col-md-12 col-lg-8 main-content">
-              <div class="row">
-                {% for post in posts %}
-               
-                <div class="col-md-6">
-                  <a href="{% url 'single' post.slug %}" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                    
-                    <img src="{{post.thumbnail.url}}" alt="Image placeholder">
-                    <div class="blog-content-body">
-                      
-                      <div class="post-meta">
-                        <span class="author mr-2"><img src="{{post.author.profile_image.url}}" alt="Colorlib"> {{post.author.get_full_name}}</span>&bullet;
-                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>&bullet;
-                        <span class="mr-2">{{post.content|readtime}}</span>
-                      </div>
-                      <h2>{{post.title}}</h2>
-                    </div>
-                  </a>
-                </div>   
-                {% empty %}
-                <div class="col-md-6">
-                  <a href="" class="blog-entry element-animate" data-animate-effect="fadeIn">
-                    
-                    <img src="{% static 'images/empty.png' %}" height alt="Image placeholder">
-                    <div class="blog-content-body">
-                      
-                      <h2>No Post Yet</h2>
-                    </div>
-                  </a>
-                </div> 
-                {% endfor %}
-              </div>
+        {% endif %}
+      </div>
+      {% include "partials/sidebar.html" %}
+    </div>
+  </div>
+</section>
 
-              {% if pagination %}
-                
-              <div class="row mt-5">
-                <div class="col-md-12 text-center">
-                  <nav aria-label="Page navigation" class="text-center">
-                    <ul class="pagination">
-                      {% if posts.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{posts.previous_page_number}}">&lt;</a></li>
-                      {% else %}
-                        <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
-                      {% endif %}
-                        <li class="page-item"><a class="page-link active" href="">{{posts.number}}</a></li>
-                      {% if posts.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{posts.next_page_number}}">&gt;</a></li>
-                      {% else %}
-                        <li class="page-item"><a class="page-link" style="pointer-events: none;">&gt;</a></li>
-                      {% endif %}
-                    </ul>
-                  </nav>
-                </div>
-              </div>
-              
-              {% endif %}
-            </div>
-            {% include "partials/sidebar.html" %}
-          </div>
-          </div>
-      </section>
+{% endblock content %} {% block js_down %}
+<script>
+  var element = document.getElementById("home");
+  element.classList.add("active");
+</script>
 
+<!-- Show Alert Only Once -->
+<script>
+  function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toGMTString();
+    } else {
+      expires = "";
+    }
+    document.cookie = name + "=" + value + expires + "; path=/";
+  }
 
+  function getCookie(c_name) {
+    if (document.cookie.length > 0) {
+      c_start = document.cookie.indexOf(c_name + "=");
+      if (c_start != -1) {
+        c_start = c_start + c_name.length + 1;
+        c_end = document.cookie.indexOf(";", c_start);
+        if (c_end == -1) {
+          c_end = document.cookie.length;
+        }
+        return unescape(document.cookie.substring(c_start, c_end));
+      }
+    }
+    return "";
+  }
 
- {% endblock content %}
-
- {% block js_down %}
-  <script>
-    var element = document.getElementById("home")
-    element.classList.add("active");
-  </script>
+  var alerted = getCookie("alerted") || "";
+  if (alerted != "yes") {
+    Swal.fire({
+      title: "Checked our other products?",
+      icon: "question",
+      html: 
+        '<a href="https://srty.me"><strong>Shorty - URL Shortener and QR Generator</strong></a><br><br>' +
+        '<a href="https://pywisher.ml"><strong>PyWisher - Automatic Birthday Wisher</strong></a>'
+    })
+    createCookie("alerted", "yes", 7); //cookies expires after 7 days
+  }
+</script>
 {% endblock js_down %}
