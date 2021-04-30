@@ -34,7 +34,8 @@ def social_links(request):
         'twitter': 'https://twitter.com/iReadBot',
         'instagram': 'https://instagram.com/ireadblog',
         'linkedin': 'https://linkedin.com/in/ashutoshkrris',
-        'portfolio': 'https://ashutoshkrris.tk'
+        'portfolio': 'https://ashutoshkrris.tk',
+        'dev': 'https://dev.to/ireadblog'
     }
     return {'links': links}
 

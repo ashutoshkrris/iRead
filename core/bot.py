@@ -1,5 +1,6 @@
 import tweepy
 from decouple import config
+import requests
 
 # Keys and Tokens
 CONSUMER_KEY = config("TWITTER_API_KEY")
@@ -25,7 +26,6 @@ def tweet_new_post(post, tags):
     tweet = f"{post.title} by {post.author.get_full_name()} : https://iread.ga/posts/{post.slug}"
     for tag in tags:
         tweet += f" #{tag}"
-    print(tweet)
     try:
         iread_bot.update_status(tweet)
     except Exception as e:
@@ -47,3 +47,22 @@ def get_latest_tweet():
     retweeted = bool(data["retweeted"])
     date = data["created_at"]
     return link, tweet_id, full_text, retweeted, date
+
+
+def create_new_dev_post(post, tags):
+    url = "https://dev.to/api/articles"
+    headers = {
+        "api-key": config("DEV_API_KEY")
+    }
+    data = {
+        "article": {
+            "title": f"{post.title}",
+            "published": True,
+            "body_markdown": f"{post.content}",
+            "tags": tags,
+        }
+    }
+    try:
+        x = requests.post(url=url, headers=headers, json=data)
+    except Exception as e:
+        print(e)

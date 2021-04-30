@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
 from django.core.serializers import serialize
-from .bot import tweet_new_post
+from .bot import create_new_dev_post, tweet_new_post
 from django.views import View
 from decouple import config
 
@@ -281,6 +281,7 @@ def new_post(request):
             post.save()
             if post.published:
                 tweet_new_post(post, tags)
+                create_new_dev_post(post, tags)
             return redirect('single', slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
