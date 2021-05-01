@@ -19,3 +19,10 @@ class LatestPostsFeed(Feed):
 
     def item_author_name(self, item):
         return item.author.get_full_name()
+
+    def item_pubdate(self, item):
+        return item.timestamp
+
+    def item_categories(self, item):
+        return [item.categories.name]
+
