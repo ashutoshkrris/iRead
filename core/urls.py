@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.urls import path
 from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_tag, privacy_policy, pub_api, refund_policy, send_bulletin_email, single, contact, search, category, tag, terms_conditions, update_post
-from authentication.middlewares.auth import auth_middleware, login_excluded
+from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
+from .feeds import LatestPostsFeed
 
 urlpatterns = [
     path('', index, name='home'),
@@ -47,4 +48,5 @@ urlpatterns = [
     path('notification/delete/<int:notification_id>/<to_user>',
          RemoveNotification.as_view(), name='notification-delete'),
     path('api/posts', pub_api, name='public_api'),
+    path('feed/', LatestPostsFeed(), name='post_feed'),
 ]
