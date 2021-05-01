@@ -17,33 +17,43 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from django.views.generic.base import TemplateView
 from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
 from django.conf.urls import url
 from ckeditor_uploader import views
+from django.contrib.sitemaps.views import sitemap
+from core.sitemaps import PostSitemap, CategorySitemap, TagSitemap
+
+sitemaps = {
+    'posts': PostSitemap,
+    'tags': TagSitemap,
+    'categories': CategorySitemap
+}
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('ckeditor/', include('ckeditor_uploader.urls')),
-    url(r"^ckeditor/upload/", csrf_exempt(auth_middleware(views.upload)), name="ckeditor_upload"),
+    url(r"^ckeditor/upload/", csrf_exempt(auth_middleware(views.upload)),
+        name="ckeditor_upload"),
     url(
         r"^ckeditor/browse/",
         csrf_exempt(never_cache(auth_middleware(views.browse))),
         name="ckeditor_browse",
     ),
-    path('accounts/',include('authentication.urls')),
-    path('accounts/social/',include('social_django.urls'), name='social'),
-    path('',include('core.urls')),
-    path('payment/',include('payment.urls')),
-    path('sitemap.xml', TemplateView.as_view(template_name='sitemap.xml',
-                                          content_type='text/xml')),
+    path('accounts/', include('authentication.urls')),
+    path('accounts/social/', include('social_django.urls'), name='social'),
+    path('', include('core.urls')),
+    path('payment/', include('payment.urls')),
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
+         name='django.contrib.sitemaps.views.sitemap')
 ]
 
 if settings.DEBUG:
-	urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-	urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)
 
 handler404 = 'authentication.views.error_404'
 handler500 = 'authentication.views.error_500'

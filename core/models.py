@@ -1,5 +1,4 @@
-from random import choice
-import string
+from django.urls import reverse
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.utils.text import slugify
@@ -12,16 +11,27 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'categories'
+        ordering = ['-id']
 
     def __str__(self) -> str:
         return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse('category', args=[self.name])
 
 
 class Tag(models.Model):
     name = models.CharField(max_length=63)
 
+    class Meta:
+        verbose_name_plural = 'tags'
+        ordering = ['-id']
+
     def __str__(self) -> str:
         return f"{self.name}"
+
+    def get_absolute_url(self):
+        return reverse('tag', args=[self.name])
 
 
 class Post(models.Model):
@@ -49,6 +59,9 @@ class Post(models.Model):
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
         super(Post, self).save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return reverse('single', args=[self.slug])
 
 
 class Like(models.Model):
@@ -114,10 +127,13 @@ class BulletinSubscriber(models.Model):
 class Notification(models.Model):
     # 1 : Like, 2: Comment, 3: Follow
     notification_type = models.IntegerField()
-    to_user = models.ForeignKey(Account, related_name='notification_to', on_delete=models.CASCADE, null=True)
-    from_user = models.ForeignKey(Account, related_name='notification_from', on_delete=models.CASCADE, null=True)
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='+', blank=True, null=True)
-    comment = models.ForeignKey(Comment, on_delete=models.CASCADE, related_name='+', blank=True, null=True)
+    to_user = models.ForeignKey(
+        Account, related_name='notification_to', on_delete=models.CASCADE, null=True)
+    from_user = models.ForeignKey(
+        Account, related_name='notification_from', on_delete=models.CASCADE, null=True)
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name='+', blank=True, null=True)
+    comment = models.ForeignKey(
+        Comment, on_delete=models.CASCADE, related_name='+', blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     user_has_seen = models.BooleanField(default=False)
-    

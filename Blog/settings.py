@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'core',
     'payment',
     'social_django',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 ]
 
 MIDDLEWARE = [
