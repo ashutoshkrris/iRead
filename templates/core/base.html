@@ -284,7 +284,7 @@
       <footer class="site-footer">
         <div class="container">
           <div class="row mb-5">
-            <div class="col-md-4 mb-3">
+            <div class="col-md-4" style="margin-bottom: 50px;">
               <h3>About Us</h3>
               <p class="mb-4">
                 <img
@@ -301,6 +301,8 @@
                 experts, and individuals with unique perspectives share their
                 thinking here. <a href="{% url 'about' %}">Read More</a>
               </p>
+              <a href="https://validator.w3.org/feed/check.cgi?url=https%3A//iread.ga/feed"><img src="{% static 'images/valid-rss-rogers.png' %}" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
+              <a href="http://feeds.feedburner.com/ireadblog" title="Subscribe to my feed" rel="alternate" type="application/rss+xml" target="_blank">Subscribe in a reader</a>
             </div>
             <div class="col-md-6 ml-auto">
               <div class="row">
@@ -438,7 +440,11 @@
       $(".bulletin").click(function(e){
       Swal.fire({
         title: 'Enjoy Our Bulletins',
-        html: `<form action="" method="POST" id="bltForm">
+        html: `
+        <br>
+        <a href="http://feeds.feedburner.com/ireadblog" title="Subscribe to my feed" rel="alternate" type="application/rss+xml"><img src="https://feedburner.google.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a><a href="http://feeds.feedburner.com/ireadblog" title="Subscribe to iRead feed" rel="alternate" type="application/rss+xml"> Subscribe in a reader</a>
+        <p class="mt-3"><strong>OR</strong></p>
+        <form action="" method="POST" id="bltForm">
           {% csrf_token %}
           <input type="text" id="name" name="name" class="swal2-input" placeholder="Name">
         <input type="email" id="email" name="email" class="swal2-input" placeholder="Email address">
