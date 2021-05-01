@@ -6,7 +6,7 @@ from .models import Post
 class LatestPostsFeed(Feed):
     title = 'iRead Blog'
     link = reverse_lazy('home')
-    description = 'New Post of my Blog'
+    description = 'Latest five blogs on iRead'
 
     def items(self):
         return Post.objects.filter(published=True)[:5]
@@ -16,3 +16,6 @@ class LatestPostsFeed(Feed):
 
     def item_description(self, item):
         return item.seo_overview
+
+    def item_author_name(self, item):
+        return item.author.get_full_name()
