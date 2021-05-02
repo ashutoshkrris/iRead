@@ -24,6 +24,7 @@ def authenticate():
 def tweet_new_post(post, tags):
     iread_bot = authenticate()
     tweet = f"{post.title} by {post.author.get_full_name()} : https://iread.ga/posts/{post.slug}"
+    tags.append("ireadblog")
     for tag in tags:
         tweet += f" #{tag}"
     try:
