@@ -198,14 +198,23 @@
 
   var alerted = getCookie("alerted") || "";
   if (alerted != "yes") {
+    // Swal.fire({
+    //   title: "Checked our other products?",
+    //   icon: "question",
+    //   html: 
+    //     '<a href="https://srty.me"><strong>Shorty - URL Shortener and QR Generator</strong></a><br><br>' +
+    //     '<a href="https://pywisher.ml"><strong>PyWisher - Automatic Birthday Wisher</strong></a>'
+    // })
     Swal.fire({
-      title: "Checked our other products?",
-      icon: "question",
-      html: 
-        '<a href="https://srty.me"><strong>Shorty - URL Shortener and QR Generator</strong></a><br><br>' +
-        '<a href="https://pywisher.ml"><strong>PyWisher - Automatic Birthday Wisher</strong></a>'
+      title: 'Let Us Help India Breathe',
+      html:
+      '<div id="content">' +
+      `<img src="{% static 'images/covid.png' %}" style='max-width:100%;max-height:100%'` + 
+      '</div>'+
+      '<a href="https://milaap.org/partner-pages/Amazon?pf_rd_r=CHWN59SJQKBXPHEJ32NY&pf_rd_p=31c19504-900e-41c6-a87d-138119760f64" target="_blank"><button class="btn btn-primary">Donate Now</button></a>',
+      showConfirmButton: false
     })
-    createCookie("alerted", "yes", 7); //cookies expires after 7 days
+    createCookie("alerted", "yes", 1); //cookies expires after 7 days
   }
 </script>
 {% endblock js_down %}
