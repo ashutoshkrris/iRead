@@ -24,6 +24,10 @@
         gethead = document.getElementById("post-toc").getElementsByTagName("h1")[
           i
         ].textContent;
+        gethead2 = document.getElementById("post-toc").getElementsByTagName("h1")[
+          i
+        ].innerHTML;
+        if(gethead2 != "&nbsp;"){
         document
           .getElementById("post-toc")
           .getElementsByTagName("h1")
@@ -31,11 +35,16 @@
         mbtTOC = "<li><a href='#point" + i + "'>" + gethead + "</a></li>";
         document.getElementById("mbtTOC").innerHTML += mbtTOC;
       }
+    }
     } else if(headlength2 > 0){
       for (i = 0; i < headlength2; i++) {
         gethead = document.getElementById("post-toc").getElementsByTagName("h2")[
           i
         ].textContent;
+        gethead2 = document.getElementById("post-toc").getElementsByTagName("h1")[
+          i
+        ].innerHTML;
+        if(gethead2 != "&nbsp;"){
         document
           .getElementById("post-toc")
           .getElementsByTagName("h2")
@@ -44,8 +53,8 @@
         document.getElementById("mbtTOC").innerHTML += mbtTOC;
     }
   }
+  }
   if(headlength1<=0 && headlength2<=0){
-    console.log("Exec")
     var toc = document.getElementById("toc");
     toc.style.display = "none";
   }
