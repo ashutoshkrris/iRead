@@ -1,125 +1,268 @@
-{% extends "core/base.html" %}
-{% load custom_tags %} {% load static %} {% block title %}{{post.title}}{% endblock title %} {% block content %}
+{% extends "core/base.html" %} 
+{% load custom_tags %} 
+{% load static %} 
+{% block title %}{{post.title}}{% endblock title %} 
+{% block content %} 
+{% block js_up %}
+<link
+  href="http://fonts.googleapis.com/css?family=Oswald"
+  rel="stylesheet"
+  type="text/css"
+/>
+
+<script type="text/javascript">
+  function mbtTOC() {
+    var mbtTOC = (i = headlength1 = headlength2 = gethead = 0);
+    headlength1 = document.getElementById("post-toc").getElementsByTagName("h1")
+      .length;
+    if(headlength1 <=0){
+      headlength2 = document.getElementById("post-toc").getElementsByTagName("h2")
+      .length;
+    }
+    if(headlength1>0){
+      for (i = 0; i < headlength1; i++) {
+        gethead = document.getElementById("post-toc").getElementsByTagName("h1")[
+          i
+        ].textContent;
+        document
+          .getElementById("post-toc")
+          .getElementsByTagName("h1")
+          [i].setAttribute("id", "point" + i);
+        mbtTOC = "<li><a href='#point" + i + "'>" + gethead + "</a></li>";
+        document.getElementById("mbtTOC").innerHTML += mbtTOC;
+      }
+    } else if(headlength2 > 0){
+      for (i = 0; i < headlength2; i++) {
+        gethead = document.getElementById("post-toc").getElementsByTagName("h2")[
+          i
+        ].textContent;
+        document
+          .getElementById("post-toc")
+          .getElementsByTagName("h2")
+          [i].setAttribute("id", "point" + i);
+        mbtTOC = "<li><a href='#point" + i + "'>" + gethead + "</a></li>";
+        document.getElementById("mbtTOC").innerHTML += mbtTOC;
+    }
+  }
+}
+  function mbtToggle() {
+    var mbt = document.getElementById("mbtTOC");
+    if (mbt.style.display === "none") {
+      mbt.style.display = "block";
+    } else {
+      mbt.style.display = "none";
+    }
+  }
+</script>
+<style>
+  .mbtTOC {
+    border: 5px solid #f7f0b8;
+    box-shadow: 1px 1px 0 #ede396;
+    background-color: #ffffe0;
+    color: #707037;
+    line-height: 1.4em;
+    margin: 30px auto;
+    padding: 20px 30px 20px 10px;
+    font-family: oswald, arial;
+    display: block;
+    width: 70%;
+  }
+  .mbtTOC ol,
+  .mbtTOC ul {
+    margin: 0;
+    padding: 0;
+  }
+  .mbtTOC ul {
+    list-style: none;
+  }
+  .mbtTOC ol li,
+  .mbtTOC ul li {
+    padding: 15px 0 0;
+    margin: 0 0 0 30px;
+    font-size: 15px;
+  }
+  .mbtTOC a {
+    color: #0080ff;
+    text-decoration: none;
+  }
+  .mbtTOC a:hover {
+    text-decoration: underline;
+  }
+
+  .mbtTOC button {
+    background: #ffffe0;
+    font-family: oswald, arial;
+    font-size: 20px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    border: none;
+    color: #707037;
+    padding: 0 0 0 15px;
+  }
+  .mbtTOC button:after {
+    content: "\f0dc";
+    font-family: FontAwesome;
+    position: relative;
+    left: 10px;
+    font-size: 20px;
+  }
+</style>
+{% endblock js_up %}
 
 <section class="site-section py-lg">
-      <div class="container">
-<div class="row blog-entries element-animate">
-  <div class="col-md-12 col-lg-8 main-content">
-    <div class="post-meta">  
-      <span class="author mr-2"
-        ><img
-          src="{{post.author.profile_image.url}}"
-          alt="Colorlib"
-          class="mr-2"
-        />
-        <a href="{% url 'profile' post.author.username %}">{{post.author.get_full_name}}</a></span
-      >&bullet;
-      <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>&bullet;
-      <span class="mr-2">{{post.content|readtime}}</span>
-      {% if request.session.user_id == post.author.id %}
-        <span class="ml-2"><a href="{% url 'update_post' post.slug %}">Edit</a></span>
-        <span class="ml-2"><a id="delBtn" style="color: red;cursor: pointer;">Delete</a></span>
-        <span class="ml-4">
-          {% if post.published %}
-            <a class="category mb-5" href="#" style="background-color: grey;">PUBLISHED</a>
-          {% else %}
-            <a class="category mb-5" href="#" style="background-color: grey;">NOT PUBLISHED</a>
+  <div class="container">
+    <div class="row blog-entries element-animate">
+      <div class="col-md-12 col-lg-8 main-content">
+        <div class="post-meta">
+          <span class="author mr-2"
+            ><img
+              src="{{post.author.profile_image.url}}"
+              alt="Colorlib"
+              class="mr-2"
+            />
+            <a href="{% url 'profile' post.author.username %}"
+              >{{post.author.get_full_name}}</a
+            ></span
+          >&bullet;
+          <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>&bullet;
+          <span class="mr-2">{{post.content|readtime}}</span>
+          {% if request.session.user_id == post.author.id %}
+          <span class="ml-2"
+            ><a href="{% url 'update_post' post.slug %}">Edit</a></span
+          >
+          <span class="ml-2"
+            ><a id="delBtn" style="color: red; cursor: pointer">Delete</a></span
+          >
+          <span class="ml-4">
+            {% if post.published %}
+            <a class="category mb-5" href="#" style="background-color: grey"
+              >PUBLISHED</a
+            >
+            {% else %}
+            <a class="category mb-5" href="#" style="background-color: grey"
+              >NOT PUBLISHED</a
+            >
+            {% endif %}
+          </span>
           {% endif %}
-        </span>
-        {% endif %}
-    </div>
-    <h1 class="mb-4">{{post.title}}</h1>
-    <a class="category mb-5" href="#">{{post.categories.name}}</a>
-    <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" />
-    <div class="post-content-body">{{post.content|safe}}</div>
+        </div>
+        <h1 class="mb-4">{{post.title}}</h1>
+        <a class="category mb-5" href="#">{{post.categories.name}}</a>
+        <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" />
+        <div class="mbtTOC">
+          <button onclick="mbtToggle()">Table of Contents</button>
+          <ol id="mbtTOC"></ol>
+        </div>
+        <div class="post-content-body" id="post-toc">{{post.content|safe}}</div>
 
-    <div class="pt-3">
-      <p>
-        Tags: {% for tag in post.tags.all %} {% if not forloop.last %}
-        <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>, {% else %}
-        <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>
-        {% endif %} {% endfor %}
-      </p>
-    </div>
+        <div class="pt-3">
+          <p>
+            Tags: {% for tag in post.tags.all %} {% if not forloop.last %}
+            <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>, {% else %}
+            <a href="{% url 'tag' tag.name %}">#{{tag.name}}</a>
+            {% endif %} {% endfor %}
+          </p>
+        </div>
 
-    <!-- <div id="like-section">
+        <!-- <div id="like-section">
       {% include "partials/like.html" %}
     </div> -->
 
-    <div class="share-btn-container pt-3" style="display: flex; justify-content: space-between">
-      
-        <div>
-          {% include "partials/like.html" %}
-          <div
-            class="likeFeedBackArea invalid-feedback"
-            style="display: none"
-          ></div>
+        <div
+          class="share-btn-container pt-3"
+          style="display: flex; justify-content: space-between"
+        >
+          <div>
+            {% include "partials/like.html" %}
+            <div
+              class="likeFeedBackArea invalid-feedback"
+              style="display: none"
+            ></div>
+          </div>
+          <div>
+            <h4>
+              Share on : &nbsp;
+              <a href="#" class="facebook-btn" target="_blank">
+                <i class="fa fa-facebook"></i>
+              </a>
+              &nbsp;
+              <a href="#" class="twitter-btn" target="_blank">
+                <i class="fa fa-twitter"></i>
+              </a>
+              &nbsp;
+              <a href="#" class="linkedin-btn" target="_blank">
+                <i class="fa fa-linkedin"></i>
+              </a>
+              &nbsp;
+              <a href="#" class="whatsapp-btn" target="_blank">
+                <i class="fa fa-whatsapp"></i>
+              </a>
+              &nbsp;
+              <a
+                onclick="copyLink(`{{request.build_absolute_uri}}`, `{{shorty_api_key}}`)"
+                style="cursor: pointer"
+                class="copy-btn"
+              >
+                <i class="fa fa-link" aria-hidden="true"></i>
+              </a>
+              &nbsp;
+            </h4>
+          </div>
         </div>
-        <div>
-          <h4>
-            Share on : &nbsp;
-            <a href="#" class="facebook-btn" target="_blank">
-              <i class="fa fa-facebook"></i>
-            </a> &nbsp;
-            <a href="#" class="twitter-btn" target="_blank">
-              <i class="fa fa-twitter"></i>
-            </a> &nbsp;
-            <a href="#" class="linkedin-btn" target="_blank">
-              <i class="fa fa-linkedin"></i>
-            </a> &nbsp;
-            <a href="#" class="whatsapp-btn" target="_blank">
-              <i class="fa fa-whatsapp"></i>
-            </a> &nbsp;
-            <a onclick="copyLink(`{{request.build_absolute_uri}}`, `{{shorty_api_key}}`)" style="cursor: pointer;" class="copy-btn">
-              <i class="fa fa-link" aria-hidden="true"></i>
-            </a> &nbsp;
-          </h4>
-      </div>
-      
-    </div>
 
-    <div class="pt-5">
-      <h3 class="mb-5"> {{post.comments}} Comments</h3>
-      <ul class="comment-list">
-        {% for c in comments %}
-        <li class="comment">
-          <div class="vcard">
-            <img src="{{c.0.user.profile_image.url}}" alt="Image placeholder" />
-          </div>
-          <div class="comment-body">
-            <h3>{{c.0.user.get_full_name}}</h3>
-            <div class="meta">{{c.0.timestamp}}</div>
-            <p>{{c.0.message}}</p>
-            {% if request.session.user_id %}
-            <p id="{{c.0.id}}"><button onclick="ReplyForm('{{c.0.id}}')" class="btn btn-primary btn-sm">Reply</button></p>
-            {% endif %}
-          </div>
-
-          <ul class="children">
-            {% for sc in c.1 %}
-
+        <div class="pt-5">
+          <h3 class="mb-5">{{post.comments}} Comments</h3>
+          <ul class="comment-list">
+            {% for c in comments %}
             <li class="comment">
               <div class="vcard">
                 <img
-                  src="{{sc.user.profile_image.url}}"
+                  src="{{c.0.user.profile_image.url}}"
                   alt="Image placeholder"
                 />
               </div>
               <div class="comment-body">
-                <h3>{{sc.user.get_full_name}}</h3>
-                <div class="meta">{{sc.timestamp}}</div>
-                <p>{{sc.message}}</p>
+                <h3>{{c.0.user.get_full_name}}</h3>
+                <div class="meta">{{c.0.timestamp}}</div>
+                <p>{{c.0.message}}</p>
+                {% if request.session.user_id %}
+                <p id="{{c.0.id}}">
+                  <button
+                    onclick="ReplyForm('{{c.0.id}}')"
+                    class="btn btn-primary btn-sm"
+                  >
+                    Reply
+                  </button>
+                </p>
+                {% endif %}
               </div>
+
+              <ul class="children">
+                {% for sc in c.1 %}
+
+                <li class="comment">
+                  <div class="vcard">
+                    <img
+                      src="{{sc.user.profile_image.url}}"
+                      alt="Image placeholder"
+                    />
+                  </div>
+                  <div class="comment-body">
+                    <h3>{{sc.user.get_full_name}}</h3>
+                    <div class="meta">{{sc.timestamp}}</div>
+                    <p>{{sc.message}}</p>
+                  </div>
+                </li>
+                {% endfor %}
+              </ul>
             </li>
             {% endfor %}
           </ul>
-        </li>
-        {% endfor %}
-      </ul>
-      <!-- END comment-list -->
-      <script type="text/javascript">
-        function ReplyForm(id) {
-          let elm = `<form method="POST" class="p-5 bg-light">
+          <!-- END comment-list -->
+          <script type="text/javascript">
+            function ReplyForm(id) {
+              let elm = `<form method="POST" class="p-5 bg-light">
                                     {% csrf_token %}
                         <div class="form-group">
                         <input type='text' value='${id}' name = 'comm_id' style="display:none;" readonly/>
@@ -131,100 +274,103 @@
                         </div>
       
                       </form>`;
-          document.getElementById(id).innerHTML = elm;
-        }
-      </script>
+              document.getElementById(id).innerHTML = elm;
+            }
+          </script>
 
-      {% if request.session.user_id %}
-      <div class="comment-form-wrap pt-5">
-        <h3 class="mb-5">Leave a comment</h3>
-        <form method="POST" class="p-5 bg-light">
-          {% csrf_token %}
-          <div class="form-group">
-            <label for="message">Comment</label>
-            <textarea
-              name="comm"
-              id="message"
-              cols="30"
-              rows="3"
-              class="form-control"
-            ></textarea>
+          {% if request.session.user_id %}
+          <div class="comment-form-wrap pt-5">
+            <h3 class="mb-5">Leave a comment</h3>
+            <form method="POST" class="p-5 bg-light">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="message">Comment</label>
+                <textarea
+                  name="comm"
+                  id="message"
+                  cols="30"
+                  rows="3"
+                  class="form-control"
+                ></textarea>
+              </div>
+              <div class="form-group">
+                <input
+                  type="submit"
+                  value="Post Comment"
+                  class="btn btn-primary"
+                />
+              </div>
+            </form>
           </div>
-          <div class="form-group">
-            <input type="submit" value="Post Comment" class="btn btn-primary" />
-          </div>
-        </form>
+          {% else %}
+          <p>
+            To add a comment, please <a href="{% url 'signup' %}">Signup</a> or
+            <a href="{% url 'login' %}">Login</a>
+          </p>
+          {% endif %}
+        </div>
       </div>
-      {% else %}
-      <p>
-        To add a comment, please <a href="{% url 'signup' %}">Signup</a> or
-        <a href="{% url 'login' %}">Login</a>
-      </p>
+
+      {% include "partials/sidebar.html" %} {% if related_posts|length > 0 %}
+
+      <section class="py-5">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-12">
+              <h2 class="mb-3">Related Posts</h2>
+            </div>
+          </div>
+          <div class="row">
+            {% for post in related_posts %}
+
+            <div class="col-md-6 col-lg-4">
+              <a
+                href="{% url 'single' post.slug %}"
+                class="a-block sm d-flex align-items-center height-md"
+                style="background-image: url('{{post.thumbnail.url}}');"
+              >
+                <div class="text">
+                  <div class="post-meta">
+                    <span class="category">{{post.categories.name}}</span>
+                    <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
+                  </div>
+                  <h3>{{post.title}}</h3>
+                </div>
+              </a>
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+      </section>
+
       {% endif %}
+      <!-- END section -->
     </div>
   </div>
-
-  {% include "partials/sidebar.html" %}
-  
-  {% if related_posts|length > 0 %}
-    
-  <section class="py-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <h2 class="mb-3">Related Posts</h2>
-        </div>
-      </div>
-      <div class="row">
-        {% for post in related_posts %}
-          
-        <div class="col-md-6 col-lg-4">
-          <a
-            href="{% url 'single' post.slug %}"
-            class="a-block sm d-flex align-items-center height-md"
-            style="background-image: url('{{post.thumbnail.url}}');"
-          >
-            <div class="text">
-              <div class="post-meta">
-                <span class="category">{{post.categories.name}}</span>
-                <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
-              </div>
-              <h3>{{post.title}}</h3>
-            </div>
-          </a>
-        </div>
-        
-        {% endfor %}
-      </div>
-    </div>
-  </section>
-  
-  {% endif %}
-  <!-- END section -->
-</div>
-      </div>
 </section>
-{% endblock content %}
-
-{% block js_down %}
-  <script src="{% static 'js/single_post.js' %}"></script>
-  <script>
-    $('.post-content-body img').addClass('img-fluid');
-  </script>
-  <script>
-    $("#delBtn").click(function(e){
-      Swal.fire({
-      title: 'Sure ?',
+{% endblock content %} {% block js_down %}
+<script src="{% static 'js/single_post.js' %}"></script>
+<script>
+  $(".post-content-body img").addClass("img-fluid");
+</script>
+<script>
+  $("#delBtn").click(function (e) {
+    Swal.fire({
+      title: "Sure ?",
       // text: 'Do you want to continue ?',
-      type: 'warning',
+      type: "warning",
       showCancelButton: true,
-      confirmButtonText: `<a href="{% url 'delete_post' post.slug %}" style="color: white;">Yeah!</a>`
-    })
-    })
-  </script>
-  
+      confirmButtonText: `<a href="{% url 'delete_post' post.slug %}" style="color: white;">Yeah!</a>`,
+    });
+  });
+</script>
+<script>
+  mbtTOC();
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/show-language/prism-show-language.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/download-button/prism-download-button.js"></script>
-    
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/download-button/prism-download-button.js"></script>
+
 {% endblock js_down %}
