@@ -44,6 +44,11 @@
         document.getElementById("mbtTOC").innerHTML += mbtTOC;
     }
   }
+  if(headlength1<=0 && headlength2<=0){
+    console.log("Exec")
+    var toc = document.getElementById("toc");
+    toc.style.display = "none";
+  }
 }
   function mbtToggle() {
     var mbt = document.getElementById("mbtTOC");
@@ -150,7 +155,7 @@
         <h1 class="mb-4">{{post.title}}</h1>
         <a class="category mb-5" href="#">{{post.categories.name}}</a>
         <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" />
-        <div class="mbtTOC">
+        <div id="toc" class="mbtTOC">
           <button onclick="mbtToggle()">Table of Contents</button>
           <ol id="mbtTOC"></ol>
         </div>

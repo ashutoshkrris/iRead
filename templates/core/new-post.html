@@ -101,4 +101,11 @@
     var element = document.getElementById("new_post")
     element.classList.add("active");
   </script>
+  <script>
+    new Notify ({
+        title: 'Tip',
+        text: `Use 'h1' or 'h2' for heading to auto-generate Table of Contents`,
+        status: 'success'
+        })
+  </script>
 {% endblock js_down %}
