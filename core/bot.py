@@ -1,6 +1,7 @@
 import tweepy
 from decouple import config
 import requests
+from django.conf import settings
 
 # Keys and Tokens
 CONSUMER_KEY = config("TWITTER_API_KEY")
@@ -55,15 +56,21 @@ def create_new_dev_post(post, tags):
     headers = {
         "api-key": config("DEV_API_KEY")
     }
+    if settings.DEBUG:
+        main_image = f"http://127.0.0.1:8000/static/{post.thumbnail.url}"
+    else:
+        main_image = post.thumbnail.url
     data = {
         "article": {
             "title": f"{post.title}",
             "published": True,
             "body_markdown": f"{post.content}",
             "tags": tags,
+            "canonical_url": f"https://iread.ga/{post.get_absolute_url()}",
         }
     }
     try:
         x = requests.post(url=url, headers=headers, json=data)
+        print(x)
     except Exception as e:
         print(e)

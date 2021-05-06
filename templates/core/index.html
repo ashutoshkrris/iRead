@@ -212,9 +212,10 @@
       `<img src="{% static 'images/covid.png' %}" style='max-width:100%;max-height:100%'` + 
       '</div>'+
       '<a href="https://milaap.org/partner-pages/Amazon?pf_rd_r=CHWN59SJQKBXPHEJ32NY&pf_rd_p=31c19504-900e-41c6-a87d-138119760f64" target="_blank"><button class="btn btn-primary">Donate Now</button></a>',
-      showConfirmButton: false
+      showConfirmButton: false,
+      showCloseButton: true,
     })
-    createCookie("alerted", "yes", 1); //cookies expires after 7 days
+    createCookie("alerted", "yes", 1); // cookies expire after 1 day
   }
 </script>
 {% endblock js_down %}
