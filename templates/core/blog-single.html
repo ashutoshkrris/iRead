@@ -143,7 +143,7 @@
           <span class="mr-2">{{post.content|readtime}}</span>
           {% if request.session.user_id == post.author.id %}
           <span class="ml-2"
-            ><a href="{% url 'update_post' post.slug %}">Edit</a></span
+            ><a href="{% url 'update_post' post.id post.slug %}">Edit</a></span
           >
           <span class="ml-2"
             ><a id="delBtn" style="color: red; cursor: pointer">Delete</a></span
@@ -339,7 +339,7 @@
 
             <div class="col-md-6 col-lg-4">
               <a
-                href="{% url 'single' post.slug %}"
+                href="{% url 'single' post.id post.slug %}"
                 class="a-block sm d-flex align-items-center height-md"
                 style="background-image: url('{{post.thumbnail.url}}');"
               >
@@ -375,7 +375,7 @@
       // text: 'Do you want to continue ?',
       type: "warning",
       showCancelButton: true,
-      confirmButtonText: `<a href="{% url 'delete_post' post.slug %}" style="color: white;">Yeah!</a>`,
+      confirmButtonText: `<a href="{% url 'delete_post' post.id post.slug %}" style="color: white;">Yeah!</a>`,
     });
   });
 </script>

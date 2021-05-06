@@ -312,7 +312,7 @@
                     <ul>
                       {% for post in latest_posts %}
                       <li>
-                        <a href="{% url 'single' post.slug %}">
+                        <a href="{% url 'single' post.id post.slug %}">
                           <img
                             src="{{post.thumbnail.url}}"
                             alt="Image placeholder"

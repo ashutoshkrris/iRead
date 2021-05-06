@@ -61,7 +61,7 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        return reverse('single', args=[self.slug])
+        return reverse('single', args=[self.id, self.slug])
 
 
 class Like(models.Model):

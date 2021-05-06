@@ -111,7 +111,7 @@
                   {% for post in user_posts %}
                     
                   <div class="post-entry-horzontal">
-                    <a href="{% url 'single' post.slug %}">
+                    <a href="{% url 'single' post.id post.slug %}">
                       <div class="image" style="background-image: url({{post.thumbnail.url}});"></div>
                       <span class="text">
                         <div class="post-meta">

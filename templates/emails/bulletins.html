@@ -383,7 +383,7 @@
                                           mso-line-height-rule: exactly;
                                           padding: 0;
                                         "
-                                        ><a href="{% url 'single' lp1.slug %}">{{lp1.title}}</a> </b
+                                        ><a href="{% url 'single' lp1.id lp1.slug %}">{{lp1.title}}</a> </b
                                       ><br
                                         style="
                                           box-sizing: border-box;
@@ -556,7 +556,7 @@
                                           mso-line-height-rule: exactly;
                                           padding: 0;
                                         "
-                                        ><a href="{% url 'single' lp2.slug %}">{{lp2.title}}</a></b
+                                        ><a href="{% url 'single' lp2.id lp2.slug %}">{{lp2.title}}</a></b
                                       ><br
                                         style="
                                           box-sizing: border-box;

@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row blog-entries">
             <div class="col-md-12 col-lg-8 main-content">
-                <form action="{% url 'update_post' post.slug %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'update_post' post.id post.slug %}" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-12 form-group">

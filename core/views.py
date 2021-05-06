@@ -18,6 +18,7 @@ from decouple import config
 
 # Create your views here.
 
+
 def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
     most_viewed = Post.objects.filter(published=True).order_by('-views')[:3]
@@ -107,7 +108,7 @@ def category(request, category_name):
         return Http404()
 
 
-def single(request, slug):
+def single(request, post_id, slug):
     posts = Post.objects.filter(published=True)
     liked = []
     try:
@@ -118,7 +119,7 @@ def single(request, slug):
     except Exception:
         pass
     try:
-        post = Post.objects.get(slug=slug)
+        post = Post.objects.get(id=post_id, slug=slug)
         related_posts = Post.objects.filter(
             Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()[:3]
         post.views += 1
@@ -193,7 +194,8 @@ def search(request):
         return redirect('signup')
     if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
         return redirect('login')
-    users = Account.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name')).filter(Q(full_name__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query))
+    users = Account.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name')).filter(
+        Q(full_name__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query))
     categories = Category.objects.filter(Q(name__icontains=query)).distinct()
     tags = Tag.objects.filter(Q(name__icontains=query)).distinct()
     results = Post.objects.filter(Q(title__icontains=query) | Q(
@@ -289,8 +291,8 @@ def new_post(request):
     return render(request, "core/new-post.html", context)
 
 
-def update_post(request, slug):
-    post = Post.objects.get(slug=slug)
+def update_post(request, post_id, slug):
+    post = Post.objects.get(id=post_id, slug=slug)
     context = {
         'post': post
     }
@@ -311,15 +313,15 @@ def update_post(request, slug):
             post.content = content
             post.published = bool(published)
             post.save()
-            return redirect('single', slug=post.slug)
+            return redirect('single', post_id=post.id,  slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
             return render(request, "core/update-post.html", context)
     return render(request, "core/update-post.html", context)
 
 
-def delete_post(request, slug):
-    post = Post.objects.get(slug=slug)
+def delete_post(request, post_id, slug):
+    post = Post.objects.get(id=post_id, slug=slug)
     post.delete()
     return redirect('home')
 
