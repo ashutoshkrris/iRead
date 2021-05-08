@@ -24,7 +24,7 @@ def authenticate():
 
 def tweet_new_post(post, tags):
     iread_bot = authenticate()
-    tweet = f"{post.title} by {post.author.get_full_name()} : https://iread.ga/{post.get_absolute_url()}"
+    tweet = f"'{post.title}' by {post.author.get_full_name()} : https://iread.ga{post.get_absolute_url()}"
     tags.append("ireadblog")
     for tag in tags:
         tweet += f" #{tag}"
@@ -66,7 +66,7 @@ def create_new_dev_post(post, tags):
             "published": True,
             "body_markdown": f"{post.content}",
             "tags": tags,
-            "canonical_url": f"https://iread.ga/{post.get_absolute_url()}",
+            "canonical_url": f"https://iread.ga{post.get_absolute_url()}",
         }
     }
     try:
