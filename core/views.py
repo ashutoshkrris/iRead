@@ -283,7 +283,6 @@ def new_post(request):
             post.save()
             if post.published:
                 tweet_new_post(post, tags)
-                create_new_dev_post(post, tags)
             return redirect('single', slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
