@@ -808,7 +808,7 @@
                                           mso-line-height-rule: exactly;
                                           padding: 0;
                                         "
-                                        ><a href="{% url 'single' pp1.slug %}">{{pp1.title}}</a></b
+                                        ><a href="{% url 'single' pp1.id pp1.slug %}">{{pp1.title}}</a></b
                                       ><br
                                         style="
                                           box-sizing: border-box;
@@ -1010,7 +1010,7 @@
                                           mso-line-height-rule: exactly;
                                           padding: 0;
                                         "
-                                        ><a href="{% url 'single' pp1.slug %}">{{pp2.title}}</a></b
+                                        ><a href="{% url 'single' pp2.id pp2.slug %}">{{pp2.title}}</a></b
                                       >
                                     </div>
                                     <br

@@ -12,7 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import json
 from django.core.serializers import serialize
-from .bot import create_new_dev_post, tweet_new_post
+from .bot import tweet_new_post
 from django.views import View
 from decouple import config
 
@@ -283,7 +283,7 @@ def new_post(request):
             post.save()
             if post.published:
                 tweet_new_post(post, tags)
-            return redirect('single', slug=post.slug)
+            return redirect('single', post_id=post.id, slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
             return render(request, "core/new-post.html", context)
@@ -494,7 +494,7 @@ class PostNotification(View):
         notification.user_has_seen = True
         notification.save()
 
-        return redirect('single', slug=slug)
+        return redirect('single', post_id=post.id, slug=slug)
 
 
 class FollowNotification(View):
