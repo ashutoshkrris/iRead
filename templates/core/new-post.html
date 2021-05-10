@@ -46,6 +46,15 @@
                             <input type="checkbox" id="published" name="published" value="True">
                             <label for="published"> Published</label><br>
                         </div>
+                        <div class="col-md-6 form-group" id="series_select">
+                            <label for="series">Series</label>
+                            <select name="series" id="series" style="width: 200px;">
+                                <option disabled value selected>Select Series</option>
+                                {% for ser in series %}
+                                    <option value="{{ser.id}}">{{ser}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4"></div>
@@ -55,6 +64,8 @@
                         <div class="col-md-4"></div>
                     </div>
                 </form>
+                <br>
+                <p class="text-center">Note : Series is an optional field.</p>
             </div>
             {% include "partials/sidebar.html" %}
         </div>

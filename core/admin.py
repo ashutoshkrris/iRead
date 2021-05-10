@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
-from .models import BulletinSubscriber, Category, Like, Notification, Recurring, Tag, Post, Comment, SubComment, Contact
+from .models import BulletinSubscriber, Category, Like, Notification, Recurring, Series, Tag, Post, Comment, SubComment, Contact
 
 
 # Register your models here.
@@ -21,12 +21,20 @@ toggle_published.short_description = "Toggle the published status of posts"
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
     list_display = ('id', 'title', 'author', 'views', 'likes',
-                    'published', 'timestamp',)
+                    'published', 'timestamp', 'date_updated',)
     search_fields = ('title', 'author')
     ordering = ('-timestamp',)
     readonly_fields = ('slug', 'views',)
     list_filter = ('categories', 'tags', 'published')
     actions = [toggle_published]
+
+
+@admin.register(Series)
+class SeriesAdmin(ModelAdmin):
+    list_display = ('id', 'name', 'user', 'date_created', 'date_updated',)
+    search_fields = ('name',)
+    ordering = ('-id',)
+    readonly_fields = ('slug',)
 
 
 admin.site.register(Category)

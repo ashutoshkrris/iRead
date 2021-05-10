@@ -4,7 +4,7 @@ from datetime import datetime
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
-from .models import BulletinSubscriber, Contact, Notification, Post, Category, Recurring, Tag, Comment, SubComment, Like
+from .models import BulletinSubscriber, Contact, Notification, Post, Category, Recurring, Series, Tag, Comment, SubComment, Like
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.mail import EmailMultiAlternatives
@@ -85,7 +85,7 @@ def category(request, category_name):
         posts = Post.objects.filter(
             published=True, categories__name=category_name)
         if len(posts) > 3:
-            all_posts = Paginator(posts, 3)
+            all_posts = Paginator(posts, 8)
             page = request.GET.get('page')
             try:
                 page_posts = all_posts.page(page)
@@ -107,9 +107,41 @@ def category(request, category_name):
     except Exception as e:
         return Http404()
 
+def series(request, series_id, series_slug):
+    try:
+        series = Series.objects.filter(id=series_id,slug=series_slug).first()
+        posts = series.posts.all()
+        if len(posts) > 3:
+            all_posts = Paginator(posts, 8)
+            page = request.GET.get('page')
+            try:
+                page_posts = all_posts.page(page)
+            except PageNotAnInteger:
+                page_posts = all_posts.page(1)
+            except EmptyPage:
+                page_posts = all_posts.page(all_posts.num_pages)
+            context = {
+                'series': series,
+                'posts': page_posts,
+                'pagination': True
+            }
+        else:
+            context = {
+                'series': series,
+                'posts': posts
+            }
+        return render(request, "core/series.html", context)
+    except Exception as e:
+        return Http404()
+
 
 def single(request, post_id, slug):
     posts = Post.objects.filter(published=True)
+    series = None
+    try:
+        series = Series.objects.filter(posts__id=post_id).first()
+    except Exception:
+        pass
     liked = []
     try:
         user = Account.objects.get(id=request.session.get('user_id'))
@@ -154,6 +186,7 @@ def single(request, post_id, slug):
             total_likes = 0
         context = {
             'post': post,
+            'series': series,
             'related_posts': related_posts,
             'comments': comments,
             'liked_posts': liked,
@@ -201,7 +234,7 @@ def search(request):
     results = Post.objects.filter(Q(title__icontains=query) | Q(
         seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
     if len(results) > 3:
-        all_posts = Paginator(results, 3)
+        all_posts = Paginator(results, 8)
         page = request.GET.get('page')
         try:
             page_posts = all_posts.page(page)
@@ -234,7 +267,7 @@ def tag(request, tag_name):
         posts = Post.objects.filter(
             published=True, tags__name=tag_name)
         if len(posts) > 3:
-            all_posts = Paginator(posts, 3)
+            all_posts = Paginator(posts, 8)
             page = request.GET.get('page')
             try:
                 page_posts = all_posts.page(page)
@@ -260,7 +293,8 @@ def tag(request, tag_name):
 def new_post(request):
     context = {
         'categories': Category.objects.all(),
-        'tags': Tag.objects.all()
+        'tags': Tag.objects.all(),
+        'series': Series.objects.filter(user__id=request.session.get('user_id'))
     }
     if request.method == 'POST':
         try:
@@ -271,18 +305,21 @@ def new_post(request):
             category = request.POST.get('category')
             tags = request.POST.getlist('tags')
             published = request.POST.get('published')
-
+            series_id = request.POST.get('series')
             cat = Category.objects.get(name=category)
             user = Account.objects.get(id=request.session.get('user_id'))
             new_post = Post(title=title, seo_overview=overview,
                             thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
             new_post.save()
+            if(series_id):
+                series = Series.objects.get(id=series_id)
+                series.posts.add(new_post)
             post = Post.objects.get(title=title, author=user)
             for tag in tags:
                 post.tags.add(Tag.objects.get(name=tag))
             post.save()
-            if post.published:
-                tweet_new_post(post, tags)
+            # if post.published:
+            #     tweet_new_post(post, tags)
             return redirect('single', post_id=post.id, slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
@@ -311,6 +348,7 @@ def update_post(request, post_id, slug):
             post.seo_overview = overview
             post.content = content
             post.published = bool(published)
+            post.date_updated = datetime.now()
             post.save()
             return redirect('single', post_id=post.id,  slug=post.slug)
         except ValueError:

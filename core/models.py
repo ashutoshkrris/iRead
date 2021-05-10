@@ -41,6 +41,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
     content = RichTextUploadingField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
     thumbnail = models.ImageField(upload_to="blog/thumbnails")
     published = models.BooleanField(default=True)
@@ -63,6 +64,28 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('single', args=[self.id, self.slug])
+
+
+class Series(models.Model):
+    name = models.CharField(max_length=127)
+    desc = models.TextField(null=True)
+    slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
+    posts = models.ManyToManyField(Post, related_name='post_series')
+    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    date_created = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        verbose_name_plural = 'series'
+        ordering = ['-id']
+
+    def __str__(self) -> str:
+        return f"{self.name}"
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Series, self).save(*args, **kwargs)
+
 
 
 class Like(models.Model):
