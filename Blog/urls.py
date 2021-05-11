@@ -23,12 +23,13 @@ from django.views.decorators.cache import never_cache
 from django.conf.urls import url
 from ckeditor_uploader import views
 from django.contrib.sitemaps.views import sitemap
-from core.sitemaps import PostSitemap, CategorySitemap, TagSitemap
+from core.sitemaps import PostSitemap, CategorySitemap, SeriesSitemap, TagSitemap
 
 sitemaps = {
     'posts': PostSitemap,
     'tags': TagSitemap,
-    'categories': CategorySitemap
+    'categories': CategorySitemap,
+    'series': SeriesSitemap,
 }
 
 urlpatterns = [

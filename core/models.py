@@ -86,6 +86,9 @@ class Series(models.Model):
         self.slug = slugify(self.name)
         super(Series, self).save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('series', args=[self.id, self.slug])
+
 
 
 class Like(models.Model):
