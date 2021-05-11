@@ -162,17 +162,11 @@
           {% endif %}
         </div>
         <h1 class="mb-4">{{post.title}}</h1>
-        {% if series %}
-        <p>This post is a part of <a href="{% url 'series' series.id series.slug %}">{{series.name}}</a> series.</p>
-        {% endif %}
         <a class="category mb-5" href="{% url 'category' post.categories.name %}">{{post.categories.name}}</a>
         {% if series %}
         <a class="category mb-5" style="background-color:#0080ff" href="{% url 'series' series.id series.slug %}">{{series.name|upper}} SERIES</a>
         {% endif %}
         <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" />
-        {% if series %}
-        <h4></h4>
-        {% endif %}
         <div id="toc" class="mbtTOC">
           <button onclick="mbtToggle()">Table of Contents</button>
           <ol id="mbtTOC"></ol>

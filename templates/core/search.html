@@ -115,6 +115,17 @@
                 <li><a href="{% url 'tag' tag.name %}">{{tag.name}}</a></li>
 
                 {% endfor %}
+
+              {% if series %}
+                  <div class="separator" style="margin-top: 10px; margin-bottom: 10px;"><h2>Series</h2></div>
+              {% endif %}
+              <ul class="tags">
+                {% for ser in series %}
+
+                    <h1><a class="category" style="background-color:#0080ff" href="{% url 'series' ser.id ser.slug %}">{{ser.name|upper}} SERIES</a></h1>
+                  <!-- END Series -->
+
+                {% endfor %}
               </ul>
           </div>
           {% include "partials/sidebar.html" %}

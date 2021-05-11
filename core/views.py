@@ -107,9 +107,10 @@ def category(request, category_name):
     except Exception as e:
         return Http404()
 
+
 def series(request, series_id, series_slug):
     try:
-        series = Series.objects.filter(id=series_id,slug=series_slug).first()
+        series = Series.objects.filter(id=series_id, slug=series_slug).first()
         posts = series.posts.all()
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
@@ -231,6 +232,7 @@ def search(request):
         Q(full_name__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query))
     categories = Category.objects.filter(Q(name__icontains=query)).distinct()
     tags = Tag.objects.filter(Q(name__icontains=query)).distinct()
+    series = Series.objects.filter(Q(name__icontains=query)).distinct()
     results = Post.objects.filter(Q(title__icontains=query) | Q(
         seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
     if len(results) > 3:
@@ -248,7 +250,8 @@ def search(request):
             'pagination': True,
             'users': users[:3],
             'categories_res': categories,
-            'tags': tags
+            'tags': tags,
+            'series': series
         }
     else:
         context = {
@@ -376,7 +379,6 @@ def new_category(request):
                 try:
                     new_category = Category(name=capitalized_category)
                     new_category.save()
-                    print("Created new")
                     return JsonResponse({'category_created': 'Category created successfully.'})
                 except Exception:
                     return JsonResponse({'category_error': 'Error while creating category.'})
@@ -410,6 +412,33 @@ def new_tag(request):
             return JsonResponse({'tag_error': 'You are not logged in.'})
     else:
         return JsonResponse({'tag_error': 'Unable to create new tag'})
+
+
+def new_series(request):
+    if request.method == 'POST':
+        if request.session.get('user_id'):
+            series_name = request.POST.get('series_name')
+            series_desc = request.POST.get('series_desc')
+           
+            capitalized_series = " ".join([
+                word.capitalize()
+                for word in series_name.split(" ")
+            ])
+            if not Series.objects.filter(name=capitalized_series).exists():
+                try:
+                    new_series = Series(
+                        name=capitalized_series, desc=series_desc, user=Account.objects.get(id=request.session.get('user_id')))
+                    new_series.save()
+                    return render(request, 'core/new-series.html', {'message': 'Series has been created successfully.'})
+                except Exception as e:
+                    print(e)
+                    return render(request, 'core/new-series.html', {'error': 'Error while creating series.'})
+            else:
+                return render(request, 'core/new-series.html', {'error': 'Series already exists.'})
+        else:
+            return render(request, 'core/new-series.html', {'error': 'You are not logged in.'})
+    else:
+        return render(request, 'core/new-series.html')
 
 
 # For bulletins registration
@@ -507,13 +536,10 @@ def bulletin_email():
         email.attach_alternative(html_content, "text/html")
         if (sub_type == 'Weekly' and TODAY_DAY == 'Monday'):
             email.send()
-            print(f"Email sent to {sub.email}")
         if (sub_type == 'Monthly' and TODAY_DATE == 1):
             email.send()
-            print(f"Email sent to {sub.email}")
         if sub_type == 'Daily':
             email.send()
-            print(f"Email sent to {sub.email}")
 
 
 def send_bulletin_email(request):
@@ -549,7 +575,6 @@ class FollowNotification(View):
 class RemoveNotification(View):
     def delete(self, request, notification_id, to_user, *args, **kwargs):
         try:
-            print(to_user)
             # to_user = Account.objects.get(id=to_user_id)
             notification = Notification.objects.get(id=notification_id)
 

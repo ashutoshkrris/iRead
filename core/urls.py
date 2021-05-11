@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_tag, privacy_policy, pub_api, refund_policy, send_bulletin_email, series, single, contact, search, category, tag, terms_conditions, update_post
+from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_series, new_tag, privacy_policy, pub_api, refund_policy, send_bulletin_email, series, single, contact, search, category, tag, terms_conditions, update_post
 from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
 from .feeds import LatestPostsFeed
@@ -32,6 +32,7 @@ urlpatterns = [
     path('series/<int:series_id>/<series_slug>', series, name='series'),
     path('category/new', csrf_exempt(new_category), name='new_category'),
     path('tag/new', csrf_exempt(new_tag), name='new_tag'),
+    path('series/new', auth_middleware(new_series), name='new_series'),
     path('search', search, name='search'),
     path('like_dislike', like_dislike_post, name='like_dislike_post'),
     path('new-post', auth_middleware(new_post), name='new_post'),

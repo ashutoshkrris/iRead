@@ -1,0 +1,59 @@
+{% extends "core/base.html" %}
+{% load static %}
+{% block title %}Create New Series{% endblock title %}
+
+    {% block content %}
+    <section class="site-section">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h1>Enter Series Details</h1>
+          </div>
+        </div>
+        <div class="row blog-entries">
+          <div class="col-md-12 col-lg-8 main-content">
+            <form action="{% url 'new_series' %}" method="post">
+              {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="series_name">Series Name</label>
+                      <input type="text" id="name" name="series_name" class="form-control " required>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="series_desc">Series Description</label>
+                      <textarea id="series_desc" name="series_desc" class="form-control " cols="30" rows="8" required></textarea>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 form-group">
+                      <input type="submit" id="createSeries" value="Create Series" class="btn btn-primary" onclick="change()">
+                    </div>
+                  </div>
+                </form>
+          </div>
+          {% include "partials/sidebar.html" %}
+        </div>
+      </div>
+    </section>
+  
+{% endblock content %}
+{% block js_down %}
+  <script>
+    var element = document.getElementById("contact")
+    element.classList.add("active");
+  </script>
+
+  <script>
+    function change(){
+      var series_name = document.getElementById("series_name").value;
+      var series_desc = document.getElementById("series_desc").value;
+      if (!series_name=="" && !series_desc==""){
+        var btn = document.getElementById("createSeries");
+        btn.value = 'Creating'
+      }
+    }
+  </script>
+
+{% endblock js_down %}

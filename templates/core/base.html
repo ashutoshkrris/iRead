@@ -235,6 +235,11 @@
                     >
                     <a
                       class="dropdown-item"
+                      href="{% url 'new_series' %}"
+                      >Create New Series</a
+                    >
+                    <a
+                      class="dropdown-item"
                       href="{% url 'change_password' %}"
                       >Change Password</a
                     >
@@ -558,7 +563,8 @@
         new Notify ({
         title: 'Error',
         text: `{{error|safe}}`,
-        status: 'error'
+        status: 'error',
+        effect: 'slide'
         })
       </script>
     {% endif %}
@@ -568,12 +574,11 @@
         new Notify ({
         title: 'Success',
         text: `{{message|safe}}`,
-        status: 'success'
+        status: 'success',
+        effect: 'slide'
         })
       </script>
     {% endif %}
-    <!-- Dev.to -->
-    <script src="https://unpkg.com/dev-widget@^1/dist/card.component.min.mjs" type="module"></script>
     {% block js_down %} {% endblock js_down %}
   </body>
 </html>

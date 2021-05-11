@@ -70,8 +70,8 @@ class Series(models.Model):
     name = models.CharField(max_length=127)
     desc = models.TextField(null=True)
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
-    posts = models.ManyToManyField(Post, related_name='post_series')
-    user = models.OneToOneField(Account, on_delete=models.CASCADE)
+    posts = models.ManyToManyField(Post, related_name='post_series', blank=True)
+    user = models.ForeignKey(Account, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now_add=True)
 

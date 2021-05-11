@@ -6,7 +6,7 @@ import re
 from datetime import datetime
 from django.views.decorators.csrf import csrf_exempt
 from .models import Account, FollowersModel, OTPModel, SocialLinks, Work
-from core.models import Notification, Post
+from core.models import Notification, Post, Series
 import string
 from random import randint, choice
 from django.template.loader import render_to_string
@@ -124,10 +124,8 @@ def send_otp(request):
             "iRead <no-reply@iRead.ga>",
             [user_email]
         )
-        print("sending email")
         email.attach_alternative(html_content, "text/html")
         email.send()
-        print("Sent")
         return JsonResponse({'otp_sent': f'An OTP has been sent to {user_email}.'})
     except Exception as e:
         print(e)
@@ -249,6 +247,7 @@ def change_password(request):
 
 
 def profile(request, username):
+    user_series = None
     user = Account.objects.get(username=username)
     try:
         logged_in_user = Account.objects.get(id=request.session.get('user_id'))
@@ -260,6 +259,10 @@ def profile(request, username):
     except FollowersModel.DoesNotExist:
         FollowersModel(user=user).save()
     followers, followings = following_obj.follower.count(), following_obj.following.count()
+    try:
+        user_series = Series.objects.filter(user=user)
+    except Series.DoesNotExist:
+        pass
     if request.session.get('user_id') == user.id:
         user_posts = Post.objects.filter(author=user)
     else:
@@ -282,6 +285,7 @@ def profile(request, username):
         context = {
             'user': user,
             'user_posts': page_posts,
+            'user_series': user_series,
             'pagination': True,
             'total_posts': total_posts,
             'is_following': is_following,
@@ -403,14 +407,12 @@ def send_message(request, username):
                 "iRead <no-reply@iRead.ga>",
                 [receiver.email]
             )
-            print("sending email")
             email.attach_alternative(html_content, "text/html")
             try:
                 email.send()
                 return JsonResponse({'message_success': 'Message sent successfully.'})
             except Exception:
                 return JsonResponse({'message_error': 'Something went wrong.'})
-            print("Sent")
         else:
             return JsonResponse({'message_error': 'You are not logged in.'})
     else:

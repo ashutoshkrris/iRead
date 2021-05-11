@@ -166,6 +166,22 @@
             </div>
             
             {% endif %}
+
+              {% if user_series|length > 0 %}
+                <div class="row mb-5 ">
+                <div class="col-md-12 mb-3">
+                  <h2>Blog Series</h2>
+                </div>
+                <div class="col-md-12">
+                  {% for series in user_series%}
+                    <h1><a class="category" style="background-color:#0080ff" href="{% url 'series' series.id series.slug %}">{{series.name|upper}} SERIES</a></h1>
+                  <!-- END Series -->
+                  {% endfor %}
+
+                </div>
+                </div>
+              {% endif %}
+
               </div>
             </div>
               
