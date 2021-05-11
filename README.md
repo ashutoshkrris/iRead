@@ -20,6 +20,7 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 * Rich Text Editor(using CKEditor) with Media Files Storage(using Cloudinary)
 * Search Blogs
 * Categories and Tags Filters
+* Create Series of Blogs
 * Like/Dislike/Comment/Reply/Share on Blog Posts
 * Follow/Unfollow Users
 * Show Notifications on Follow, Like and Comment
