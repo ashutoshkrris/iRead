@@ -321,8 +321,8 @@ def new_post(request):
             for tag in tags:
                 post.tags.add(Tag.objects.get(name=tag))
             post.save()
-            # if post.published:
-            #     tweet_new_post(post, tags)
+            if post.published:
+                tweet_new_post(post, tags)
             return redirect('single', post_id=post.id, slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
