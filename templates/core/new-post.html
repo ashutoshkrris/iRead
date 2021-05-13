@@ -102,7 +102,7 @@
 <script>
     CKEDITOR.replace('editor1', {
       height: 500,
-      extraPlugins: 'filebrowser, codesnippet',
+      extraPlugins: 'filebrowser, codesnippet, markdown',
       filebrowserBrowseUrl: '{% url "ckeditor_browse" %}',
       filebrowserUploadMethod: 'form',
       filebrowserUploadUrl: '{% url "ckeditor_upload" %}'
@@ -113,10 +113,10 @@
     element.classList.add("active");
   </script>
   <script>
-    new Notify ({
+    Swal.fire({
+        icon: 'info',
         title: 'Tip',
-        text: `Use 'h1' or 'h2' for heading to auto-generate Table of Contents`,
-        status: 'success'
-        })
+        html: 'Use <strong>h1</strong> or <strong>h2</strong> for heading to auto-generate <strong>Table of Contents</strong>',
+    })
   </script>
 {% endblock js_down %}
