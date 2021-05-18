@@ -313,104 +313,18 @@
 
       <footer class="site-footer">
         <div class="container">
-          <div class="row mb-5">
-            <div class="col-md-4" style="margin-bottom: 50px;">
-              <h3>About Us</h3>
-              <p class="mb-4">
-                <img
-                  src="{% static 'images/favicon.png' %}"
-                  alt="Image placeholder"
-                  class="img-fluid"
-                  width="150"
-                  height="150"
-                />
-              </p>
-
-              <p>
-                Anyone can write on iRead. Thought-leaders, journalists,
-                experts, and individuals with unique perspectives share their
-                thinking here. <a href="{% url 'about' %}">Read More</a>
-              </p>
-              <a href="https://validator.w3.org/feed/check.cgi?url=https%3A//iread.ga/feed"><img src="{% static 'images/valid-rss-rogers.png' %}" alt="[Valid RSS]" title="Validate my RSS feed" /></a>
-              <a href="http://feeds.feedburner.com/ireadblog" title="Subscribe to my feed" rel="alternate" type="application/rss+xml" target="_blank">Subscribe in a reader</a>
-            </div>
-            <div class="col-md-6 ml-auto">
-              <div class="row">
-                <div class="col-md-7">
-                  <h3>Latest Posts</h3>
-                  <div class="post-entry-sidebar">
-                    <ul>
-                      {% for post in latest_posts %}
-                      <li>
-                        <a href="{% url 'single' post.id post.slug %}">
-                          <img
-                            src="{{post.thumbnail.url}}"
-                            alt="Image placeholder"
-                            class="mr-4"
-                          />
-                          <div class="text">
-                            <h4>{{post.title}}</h4>
-                            <div class="post-meta">
-                              <span class="mr-2"
-                                >{{post.timestamp|date:"F d Y"}}</span
-                              >&bullet;
-                              <span class="mr-2">{{post.content|readtime}}</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      {% endfor %}
-                    </ul>
-                  </div>
-                </div>
-                <div class="col-md-1"></div>
-
-                <div class="col-md-4">
-                  <div class="mb-5">
-                    <h3>Quick Links</h3>
-                    <ul class="list-unstyled">
-                      <li><a href="{% url 'about' %}">About Us</a></li>
-                      <!-- <li><a href="#">Categories</a></li> -->
-                      <li><a href="{% url 'contact' %}">Contact</a></li>
-                      <li>
-                        <a class="bulletin" style="color:white;cursor: pointer">Bulletins</a>
-                      </li>
-                      <li><a href="{% url 'dashboard' %}">Sponsor</a></li>
-                      <li><a href="{% url 'privacy_policy' %}">Privacy Policy</a></li>
-                      <li><a href="{% url 'terms_conditions' %}">T&C</a></li>
-                      <li><a href="{% url 'refund_policy' %}">Refund Policy</a></li>
-                    </ul>
-                  </div>
-
-                  <div class="mb-5">
-                    <h3>Social</h3>
-                    <ul class="list-unstyled footer-social">
-                      <li>
-                        <a href="{{links.twitter}}"
-                          ><span class="fa fa-twitter"></span> Twitter</a
-                        >
-                      </li>
-                      <li>
-                        <a href="{{links.facebook}}"
-                          ><span class="fa fa-facebook"></span> Facebook</a
-                        >
-                      </li>
-                      <li>
-                        <a href="{{links.instagram}}"
-                          ><span class="fa fa-instagram"></span> Instagram</a
-                        >
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+          
           <div class="row">
             <div class="col-md-12 text-center">
+              <a href="{% url 'home' %}">Home</a> &bullet; <a href="{% url 'new_post' %}">Write on iRead</a> &bullet; <a href="{% url 'about' %}">About Us</a> &bullet; <a href="{% url 'contact' %}">Contact</a> <br> <a href="{% url 'dashboard' %}">Sponsor</a> &bullet; <a href="{% url 'privacy_policy' %}">Privacy Policy</a> &bullet; <a href="{% url 'terms_conditions' %}">T&C</a> &bullet; <a href="{% url 'refund_policy' %}">Refund Policy</a>
+              <center><hr width="50%"></center>
+              <a href="{{links.twitter}}"><span class="fa fa-twitter">&nbsp;&nbsp;</span></a>
+              <a href="{{links.facebook}}"><span class="fa fa-facebook"></span>&nbsp;&nbsp;</a>
+              <a href="{{links.instagram}}"><span class="fa fa-instagram"></span>&nbsp;&nbsp;</a>
               <p class="small">
+                <br>
                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;
+                iRead &copy;
                 2021<script>new Date().getFullYear()>2021&&document.write("-"+new Date().getFullYear());</script>,
                 All Rights Reserved <br />
                 This template is made with
