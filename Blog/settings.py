@@ -79,6 +79,7 @@ TEMPLATES = [
                 'core.context_processors.latest_posts',
                 'core.context_processors.categories',
                 'core.context_processors.tags',
+                'core.context_processors.all_series',
                 'core.context_processors.recurrings',
                 'core.context_processors.popular_posts',
                 'core.context_processors.social_links',

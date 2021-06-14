@@ -13,10 +13,14 @@
       name="description"
       content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
     />
-    {% if meta %}
+    {% if meta_post %}
     <meta property="og:title" content="{{post.title}} | iRead" />
     <meta property="og:description" content="{{post.seo_overview}}" />
     <meta property="og:image" content="{{post.thumbnail.url}}" />
+    {% elif meta_series %}
+    <meta property="og:title" content="{{series.name}} | iRead" />
+    <meta property="og:description" content="{{series.desc}}" />
+    <meta property="og:image" content="{% static 'images/favicon.png' %}" />
     {% else %}
     <meta property="og:title" content="{{title}}" />
     <meta

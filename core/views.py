@@ -124,12 +124,14 @@ def series(request, series_id, series_slug):
             context = {
                 'series': series,
                 'posts': page_posts,
-                'pagination': True
+                'pagination': True,
+                'meta_series': True
             }
         else:
             context = {
                 'series': series,
-                'posts': posts
+                'posts': posts,
+                'meta_series': True
             }
         return render(request, "core/series.html", context)
     except Exception as e:
@@ -192,7 +194,7 @@ def single(request, post_id, slug):
             'comments': comments,
             'liked_posts': liked,
             'total_likes': total_likes,
-            'meta': True,
+            'meta_post': True,
             'shorty_api_key': config("SHORTY_API_KEY")
         }
         return render(request, "core/blog-single.html", context)

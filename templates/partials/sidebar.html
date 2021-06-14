@@ -39,6 +39,22 @@
   </div>
   <!-- END sidebar-box -->
 
+  <div class="sidebar-box" id="">
+    <h3 class="heading">Series<a href="{% url 'new_series' %}" style="color: black;"><i class="fa fa-plus" style="float: right;" aria-hidden="true"></i></a></h3>
+    <ul class="categories" style="height: 300px; overflow-y: scroll;">
+      
+      {% for ser in all_series %}
+
+      <li>
+        <a href="{% url 'series' ser.id ser.slug %}"
+          >{{ser.name}} ({{ser.posts.count}})<span></span
+        ></a>
+      </li>
+
+      {% endfor %}
+    </ul>
+  </div>
+
   <div class="sidebar-box" id="cat_box">
     <h3 class="heading">Categories<a id="new_cat" style="cursor: pointer;"><i class="fa fa-plus" style="float: right;" aria-hidden="true"></i></a></h3>
     <ul class="categories" style="height: 300px; overflow-y: scroll;">

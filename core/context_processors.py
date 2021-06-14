@@ -1,4 +1,4 @@
-from .models import Category, Post, Recurring, Tag
+from .models import Category, Post, Recurring, Series, Tag
 from .bot import get_latest_tweet
 
 
@@ -16,6 +16,11 @@ def categories(request):
 def tags(request):
     tags = Tag.objects.all()
     return {'tags': tags}
+
+
+def all_series(request):
+    series = Series.objects.all()
+    return {'all_series': series}
 
 
 def recurrings(request):
