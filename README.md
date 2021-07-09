@@ -7,7 +7,27 @@
 <h1 align="center"> 
     iRead | Where Dynamic Ideas Find You
 </h1>
+<div align="center">
+  
+<a href="https://github.com/ashutoshkrris/iRead"><img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103"></a>
+<a href="https://github.com/ashutoshkrris/iRead"><img src="https://img.shields.io/badge/Built%20by-developers%20%3C%2F%3E-0059b3"></a>
+<a href="https://www.python.org/"><img src="https://img.shields.io/badge/Made%20with-Python-brightgreen.svg"></a>
 
+<a href="https://github.com/ashutoshkrris/iRead"><img src="https://img.shields.io/static/v1.svg?label=Contributions&message=Welcome&color=yellow"></a>
+<a href="https://github.com/vigneshshettyin/"><img src="https://img.shields.io/badge/Maintained%3F-yes-brightgreen.svg?v=103"></a>
+<a href="https://github.com/ashutoshkrris/iRead"><img src="https://img.shields.io/github/repo-size/ashutoshkrris/iRead.svg?label=Repo%20size&style=flat"></a>
+<a href="https://github.com/ashutoshkrris/iRead"><img src="https://img.shields.io/tokei/lines/github/ashutoshkrris/iRead?color=yellow&label=Lines%20of%20Code"></a>
+<a href="https://github.com/ashutoshkrris/iRead/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MPL_2.0-brightgreen.svg?v=103"></a>
+<a href="https://github.com/ashutoshkrris/iRead/watchers"><img src="https://img.shields.io/github/watchers/ashutoshkrris/iRead"></a>
+  
+<a href="https://github.com/ashutoshkrris/iRead/graphs/contributors"><img src="https://img.shields.io/github/contributors/ashutoshkrris/iRead?color=brightgreen"></a>
+<a href="https://github.com/ashutoshkrris/iRead/stargazers"><img src="https://img.shields.io/github/stars/ashutoshkrris/iRead?color=0059b3"></a>
+<a href="https://github.com/ashutoshkrris/iRead/network/members"><img src="https://img.shields.io/github/forks/ashutoshkrris/iRead?color=yellow"></a>
+<a href="https://github.com/ashutoshkrris/iRead/issues"><img src="https://img.shields.io/github/issues/ashutoshkrris/iRead?color=brightgreen"></a>
+<a href="https://github.com/ashutoshkrris/iRead/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed-raw/ashutoshkrris/iRead?color=0059b3"></a>
+<a href="https://github.com/ashutoshkrris/iRead/pulls"><img src="https://img.shields.io/github/issues-pr/ashutoshkrris/iRead?color=yellow"></a>
+<a href="https://github.com/ashutoshkrris/iRead/pulls?q=is%3Apr+is%3Aclosed"><img src="https://img.shields.io/github/issues-pr-closed-raw/ashutoshkrris/iRead?color=brightgreen"></a> 
+</div>
 iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic.
 
 
