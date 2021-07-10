@@ -102,6 +102,7 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
     RAZORPAY_KEY_ID='rzp-key-id'
     RAZORPAY_KEY_SECRET='rzp-key-secret'
     REDIS_URL=redis://127.0.0.1:6379/1
+    SHORTY_API_KEY='shorty-api-key'
     ```  
     or, just copy the `.env.save` file from `samples` directory to the root directory (`iRead`) and rename it to `.env` (only `.env` and not `.env.txt`)  
     
