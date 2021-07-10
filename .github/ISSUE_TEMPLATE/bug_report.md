@@ -20,12 +20,16 @@ Steps to reproduce the behavior:
 ### **Expected behavior**
 A clear and concise description of what you expected to happen.
 
+### Which Program are you part of?
+<!--
+Example how to mark a checkbox:-
+- [x] Part of this program.
+-->
+- [ ] DCP21
+- [ ] Any other
+
 ### **Screenshots**
 If applicable, add screenshots to help explain your problem.
 
 ### **Additional context**
 Add any other context about the problem here.
-
-
-Note: If you want to work on an issue, you should check if it has already been assigned to anyone. If the issue is free you can comment `/assign` to get the issue assigned to you.
-If you are raising a new issue and want to work on it then also you should comment `/assign` under the issue to get it auto assigned.
