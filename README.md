@@ -128,3 +128,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 - If you wish to contribute kindly check the [CONTRIBUTING.md](https://github.com/ashutoshkrris/iRead/blob/master/CONTRIBUTING.md)🤝
 - If you are completely new to Open Source, read the [Instructions](https://github.com/ashutoshkrris/iRead/blob/master/INSTRUCTIONS.md).
 - Please follow the [CODE OF CONDUCT](https://github.com/ashutoshkrris/iRead/blob/master/CODE_OF_CONDUCT.md)
+
+
+
+
+## 💥 Our Valuable Contributors.
+<a href="https://github.com/ashutoshkrris/iRead/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ashutoshkrris/iRead" />
+</a>
