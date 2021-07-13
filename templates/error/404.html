@@ -1,56 +1,82 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style media="screen">
-    *{
-        transition: all 0.6s;
-    }
+{% load static %}
 
-    html {
-        height: 100%;
-    }
+<head>
+    <title>404 - Not Found</title>
+    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+    <script src="{% static 'js/404.js' %}"></script>
+</head>
 
-    body{
-        font-family: 'Lato', sans-serif;
-        color: #888;
-        margin: 0;
-    }
+<!-- about -->
+<div class="about">
+   <a class="bg_links social portfolio" href="https://www.rafaelalucas.com" target="_blank">
+      <span class="icon"></span>
+   </a>
+   <a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
+      <span class="icon"></span>
+   </a>
+   <a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
+      <span class="icon"></span>
+   </a>
+   <a class="bg_links logo"></a>
+</div>
+<!-- end about -->
 
-    #main{
-        display: table;
-        width: 100%;
-        height: 100vh;
-        text-align: center;
-    }
+    <nav>
+        <div class="menu">
+            <p class="website_name">iRead</p>
+            <div class="menu_links">
+                <a href="{% url 'home' %}" class="link">Home</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
 
-    .fof{
-    	  display: table-cell;
-    	  vertical-align: middle;
-    }
+    <section class="wrapper">
 
-    .fof h1{
-    	  font-size: 50px;
-    	  display: inline-block;
-    	  padding-right: 12px;
-    	  animation: type .5s alternate infinite;
-    }
+        <div class="container">
 
-    @keyframes type{
-    	  from{box-shadow: inset -3px 0px 0px #888;}
-    	  to{box-shadow: inset -3px 0px 0px transparent;}
-    }
-    </style>
-  </head>
-  <body>
+            <div id="scene" class="scene" data-hover-only="false">
 
-    <div id="main">
-        	<div class="fof">
-            		<h1>Page Not Found</h1>
-                <h3><a href="{% url 'home' %}">Go to Home</a></h3>
-                
-        	</div>
-    </div>
-  </body>
-</html>
+
+                <div class="circle" data-depth="1.2"></div>
+
+                <div class="one" data-depth="0.9">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+
+                <div class="two" data-depth="0.60">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+
+                <div class="three" data-depth="0.40">
+                    <div class="content">
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                        <span class="piece"></span>
+                    </div>
+                </div>
+
+                <p class="p404" data-depth="0.50">404</p>
+                <p class="p404" data-depth="0.10">404</p>
+
+            </div>
+
+            <div class="text">
+                <article>
+                    <p>Uh oh! Looks like you got lost. <br>Go back to the homepage if you dare!</p>
+                    <a href="{% url 'home' %}"><button>i dare!</button></a>
+                </article>
+            </div>
+
+        </div>
+    </section>

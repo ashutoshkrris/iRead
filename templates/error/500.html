@@ -1,57 +1,15 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <title></title>
-    <style media="screen">
-    *{
-        transition: all 0.6s;
-    }
+{% load static %}
 
-    html {
-        height: 100%;
-    }
+<head>
+    <title>500 - Server Error</title>
+    <link rel="stylesheet" href="{% static 'css/500.css' %}">
+</head>
 
-    body{
-        font-family: 'Lato', sans-serif;
-        color: #888;
-        margin: 0;
-    }
-
-    #main{
-        display: table;
-        width: 100%;
-        height: 100vh;
-        text-align: center;
-    }
-
-    .fof{
-    	  display: table-cell;
-    	  vertical-align: middle;
-    }
-
-    .fof h1{
-    	  font-size: 50px;
-    	  display: inline-block;
-    	  padding-right: 12px;
-    	  animation: type .5s alternate infinite;
-    }
-
-    @keyframes type{
-    	  from{box-shadow: inset -3px 0px 0px #888;}
-    	  to{box-shadow: inset -3px 0px 0px transparent;}
-    }
-    </style>
-  </head>
-  <body>
-
-    <div id="main">
-        	<div class="fof">
-            		<h1>Internal Server Error</h1>
-                    <h3>We didn't know about this error. Please report it <a href="{% url 'contact' %}">here</a></h3>
-                <h3><a href="{% url 'home' %}">Go to Home</a></h3>
-                
-        	</div>
-    </div>
-  </body>
-</html>
+<div id="error">
+  <div id="box"></div>
+  <h3>ERROR 500</h3>
+  <p>Things are a little <span>unstable</span> here</p>
+  <p>I suggest come back later</p>
+  <br>
+  <p>Return <a href="{% url 'home' %}">Home?</a></p>
+</div>
