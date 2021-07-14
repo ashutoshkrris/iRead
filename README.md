@@ -5,7 +5,7 @@
 </p>
 
 <h1 align="center"> 
-    iRead | Where Dynamic Ideas Find You |
+    iRead | Where Dynamic Ideas Find You !
 </h1>
 <div align="center">
   
