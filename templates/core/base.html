@@ -17,6 +17,11 @@
     <meta property="og:title" content="{{post.title}} | iRead" />
     <meta property="og:description" content="{{post.seo_overview}}" />
     <meta property="og:image" content="{{post.thumbnail.url}}" />
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@iReadBot">
+    <meta name="twitter:title" content="{{post.title}} | iRead">
+    <meta name="twitter:description" content="{{post.seo_overview}}">
+    <meta name="twitter:image" content="{{post.thumbnail.url}}">
     {% elif meta_series %}
     <meta property="og:title" content="{{series.name}} | iRead" />
     <meta property="og:description" content="{{series.desc}}" />
@@ -120,6 +125,20 @@
         animation: none !important;
         border-width: 0 !important;
       }
+/*       ::-webkit-scrollbar{
+        width: 15px;
+      }
+      ::-webkit-scrollbar-track{
+        background-color: #4f4f4f;
+        border-radius: 35px;
+      }
+      ::-webkit-scrollbar-thumb{
+        background: #6610f2;
+        border-radius: 35px;
+      }
+      ::-webkit-scrollbar-thumb:hover{
+        background: #7600d1;
+      } */
     </style>
   </head>
   <body>
