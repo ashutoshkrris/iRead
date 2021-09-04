@@ -17,7 +17,7 @@ from django.urls import path
 from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_series, new_tag, privacy_policy, pub_api, refund_policy, send_bulletin_email, series, single, contact, search, category, tag, terms_conditions, update_post
 from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
-from .feeds import LatestPostsFeed
+from .feeds import LatestPostsFeed, UserPostsFeed
 
 urlpatterns = [
     path('', index, name='home'),
@@ -52,5 +52,6 @@ urlpatterns = [
     path('notification/delete/<int:notification_id>/<to_user>',
          RemoveNotification.as_view(), name='notification-delete'),
     path('api/posts', pub_api, name='public_api'),
+    path('feed/<username>', UserPostsFeed(), name='user_post_feed'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
 ]
