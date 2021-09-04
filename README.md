@@ -55,13 +55,14 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 **Database:** PostgreSQL  
 
 
+
+And additional requirements are in [**requirements.txt**](https://github.com/ashutoshkrris/iRead/blob/master/requirements.txt) or [**Pipfile**](https://github.com/ashutoshkrris/iRead/blob/master/Pipfile).
+
+
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
 <!-- BLOG-POST-LIST:END -->
-
-
-And additional requirements are in [**requirements.txt**](https://github.com/ashutoshkrris/iRead/blob/master/requirements.txt) or [**Pipfile**](https://github.com/ashutoshkrris/iRead/blob/master/Pipfile).
 
 ## Demo
 
