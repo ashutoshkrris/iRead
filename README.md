@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Bubble Sort](http://iread.ga/posts/45/bubble-sort)
 - [Interview Experience || EY GDS](http://iread.ga/posts/40/interview-experience-ey-gds)
 - [Searching Algorithms](http://iread.ga/posts/39/searching-algorithms)
 - [The Flask Mega-Tutorial Part 4: Databases](http://iread.ga/posts/38/the-flask-mega-tutorial-part-4-databases)
 - [URL Shortener using Flask](http://iread.ga/posts/37/url-shortener-using-flask)
-- [The Flask Mega-Tutorial Part 3: Web Forms](http://iread.ga/posts/35/the-flask-mega-tutorial-part-3-web-forms)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
