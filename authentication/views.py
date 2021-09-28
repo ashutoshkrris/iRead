@@ -160,7 +160,10 @@ def signup(request):
         new_user.is_active = True
         new_user.save()
         user = Account.objects.get(username=username)
-        FollowersModel(user=user).save()
+        try:
+            FollowersModel(user=user).save()
+        except Exception:
+            pass
         return render(request, "authentication/login.html", {"message": "You can now login."})
     return render(request, "authentication/signup.html")
 
