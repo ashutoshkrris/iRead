@@ -24,8 +24,9 @@ def authenticate():
 
 def tweet_new_post(post, tags):
     iread_bot = authenticate()
-    author = f'@{post.author.social_links.twitter_username}'
-    if len(author) == 1:
+    try:
+        author = f'@{post.author.social_links.twitter_username}'
+    except Exception:
         author = f'{post.author.get_full_name()}'
     tweet = f"'{post.title}' by {author} : https://iread.ga{post.get_absolute_url()}"
     tags.append("ireadblog")
