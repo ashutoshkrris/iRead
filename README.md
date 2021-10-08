@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [The Flask Mega Tutorial Part 5: User Login System](http://iread.ga/posts/53/the-flask-mega-tutorial-part-5-user-login-system)
 - [Encrypt and Decrypt PDF Files using Python](http://iread.ga/posts/52/encrypt-and-decrypt-pdf-files-using-python)
 - [TCS Digital Interview Experience for Systems Engineer](http://iread.ga/posts/50/tcs-digital-interview-experience-for-systems-engineer)
 - [Do You Really Need Environment Variables in Python?](http://iread.ga/posts/49/do-you-really-need-environment-variables-in-python)
 - [How to Contribute to Open Source as a Beginner](http://iread.ga/posts/48/how-to-contribute-to-open-source-as-a-beginner)
-- [DevIncept - Incept... Iterate... Innovate...](http://iread.ga/posts/47/devincept-incept-iterate-innovate)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
