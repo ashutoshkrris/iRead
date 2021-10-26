@@ -16,7 +16,7 @@ class LatestPostsFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.seo_overview
+        return item.content
 
     def item_author_name(self, item):
         return item.author.get_full_name()
@@ -43,7 +43,7 @@ class UserPostsFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.seo_overview
+        return item.content
 
     def item_author_name(self, item):
         return item.author.get_full_name()
