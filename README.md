@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Let's launch EazyLoader](http://iread.ga/posts/59/lets-launch-eazyloader)
 - [Build a Better Brand with Fiverr](http://iread.ga/posts/58/build-a-better-brand-with-fiverr)
 - [Quick Guide To Deploy Using Docker](http://iread.ga/posts/57/quick-guide-to-deploy-using-docker)
 - [GUI Quiz Application using Tkinter and Open Trivia DB](http://iread.ga/posts/56/gui-quiz-application-using-tkinter-and-open-trivia-db)
 - [Creating a News Application using Flask](http://iread.ga/posts/55/creating-a-news-application-using-flask)
-- [Getting Started with Flask](http://iread.ga/posts/54/getting-started-with-flask)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
