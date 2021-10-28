@@ -497,14 +497,14 @@ def refund_policy(request):
 def pub_api(request):
     posts = Post.objects.filter(published=True)
     data = serialize("json", posts, fields=(
-        'title', 'slug', 'seo_overview', 'content', 'timestamp',))
+        'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
     return HttpResponse(data, content_type="application/json")
 
 
 def pub_user_posts_api(request, username):
     posts = Post.objects.filter(author__username=username, published=True)
     data = serialize("json", posts, fields=(
-        'title', 'slug', 'seo_overview', 'content', 'timestamp',))
+        'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
     return HttpResponse(data, content_type="application/json")
 
 
