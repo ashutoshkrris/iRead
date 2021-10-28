@@ -1,13 +1,9 @@
-
-{% load custom_tags %}
-{% load static %}
+{% load custom_tags %} {% load static %}
 
 <div class="col-md-12 col-lg-4 sidebar mt-4">
   <!-- Author May Come Here -->
 
-  {% if 'posts' in request.path %}
-    {% include "partials/author.html" %}
-  {% endif %}
+  {% if 'posts' in request.path %} {% include "partials/author.html" %} {% endif %}
 
   <div class="sidebar-box">
     <h3 class="heading">Popular Posts</h3>
@@ -25,7 +21,8 @@
             <div class="text">
               <h4>{{post.title}}</h4>
               <div class="post-meta">
-                <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>&bullet;
+                <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span
+                >&bullet;
                 <span class="mr-2">{{post.categories.name}}</span>&bullet;
                 <span class="mr-2">{{post.content|readtime}}</span>
               </div>
@@ -40,9 +37,12 @@
   <!-- END sidebar-box -->
 
   <div class="sidebar-box" id="">
-    <h3 class="heading">Series<a href="{% url 'new_series' %}" style="color: black;"><i class="fa fa-plus" style="float: right;" aria-hidden="true"></i></a></h3>
-    <ul class="categories" style="height: 300px; overflow-y: scroll;">
-      
+    <h3 class="heading">
+      Series<a href="{% url 'new_series' %}" style="color: black"
+        ><i class="fa fa-plus" style="float: right" aria-hidden="true"></i
+      ></a>
+    </h3>
+    <ul class="categories" style="height: 300px; overflow-y: scroll">
       {% for ser in all_series %}
 
       <li>
@@ -56,8 +56,12 @@
   </div>
 
   <div class="sidebar-box" id="cat_box">
-    <h3 class="heading">Categories<a id="new_cat" style="cursor: pointer;"><i class="fa fa-plus" style="float: right;" aria-hidden="true"></i></a></h3>
-    <ul class="categories" style="height: 300px; overflow-y: scroll;">
+    <h3 class="heading">
+      Categories<a id="new_cat" style="cursor: pointer"
+        ><i class="fa fa-plus" style="float: right" aria-hidden="true"></i
+      ></a>
+    </h3>
+    <ul class="categories" style="height: 300px; overflow-y: scroll">
       {% for category in categories %}
 
       <li>
@@ -72,7 +76,11 @@
   <!-- END sidebar-box -->
 
   <div class="sidebar-box" id="tag_box">
-    <h3 class="heading">Tags<a id="new_tag" style="cursor: pointer;"><i class="fa fa-plus" style="float: right;" aria-hidden="true"></i></a></h3>
+    <h3 class="heading">
+      Tags<a id="new_tag" style="cursor: pointer"
+        ><i class="fa fa-plus" style="float: right" aria-hidden="true"></i
+      ></a>
+    </h3>
     <ul class="tags">
       {% for tag in tags %}
 
@@ -82,15 +90,27 @@
     </ul>
   </div>
 
-  {% if connected %}  
+  {% if connected %}
   <!-- Start Twitter -->
   <div class="sidebar-box">
     {% if retweeted %}
-      <h3 class="heading">Latest Reweet</h3>
+    <h3 class="heading">Latest Reweet</h3>
     {% else %}
-      <h3 class="heading">Latest Tweet</h3>
+    <h3 class="heading">Latest Tweet</h3>
     {% endif %}
-      <blockquote class="twitter-tweet"><p lang="en" dir="ltr">{{full_text}}</p>&mdash; iRead (@iReadBot) <a href="https://twitter.com/iReadBot/status/{{tweet_id}}?ref_src=twsrc%5Etfw">{{date}}</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <blockquote class="twitter-tweet">
+      <p lang="en" dir="ltr">{{full_text}}</p>
+      &mdash; iRead (@iReadBot)
+      <a
+        href="https://twitter.com/iReadBot/status/{{tweet_id}}?ref_src=twsrc%5Etfw"
+        >{{date}}</a
+      >
+    </blockquote>
+    <script
+      async
+      src="https://platform.twitter.com/widgets.js"
+      charset="utf-8"
+    ></script>
   </div>
   <!-- End Twitter -->
   {% endif %}
@@ -98,34 +118,85 @@
   <div class="sidebar-box">
     <h3 class="heading">Advertisements</h3>
     {% if meta_post %}
-    <script type="text/javascript">amzn_assoc_ad_type ="responsive_search_widget"; amzn_assoc_tracking_id ="ireadblog-21"; amzn_assoc_marketplace ="amazon"; amzn_assoc_region ="IN"; amzn_assoc_placement =""; amzn_assoc_search_type = "search_widget";amzn_assoc_width ="auto"; amzn_assoc_height ="auto"; amzn_assoc_default_search_category =""; amzn_assoc_default_search_key ="";amzn_assoc_theme ="dark"; amzn_assoc_bg_color ="000000"; </script><script src="//z-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&Marketplace=IN"></script>
-    <br>
-    <iframe src="https://tools.fiverr.com/?searchbox-iframe=1&amp;affid=294862&amp;widget-style=1" border="0" scrolling="no" height="253px" width="100%" style="border: 0px; overflow: hidden; width: 726px; max-width: 280px; height: 253px; box-shadow: rgba(17, 17, 17, 0.12) 0px 16px 32px;" class="fasb-iframe-searchbox-widget"  data-origwidth="100%" data-origheight="253px" widget-style="1"></iframe>
-    <br><br>
-    <script type="text/javascript" language="javascript">
-      var aax_size='300x600';
-      var aax_pubname = 'ireadblog-21';
-      var aax_src='302';
+    <script type="text/javascript">
+      amzn_assoc_ad_type = "responsive_search_widget";
+      amzn_assoc_tracking_id = "ireadblog-21";
+      amzn_assoc_marketplace = "amazon";
+      amzn_assoc_region = "IN";
+      amzn_assoc_placement = "";
+      amzn_assoc_search_type = "search_widget";
+      amzn_assoc_width = "auto";
+      amzn_assoc_height = "auto";
+      amzn_assoc_default_search_category = "";
+      amzn_assoc_default_search_key = "";
+      amzn_assoc_theme = "dark";
+      amzn_assoc_bg_color = "000000";
     </script>
-    <script type="text/javascript" language="javascript" src="https://c.amazon-adsystem.com/aax2/assoc.js"></script>
-    <br><br>
+    <script src="//z-in.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&Marketplace=IN"></script>
+    <br />
+    <iframe
+      src="https://tools.fiverr.com/?searchbox-iframe=1&amp;affid=294862&amp;widget-style=1"
+      border="0"
+      scrolling="no"
+      height="253px"
+      width="100%"
+      style="
+        border: 0px;
+        overflow: hidden;
+        width: 726px;
+        max-width: 280px;
+        height: 253px;
+        box-shadow: rgba(17, 17, 17, 0.12) 0px 16px 32px;
+      "
+      class="fasb-iframe-searchbox-widget"
+      data-origwidth="100%"
+      data-origheight="253px"
+      widget-style="1"
+    ></iframe>
+    <br /><br />
+    <script type="text/javascript" language="javascript">
+      var aax_size = "300x600";
+      var aax_pubname = "ireadblog-21";
+      var aax_src = "302";
+    </script>
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://c.amazon-adsystem.com/aax2/assoc.js"
+    ></script>
+    <br /><br />
     <a href="https://typeform.grsm.io/ireadblog" target="_blank">
-      <img src="{% static 'images/typeform.png' %}" alt="">
+      <img src="{% static 'images/typeform.png' %}" alt="" />
     </a>
+    <br /><br />
+    <a
+      href="https://go.fiverr.com/visit/?bta=294862&nci=8396"
+      rel="sponsored"
+      target="_Top"
+      ><img
+        border="0"
+        src="https://fiverr.ck-cdn.com/tn/serve/?cid=13964112"
+        width="300"
+        height="600"
+    /></a>
     <br><br>
-    <a href="https://go.fiverr.com/visit/?bta=294862&nci=8396" rel="sponsored"  Target="_Top"><img border="0" src="https://fiverr.ck-cdn.com/tn/serve/?cid=13964112"  width="300" height="600"></a>
+    <a href="https://elementor.com?ref=27526" target="_blank">
+      <img class="img-fluid" src="{% static 'images/elementor-side.jpg' %}" alt="">
+    </a>
     {% else %}
     <script type="text/javascript" language="javascript">
-      var aax_size='300x250';
-      var aax_pubname = 'ireadblog-21';
-      var aax_src='302';
+      var aax_size = "300x250";
+      var aax_pubname = "ireadblog-21";
+      var aax_src = "302";
     </script>
-    <script type="text/javascript" language="javascript" src="https://c.amazon-adsystem.com/aax2/assoc.js"></script>
+    <script
+      type="text/javascript"
+      language="javascript"
+      src="https://c.amazon-adsystem.com/aax2/assoc.js"
+    ></script>
     {% endif %}
-    
   </div>
 </div>
 <!-- END sidebar -->
-
 
 <script src="{% static 'js/sidebar.js' %}"></script>
