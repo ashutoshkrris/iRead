@@ -16,7 +16,6 @@ $("#new_cat").click(function (e) {
       })
         .then((res) => res.json())
         .then((response) => {
-          console.log(response.category_error);
           if (response.category_error) {
             throw new Error(response.category_error);
           } else if (response.category_created) {
@@ -56,7 +55,6 @@ $("#new_tag").click(function (e) {
       })
         .then((res) => res.json())
         .then((response) => {
-          console.log(response.tag_error);
           if (response.tag_error) {
             throw new Error(response.tag_error);
           } else if (response.tag_created) {

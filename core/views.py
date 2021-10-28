@@ -421,7 +421,7 @@ def new_series(request):
         if request.session.get('user_id'):
             series_name = request.POST.get('series_name')
             series_desc = request.POST.get('series_desc')
-           
+
             capitalized_series = " ".join([
                 word.capitalize()
                 for word in series_name.split(" ")
@@ -496,7 +496,15 @@ def refund_policy(request):
 
 def pub_api(request):
     posts = Post.objects.filter(published=True)
-    data = serialize("json", posts, fields=('title', 'slug', 'timestamp',))
+    data = serialize("json", posts, fields=(
+        'title', 'slug', 'seo_overview', 'content', 'timestamp',))
+    return HttpResponse(data, content_type="application/json")
+
+
+def pub_user_posts_api(request, username):
+    posts = Post.objects.filter(author__username=username, published=True)
+    data = serialize("json", posts, fields=(
+        'title', 'slug', 'seo_overview', 'content', 'timestamp',))
     return HttpResponse(data, content_type="application/json")
 
 
