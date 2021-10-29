@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_series, new_tag, privacy_policy, pub_api, pub_user_posts_api, refund_policy, send_bulletin_email, series, single, contact, search, category, tag, terms_conditions, update_post
+from .views import FollowNotification, PostNotification, RemoveNotification, bulletin_registration, bulletin_unsubscribe, delete_post, index, about, like_dislike_post, new_category, new_post, new_series, new_tag, privacy_policy, pub_api, pub_single_post_api, pub_user_posts_api, refund_policy, send_bulletin_email, series, single, contact, search, category, tag, terms_conditions, update_post
 from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
 from .feeds import LatestPostsFeed, UserPostsFeed
@@ -53,6 +53,7 @@ urlpatterns = [
          RemoveNotification.as_view(), name='notification-delete'),
     path('api/v1/posts', pub_api, name='public_api'),
     path('api/v1/<str:username>/posts', pub_user_posts_api, name='pub_user_posts_api'),
+    path('api/v1/post/<int:post_id>/<str:slug>', pub_single_post_api, name='pub_single_post_api'),
     path('feed/<username>', UserPostsFeed(), name='user_post_feed'),
     path('feed/', LatestPostsFeed(), name='post_feed'),
 ]

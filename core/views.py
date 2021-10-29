@@ -507,6 +507,12 @@ def pub_user_posts_api(request, username):
         'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
     return HttpResponse(data, content_type="application/json")
 
+def pub_single_post_api(request, post_id, slug):
+    post = Post.objects.filter(id=post_id,slug=slug, published=True)
+    data = serialize("json", post, fields=(
+        'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
+    return HttpResponse(data, content_type="application/json")
+
 
 TODAY_DATE = datetime.today().day
 TODAY_DAY = datetime.now().strftime("%A")
