@@ -24,7 +24,7 @@ def index(request):
     most_viewed = Post.objects.filter(published=True).order_by('-views')[:3]
     if len(posts) > 8:
         all_posts = Paginator(posts, 8)
-        page = request.GET.get('page')
+        page = request.GET.get('page', 1)
         try:
             page_posts = all_posts.page(page)
         except PageNotAnInteger:
@@ -34,7 +34,8 @@ def index(request):
         context = {
             'posts': page_posts,
             'most_viewed_posts': most_viewed,
-            'pagination': True
+            'pagination': True,
+            'page_range': all_posts.get_elided_page_range(number=page)
         }
     else:
         context = {
@@ -86,7 +87,7 @@ def category(request, category_name):
             published=True, categories__name=category_name)
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
-            page = request.GET.get('page')
+            page = request.GET.get('page', 1)
             try:
                 page_posts = all_posts.page(page)
             except PageNotAnInteger:
@@ -96,7 +97,8 @@ def category(request, category_name):
             context = {
                 'category': category,
                 'posts': page_posts,
-                'pagination': True
+                'pagination': True,
+                'page_range': all_posts.get_elided_page_range(number=page)
             }
         else:
             context = {
@@ -114,7 +116,7 @@ def series(request, series_id, series_slug):
         posts = series.posts.all()
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
-            page = request.GET.get('page')
+            page = request.GET.get('page', 1)
             try:
                 page_posts = all_posts.page(page)
             except PageNotAnInteger:
@@ -125,7 +127,8 @@ def series(request, series_id, series_slug):
                 'series': series,
                 'posts': page_posts,
                 'pagination': True,
-                'meta_series': True
+                'meta_series': True,
+                'page_range': all_posts.get_elided_page_range(number=page)
             }
         else:
             context = {
@@ -239,7 +242,7 @@ def search(request):
         seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
     if len(results) > 3:
         all_posts = Paginator(results, 8)
-        page = request.GET.get('page')
+        page = request.GET.get('page', 1)
         try:
             page_posts = all_posts.page(page)
         except PageNotAnInteger:
@@ -253,7 +256,8 @@ def search(request):
             'users': users[:3],
             'categories_res': categories,
             'tags': tags,
-            'series': series
+            'series': series,
+            'page_range': all_posts.get_elided_page_range(number=page)
         }
     else:
         context = {
@@ -273,7 +277,7 @@ def tag(request, tag_name):
             published=True, tags__name=tag_name)
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
-            page = request.GET.get('page')
+            page = request.GET.get('page', 1)
             try:
                 page_posts = all_posts.page(page)
             except PageNotAnInteger:
@@ -283,7 +287,8 @@ def tag(request, tag_name):
             context = {
                 'tag': tag,
                 'posts': page_posts,
-                'pagination': True
+                'pagination': True,
+                'page_range': all_posts.get_elided_page_range(number=page)
             }
         else:
             context = {
@@ -507,8 +512,9 @@ def pub_user_posts_api(request, username):
         'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
     return HttpResponse(data, content_type="application/json")
 
+
 def pub_single_post_api(request, post_id, slug):
-    post = Post.objects.filter(id=post_id,slug=slug, published=True)
+    post = Post.objects.filter(id=post_id, slug=slug, published=True)
     data = serialize("json", post, fields=(
         'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
     return HttpResponse(data, content_type="application/json")

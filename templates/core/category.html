@@ -52,7 +52,25 @@
                       {% else %}
                         <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
                       {% endif %}
-                        <li class="page-item"><a class="page-link active" href="">{{posts.number}}</a></li>
+                        
+                      {% for i in page_range|default_if_none:posts.paginator.get_elided_page_range %}
+                        {% if posts.number == i %}
+                        <li class="page-item active">
+                          <a class="page-link" href="">{{posts.number}}</a>
+                        </li>
+                        {% else %}
+                          {% if i == posts.paginator.ELLIPSIS %}
+                            <li class="page-item">
+                              <span class="page-link">{{i}}</span>
+                            </li>
+                          {% else %}
+                            <li class="page-item">
+                              <a class="page-link" href="?page={{i}}">{{i}}</a>
+                            </li>
+                          {% endif %}
+                        {% endif %}
+                      {% endfor %}
+
                       {% if posts.has_next %}
                         <li class="page-item"><a class="page-link" href="?page={{posts.next_page_number}}">&gt;</a></li>
                       {% else %}
