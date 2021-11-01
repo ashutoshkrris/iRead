@@ -1,10 +1,17 @@
 from django.contrib.sitemaps import Sitemap
 from .models import Post, Category, Series, Tag
+from django.conf import settings
+
+if settings.DEBUG:
+    protocol = 'http'
+else:
+    protocol = 'https'
 
 
 class PostSitemap(Sitemap):
     changefreq = 'weekly'
     priority = 0.9
+    protocol = protocol
 
     def items(self):
         return Post.objects.filter(published=True)
@@ -16,6 +23,7 @@ class PostSitemap(Sitemap):
 class CategorySitemap(Sitemap):
     changefreq = 'weekly'
     priority = 0.9
+    protocol = protocol
 
     def items(self):
         return Category.objects.all()
@@ -24,6 +32,7 @@ class CategorySitemap(Sitemap):
 class TagSitemap(Sitemap):
     changefreq = 'weekly'
     priority = 0.9
+    protocol = protocol
 
     def items(self):
         return Tag.objects.all()
@@ -32,6 +41,7 @@ class TagSitemap(Sitemap):
 class SeriesSitemap(Sitemap):
     changefreq = 'weekly'
     priority = 0.9
+    protocol = protocol
 
     def items(self):
         return Series.objects.all()
