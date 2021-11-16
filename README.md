@@ -63,10 +63,10 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 
 <!-- BLOG-POST-LIST:START -->
 - [DSA Sheets You Must Solve](http://iread.ga/posts/64/dsa-sheets-you-must-solve)
+- [Update - Download Slides from SlideShare](http://iread.ga/posts/63/update-download-slides-from-slideshare)
 - [Basic Authentication in Password Manager using Tkinter](http://iread.ga/posts/62/basic-authentication-in-password-manager-using-tkinter)
 - [Review by Fidel Navamuel](http://iread.ga/posts/61/review-by-fidel-navamuel)
 - [Password Generator using Python and Tkinter](http://iread.ga/posts/60/password-generator-using-python-and-tkinter)
-- [Let&#39;s launch EazyLoader](http://iread.ga/posts/59/lets-launch-eazyloader)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
