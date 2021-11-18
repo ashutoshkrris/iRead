@@ -241,7 +241,7 @@ def search(request):
     results = Post.objects.filter(Q(title__icontains=query) | Q(
         seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
     if len(results) > 3:
-        all_posts = Paginator(results, 8)
+        all_posts = Paginator(results, 5)
         page = request.GET.get('page', 1)
         try:
             page_posts = all_posts.page(page)

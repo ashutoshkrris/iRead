@@ -82,19 +82,19 @@
                         <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
                       {% endif %}
                         
-                      {% for i in page_range|default_if_none:posts.paginator.get_elided_page_range %}
-                        {% if posts.number == i %}
+                      {% for i in page_range|default_if_none:results.paginator.get_elided_page_range %}
+                        {% if results.number == i %}
                         <li class="page-item active">
-                          <a class="page-link" href="">{{posts.number}}</a>
+                          <a class="page-link" href="">{{results.number}}</a>
                         </li>
                         {% else %}
-                          {% if i == posts.paginator.ELLIPSIS %}
+                          {% if i == results.paginator.ELLIPSIS %}
                             <li class="page-item">
                               <span class="page-link">{{i}}</span>
                             </li>
                           {% else %}
                             <li class="page-item">
-                              <a class="page-link" href="?page={{i}}">{{i}}</a>
+                              <a class="page-link" href="?query={{query}}&page={{i}}">{{i}}</a>
                             </li>
                           {% endif %}
                         {% endif %}
