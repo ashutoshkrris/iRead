@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Building our own J.A.R.V.I.S. using Python - Part I](http://iread.ga/posts/66/building-our-own-jarvis-using-python-part-i)
 - [Password Vault Screen using Tkinter](http://iread.ga/posts/65/password-vault-screen-using-tkinter)
 - [DSA Sheets You Must Solve](http://iread.ga/posts/64/dsa-sheets-you-must-solve)
 - [Update - Download Slides from SlideShare](http://iread.ga/posts/63/update-download-slides-from-slideshare)
 - [Basic Authentication in Password Manager using Tkinter](http://iread.ga/posts/62/basic-authentication-in-password-manager-using-tkinter)
-- [Review by Fidel Navamuel](http://iread.ga/posts/61/review-by-fidel-navamuel)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
