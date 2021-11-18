@@ -608,3 +608,7 @@ class RemoveNotification(View):
         except Exception as e:
             print(e)
             return JsonResponse({'error': True})
+
+
+def ads(request):
+    return render(request, 'core/important-docs/ads.txt', content_type='text/plain')

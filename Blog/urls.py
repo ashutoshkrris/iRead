@@ -24,6 +24,7 @@ from django.conf.urls import url
 from ckeditor_uploader import views
 from django.contrib.sitemaps.views import sitemap
 from core.sitemaps import PostSitemap, CategorySitemap, SeriesSitemap, TagSitemap
+from core.views import ads
 
 sitemaps = {
     'posts': PostSitemap,
@@ -47,7 +48,8 @@ urlpatterns = [
     path('', include('core.urls')),
     path('payment/', include('payment.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-         name='django.contrib.sitemaps.views.sitemap')
+         name='django.contrib.sitemaps.views.sitemap'),
+    path('ads.txt', ads, name='ads')
 ]
 
 if settings.DEBUG:
