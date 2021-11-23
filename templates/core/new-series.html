@@ -12,8 +12,14 @@
         </div>
         <div class="row blog-entries">
           <div class="col-md-12 col-lg-8 main-content">
-            <form action="{% url 'new_series' %}" method="post">
+            <form action="{% url 'new_series' %}" method="post" enctype="multipart/form-data">
               {% csrf_token %}
+                  <div class="row">
+                    <div class="col-md-12 form-group">
+                      <label for="series_name">Series Thumbnail</label><br>
+                      <input id="imageUpload" type="file" name="thumbnail" placeholder="Photo" required>
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="series_name">Series Name</label>

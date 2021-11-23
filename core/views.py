@@ -113,6 +113,7 @@ def category(request, category_name):
 def series(request, series_id, series_slug):
     try:
         series = Series.objects.filter(id=series_id, slug=series_slug).first()
+        print(series)
         posts = series.posts.all()
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
@@ -426,7 +427,8 @@ def new_series(request):
         if request.session.get('user_id'):
             series_name = request.POST.get('series_name')
             series_desc = request.POST.get('series_desc')
-
+            thumbnail = request.FILES.get('thumbnail')
+            print(thumbnail)
             capitalized_series = " ".join([
                 word.capitalize()
                 for word in series_name.split(" ")
@@ -434,9 +436,9 @@ def new_series(request):
             if not Series.objects.filter(name=capitalized_series).exists():
                 try:
                     new_series = Series(
-                        name=capitalized_series, desc=series_desc, user=Account.objects.get(id=request.session.get('user_id')))
+                        name=capitalized_series, desc=series_desc, thumbnail=thumbnail, user=Account.objects.get(id=request.session.get('user_id')))
                     new_series.save()
-                    return render(request, 'core/new-series.html', {'message': 'Series has been created successfully.'})
+                    return redirect('series', series_id=new_series.id, series_slug=new_series.slug)
                 except Exception as e:
                     print(e)
                     return render(request, 'core/new-series.html', {'error': 'Error while creating series.'})
