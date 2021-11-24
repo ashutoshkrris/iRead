@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Grocery Bag using Django &lpar;Part-1&rpar; - Introduction and Project Setup](http://iread.ga/posts/68/grocery-bag-using-django-part-1-introduction-and-project-setup)
 - [Building our own J.A.R.V.I.S. using Python - Part II](http://iread.ga/posts/67/building-our-own-jarvis-using-python-part-ii)
 - [Building our own J.A.R.V.I.S. using Python - Part I](http://iread.ga/posts/66/building-our-own-jarvis-using-python-part-i)
 - [Password Vault Screen using Tkinter](http://iread.ga/posts/65/password-vault-screen-using-tkinter)
 - [DSA Sheets You Must Solve](http://iread.ga/posts/64/dsa-sheets-you-must-solve)
-- [Update - Download Slides from SlideShare](http://iread.ga/posts/63/update-download-slides-from-slideshare)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
