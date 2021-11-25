@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Grocery Bag using Django &lpar;Part-2&rpar; - Fixing Templates and Static Files](http://iread.ga/posts/70/grocery-bag-using-django-part-2-fixing-templates-and-static-files)
 - [How to display numbers with leading zeros using Python?](http://iread.ga/posts/69/how-to-display-numbers-with-leading-zeros-using-python)
 - [Grocery Bag using Django &lpar;Part-1&rpar; - Introduction and Project Setup](http://iread.ga/posts/68/grocery-bag-using-django-part-1-introduction-and-project-setup)
 - [Building our own J.A.R.V.I.S. using Python - Part II](http://iread.ga/posts/67/building-our-own-jarvis-using-python-part-ii)
 - [Building our own J.A.R.V.I.S. using Python - Part I](http://iread.ga/posts/66/building-our-own-jarvis-using-python-part-i)
-- [Password Vault Screen using Tkinter](http://iread.ga/posts/65/password-vault-screen-using-tkinter)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
