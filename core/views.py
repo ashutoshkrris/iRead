@@ -23,7 +23,7 @@ def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
     most_viewed = Post.objects.filter(published=True).order_by('-views')[:3]
     if len(posts) > 8:
-        all_posts = Paginator(posts, 8)
+        all_posts = Paginator(posts, 16)
         page = request.GET.get('page', 1)
         try:
             page_posts = all_posts.page(page)
