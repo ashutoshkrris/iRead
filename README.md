@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [How to Merge Dictionaries in Python](http://iread.ga/posts/76/how-to-merge-dictionaries-in-python)
 - [How to know your horoscope using Python?](http://iread.ga/posts/75/how-to-know-your-horoscope-using-python)
 - [Grocery Bag using Django &lpar;Part-6&rpar; - Deployment on Heroku](http://iread.ga/posts/74/grocery-bag-using-django-part-6-deployment-on-heroku)
 - [Grocery Bag using Django &lpar;Part-5&rpar; - Filter Items by Date](http://iread.ga/posts/73/grocery-bag-using-django-part-5-filter-items-by-date)
 - [Grocery Bag using Django &lpar;Part-4&rpar; - CRUD Operations](http://iread.ga/posts/72/grocery-bag-using-django-part-4-crud-operations)
-- [Grocery Bag using Django &lpar;Part-3&rpar; - User Authentication](http://iread.ga/posts/71/grocery-bag-using-django-part-3-user-authentication)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
