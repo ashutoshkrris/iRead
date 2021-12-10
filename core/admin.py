@@ -23,7 +23,7 @@ class PostAdmin(ModelAdmin):
     list_display = ('id', 'title', 'author', 'views', 'likes',
                     'published', 'timestamp', 'date_updated',)
     search_fields = ('title', 'author')
-    ordering = ('-timestamp', 'views',)
+    ordering = ('-timestamp')
     readonly_fields = ('slug', 'views',)
     list_filter = ('categories', 'tags', 'published')
     actions = [toggle_published]
