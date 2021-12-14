@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "20d9eb80f26b20f876c45aa52e56f8b4fe6171218b9a2a6c89b5742d3042d000"
+            "sha256": "fc74eb2686ecf7ddc97fe65c5355edd6d2e4a6584062a79ff701cd88b5945982"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -153,11 +153,11 @@
         },
         "django": {
             "hashes": [
-                "sha256:59304646ebc6a77b9b6a59adc67d51ecb03c5e3d63ed1f14c909cdfda84e8010",
-                "sha256:d5a8a14da819a8b9237ee4d8c78dfe056ff6e8a7511987be627192225113ee75"
+                "sha256:95b318319d6997bac3595517101ad9cc83fe5672ac498ba48d1a410f47afecd2",
+                "sha256:e93c93565005b37ddebf2396b4dc4b6913c1838baa82efdfb79acedd5816c240"
             ],
             "index": "pypi",
-            "version": "==4.0"
+            "version": "==3.2.7"
         },
         "django-ckeditor": {
             "hashes": [
@@ -451,6 +451,13 @@
             ],
             "version": "==3.2.0"
         },
+        "pytz": {
+            "hashes": [
+                "sha256:3672058bc3453457b622aab7a1c3bfd5ab0bdae451512f6cf25f64ed37f5b87c",
+                "sha256:acad2d8b20a1af07d4e4c9d2e9285c5ed9104354062f275f3fcd88dcef4f1326"
+            ],
+            "version": "==2021.3"
+        },
         "razorpay": {
             "hashes": [
                 "sha256:0bea9e11aca8024af0cd741b779cb6d3b0a689a8488e21b5e4b345f8840a0fe4",
@@ -537,14 +544,6 @@
             ],
             "index": "pypi",
             "version": "==4.4.0"
-        },
-        "tzdata": {
-            "hashes": [
-                "sha256:3eee491e22ebfe1e5cfcc97a4137cd70f092ce59144d81f8924a844de05ba8f5",
-                "sha256:68dbe41afd01b867894bbdfd54fa03f468cfa4f0086bfb4adcd8de8f24f3ee21"
-            ],
-            "markers": "sys_platform == 'win32'",
-            "version": "==2021.5"
         },
         "urllib3": {
             "hashes": [

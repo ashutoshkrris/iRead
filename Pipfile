@@ -4,7 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
+django = "==3.2.7"
 python-decouple = "*"
 psycopg2-binary = "*"
 pillow = ">=8.2.0"
