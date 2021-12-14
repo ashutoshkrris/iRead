@@ -14,13 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from django.conf import settings
 from django.conf.urls.static import static
 from authentication.middlewares.auth import auth_middleware
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
-from django.conf.urls import url
 from ckeditor_uploader import views
 from django.contrib.sitemaps.views import sitemap
 from core.sitemaps import PostSitemap, CategorySitemap, SeriesSitemap, TagSitemap
@@ -36,9 +35,9 @@ sitemaps = {
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('ckeditor/', include('ckeditor_uploader.urls')),
-    url(r"^ckeditor/upload/", csrf_exempt(auth_middleware(views.upload)),
+    re_path(r"^ckeditor/upload/", csrf_exempt(auth_middleware(views.upload)),
         name="ckeditor_upload"),
-    url(
+    re_path(
         r"^ckeditor/browse/",
         csrf_exempt(never_cache(auth_middleware(views.browse))),
         name="ckeditor_browse",
