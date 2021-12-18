@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [How to Create a Horoscope API with Beautiful Soup and Flask](http://iread.ga/posts/78/how-to-create-a-horoscope-api-with-beautiful-soup-and-flask)
 - [Python API Tutorial - How to Interact with Web Services](http://iread.ga/posts/77/python-api-tutorial-how-to-interact-with-web-services)
 - [How to Merge Dictionaries in Python](http://iread.ga/posts/76/how-to-merge-dictionaries-in-python)
 - [How to know your horoscope using Python?](http://iread.ga/posts/75/how-to-know-your-horoscope-using-python)
 - [Grocery Bag using Django &lpar;Part-6&rpar; - Deployment on Heroku](http://iread.ga/posts/74/grocery-bag-using-django-part-6-deployment-on-heroku)
-- [Grocery Bag using Django &lpar;Part-5&rpar; - Filter Items by Date](http://iread.ga/posts/73/grocery-bag-using-django-part-5-filter-items-by-date)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
