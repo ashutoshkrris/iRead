@@ -28,6 +28,8 @@ def tweet_new_post(post, tags):
     except Exception:
         author = f'{post.author.get_full_name()}'
     tweet = f"'{post.title}' by {author} : https://iread.ga{post.get_absolute_url()}"
+    if type(tags) != list:
+        tags = list(tags)
     tags.append("ireadblog")
     for tag in tags:
         tweet += f" #{tag}"

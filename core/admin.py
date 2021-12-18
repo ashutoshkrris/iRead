@@ -1,10 +1,12 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
+
+from core.bot import tweet_new_post
 from .models import BulletinSubscriber, Category, Like, Notification, Recurring, Series, Tag, Post, Comment, SubComment, Contact
 
 
 # Register your models here.
-
+@admin.action(description="Toggle the published status of posts")
 def toggle_published(modeladmin, request, queryset):
     for obj in queryset:
         if obj.published:
@@ -15,18 +17,21 @@ def toggle_published(modeladmin, request, queryset):
         obj.save()
 
 
-toggle_published.short_description = "Toggle the published status of posts"
+@admin.action(description="Tweet this post")
+def tweet_this_post(modeladmin, request, queryset):
+    for obj in queryset:
+        tweet_new_post(obj, obj.tags.all())
 
 
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
     list_display = ('id', 'title', 'author', 'views', 'likes',
-                    'published','tweeted', 'timestamp', 'date_updated',)
+                    'published', 'tweeted', 'timestamp', 'date_updated',)
     search_fields = ('title', 'author')
     ordering = ('-timestamp',)
     readonly_fields = ('slug', 'views',)
     list_filter = ('categories', 'tags', 'published')
-    actions = [toggle_published]
+    actions = [toggle_published, tweet_this_post]
 
 
 @admin.register(Series)
