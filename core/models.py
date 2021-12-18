@@ -45,6 +45,7 @@ class Post(models.Model):
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
     thumbnail = models.ImageField(upload_to="blog/thumbnails")
     published = models.BooleanField(default=True)
+    tweeted = models.BooleanField(default=False)
     categories = models.ForeignKey(
         Category, on_delete=models.CASCADE, default=1)
     tags = models.ManyToManyField(Tag, blank=True)

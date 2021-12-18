@@ -33,6 +33,8 @@ def tweet_new_post(post, tags):
         tweet += f" #{tag}"
     try:
         iread_bot.update_status(tweet)
+        post.tweeted = True
+        post.save()
     except Exception as e:
         print(e)
         pass

@@ -21,7 +21,7 @@ toggle_published.short_description = "Toggle the published status of posts"
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
     list_display = ('id', 'title', 'author', 'views', 'likes',
-                    'published', 'timestamp', 'date_updated',)
+                    'published','tweeted', 'timestamp', 'date_updated',)
     search_fields = ('title', 'author')
     ordering = ('-timestamp',)
     readonly_fields = ('slug', 'views',)

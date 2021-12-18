@@ -360,6 +360,8 @@ def update_post(request, post_id, slug):
             post.published = bool(published)
             post.date_updated = datetime.now()
             post.save()
+            if post.published and not post.tweeted:
+                tweet_new_post(post, post.tags.all())
             return redirect('single', post_id=post.id,  slug=post.slug)
         except ValueError:
             context['error'] = 'One or more fields is missing.'
