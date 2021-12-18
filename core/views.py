@@ -158,6 +158,8 @@ def single(request, post_id, slug):
         pass
     try:
         post = Post.objects.get(id=post_id, slug=slug)
+        if not post.published and post.author.id != request.session.get('user_id'):
+            raise Http404()
         related_posts = Post.objects.filter(
             Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()[:3]
         post.views += 1
@@ -318,9 +320,13 @@ def new_post(request):
             series_id = request.POST.get('series')
             cat = Category.objects.get(name=category)
             user = Account.objects.get(id=request.session.get('user_id'))
-            new_post = Post(title=title, seo_overview=overview,
-                            thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
-            new_post.save()
+            if len(content) > 63:
+                new_post = Post(title=title, seo_overview=overview,
+                                thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
+                new_post.save()
+            else:
+                context['error'] = 'Please enter at least 64 characters in the post content.'
+                return render(request, "core/new-post.html", context)
             if(series_id):
                 series = Series.objects.get(id=series_id)
                 series.posts.add(new_post)
