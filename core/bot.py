@@ -17,8 +17,7 @@ def authenticate():
     auth.set_access_token(ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
     # Create API object to invoke Twitter API methods
-    api = tweepy.API(auth, wait_on_rate_limit=True,
-                     wait_on_rate_limit_notify=True)
+    api = tweepy.API(auth, wait_on_rate_limit=True)
     return api
 
 
