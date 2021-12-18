@@ -41,11 +41,11 @@ def tweet_new_post(post, tags):
 def get_latest_tweet():
     iread_bot = authenticate()
     response = iread_bot.user_timeline(
-        id="iReadBot", count=1, tweet_mode="extended")[0]
+        user_id="iReadBot", count=1, tweet_mode="extended")[0]
     data = response._json
     try:
         link = data['entities']['urls'][0]['url']
-    except:
+    except Exception:
         link = ""
     tweet_id = data['id_str']
     full_text = data['full_text']

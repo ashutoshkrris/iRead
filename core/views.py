@@ -113,7 +113,6 @@ def category(request, category_name):
 def series(request, series_id, series_slug):
     try:
         series = Series.objects.filter(id=series_id, slug=series_slug).first()
-        print(series)
         posts = series.posts.all()
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
