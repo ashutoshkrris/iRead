@@ -11,7 +11,7 @@ class SocialLinks(models.Model):
     github_url = models.URLField(verbose_name='github link', blank=True)
     gitlab_url = models.URLField(verbose_name='gitlab link', blank=True)
     medium_url = models.URLField(verbose_name='medium link', blank=True)
-    twitter_username = models.CharField(max_length=63, verbose_name='twitter link', blank=True)
+    twitter_username = models.CharField(max_length=63, verbose_name='twitter username', blank=True, help_text='Do not include @')
     linkedin_url = models.URLField(verbose_name='linkedin link', blank=True)
     portfolio_url = models.URLField(verbose_name='portfolio link', blank=True)
 
