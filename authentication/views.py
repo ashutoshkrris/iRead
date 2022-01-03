@@ -332,6 +332,7 @@ def edit_profile(request, username):
             twitter = request.POST.get('twitter')
             linkedin = request.POST.get('linkedin')
             portfolio = request.POST.get('portfolio')
+            coffee = request.POST.get('coffee')
             user.first_name = fname
             user.last_name = lname
             user.about = about
@@ -356,9 +357,10 @@ def edit_profile(request, username):
                 user.social_links.twitter_username = twitter
                 user.social_links.linkedin_url = linkedin
                 user.social_links.portfolio_url = portfolio
+                user.social_links.buymeacoffee_url = coffee
             else:
                 new_social = SocialLinks(youtube_url=youtube, facebook_url=facebook, dribble_url=dribble, instagram_url=instagram, github_url=github,
-                                         gitlab_url=gitlab, medium_url=medium, twitter_username=twitter, linkedin_url=linkedin, portfolio_url=portfolio)
+                                         gitlab_url=gitlab, medium_url=medium, twitter_username=twitter, linkedin_url=linkedin, portfolio_url=portfolio,buymeacoffee_url=coffee)
                 new_social.save()
                 user.social_links = new_social
             user.work.save()

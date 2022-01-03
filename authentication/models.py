@@ -14,6 +14,7 @@ class SocialLinks(models.Model):
     twitter_username = models.CharField(max_length=63, verbose_name='twitter username', blank=True, help_text='Do not include @')
     linkedin_url = models.URLField(verbose_name='linkedin link', blank=True)
     portfolio_url = models.URLField(verbose_name='portfolio link', blank=True)
+    buymeacoffee_url = models.URLField(verbose_name='buymeacoffee link', blank=True)
 
     class Meta:
         verbose_name_plural = 'Social Links'

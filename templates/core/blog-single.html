@@ -196,10 +196,6 @@
           </p>
         </div>
 
-        <!-- <div id="like-section">
-      {% include "partials/like.html" %}
-    </div> -->
-
         <div
           class="share-btn-container pt-3"
           style="display: flex; justify-content: space-between"
@@ -241,6 +237,14 @@
             </h4>
           </div>
         </div>
+
+        {% if post.author.social_links.buymeacoffee_url %}
+        <div class="pt-3">
+        <hr>
+          If you read this far, support the author to show them you care.
+          <a href="{{post.author.social_links.buymeacoffee_url}}" target="_blank"><img src="https://img.buymeacoffee.com/button-api/?text=Support Me&button_colour=BD5FFF&font_colour=ffffff&font_family=Cookie&outline_colour=000000&coffee_colour=FFDD00"></a>
+        </div>
+        {% endif %}
 
         <div class="pt-5">
           <h3 class="mb-5">{{post.comments}} Comments</h3>
