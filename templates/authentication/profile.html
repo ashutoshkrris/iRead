@@ -1,218 +1,350 @@
-{% extends "core/base.html" %}
-{% load custom_tags %}
-{% load static %}
-{% block title %}{{user.get_full_name}}{% endblock title %}
+{% extends "core/base.html" %} {% load custom_tags %} {% load static %} 
+{% block title %}{{user.get_full_name}}{% endblock title %} {% block content %}
+<section class="site-section pt-5" style="margin-top: 30px">
+  <div class="container">
+    <div class="bio text-center">
+      <img
+        src="{{user.profile_image.url}}"
+        alt="Image Placeholder"
+        class="img-fluid"
+      />
+      <div class="bio-body">
+        <h2>
+          {{user.get_full_name}} (@{{user.username}}) {% if request.session.user_id == user.id %}
 
+          <a href="{% url 'edit_profile' user.username %}"
+            ><i
+              class="fa fa-pencil-square-o ml-2"
+              aria-hidden="true"
+              style="color: black"
+            ></i
+          ></a>
+          {% else %}
+          <br />
+          {% if request.session.user_id %} {% if is_following %}
+          <a
+            type="button"
+            class="btn mb-2 mt-2 mb-md-0 btn-danger btn-round"
+            style="width: 128.5px; height: 44px; color: white"
+            id="followBtn"
+            role="button"
+            href="{% url 'follow_user' user.username %}"
+          >
+            Unollow <i class="fa fa-user-times" aria-hidden="true"></i>
+          </a>
+          {% else %}
+          <a
+            type="button"
+            class="btn mb-2 mt-2 mb-md-0 btn-success btn-round"
+            style="width: 128.5px; height: 44px; color: white"
+            id="followBtn"
+            role="button"
+            href="{% url 'follow_user' user.username %}"
+          >
+            Follow <i class="fa fa-user-plus" aria-hidden="true"></i>
+          </a>
+          {% endif %}
 
-{% block content %}
-<section class="site-section pt-5" style="margin-top: 30px;">
-      <div class="container" >
-              <div class="bio text-center">
-                <img src="{{user.profile_image.url}}" alt="Image Placeholder" class="img-fluid">
-                <div class="bio-body">
-                  <h2>
-                    {{user.get_full_name}} (@{{user.username}})
-                    {% if request.session.user_id == user.id %}
+          <button
+            type="button"
+            class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round"
+            id="msgBtn"
+          >
+            Message <i class="fa fa-envelope" aria-hidden="true"></i>
+          </button>
 
-                    <a href="{% url 'edit_profile' user.username %}"><i class="fa fa-pencil-square-o ml-2" aria-hidden="true" style="color: black;"></i></a>
-                    {% else %}
-                    <br>
-                    {% if request.session.user_id %}
-                      
-                    {% if is_following %}
-                      <a type="button" class="btn mb-2 mt-2 mb-md-0 btn-danger btn-round" style="width: 128.5px; height: 44px; color: white;" id="followBtn" role="button" href="{% url 'follow_user' user.username %}">
-                      Unollow <i class="fa fa-user-times" aria-hidden="true"></i>
-                      </a>
-                    {% else %}
-                      <a type="button" class="btn mb-2 mt-2 mb-md-0 btn-success btn-round" style="width: 128.5px; height: 44px; color: white;" id="followBtn" role="button" href="{% url 'follow_user' user.username %}">
-                      Follow <i class="fa fa-user-plus" aria-hidden="true"></i>
-                      </a>
-                    {% endif %}
-                    
-                    <button type="button" class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round" id="msgBtn">
-                      Message <i class="fa fa-envelope" aria-hidden="true"></i>
-                    </button>
-                    
-                    {% endif %}
-                    
-                    {% endif %}
-                    
-                  </h2>
-                  <p id="p_posts"><strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong>{{followers}}</strong> followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</p>
-                  <small id="small_posts"><strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong>{{followers}}</strong> followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</small>
-                  <p>{{user.about}}<br>{{user.location}}</p>
-                </div>
-              </div>
-              <div class="row blog-entries">
-                {% if user_posts.number == 1 %}
-                  
-                <div class="separator" style="margin-top: 30px; margin-bottom: 30px;"><h2>Work / Education</h2></div>
-                <div class="row">
-                    <div class="col-md-12 form-group">
-                      <label for="title">Title</label>
-                      <input type="text" id="title" name="title" class="form-control" value="{{user.work.employer_title}}" disabled readonly>
-                    </div>
-                    <div class="col-md-12 form-group">
-                      <label for="institution">Institution / Organisation</label>
-                      <input type="text" id="institution" name="institution" class="form-control" value="{{user.work.employer_name}}" disabled readonly>
-                    </div>
-                    
-                    <div class="col-md-12 form-group">
-                      <label for="education">Education</label>
-                      <input type="text" id="education" name="education" value="{{user.work.education}}" class="form-control" disabled readonly>
-                    </div>
-                    </div>
+          {% endif %} {% endif %}
+        </h2>
+        <p id="p_posts">
+          <strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong
+            >{{followers}}</strong
+          >
+          followers &nbsp;&nbsp;<strong>{{followings}}</strong> following
+        </p>
+        <small id="small_posts"
+          ><strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong
+            >{{followers}}</strong
+          >
+          followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</small
+        >
+        <p>{{user.about}}<br />{{user.location}}</p>
+      </div>
+    </div>
+    <div class="row blog-entries">
+      {% if user_posts.number == 1 %}
 
-                <div class="separator" style="margin-top: 30px; margin-bottom: 30px;"><h2>Social Media Links</h2></div>
-                    <div class="row text-center mr-4">
-                      <h1>
-                        {% if user.social_links.facebook_url %}
-                          <a href="{{user.social_links.facebook_url}}"><i class="fa fa-facebook-official" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.youtube_url %}
-                          <a href="{{user.social_links.youtube_url}}"><i class="fa fa-youtube-play" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.instagram_url %}
-                          <a href="{{user.social_links.instagram_url}}"><i class="fa fa-instagram" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.dribble_url %}
-                          <a href="{{user.social_links.dribble_url}}"><i class="fa fa-dribbble" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.github_url %}
-                          <a href="{{user.social_links.github_url}}"><i class="fa fa-github" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.gitlab_url %}
-                          <a href="{{user.social_links.gitlab_url}}"><i class="fa fa-gitlab" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.medium_url %}
-                          <a href="{{user.social_links.medium_url}}"><i class="fa fa-medium" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.twitter_username %}
-                          <a href="https://twitter.com/{{user.social_links.twitter_username}}"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.linkedin_url %}
-                          <a href="{{user.social_links.linkedin_url}}"><i class="fa fa-linkedin-square" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.portfolio_url %}
-                          <a href="{{user.social_links.portfolio_url}}"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                        {% endif %}
-                        {% if user.social_links.buymeacoffee_url %}
-                          <a href="{{user.social_links.buymeacoffee_url}}"><i class="fa fa-coffee" aria-hidden="true"></i></a>
-                        {% endif %}
-                      </h1>
-                    </div>
-                
-                {% endif %}
-                <div class="col-md-12 main-content">
-              {% if user_posts|length > 0 %}
-                
-                <div class="row mb-5 mt-5 ">
-                <div class="col-md-12 mb-5">
-                  <h2>Latest Posts</h2>
-                </div>
-                <div class="col-md-12">
-                  {% for post in user_posts %}
-                    
-                  <div class="post-entry-horzontal">
-                    <a href="{% url 'single' post.id post.slug %}">
-                      <div class="image" style="background-image: url({{post.thumbnail.url}});"></div>
-                      <span class="text">
-                        <div class="post-meta">
-                          <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span>&bullet;
-                          {% if request.session.user_id %}
-                            <span class="mr-2">{{post.categories.name}}</span>&bullet;
-                            <span class="mr-2">{{post.content|readtime}}</span>
-                            {% if request.session.user_id == post.author.id %}
-                              <span class="mr-2">
-                                {% if post.published %}
-                                  <span>&bullet; Published</span>
-                                {% else %}
-                                  <span>&bullet; Not Published</span>
-                                {% endif %}
-                              </span>
-                            {% endif %}
-                          {% else %}
-                            <span class="mr-2">{{post.categories.name}}</span>
-                          {% endif %}
-                        </div>
-                        <h2>{{post.title}}</h2>
-                      </span>
-                    </a>
-                  </div>
-                  <!-- END post -->
-                  {% endfor %}
+      <div class="separator" style="margin-top: 30px; margin-bottom: 30px">
+        <h2>Work / Education</h2>
+      </div>
+      <div class="row">
+        <div class="col-md-12 form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            class="form-control"
+            value="{{user.work.employer_title}}"
+            disabled
+            readonly
+          />
+        </div>
+        <div class="col-md-12 form-group">
+          <label for="institution">Institution / Organisation</label>
+          <input
+            type="text"
+            id="institution"
+            name="institution"
+            class="form-control"
+            value="{{user.work.employer_name}}"
+            disabled
+            readonly
+          />
+        </div>
 
-                </div>
-                </div>
-            
-              {% endif %}
-              {% if pagination %}
-              
-            <div class="row mt-5">
-              <div class="col-md-12 text-center">
-                <nav aria-label="Page navigation" class="text-center">
-                  <ul class="pagination">
-                    {% if user_posts.has_previous %}
-                        <li class="page-item"><a class="page-link" href="?page={{user_posts.previous_page_number}}">&lt;</a></li>
-                      {% else %}
-                        <li class="page-item"><a class="page-link" style="pointer-events: none;" aria-disabled="true">&lt;</a></li>
-                      {% endif %}
-                        <li class="page-item"><a class="page-link active" href="">{{user_posts.number}}</a></li>
-                      {% if user_posts.has_next %}
-                        <li class="page-item"><a class="page-link" href="?page={{user_posts.next_page_number}}">&gt;</a></li>
-                      {% else %}
-                        <li class="page-item"><a class="page-link" style="pointer-events: none;">&gt;</a></li>
-                      {% endif %}
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            
-            {% endif %}
+        <div class="col-md-12 form-group">
+          <label for="education">Education</label>
+          <input
+            type="text"
+            id="education"
+            name="education"
+            value="{{user.work.education}}"
+            class="form-control"
+            disabled
+            readonly
+          />
+        </div>
+      </div>
 
-              {% if user_series|length > 0 %}
-                <div class="row mb-5 ">
-                <div class="col-md-12 mb-3">
-                  <h2>Blog Series</h2>
-                </div>
-                <div class="col-md-12">
-                  {% for series in user_series%}
-                    <h1><a class="category" style="background-color:#0080ff" href="{% url 'series' series.id series.slug %}">{{series.name|upper}} SERIES</a></h1>
-                  <!-- END Series -->
-                  {% endfor %}
+      <div class="separator" style="margin-top: 30px; margin-bottom: 30px">
+        <h2>Social Media Links</h2>
+      </div>
+      <div class="row text-center mr-4">
+        <h1>
+          {% if user.social_links.facebook_url %}
+          <a href="{{user.social_links.facebook_url}}"
+            ><i class="fa fa-facebook-official" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.youtube_url %}
+          <a href="{{user.social_links.youtube_url}}"
+            ><i class="fa fa-youtube-play" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.instagram_url %}
+          <a href="{{user.social_links.instagram_url}}"
+            ><i class="fa fa-instagram" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.dribble_url %}
+          <a href="{{user.social_links.dribble_url}}"
+            ><i class="fa fa-dribbble" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.github_url %}
+          <a href="{{user.social_links.github_url}}"
+            ><i class="fa fa-github" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.gitlab_url %}
+          <a href="{{user.social_links.gitlab_url}}"
+            ><i class="fa fa-gitlab" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.medium_url %}
+          <a href="{{user.social_links.medium_url}}"
+            ><i class="fa fa-medium" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.twitter_username %}
+          <a href="https://twitter.com/{{user.social_links.twitter_username}}"
+            ><i class="fa fa-twitter" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.linkedin_url %}
+          <a href="{{user.social_links.linkedin_url}}"
+            ><i class="fa fa-linkedin-square" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.portfolio_url %}
+          <a href="{{user.social_links.portfolio_url}}"
+            ><i class="fa fa-globe" aria-hidden="true"></i
+          ></a>
+          {% endif %} {% if user.social_links.buymeacoffee_url %}
+          <a href="{{user.social_links.buymeacoffee_url}}"
+            ><i class="fa fa-coffee" aria-hidden="true"></i
+          ></a>
+          {% endif %}
+        </h1>
+      </div>
 
-                </div>
-                </div>
-              {% endif %}
+      {% endif %}
+      <div class="col-md-12 main-content">
+        {% if user_posts|length > 0 %}
 
-              </div>
-            </div>
-              
+        <div class="row mb-5 mt-5">
+          <div class="col-md-12 mb-5">
+            <h2>Latest Posts</h2>
           </div>
-          </section>
-{% endblock content %}
+          <div class="row blog-entries">
+            <div class="col-md-12 main-content">
+              <div class="row">
+                {% for post in user_posts %}
 
+                <div class="col-md-4">
+                  <a
+                    href="{% url 'single' post.id post.slug %}"
+                    class="blog-entry element-animate"
+                    data-animate-effect="fadeIn"
+                  >
+                    <img src="{{post.thumbnail.url}}" alt="Image placeholder" />
+                    <div class="blog-content-body">
+                      <div class="post-meta">
+                        <span class="author mr-2"
+                          ><img
+                            src="{{post.author.profile_image.url}}"
+                            alt="Colorlib"
+                          />
+                          {{post.author.get_full_name}}</span
+                        >&bullet;
+                        <span class="mr-2">{{post.timestamp|date:"F d Y"}}</span
+                        >&bullet;
+                        <span class="mr-2">{{post.content|readtime}}</span>
+                      </div>
+                      <h2>{{post.title}}</h2>
+                    </div>
+                  </a>
+                </div>
+                {% empty %}
+                <div class="col-md-6">
+                  <a
+                    href=""
+                    class="blog-entry element-animate"
+                    data-animate-effect="fadeIn"
+                  >
+                    <img
+                      src="{% static 'images/empty.png' %}"
+                      height
+                      alt="Image placeholder"
+                    />
+                    <div class="blog-content-body">
+                      <h2>No Post Yet</h2>
+                    </div>
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
 
-{% block js_down %}
+              {% if pagination %}
+
+              <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                  <nav aria-label="Page navigation" class="text-center">
+                    <ul class="pagination">
+                      {% if user_posts.has_previous %}
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="?page={{user_posts.previous_page_number}}"
+                          >&lt;</a
+                        >
+                      </li>
+                      {% else %}
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          style="pointer-events: none"
+                          aria-disabled="true"
+                          >&lt;</a
+                        >
+                      </li>
+                      {% endif %} {% for i in page_range|default_if_none:user_posts.paginator.get_elided_page_range %} {% if user_posts.number == i %}
+                      <li class="page-item active">
+                        <a class="page-link" href="">{{user_posts.number}}</a>
+                      </li>
+                      {% else %} {% if i == user_posts.paginator.ELLIPSIS %}
+                      <li class="page-item">
+                        <span class="page-link">{{i}}</span>
+                      </li>
+                      {% else %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{i}}">{{i}}</a>
+                      </li>
+                      {% endif %} {% endif %} {% endfor %} {% if user_posts.has_next %}
+                      <li class="page-item">
+                        <a
+                          class="page-link"
+                          href="?page={{user_posts.next_page_number}}"
+                          >&gt;</a
+                        >
+                      </li>
+                      {% else %}
+                      <li class="page-item">
+                        <a class="page-link" style="pointer-events: none"
+                          >&gt;</a
+                        >
+                      </li>
+                      {% endif %}
+                    </ul>
+                  </nav>
+                </div>
+              </div>
+
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {% endif %}
+
+        {% if user_series|length > 0 %}
+        <div class="row mb-5">
+          <div class="col-md-12 mb-3">
+            <h2>Blog Series</h2>
+          </div>
+          <div class="row blog-entries">
+            <div class="col-md-12 main-content">
+              <div class="row">
+                {% for series in user_series %}
+
+                <div class="col-md-4">
+                  <a
+                    href="{% url 'series' series.id series.slug %}"
+                    class="blog-entry element-animate"
+                    data-animate-effect="fadeIn"
+                  >
+                    <img src="{{series.thumbnail.url}}" alt="Image placeholder" />
+                    <div class="blog-content-body">
+                      <div class="post-meta">
+                        <span class="category mb-5">SERIES</span>
+                        <span class="mr-2">{{series.date_created|date:"F d Y"}}</span
+                        >
+                      </div>
+                      <h2>{{series.name}}</h2>
+                    </div>
+                  </a>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %} {% block js_down %}
 <script>
   function getCookie(name) {
     var cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
+    if (document.cookie && document.cookie !== "") {
+      var cookies = document.cookie.split(";");
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = jQuery.trim(cookies[i]);
+        // Does this cookie string begin with the name we want?
+        if (cookie.substring(0, name.length + 1) === name + "=") {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
         }
+      }
     }
     return cookieValue;
-    }
+  }
 </script>
-  <script>
-    $("#msgBtn").click(function (e) {
+<script>
+  $("#msgBtn").click(function (e) {
     Swal.fire({
       title: "Write Your Message",
       input: "textarea",
@@ -226,9 +358,9 @@
         return fetch(`{% url 'send_message' user.username %}`, {
           body: JSON.stringify({ message: message }),
           method: "POST",
-          credentials: 'same-origin',
+          credentials: "same-origin",
           headers: {
-              "X-CSRFToken": getCookie("csrftoken")
+            "X-CSRFToken": getCookie("csrftoken"),
           },
         })
           .then((res) => res.json())
@@ -236,8 +368,7 @@
             if (response.message_error) {
               throw new Error(response.message_error);
             } else if (response.message_success) {
-              icon: 'success',
-              Swal.fire(`${response.message_success}`);
+              icon: "success", Swal.fire(`${response.message_success}`);
             }
           })
           .catch((error) => {
@@ -248,30 +379,34 @@
     }).then((result) => {
       if (result.message_success) {
         Swal.fire({
-            icon: 'success',
-            title: `${result.message_success}`,
+          icon: "success",
+          title: `${result.message_success}`,
         });
       }
     });
   });
-  </script>
-  <script>
-    $('#followBtn').click(function(e){
-      e.preventDefault();
-      $.ajax({
-        url: this.href,
-        success: function(response){
-          if (response['is_following']){
-            $('#followBtn').html(`Unfollow <i class="fa fa-user-times" aria-hidden="true"></i>`)
-            $('#followBtn').removeClass('btn-success')
-            $('#followBtn').addClass('btn-danger')
-          } else {
-            $('#followBtn').html(`Follow <i class="fa fa-user-plus" aria-hidden="true"></i>`)
-            $('#followBtn').removeClass('btn-danger')
-            $('#followBtn').addClass('btn-success')
-          }
+</script>
+<script>
+  $("#followBtn").click(function (e) {
+    e.preventDefault();
+    $.ajax({
+      url: this.href,
+      success: function (response) {
+        if (response["is_following"]) {
+          $("#followBtn").html(
+            `Unfollow <i class="fa fa-user-times" aria-hidden="true"></i>`
+          );
+          $("#followBtn").removeClass("btn-success");
+          $("#followBtn").addClass("btn-danger");
+        } else {
+          $("#followBtn").html(
+            `Follow <i class="fa fa-user-plus" aria-hidden="true"></i>`
+          );
+          $("#followBtn").removeClass("btn-danger");
+          $("#followBtn").addClass("btn-success");
         }
-      })
-    })
-  </script>
+      },
+    });
+  });
+</script>
 {% endblock js_down %}

@@ -277,8 +277,8 @@ def profile(request, username):
             pass
     total_posts = len(user_posts)
     if total_posts > 3:
-        all_posts = Paginator(user_posts, 3)
-        page = request.GET.get('page')
+        all_posts = Paginator(user_posts, 9)
+        page = request.GET.get('page', 1)
         try:
             page_posts = all_posts.page(page)
         except PageNotAnInteger:
@@ -293,7 +293,8 @@ def profile(request, username):
             'total_posts': total_posts,
             'is_following': is_following,
             'followers': followers,
-            'followings': followings
+            'followings': followings,
+            'page_range': all_posts.get_elided_page_range(number=page)
         }
     else:
         context = {
