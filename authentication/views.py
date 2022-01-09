@@ -300,6 +300,7 @@ def profile(request, username):
         context = {
             'user': user,
             'user_posts': user_posts,
+            'user_series': user_series,
             'total_posts': total_posts,
             'is_following': is_following,
             'followers': followers,
