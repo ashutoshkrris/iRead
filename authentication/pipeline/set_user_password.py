@@ -4,6 +4,7 @@ from social_core.pipeline.partial import partial
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
+from authentication.utils import add_subscriber
 
 # partial says "we may interrupt, but we will come back here again"
 
@@ -49,6 +50,7 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
         user.pwd_mail_sent = True
         user.save()
         FollowersModel(user=user).save()
+        add_subscriber(email, user_name)
     strategy.session_set('user_id',user.id)
     strategy.session_set('username',user.username)
     

@@ -18,6 +18,7 @@ from django.utils.decorators import method_decorator
 from .middlewares.auth import login_excluded
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls.base import reverse
+from authentication.utils import add_subscriber
 
 
 UPPERCASE = list(string.ascii_uppercase)
@@ -162,6 +163,7 @@ def signup(request):
         user = Account.objects.get(username=username)
         try:
             FollowersModel(user=user).save()
+            add_subscriber(email, fname, lname, True)
         except Exception:
             pass
         return render(request, "authentication/login.html", {"message": "You can now login."})
@@ -362,7 +364,7 @@ def edit_profile(request, username):
                 user.social_links.buymeacoffee_url = coffee
             else:
                 new_social = SocialLinks(youtube_url=youtube, facebook_url=facebook, dribble_url=dribble, instagram_url=instagram, github_url=github,
-                                         gitlab_url=gitlab, medium_url=medium, twitter_username=twitter, linkedin_url=linkedin, portfolio_url=portfolio,buymeacoffee_url=coffee)
+                                         gitlab_url=gitlab, medium_url=medium, twitter_username=twitter, linkedin_url=linkedin, portfolio_url=portfolio, buymeacoffee_url=coffee)
                 new_social.save()
                 user.social_links = new_social
             user.work.save()
