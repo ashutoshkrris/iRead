@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Everything you need to know about Python Dictionaries](http://iread.ga/posts/84/everything-you-need-to-know-about-python-dictionaries)
 - [Getting your hands dirty with Githug](http://iread.ga/posts/83/getting-your-hands-dirty-with-githug)
 - [How to Create a URL Shortener using Flask](http://iread.ga/posts/82/how-to-create-a-url-shortener-using-flask)
 - [Create Your Own Linkify For Free](http://iread.ga/posts/81/create-your-own-linkify-for-free)
 - [Exception Handling in Python](http://iread.ga/posts/80/exception-handling-in-python)
-- [How to Create a Horoscope API with Beautiful Soup and Flask](http://iread.ga/posts/78/how-to-create-a-horoscope-api-with-beautiful-soup-and-flask)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
