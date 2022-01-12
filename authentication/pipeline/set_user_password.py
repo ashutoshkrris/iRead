@@ -50,7 +50,7 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
         user.pwd_mail_sent = True
         user.save()
         FollowersModel(user=user).save()
-        add_subscriber(email, user_name)
+        add_subscriber(user_email, user_name)
     strategy.session_set('user_id',user.id)
     strategy.session_set('username',user.username)
     
