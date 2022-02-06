@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Getting Rich with Python](http://iread.ga/posts/87/getting-rich-with-python)
-- [Object-Oriented Programming in Python](http://iread.ga/posts/86/object-oriented-programming-in-python)
-- [Getting Started With TinyDB](http://iread.ga/posts/85/getting-started-with-tinydb)
-- [Everything you need to know about Python Dictionaries](http://iread.ga/posts/84/everything-you-need-to-know-about-python-dictionaries)
-- [Getting your hands dirty with Githug](http://iread.ga/posts/83/getting-your-hands-dirty-with-githug)
+- [Getting Rich with Python](http://ireadblog.com/posts/87/getting-rich-with-python)
+- [Object-Oriented Programming in Python](http://ireadblog.com/posts/86/object-oriented-programming-in-python)
+- [Getting Started With TinyDB](http://ireadblog.com/posts/85/getting-started-with-tinydb)
+- [Everything you need to know about Python Dictionaries](http://ireadblog.com/posts/84/everything-you-need-to-know-about-python-dictionaries)
+- [Getting your hands dirty with Githug](http://ireadblog.com/posts/83/getting-your-hands-dirty-with-githug)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
