@@ -3,6 +3,7 @@
 {% block title %}Contact{% endblock title %}
 
     {% block content %}
+     <script src="https://www.google.com/recaptcha/api.js"></script>
     <section class="site-section">
       <div class="container">
         <div class="row mb-4">
@@ -33,12 +34,14 @@
                   <div class="row">
                     <div class="col-md-12 form-group">
                       <label for="message">Write Message</label>
-                      <textarea id="message" name="message" class="form-control " cols="30" rows="8" required></textarea>
+                      <textarea id="message" name="message" class="form-control" cols="30" rows="8" required></textarea>
                     </div>
                   </div>
                   <div class="row">
                     <div class="col-md-6 form-group">
-                      <input type="submit" id="sendMsg" value="Send Message" class="btn btn-primary" onclick="change()">
+                      <!-- <div class="g-recaptcha mb-3" data-sitekey="6LdOrVceAAAAAB20nfeAIhtHLb_YQZla5PmjhYgv"></div> -->
+                      <input type="submit" id="sendMsg" value="Send Message" class="btn btn-primary g-recaptcha" data-sitekey="6LdOrVceAAAAAB20nfeAIhtHLb_YQZla5PmjhYgv" 
+        data-callback='onSubmit'>
                     </div>
                   </div>
                 </form>
@@ -57,20 +60,6 @@
   <script>
     var element = document.getElementById("contact")
     element.classList.add("active");
-  </script>
-
-  <script>
-    function change(){
-      var name = document.getElementById("name").value;
-      var email = document.getElementById("email").value;
-      var subject = document.getElementById("subject").value;
-      var message = document.getElementById("message").value;
-      console.log(name,email,subject,message)
-      if (!name=="" && !email=="" && !subject=="" && !message==""){
-        var btn = document.getElementById("sendMsg");
-        btn.value = 'Sending'
-      }
-    }
   </script>
 
   {% if unsubscribe %}
@@ -137,4 +126,24 @@
     </script>
     
   {% endif %}
+  <script>
+   function onSubmit(token) {
+     var name = document.getElementById("name").value;
+      var email = document.getElementById("email").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+      console.log(name,email,subject,message)
+      if (!name=="" && !email=="" && !subject=="" && !message==""){
+        var btn = document.getElementById("sendMsg");
+        btn.value = 'Sending';
+        document.getElementById("contactForm").submit();
+     } else {
+       new Notify ({
+          title: 'Error',
+          text: 'Please enter all the details',
+          status: 'error'
+        })
+     }
+   }
+ </script>
 {% endblock js_down %}
