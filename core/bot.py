@@ -27,7 +27,7 @@ def tweet_new_post(post, tags):
         author = f'@{post.author.social_links.twitter_username}'
     except Exception:
         author = f'{post.author.get_full_name()}'
-    tweet = f"'{post.title}' by {author} : https://iread.ga{post.get_absolute_url()}"
+    tweet = f"'{post.title}' by {author} : https://ireadblog.com{post.get_absolute_url()}"
     if type(tags) != list:
         tags = list(tags)
     tags.append("ireadblog")
@@ -73,7 +73,7 @@ def create_new_dev_post(post, tags):
             "published": True,
             "body_markdown": f"{post.content}",
             "tags": tags,
-            "canonical_url": f"https://iread.ga{post.get_absolute_url()}",
+            "canonical_url": f"https://ireadblog.com{post.get_absolute_url()}",
         }
     }
     try:
