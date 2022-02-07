@@ -109,10 +109,10 @@ DATABASES = {
     }
 }
 
-# DATABASES = {    
-#     'default': {        
-#         'ENGINE': 'django.db.backends.sqlite3',        
-#         'NAME': BASE_DIR / 'db.sqlite3',    
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
 
@@ -271,7 +271,8 @@ SOCIAL_AUTH_PIPELINE = (
     'authentication.pipeline.set_user_password.collect_password',
 )
 
-SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['user_id', 'username', 'local_password',]
+SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = [
+    'user_id', 'username', 'local_password', ]
 
 SOCIAL_AUTH_JSONFIELD_ENABLED = True
 
@@ -279,3 +280,8 @@ LOGIN_REDIRECT_URL = '/'
 
 # Needed to be written explicitly since Django 3.2
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+
+# Needed to be written explicitly since Django 4.0
+CSRF_TRUSTED_ORIGINS = ['https://*.ireadblog.com',
+                        'https://*.iread.ga', 'http://*.127.0.0.1']
