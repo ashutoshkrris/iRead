@@ -67,7 +67,7 @@
           >
           followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</small
         >
-        <p>{{user.about}}<br />{{user.location}}</p>
+        <p>{% if user.about %}{{user.about}}{% endif %}<br />{% if user.location %}{{user.location}}{% endif %}</p>
       </div>
     </div>
     <div class="row blog-entries">
