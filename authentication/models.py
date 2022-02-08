@@ -68,7 +68,7 @@ class Account(AbstractBaseUser):
     about = models.TextField(blank=True)
     profile_image = models.ImageField(
         upload_to="authentication/profile_images", default="authentication/profile_images/favicon-512.png")
-    location = models.CharField(max_length=63)
+    location = models.CharField(max_length=63, blank=True, null=True)
     social_links = models.ForeignKey(
         SocialLinks, on_delete=models.PROTECT, blank=True, null=True)
     work = models.ForeignKey(
