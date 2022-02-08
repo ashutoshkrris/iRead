@@ -22,6 +22,23 @@
                             <textarea cols="80" id="overview" name="overview" rows="3" style="max-width: 100%;" required></textarea>
                         </div>
                         <div class="col-md-12 form-group">
+                            <div class="accordion" id="accordionExample">
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="headingOne">
+                                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            Canonical URL
+                                        </button>
+                                    </h2>
+                                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body">
+                                            <label for="canonical_url">Change meta tag <code>canonical_url</code> if this post was first published elsewhere (like your own blog).</label>
+                                            <input type="text" id="canonical_url" name="canonical_url" placeholder="https://your-site.com/post-title" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12 form-group">
                             <label for="content">Content</label>
                             <textarea cols="80" id="editor1" name="editor1" rows="10" data-sample-short required></textarea>
                         </div>

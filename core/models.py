@@ -38,6 +38,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=127)
     seo_overview = models.TextField()
+    canonical_url = models.URLField(blank=True,null=True)
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
     content = RichTextUploadingField()
     timestamp = models.DateTimeField(auto_now_add=True)

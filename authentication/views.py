@@ -253,6 +253,7 @@ def change_password(request):
 
 def profile(request, username):
     user_series = None
+    followers,followings = 0,0
     try:
         user = Account.objects.get(username=username)
     except Account.DoesNotExist:

@@ -10,6 +10,7 @@
     />
 
     {% if meta_post %}
+    {% if post.canonical_url %}<link rel="canonical" href="{{post.canonical_url}}" />{% endif %}
     <meta name="description" content="{{post.seo_overview}}" />
     <meta property="og:title" content="{{post.title}} | iRead" />
     <meta property="og:description" content="{{post.seo_overview}}" />

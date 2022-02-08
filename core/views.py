@@ -15,6 +15,7 @@ from django.core.serializers import serialize
 from .bot import tweet_new_post
 from django.views import View
 from decouple import config
+from urllib.parse import urlparse
 
 # Create your views here.
 
@@ -202,6 +203,9 @@ def single(request, post_id, slug):
             'meta_post': True,
             'shorty_api_key': config("SHORTY_API_KEY")
         }
+        if post.canonical_url:
+            post_original_url = urlparse(post.canonical_url).netloc
+            context['post_original_url'] = post_original_url
         return render(request, "core/blog-single.html", context)
     except Exception as e:
         raise Http404()
@@ -313,6 +317,7 @@ def new_post(request):
             title = request.POST.get('title')
             banner = request.FILES.get('banner_image')
             overview = request.POST.get('overview')
+            canonical_url = request.POST.get('canonical_url')
             content = request.POST.get('editor1')
             category = request.POST.get('category')
             tags = request.POST.getlist('tags')
@@ -321,7 +326,7 @@ def new_post(request):
             cat = Category.objects.get(name=category)
             user = Account.objects.get(id=request.session.get('user_id'))
             if len(content) > 63:
-                new_post = Post(title=title, seo_overview=overview,
+                new_post = Post(title=title, seo_overview=overview,canonical_url=canonical_url,
                                 thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
                 new_post.save()
             else:
@@ -358,10 +363,12 @@ def update_post(request, post_id, slug):
             except Exception:
                 pass
             overview = request.POST.get('overview')
+            canonical_url = request.POST.get('canonical_url')
             content = request.POST.get('editor1')
             published = request.POST.get('published')
             post.title = title
             post.seo_overview = overview
+            post.canonical_url = canonical_url
             post.content = content
             post.published = bool(published)
             post.date_updated = datetime.now()
