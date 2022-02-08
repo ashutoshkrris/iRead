@@ -253,7 +253,10 @@ def change_password(request):
 
 def profile(request, username):
     user_series = None
-    user = Account.objects.get(username=username)
+    try:
+        user = Account.objects.get(username=username)
+    except Account.DoesNotExist:
+        raise Http404()
     try:
         logged_in_user = Account.objects.get(id=request.session.get('user_id'))
     except Exception:
