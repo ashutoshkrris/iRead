@@ -163,7 +163,7 @@ def signup(request):
         user = Account.objects.get(username=username)
         try:
             FollowersModel(user=user).save()
-            add_subscriber(email, fname, lname, True)
+            added = add_subscriber(email, fname, lname, False)
         except Exception:
             pass
         return render(request, "authentication/login.html", {"message": "You can now login."})
