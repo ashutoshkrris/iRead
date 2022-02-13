@@ -20,6 +20,10 @@
     <meta name="twitter:title" content="{{post.title}} | iRead" />
     <meta name="twitter:description" content="{{post.seo_overview}}" />
     <meta name="twitter:image" content="{{post.thumbnail.url}}" />
+    <meta
+      name="keywords"
+      content="iread,blog,iread blog,{{meta_keywords}}"
+    />
     {% elif meta_series %}
     <meta name="description" content="{{series.desc}}" />
     <meta property="og:title" content="{{series.name}} | iRead" />
@@ -37,14 +41,14 @@
       content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
     />
     <meta property="og:image" content="{% static 'images/favicon.png' %}" />
-    {% endif %}
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="iRead" />
-    <meta property="og:image:type" content="image/jpg" />
     <meta
       name="keywords"
       content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
     />
+    {% endif %}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="iRead" />
+    <meta property="og:image:type" content="image/jpg" />
     <meta
       name="google-site-verification"
       content="kCaDsevOB107PNa52WhEleNVU7IrF7zFpT4prbTqrqM"

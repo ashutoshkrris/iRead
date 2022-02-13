@@ -193,8 +193,14 @@ def single(request, post_id, slug):
             total_likes = like_obj.user.count()
         except Exception:
             total_likes = 0
+        
+        arr = []
+        for t in post.tags.all():
+            arr.append(t.name)
+        tags_text = ','.join(arr)
         context = {
             'post': post,
+            'meta_keywords': tags_text,
             'series': series,
             'related_posts': related_posts,
             'comments': comments,
