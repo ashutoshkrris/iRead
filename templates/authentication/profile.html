@@ -30,7 +30,7 @@
             role="button"
             href="{% url 'follow_user' user.username %}"
           >
-            Unollow <i class="fa fa-user-times" aria-hidden="true"></i>
+            Unfollow <i class="fa fa-user-times" aria-hidden="true"></i>
           </a>
           {% else %}
           <a
@@ -71,7 +71,7 @@
       </div>
     </div>
     <div class="row blog-entries">
-      {% if user_posts.number == 1 %}
+      
 
       <div class="separator" style="margin-top: 30px; margin-bottom: 30px">
         <h2>Work / Education</h2>
@@ -169,7 +169,7 @@
         </h1>
       </div>
 
-      {% endif %}
+      
       <div class="col-md-12 main-content">
         {% if user_posts|length > 0 %}
 
