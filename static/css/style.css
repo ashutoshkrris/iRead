@@ -1905,3 +1905,44 @@ blockquote p {
   background: #6610f2;
   z-index: 99;
 }
+
+.profile-card {
+  width: 350px;
+  background-color: #efefef;
+  border: none;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.pf-image img {
+  transition: all 0.5s;
+}
+
+.profile-card:hover .pf-image img {
+  transform: scale(1.5);
+}
+
+.name {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.idd {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn1 {
+  height: 40px;
+  width: 150px;
+  border: none;
+  background-color: #000;
+  color: #aeaeae;
+  font-size: 15px;
+}
+
+.text span {
+  font-size: 13px;
+  color: #545454;
+  font-weight: 500;
+}
