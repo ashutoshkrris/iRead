@@ -427,6 +427,31 @@
 <script>
   mbtTOC();
 </script>
+<script>
+  function subscribeToNewsletter() {
+        Swal.fire({
+          title: "<strong>Subscribe to our newsletters</strong>",
+          icon: "info",
+          html:
+            '<div id="revue-embed">' +
+            '<form action="https://digests.ireadblog.com/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">' +
+            '<div class="revue-form-group form-group">' +
+            '<input class="revue-form-field form-control" placeholder="Your email address..." type="email" name="member[email]" id="member_email" required>' +
+            "</div>" +
+            '<div class="revue-form-actions">' +
+            '<input type="submit" class="btn btn-primary" value="Subscribe" name="member[subscribe]" id="member_submit">' +
+            "</div>" +
+            '<div class="revue-form-footer mt-3">By subscribing, you agree with Revue’s <a target="_blank" href="https://www.getrevue.co/terms">Terms of Service</a> and <a target="_blank" href="https://www.getrevue.co/privacy">Privacy Policy</a>.</div>' +
+            "</form>" +
+            "</div>",
+          showCloseButton: true,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+      }
+
+      window.onload = subscribeToNewsletter
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/show-language/prism-show-language.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.js"></script>
