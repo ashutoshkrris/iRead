@@ -214,26 +214,29 @@
     return "";
   }
 
-//   var alerted = getCookie("alerted") || "";
-//   if (alerted != "yes") {
-//     // Swal.fire({
-//     //   title: "Checked our other products?",
-//     //   icon: "question",
-//     //   html: 
-//     //     '<a href="https://srty.me"><strong>Shorty - URL Shortener and QR Generator</strong></a><br><br>' +
-//     //     '<a href="https://pywisher.ml"><strong>PyWisher - Automatic Birthday Wisher</strong></a>'
-//     // })
-//     Swal.fire({
-//       title: 'Let Us Help India Breathe',
-//       html:
-//       '<div id="content">' +
-//       `<img src="{% static 'images/covid.png' %}" style='max-width:100%;max-height:100%'` + 
-//       '</div>'+
-//       '<a href="https://milaap.org/partner-pages/Amazon?pf_rd_r=CHWN59SJQKBXPHEJ32NY&pf_rd_p=31c19504-900e-41c6-a87d-138119760f64" target="_blank"><button class="btn btn-primary">Donate Now</button></a>',
-//       showConfirmButton: false,
-//       showCloseButton: true,
-//     })
-//     createCookie("alerted", "yes", 1); // cookies expire after 1 day
-//   }
-// </script>
+  function subscribeToNewsletter() {
+        Swal.fire({
+          title: "<strong>Subscribe to our newsletters</strong>",
+          icon: "info",
+          html:
+            '<div id="revue-embed">' +
+            '<form action="https://digests.ireadblog.com/add_subscriber" method="post" id="revue-form" name="revue-form"  target="_blank">' +
+            '<div class="revue-form-group form-group">' +
+            '<input class="revue-form-field form-control" placeholder="Your email address..." type="email" name="member[email]" id="member_email" required>' +
+            "</div>" +
+            '<div class="revue-form-actions">' +
+            '<input type="submit" class="btn btn-primary" value="Subscribe" name="member[subscribe]" id="member_submit">' +
+            "</div>" +
+            '<div class="revue-form-footer mt-3">By subscribing, you agree with Revue’s <a target="_blank" href="https://www.getrevue.co/terms">Terms of Service</a> and <a target="_blank" href="https://www.getrevue.co/privacy">Privacy Policy</a>.</div>' +
+            "</form>" +
+            "</div>",
+          showCloseButton: true,
+          showCancelButton: false,
+          showConfirmButton: false,
+        });
+      }
+
+      window.onload = subscribeToNewsletter
+
+ </script>
 {% endblock js_down %}
