@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Running C unit tests with pytest](http://ireadblog.com/posts/90/running-c-unit-tests-with-pytest)
 - [How to add subscribers to your Revue newsletter programmatically?](http://ireadblog.com/posts/89/how-to-add-subscribers-to-your-revue-newsletter-programmatically)
 - [abstract Modifier in Java](http://ireadblog.com/posts/88/abstract-modifier-in-java)
 - [Getting Rich with Python](http://ireadblog.com/posts/87/getting-rich-with-python)
 - [Object-Oriented Programming in Python](http://ireadblog.com/posts/86/object-oriented-programming-in-python)
-- [Getting Started With TinyDB](http://ireadblog.com/posts/85/getting-started-with-tinydb)
 <!-- BLOG-POST-LIST:END -->
 
 ## Demo
