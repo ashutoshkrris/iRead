@@ -62,7 +62,7 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Running C unit tests with pytest](http://ireadblog.com/posts/90/running-c-unit-tests-with-pytest)
+- [abs&lpar;&rpar; function in Python](http://ireadblog.com/posts/91/abs-function-in-python)
 - [How to add subscribers to your Revue newsletter programmatically?](http://ireadblog.com/posts/89/how-to-add-subscribers-to-your-revue-newsletter-programmatically)
 - [abstract Modifier in Java](http://ireadblog.com/posts/88/abstract-modifier-in-java)
 - [Getting Rich with Python](http://ireadblog.com/posts/87/getting-rich-with-python)
