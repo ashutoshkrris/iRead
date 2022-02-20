@@ -212,6 +212,7 @@
                 ></a>
               </div>
               {% endif %}
+  
 
               <div class="col-3 search-top">
                 <!-- <a href="#"><span class="fa fa-search"></span></a> -->
@@ -355,52 +356,9 @@
       </header>
       <!-- END header -->
 
-      <div class="top-banner">
-        <a href="https://elementor.com?ref=27526" target="_blank">
-          <img
-            src="{% static 'images/elementor-top.jpg' %}"
-            class="img-fluid"
-            alt=""
-            srcset=""
-          />
-        </a>
-      </div>
+      
 
       {% block content %} {% endblock content %}
-      <div class="px-4">
-        <script type="text/javascript">
-          amzn_assoc_placement = "adunit0";
-          amzn_assoc_tracking_id = "ashutoshkrris-20";
-          amzn_assoc_ad_mode = "search";
-          amzn_assoc_ad_type = "smart";
-          amzn_assoc_marketplace = "amazon";
-          amzn_assoc_region = "US";
-          amzn_assoc_default_search_phrase = "Watches";
-          amzn_assoc_default_category = "All";
-          amzn_assoc_linkid = "6cb256565f02e0b0b3f73bb905871713";
-          amzn_assoc_search_bar = "true";
-          amzn_assoc_search_bar_position = "top";
-          amzn_assoc_title = "Shop Related Products";
-          </script>
-          <script src="https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US"></script>
-      </div>
-      <div class="px-4 mt-3">
-        <script src="https://z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=db69c5a1-22bc-419d-9134-47da3a4b3581"></script>
-      </div>
-      <div class="px-4">
-        <iframe
-          src="https://www.fiverr.com/embed_gigs?id=U2FsdGVkX18YPJTxNOhg8iffDJe1rISv1qvdAxxvzxUEQHTZR89+KER+VVgJbDHYvSmVylB7TNzXuY4AeZsGjuKBJQ7MHu6h4qXF9DTxIQxFyP8FXt7yj1wX6FUlGHK+1kWZffZ7KQoggSJ6b9uEdmMWODkj3EtrMeZn0owFR7dYTC/Un/euInNOEiGiFWListIiB9/mXhM2FSu6jk4pko+gQWTGEugYjv6QU2Ts2pIvaOkEUew8QEaPefgkRjxiYxYqkVruizIVD4MVr8ZvDysPNXVU/7MNM3PBM4YSV8wjDuClUnv1yvRHRcYpieHRNgh4HeP0UowyARD5asxk10uSKslozgiaKJKG9GTQB70pGrTlrZu5/fdYKEOkCDjm8uu2yG0x9tCDksox1o+nFbKQf3XYDcU1/2DIALzFczrS66nHt0hndYS83CcSRrDrg5Hb8raTwwYZLfDei5G2DQ==&affiliate_id=294862&strip_google_tagmanager=true"
-          loading="lazy"
-          data-with-title="true"
-          class="fiverr_nga_frame"
-          frameborder="0"
-          height="5px"
-          width="100%"
-          onload='var s = document.createElement("script");s.setAttribute("src", "https://npm-assets.fiverrcdn.com/nga/onload_iframe.js");document.body.appendChild(s);'
-        ></iframe>
-      </div>
-      <!-- <div class="px-4" id="amzn-assoc-ad-19369d7b-1a88-41b6-9035-98456d8df8bb"></div>
-      <script async src="//z-na.amazon-adsystem.com/widgets/onejs?MarketPlace=US&adInstanceId=19369d7b-1a88-41b6-9035-98456d8df8bb"></script> -->
       <footer class="site-footer">
         <div class="container">
           <div class="row">
@@ -414,14 +372,17 @@
               <a href="{% url 'terms_conditions' %}">T&C</a> &bullet;
               <a href="{% url 'refund_policy' %}">Refund Policy</a>
               <center><hr width="50%" /></center>
-              <a href="{{links.twitter}}"
+              <a href="{{links.twitter}}" target="_blank"
                 ><span class="fa fa-twitter">&nbsp;&nbsp;</span></a
               >
-              <a href="{{links.facebook}}"
+              <a href="{{links.facebook}}" target="_blank"
                 ><span class="fa fa-facebook"></span>&nbsp;&nbsp;</a
               >
-              <a href="{{links.instagram}}"
+              <a href="{{links.instagram}}" target="_blank"
                 ><span class="fa fa-instagram"></span>&nbsp;&nbsp;</a
+              >
+              <a href="{% url 'post_feed' %}" target="_blank"
+                ><span class="fa fa-rss"></span>&nbsp;&nbsp;</a
               >
               <br />
               <a
@@ -623,14 +584,5 @@
       type="text/javascript"
       src="https://resources.infolinks.com/js/infolinks_main.js"
     ></script>
-    <script type="text/javascript">
-        amzn_assoc_ad_type = "link_enhancement_widget";
-        amzn_assoc_tracking_id = "ashutoshkrris-20";
-        amzn_assoc_linkid = "61d92996ad8f0ceda598df636f769b93";
-        amzn_assoc_placement = "";
-        amzn_assoc_marketplace = "amazon";
-        amzn_assoc_region = "US";
-    </script>
-    <script src="https://ws-na.amazon-adsystem.com/widgets/q?ServiceVersion=20070822&Operation=GetScript&ID=OneJS&WS=1&MarketPlace=US"></script>
   </body>
 </html>

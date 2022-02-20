@@ -36,9 +36,9 @@
                 <div class="col-md-6">
                 <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
                       <div class="profile-card p-4">
-                          <div class="pf-image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{user.profile_image.url}}" height="100" width="100" /></button> <span class="name mt-3">{{user.get_full_name}}</span> <span class="idd">@{{user.username}}</span>
+                          <div class="pf-image d-flex flex-column justify-content-center align-items-center"> <button class="btn btn-secondary"> <img src="{{user.profile_image.url}}" height="100" width="100" /></button> <span class="name mt-3 search">{{user.get_full_name}}</span> <span class="idd search">@{{user.username}}</span>
                               {% if user.about %}
-                              <div class="text mt-3"> <span>{{user.about}}</span> </div>
+                              <div class="text mt-3"> <span class="search">{{user.about}}</span> </div>
                               {% endif %}
                               <div class=" d-flex mt-2"> <a href="{% url 'profile' user.username %}"><button class="btn1 btn-dark" >View Profile</button></a> </div>
                           </div>

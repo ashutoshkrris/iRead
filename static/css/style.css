@@ -1941,7 +1941,7 @@ blockquote p {
   font-size: 15px;
 }
 
-.text span {
+.text .search span {
   font-size: 13px;
   color: #545454;
   font-weight: 500;
