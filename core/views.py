@@ -277,7 +277,8 @@ def search(request):
             'results': results,
             'users': users[:3],
             'categories_res': categories,
-            'tags': tags
+            'tags': tags,
+            'series': series,
         }
     return render(request, "core/search.html", context)
 
