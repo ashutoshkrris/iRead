@@ -147,6 +147,24 @@ def check_otp(request):
         return JsonResponse({'otp_mismatch': 'OTP does not match.'})
 
 
+def send_welcome_email(user):
+    data = {
+        'receiver': user.first_name.capitalize(),
+        'edit_profile_url': 'https://ireadblog.com' + reverse('edit_profile', args=[user.username])
+    }
+    html_content = render_to_string("emails/welcome.html", data)
+    text_content = strip_tags(html_content)
+
+    email = EmailMultiAlternatives(
+        f"Welcome to iRead Blog 🎉🎉",
+        text_content,
+        "iRead <no-reply@iRead.ga>",
+        [user.email]
+    )
+    email.attach_alternative(html_content, "text/html")
+    email.send()
+
+
 @login_excluded('home')
 def signup(request):
     if request.method == "POST":
@@ -164,6 +182,10 @@ def signup(request):
         try:
             FollowersModel(user=user).save()
             added = add_subscriber(email, fname, lname, False)
+        except Exception:
+            pass
+        try:
+            send_welcome_email(user)
         except Exception:
             pass
         return render(request, "authentication/login.html", {"message": "You can now login."})

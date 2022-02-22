@@ -433,7 +433,7 @@
   <![endif]-->
   </head>
   <body>
-    <span class="preheader">Your OTP is {{otp}}</span>
+    <span class="preheader">Thank you for signing up on iRead Blog.</span>
     <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
       <tr>
         <td align="center">
@@ -455,17 +455,37 @@
                   <tr>
                     <td class="content-cell">
                       <div class="f-fallback">
-                        <h1>Hey, {{receiver}}!</h1>
-                        <p>We've received an OTP request from your account.</p>
-                        <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                        <h1>Welcome, {{receiver}}!</h1>
+                        <p>Thanks for signing up on iRead Blog. We’re thrilled to have you on board.</p>
+                        <p>To see how iRead Blog works, check out this viedo tutorial:</p>
+                        <!-- Action -->
+                        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                           <tr>
-                            <td class="attributes_content">
-                              <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                            <td align="center">
+                              <!-- Border based button
+           https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
                                 <tr>
-                                  <td class="attributes_item">
-                                    <span class="f-fallback">
-                                    <center><strong>OTP : {{otp}}</strong></center>
-                                    </span>
+                                  <td align="center">
+                                    <a href="https://www.youtube.com/watch?v=jLdJnVgpV8U" class="f-fallback button" target="_blank">Watch on YouTube</a>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        <p>On iRead, we share your blogs on our Twitter profile whenever you post a new blog to make sure it reaches to more audience. If you haven't followed us yet, make sure you do it <a href="https://twitter.com/iRead_Blog" target="_blank">here</a>.</p>
+                        <p>To get most of it, please make sure you have added your Twitter Username in your profile. If you haven't added, you can add now:</p>
+                        <!-- Action -->
+                        <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                          <tr>
+                            <td align="center">
+                              <!-- Border based button
+           https://litmus.com/blog/a-guide-to-bulletproof-buttons-in-email-design -->
+                              <table width="100%" border="0" cellspacing="0" cellpadding="0" role="presentation">
+                                <tr>
+                                  <td align="center">
+                                    <a href="{{edit_profile_url}}" class="f-fallback button" target="_blank">Add Twitter Username</a>
                                   </td>
                                 </tr>
                               </table>
@@ -473,7 +493,7 @@
                           </tr>
                         </table>
                         
-                        <p>If didn't request it, feel free to <a href="mailto:support@ireadblog.com">email us</a> or contact us <a href="https://ireadblog.com/contact">here</a>. (We're lightening quick at replying.)</p>
+                        <p>If you have any questions, feel free to <a href="mailto:support@ireadblog.com">email us</a> or contact us <a href="https://ireadblog.com/contact">here</a>. (We're lightening quick at replying.)</p>
                         <p>Thanks,
                           <br>Team iRead Blog</p>
                         
