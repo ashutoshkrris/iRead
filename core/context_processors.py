@@ -36,10 +36,10 @@ def popular_posts(request):
 def social_links(request):
     links = {
         'facebook': 'https://www.facebook.com/ireadblog',
-        'twitter': 'https://twitter.com/iReadBot',
+        'twitter': 'https://twitter.com/iRead_Blog',
         'instagram': 'https://instagram.com/ireadblog',
         'linkedin': 'https://linkedin.com/in/ashutoshkrris',
-        'portfolio': 'https://ashutoshkrris.tk',
+        'portfolio': 'https://ashutoshkrris.netlify.com',
         'dev': 'https://dev.to/ireadblog'
     }
     return {'links': links}

@@ -39,7 +39,6 @@ def tweet_new_post(post, tags):
         post.save()
     except Exception as e:
         print(e)
-        pass
 
 
 def get_latest_tweet():

@@ -5,7 +5,7 @@ const whatsappBtn = document.querySelector(".whatsapp-btn");
 
 function init() {
   let postUrl = encodeURI(document.location.href);
-  let postTitle = encodeURI("Hi everyone, please check this post on iRead: ");
+  let postTitle = encodeURI("Hi everyone, please check this post on @iRead_Blog: ");
 
   facebookBtn.setAttribute(
     "href",
