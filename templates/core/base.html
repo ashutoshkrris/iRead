@@ -283,6 +283,9 @@
                     <a class="dropdown-item" href="{% url 'new_series' %}"
                       >Create New Series</a
                     >
+                    <a href="{% url 'user_post_feed' request.session.username %}" class="dropdown-item" target="_blank">
+                      RSS Feed
+                    </a>
                     <a class="dropdown-item" href="{% url 'change_password' %}"
                       >Change Password</a
                     >
