@@ -58,7 +58,6 @@
                                     <option value="{{tag}}">{{tag}}</option>
                                 {% endfor %}
                             </select>
-                            <small>Enter tags separated by comma or space</small>
                         </div>
                         <div class="col-md-6 form-group">
                             <input type="checkbox" id="published" name="published" value="True" checked>
@@ -66,7 +65,7 @@
                         </div>
                         <div class="col-md-6 form-group" id="series_select">
                             <label for="series">Series</label>
-                            <select name="series" id="series" style="width: 200px;">
+                            <select name="series" class="js-series-basic-single" id="series" style="width: 200px;">
                                 <option disabled value selected>Select Series</option>
                                 {% for ser in series %}
                                     <option value="{{ser.id}}">{{ser}}</option>
@@ -83,7 +82,14 @@
                     </div>
                 </form>
                 <br>
-                <p class="text-center">Note : Series is an optional field.</p>
+                <p><u>Instructions:</u></p>
+                <ul>
+                    <li>If a category is not in the list, it will be created automatically.</li>
+                    <li>Enter the tags separated by commas or spaces.</li>
+                    <li>If the tags are not present in the list, they will be created automatically.</li>
+                    <li>Series is an optional field.</li>
+                    <li>If the <code>Published</code> field is unchecked, the post will be saved as draft and will not be visible to others.</li>
+                </ul>
             </div>
             {% include "partials/sidebar.html" %}
         </div>
@@ -105,8 +111,10 @@
             tags: true,
             tokenSeparators: [',', ' ']
         });
-        
-    });
+    })
+    $(document).ready(function() {
+        $('.js-series-basic-single').select2();
+    })
 </script>
 <script>
     function fasterPreview( uploader ) {
