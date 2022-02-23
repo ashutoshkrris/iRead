@@ -8,9 +8,11 @@
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-
     {% if meta_post %}
-    {% if post.canonical_url %}<link rel="canonical" href="{{post.canonical_url}}" />{% endif %}
+    {% if post.canonical_url %}
+    <link rel="canonical" href="{{post.canonical_url}}" />
+    {% endif %}
+    <meta name="title" content="{{post.title}} | iRead" />
     <meta name="description" content="{{post.seo_overview}}" />
     <meta property="og:title" content="{{post.title}} | iRead" />
     <meta property="og:description" content="{{post.seo_overview}}" />
@@ -25,6 +27,7 @@
       content="iread,blog,iread blog,{{meta_keywords}}"
     />
     {% elif meta_series %}
+    <meta name="title" content="{{series.name}} | iRead" />
     <meta name="description" content="{{series.desc}}" />
     <meta property="og:title" content="{{series.name}} | iRead" />
     <meta property="og:description" content="{{series.desc}}" />
@@ -35,20 +38,28 @@
     <meta name="twitter:description" content="{{series.desc}}" />
     <meta name="twitter:image" content="{{series.thumbnail.url}}" />
     {% else %}
-    <meta property="og:title" content="{{title}}" />
+    <meta name="title" content="{{title}} | iRead" />
+    <meta
+      name="keywords"
+      content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
+    />
+    <meta name="description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
+    <meta property="og:title" content="{{title}} | iRead" />
     <meta
       property="og:description"
       content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
     />
     <meta property="og:image" content="{% static 'images/favicon.png' %}" />
-    <meta
-      name="keywords"
-      content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
-    />
-    {% endif %}
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="iRead" />
     <meta property="og:image:type" content="image/jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@iRead_Blog" />
+    <meta name="twitter:title" content="{{title}} | iRead" />
+    <meta name="twitter:description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
+    <meta name="twitter:image" content="{% static 'images/favicon.png' %}" />
+    {% endif %}
+    <meta name="robots" content="index, follow">
     <meta
       name="google-site-verification"
       content="kCaDsevOB107PNa52WhEleNVU7IrF7zFpT4prbTqrqM"
