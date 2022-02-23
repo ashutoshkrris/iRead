@@ -57,9 +57,7 @@
 
   <div class="sidebar-box" id="cat_box">
     <h3 class="heading">
-      Categories<a id="new_cat" style="cursor: pointer"
-        ><i class="fa fa-plus" style="float: right" aria-hidden="true"></i
-      ></a>
+      Categories
     </h3>
     <ul class="categories" style="height: 300px; overflow-y: scroll">
       {% for category in categories %}
@@ -77,9 +75,7 @@
 
   <div class="sidebar-box" id="tag_box">
     <h3 class="heading">
-      Tags<a id="new_tag" style="cursor: pointer"
-        ><i class="fa fa-plus" style="float: right" aria-hidden="true"></i
-      ></a>
+      Tags
     </h3>
     <ul class="tags">
       {% for tag in tags %}
@@ -159,5 +155,3 @@
   </div>
 </div>
 <!-- END sidebar -->
-
-<script src="{% static 'js/sidebar.js' %}"></script>

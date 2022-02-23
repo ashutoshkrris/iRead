@@ -1,3 +1,4 @@
+from hashlib import new
 from django.db.models.functions import Concat
 from django.db.models import Value as V
 from datetime import datetime
@@ -330,7 +331,15 @@ def new_post(request):
             tags = request.POST.getlist('tags')
             published = request.POST.get('published')
             series_id = request.POST.get('series')
-            cat = Category.objects.get(name=category)
+            try:
+                cat = Category.objects.get(name=category)
+            except Category.DoesNotExist:
+                capitalized_category = " ".join([
+                    word.capitalize()
+                    for word in category.split(" ")
+                ])
+                cat = Category(name=capitalized_category)
+                cat.save()
             user = Account.objects.get(id=request.session.get('user_id'))
             if len(content) > 63:
                 new_post = Post(title=title, seo_overview=overview,canonical_url=canonical_url,
@@ -344,7 +353,12 @@ def new_post(request):
                 series.posts.add(new_post)
             post = Post.objects.get(title=title, author=user)
             for tag in tags:
-                post.tags.add(Tag.objects.get(name=tag))
+                try:
+                    post.tags.add(Tag.objects.get(name=tag))
+                except Tag.DoesNotExist:
+                    new_tag = Tag(name=tag.lower())
+                    new_tag.save()
+                    post.tags.add(new_tag)
             post.save()
             if post.published:
                 tweet_new_post(post, tags)
@@ -393,54 +407,6 @@ def delete_post(request, post_id, slug):
     post = Post.objects.get(id=post_id, slug=slug)
     post.delete()
     return redirect('home')
-
-
-def new_category(request):
-    if request.method == 'POST':
-        if request.session.get('user_id'):
-            data = json.loads(request.body)
-            category_name = data['category_name']
-            capitalized_category = " ".join([
-                word.capitalize()
-                for word in category_name.split(" ")
-            ])
-            if not Category.objects.filter(name=capitalized_category).exists():
-                try:
-                    new_category = Category(name=capitalized_category)
-                    new_category.save()
-                    return JsonResponse({'category_created': 'Category created successfully.'})
-                except Exception:
-                    return JsonResponse({'category_error': 'Error while creating category.'})
-            else:
-                return JsonResponse({'category_error': 'Category already exists.'})
-        else:
-            return JsonResponse({'category_error': 'You are not logged in.'})
-    else:
-        return JsonResponse({'category_error': 'Unable to create new category'})
-
-
-def new_tag(request):
-    if request.method == 'POST':
-        if request.session.get('user_id'):
-            data = json.loads(request.body)
-            tag_name = data['tag_name']
-            lower_tag = "_".join([
-                word.lower()
-                for word in tag_name.split(" ")
-            ])
-            if not Tag.objects.filter(name=lower_tag).exists():
-                try:
-                    new_tag = Tag(name=lower_tag)
-                    new_tag.save()
-                    return JsonResponse({'tag_created': 'Tag created successfully.'})
-                except Exception:
-                    return JsonResponse({'tag_error': 'Error while creating tag.'})
-            else:
-                return JsonResponse({'tag_error': 'Tag already exists.'})
-        else:
-            return JsonResponse({'tag_error': 'You are not logged in.'})
-    else:
-        return JsonResponse({'tag_error': 'Unable to create new tag'})
 
 
 def new_series(request):

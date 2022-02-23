@@ -26,7 +26,7 @@
                                 <div class="accordion-item">
                                     <h2 class="accordion-header" id="headingOne">
                                         <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                                            Canonical URL
+                                            Canonical URL (Optional)
                                         </button>
                                     </h2>
                                     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-md-6 form-group" id="cat_select">
                             <label for="category">Category</label>
-                            <select name="category" id="category" style="width: 200px;" required>
+                            <select class="js-example-basic-single" name="category" id="category" style="width: 200px;" required>
                                 <option disabled value selected>Select Category</option>
                                 {% for category in categories %}
                                     <option value="{{category}}">{{category}}</option>
@@ -58,6 +58,7 @@
                                     <option value="{{tag}}">{{tag}}</option>
                                 {% endfor %}
                             </select>
+                            <small>Enter tags separated by comma or space</small>
                         </div>
                         <div class="col-md-6 form-group">
                             <input type="checkbox" id="published" name="published" value="True" checked>
@@ -93,11 +94,17 @@
 {% block js_down %}
 <script>
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
+        $('.js-example-basic-single').select2({
+            tags: true,
+            placeholder: "Select Category"
+        });
         
     });
     $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
+        $('.js-example-basic-multiple').select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
         
     });
 </script>
