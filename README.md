@@ -63,11 +63,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [New privacy curbs on Android, and how they differ from Apple’s block on app-tracking](http://ireadblog.com/posts/92/new-privacy-curbs-on-android-and-how-they-differ-from-apples-block-on-app-tracking)
 - [abs&lpar;&rpar; function in Python](http://ireadblog.com/posts/91/abs-function-in-python)
 - [How to add subscribers to your Revue newsletter programmatically?](http://ireadblog.com/posts/89/how-to-add-subscribers-to-your-revue-newsletter-programmatically)
 - [abstract Modifier in Java](http://ireadblog.com/posts/88/abstract-modifier-in-java)
 - [Getting Rich with Python](http://ireadblog.com/posts/87/getting-rich-with-python)
+- [Object-Oriented Programming in Python](http://ireadblog.com/posts/86/object-oriented-programming-in-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
