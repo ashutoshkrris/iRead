@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="https://iread.ga">
+    <a href="https://ireadblog.com">
         <img src="https://github.com/ashutoshkrris/iRead/blob/master/static/images/favicon.png" width="20%">
     </a>
 </p>
@@ -47,6 +47,7 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 * Twitter Bot to tweet about posts published on website as well as retweet and like user's post (if they share it on Twitter)
 * Bulletins(Newsletter) Subscription/Unsubscription
 * Payment Integration using Paytm and Razorpay
+* Public API and RSS Feed Support 
 
 ## Technology Stack
 
@@ -68,6 +69,47 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 - [abstract Modifier in Java](http://ireadblog.com/posts/88/abstract-modifier-in-java)
 - [Getting Rich with Python](http://ireadblog.com/posts/87/getting-rich-with-python)
 <!-- BLOG-POST-LIST:END -->
+
+## API Documentation
+
+* Base URL: `https://ireadblog.com/api/v1`
+* Endpoint for all posts: `/posts`
+  * Accepts GET Request
+  * Returns JSON Response as:
+    ```json
+    [
+      {
+        "model": "core.post",
+        "pk": 92,
+        "fields": {
+            "title": "Your title here",
+            "seo_overview": "Your post overview here",
+            "slug": "post-slug-here",
+            "content": "Your post content here",
+            "timestamp": "2022-02-22T02:43:40.770Z",
+            "thumbnail": "media/blog/thumbnails/R_xjlzdd"
+        }
+      }
+    ]
+    ```
+  * `pk` refers to the Post ID.
+  * Base URL for `thumbnail` is: `https://res.cloudinary.com/dlomjljb6/image/upload/v1/`
+
+* Endpoint for posts for a user: `/<username>/posts`
+  * Accepts GET Request
+  * Replace `<username>` with your username.
+  * JSON response looks same as above.
+
+* Endpoint for a single post: `/post/<post_id>/<slug>`
+  * Accepts GET request
+  * Replace `<post_id>` with the Post ID and `<slug>` with the slug of the post.
+  * JSON response looks same as above.
+
+## RSS Feed
+
+* iRead Posts RSS Feed URL: `https://ireadblog.com/feed`
+* User Posts RSS Feed URL: `https://ireadblog.com/feed/<username>`
+* You can also find the RSS Feed in your profile if you're logged in.
 
 ## Demo
 
