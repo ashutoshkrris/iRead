@@ -113,7 +113,7 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 
 ## Demo
 
-[![Demo Video](https://i.imgur.com/n18yerL.png)](https://srty.me/iread-demo)
+[![Demo Video](https://img.youtube.com/vi/hbbN8ZX4EFc/0.jpg)](https://youtu.be/hbbN8ZX4EFc)
 
 ## Bulletin Email
 
