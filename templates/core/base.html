@@ -38,13 +38,13 @@
     <meta name="twitter:description" content="{{series.desc}}" />
     <meta name="twitter:image" content="{{series.thumbnail.url}}" />
     {% else %}
-    <meta name="title" content="{% block title %}{% endblock title %} | iRead" />
+    <meta name="title" content="{{title}} | iRead" />
     <meta
       name="keywords"
       content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
     />
     <meta name="description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
-    <meta property="og:title" content="{% block title %}{% endblock title %} | iRead" />
+    <meta property="og:title" content="{{title}} | iRead" />
     <meta
       property="og:description"
       content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
@@ -55,7 +55,7 @@
     <meta property="og:image:type" content="image/jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@iRead_Blog" />
-    <meta name="twitter:title" content="{% block title %}{% endblock title %} | iRead" />
+    <meta name="twitter:title" content="{{title}} | iRead" />
     <meta name="twitter:description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
     <meta name="twitter:image" content="{% static 'images/favicon.png' %}" />
     {% endif %}
