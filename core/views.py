@@ -37,19 +37,21 @@ def index(request):
             'posts': page_posts,
             'most_viewed_posts': most_viewed,
             'pagination': True,
-            'page_range': all_posts.get_elided_page_range(number=page)
+            'page_range': all_posts.get_elided_page_range(number=page),
+            'title': 'Home'
         }
     else:
         context = {
             'posts': posts,
             'most_viewed_posts': most_viewed,
+            'title': 'Home'
         }
 
     return render(request, "core/index.html", context)
 
 
 def about(request):
-    return render(request, "core/about.html")
+    return render(request, "core/about.html", {"title": "About"})
 
 
 def contact(request):
@@ -76,10 +78,10 @@ def contact(request):
             )
             email.attach_alternative(html_content, "text/html")
             email.send()
-            return render(request, "core/contact.html", {'message': "We have received your details. We'll contact you soon."})
+            return render(request, "core/contact.html", {'message': "We have received your details. We'll contact you soon.", "title": "Contact Us"})
         except Exception:
-            return render(request, "core/contact.html", {'error': "We are facing error this time. Please contact later."})
-    return render(request, "core/contact.html")
+            return render(request, "core/contact.html", {'error': "We are facing error this time. Please contact later.", "title": "Contact Us"})
+    return render(request, "core/contact.html", {"title": "Contact Us"})
 
 
 def category(request, category_name):
@@ -100,12 +102,14 @@ def category(request, category_name):
                 'category': category,
                 'posts': page_posts,
                 'pagination': True,
-                'page_range': all_posts.get_elided_page_range(number=page)
+                'page_range': all_posts.get_elided_page_range(number=page),
+                'title': category.name
             }
         else:
             context = {
                 'category': category,
-                'posts': posts
+                'posts': posts,
+                'title': category.name
             }
         return render(request, "core/category.html", context)
     except Exception as e:
@@ -130,13 +134,15 @@ def series(request, series_id, series_slug):
                 'posts': page_posts,
                 'pagination': True,
                 'meta_series': True,
-                'page_range': all_posts.get_elided_page_range(number=page)
+                'page_range': all_posts.get_elided_page_range(number=page),
+                'title': series.title
             }
         else:
             context = {
                 'series': series,
                 'posts': posts,
-                'meta_series': True
+                'meta_series': True,
+                'title': series.title
             }
         return render(request, "core/series.html", context)
     except Exception as e:
@@ -270,7 +276,8 @@ def search(request):
             'categories_res': categories,
             'tags': tags,
             'series': series,
-            'page_range': all_posts.get_elided_page_range(number=page)
+            'page_range': all_posts.get_elided_page_range(number=page),
+            'title': query
         }
     else:
         context = {
@@ -280,6 +287,7 @@ def search(request):
             'categories_res': categories,
             'tags': tags,
             'series': series,
+            'title': query
         }
     return render(request, "core/search.html", context)
 
@@ -302,12 +310,14 @@ def tag(request, tag_name):
                 'tag': tag,
                 'posts': page_posts,
                 'pagination': True,
-                'page_range': all_posts.get_elided_page_range(number=page)
+                'page_range': all_posts.get_elided_page_range(number=page),
+                'title': tag.name
             }
         else:
             context = {
                 'tag': tag,
-                'posts': posts
+                'posts': posts,
+                'title': tag.name
             }
         return render(request, "core/tag.html", context)
     except Exception as e:
@@ -318,7 +328,8 @@ def new_post(request):
     context = {
         'categories': Category.objects.all(),
         'tags': Tag.objects.all(),
-        'series': Series.objects.filter(user__id=request.session.get('user_id'))
+        'series': Series.objects.filter(user__id=request.session.get('user_id')),
+        'title': 'Create New Post'
     }
     if request.method == 'POST':
         try:
@@ -372,7 +383,8 @@ def new_post(request):
 def update_post(request, post_id, slug):
     post = Post.objects.get(id=post_id, slug=slug)
     context = {
-        'post': post
+        'post': post,
+        'title': post.title
     }
     if request.method == 'POST':
         try:
@@ -428,13 +440,13 @@ def new_series(request):
                     return redirect('series', series_id=new_series.id, series_slug=new_series.slug)
                 except Exception as e:
                     print(e)
-                    return render(request, 'core/new-series.html', {'error': 'Error while creating series.'})
+                    return render(request, 'core/new-series.html', {'error': 'Error while creating series.', 'title': 'Create New Series'})
             else:
-                return render(request, 'core/new-series.html', {'error': 'Series already exists.'})
+                return render(request, 'core/new-series.html', {'error': 'Series already exists.', 'title': 'Create New Series'})
         else:
-            return render(request, 'core/new-series.html', {'error': 'You are not logged in.'})
+            return render(request, 'core/new-series.html', {'error': 'You are not logged in.', 'title': 'Create New Series'})
     else:
-        return render(request, 'core/new-series.html')
+        return render(request, 'core/new-series.html', {'title': 'Create New Series'})
 
 
 # For bulletins registration
@@ -475,15 +487,15 @@ def bulletin_unsubscribe(request):
 
 
 def privacy_policy(request):
-    return render(request, "core/important-docs/privacy-policy.html")
+    return render(request, "core/important-docs/privacy-policy.html", {"title": "Privacy Policy"})
 
 
 def terms_conditions(request):
-    return render(request, "core/important-docs/tnc.html")
+    return render(request, "core/important-docs/tnc.html", {"title": "Terms and Conditions"})
 
 
 def refund_policy(request):
-    return render(request, "core/important-docs/refund-policy.html")
+    return render(request, "core/important-docs/refund-policy.html", {"title": "Refund Policy"})
 
 # Public API to fetch all posts
 

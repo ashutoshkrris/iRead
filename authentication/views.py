@@ -188,8 +188,8 @@ def signup(request):
             send_welcome_email(user)
         except Exception:
             pass
-        return render(request, "authentication/login.html", {"message": "You can now login."})
-    return render(request, "authentication/signup.html")
+        return render(request, "authentication/login.html", {"message": "You can now login.", "title": "Log In"})
+    return render(request, "authentication/signup.html", {"title": "Sign Up"})
 
 
 def check_user(email):
@@ -202,7 +202,7 @@ class Login(View):
     @method_decorator(login_excluded(redirect_to='home'))
     def get(self, request):
         Login.return_url = request.GET.get('return_url')
-        return render(request, "authentication/login.html")
+        return render(request, "authentication/login.html", {"title": "Log In"})
 
     @method_decorator(login_excluded(redirect_to='home'))
     def post(self, request):
@@ -227,7 +227,7 @@ class Login(View):
                 error_msg = "Password is incorrect."
         else:
             error_msg = "You are not registered yet."
-        return render(request, "authentication/login.html", {'error': error_msg})
+        return render(request, "authentication/login.html", {'error': error_msg, "title":"Log In"})
 
 
 def logout(request):
@@ -252,10 +252,10 @@ def forgot_password(request):
             user.set_password(password)
             user.pwd_changed = True
             user.save()
-            return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password."})
+            return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password.", "title": "Log In"})
         except Exception:
-            return render(request, "authentication/reset-password.html", {"error": "Password could not be changed, please try again."})
-    return render(request, "authentication/reset-password.html")
+            return render(request, "authentication/reset-password.html", {"error": "Password could not be changed, please try again.", "title": "Reset Password"})
+    return render(request, "authentication/reset-password.html", {"title": "Reset Password"})
 
 
 def change_password(request):
@@ -267,10 +267,10 @@ def change_password(request):
             user.pwd_changed = True
             user.save()
             request.session.clear()
-            return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password."})
+            return render(request, "authentication/login.html", {"message": "Password changed successfully. You can now login with your new password.", "title": "Log In"})
         except Exception:
-            return render(request, "authentication/change-password.html", {"error": "Password could not be changed, please try again."})
-    return render(request, "authentication/change-password.html")
+            return render(request, "authentication/change-password.html", {"error": "Password could not be changed, please try again.", "title": "Change Password"})
+    return render(request, "authentication/change-password.html", {"title": "Change Password"})
 
 
 def profile(request, username):
@@ -322,7 +322,8 @@ def profile(request, username):
             'is_following': is_following,
             'followers': followers,
             'followings': followings,
-            'page_range': all_posts.get_elided_page_range(number=page)
+            'page_range': all_posts.get_elided_page_range(number=page),
+            'title': user.get_full_name()
         }
     else:
         context = {
@@ -332,7 +333,8 @@ def profile(request, username):
             'total_posts': total_posts,
             'is_following': is_following,
             'followers': followers,
-            'followings': followings
+            'followings': followings,
+            'title': user.get_full_name()
         }
     return render(request, "authentication/profile.html", context)
 
@@ -342,6 +344,7 @@ def edit_profile(request, username):
     if user.username == username:
         context = {
             'user': user,
+            'title': user.get_full_name()
         }
 
         if request.method == "POST":
