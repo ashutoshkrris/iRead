@@ -77,7 +77,7 @@
     <h3 class="heading">
       Tags
     </h3>
-    <ul class="tags">
+    <ul class="tags" style="height: 300px; overflow-y: scroll">
       {% for tag in tags %}
 
       <li><a href="{% url 'tag' tag.name %}">{{tag.name}}</a></li>
@@ -96,9 +96,9 @@
     {% endif %}
     <blockquote class="twitter-tweet">
       <p lang="en" dir="ltr">{{full_text}}</p>
-      &mdash; iRead (@iReadBot)
+      &mdash; iRead (@iRead_Blog)
       <a
-        href="https://twitter.com/iReadBot/status/{{tweet_id}}?ref_src=twsrc%5Etfw"
+        href="https://twitter.com/iRead_Blog/status/{{tweet_id}}?ref_src=twsrc%5Etfw"
         >{{date}}</a
       >
     </blockquote>

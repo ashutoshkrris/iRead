@@ -367,7 +367,7 @@ def new_post(request):
                 try:
                     post.tags.add(Tag.objects.get(name=tag))
                 except Tag.DoesNotExist:
-                    new_tag = Tag(name=tag.lower())
+                    new_tag = Tag(name=tag)
                     new_tag.save()
                     post.tags.add(new_tag)
             post.save()
