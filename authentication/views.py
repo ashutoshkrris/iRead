@@ -122,7 +122,7 @@ def send_otp(request):
         email = EmailMultiAlternatives(
             f"One Time Password | iRead",
             text_content,
-            "iRead <no-reply@iRead.ga>",
+            "iRead <no-reply@ireadblog.com>",
             [user_email]
         )
         email.attach_alternative(html_content, "text/html")
@@ -158,7 +158,7 @@ def send_welcome_email(user):
     email = EmailMultiAlternatives(
         f"Welcome to iRead Blog 🎉🎉",
         text_content,
-        "iRead <no-reply@iRead.ga>",
+        "iRead <no-reply@ireadblog.com>",
         [user.email]
     )
     email.attach_alternative(html_content, "text/html")
@@ -443,7 +443,7 @@ def send_message(request, username):
             email = EmailMultiAlternatives(
                 f"New Message Received | iRead",
                 text_content,
-                "iRead <no-reply@iRead.ga>",
+                "iRead <no-reply@ireadblog.com>",
                 [receiver.email]
             )
             email.attach_alternative(html_content, "text/html")

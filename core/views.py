@@ -73,7 +73,7 @@ def contact(request):
             email = EmailMultiAlternatives(
                 f"Thanks for contacting iRead",
                 text_content,
-                "iRead <contact@iread.ga>",
+                "iRead <contact@ireadblog.com>",
                 [email]
             )
             email.attach_alternative(html_content, "text/html")
@@ -553,7 +553,7 @@ def bulletin_email():
         email = EmailMultiAlternatives(
             f"{sub_type.capitalize()} Bulletins For You | iRead",
             text_content,
-            "iRead <bulletins@iread.ga>",
+            "iRead <bulletins@ireadblog.com>",
             [sub.email]
         )
         email.attach_alternative(html_content, "text/html")
