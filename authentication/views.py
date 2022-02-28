@@ -399,6 +399,7 @@ def edit_profile(request, username):
             user.work.save()
             user.social_links.save()
             user.save()
+            return redirect('profile', username=user.username)
         return render(request, 'authentication/edit_profile.html', context)
     else:
         raise Http404()
