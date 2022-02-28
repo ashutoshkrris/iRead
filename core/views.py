@@ -352,7 +352,7 @@ def new_post(request):
                 cat = Category(name=capitalized_category)
                 cat.save()
             user = Account.objects.get(id=request.session.get('user_id'))
-            if len(content) > 63:
+            if len(content.strip()) > 63:
                 new_post = Post(title=title, seo_overview=overview,canonical_url=canonical_url,
                                 thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
                 new_post.save()
