@@ -135,14 +135,14 @@ def series(request, series_id, series_slug):
                 'pagination': True,
                 'meta_series': True,
                 'page_range': all_posts.get_elided_page_range(number=page),
-                'title': series.title
+                'title': series.name
             }
         else:
             context = {
                 'series': series,
                 'posts': posts,
                 'meta_series': True,
-                'title': series.title
+                'title': series.name
             }
         return render(request, "core/series.html", context)
     except Exception as e:
