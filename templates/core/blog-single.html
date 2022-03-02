@@ -427,8 +427,27 @@
 <script>
   mbtTOC();
 </script>
-<!-- <script>
+<script>
+  function setCookie(cName, cValue, expDays) {
+        let date = new Date();
+        date.setTime(date.getTime() + (expDays * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+}
+  function getCookie(cName) {
+      const name = cName + "=";
+      const cDecoded = decodeURIComponent(document.cookie); //to be careful
+      const cArr = cDecoded .split('; ');
+      let res;
+      cArr.forEach(val => {
+          if (val.indexOf(name) === 0) res = val.substring(name.length);
+      })
+      return res;
+}
+
   function subscribeToNewsletter() {
+    let revueCookie = getCookie('revue');
+    if(revueCookie == null){
         Swal.fire({
           title: "<strong>Subscribe to our newsletters</strong>",
           icon: "info",
@@ -448,10 +467,12 @@
           showCancelButton: false,
           showConfirmButton: false,
         });
+        setCookie('revue', true, 7);
+        }
       }
 
       window.onload = subscribeToNewsletter
-</script> -->
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/show-language/prism-show-language.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.23.0/plugins/copy-to-clipboard/prism-copy-to-clipboard.js"></script>
