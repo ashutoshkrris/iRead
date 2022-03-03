@@ -63,11 +63,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [The question is not can you build it, but rather should you build it](http://ireadblog.com/posts/97/the-question-is-not-can-you-build-it-but-rather-should-you-build-it)
 - [Get Location Information of IP Address Using Python](http://ireadblog.com/posts/96/get-location-information-of-ip-address-using-python)
 - [Reading Console Inputs in JavaScript](http://ireadblog.com/posts/94/reading-console-inputs-in-javascript)
 - [Hangman Game using Python](http://ireadblog.com/posts/93/hangman-game-using-python)
 - [abs&lpar;&rpar; function in Python](http://ireadblog.com/posts/91/abs-function-in-python)
-- [How to add subscribers to your Revue newsletter programmatically?](http://ireadblog.com/posts/89/how-to-add-subscribers-to-your-revue-newsletter-programmatically)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
