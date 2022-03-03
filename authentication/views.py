@@ -44,8 +44,7 @@ def error_500(request):
 
 
 def email_validation(request):
-    email = request.GET.get('email')
-    print(email)
+    email = request.GET.get('email').strip()
     pattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if Account.objects.filter(email=email).exists():
         return JsonResponse({'email_error': 'You are already registered. Please login to continue.'})
@@ -55,7 +54,7 @@ def email_validation(request):
 
 
 def username_validation(request):
-    username = request.GET.get('username')
+    username = request.GET.get('username').strip()
     if Account.objects.filter(username=username).exists():
         return JsonResponse({'username_error': 'Username is already taken. Please choose another'})
     if len(username) < 5:
@@ -172,15 +171,15 @@ def signup(request):
         email = request.POST.get('email')
         username = request.POST.get('username')
         password = request.POST.get('password1')
-        new_user = Account(first_name=fname, last_name=lname,
-                           email=email, username=username, password=password)
+        new_user = Account(first_name=fname.strip(), last_name=lname,
+                           email=email.strip(), username=username.strip(), password=password.strip())
         new_user.password = make_password(new_user.password)
         new_user.is_active = True
         new_user.save()
         user = Account.objects.get(username=username)
         try:
             FollowersModel(user=user).save()
-            added = add_subscriber(email, fname, lname, False)
+            add_subscriber(email, fname, lname, False)
         except Exception:
             pass
         try:
