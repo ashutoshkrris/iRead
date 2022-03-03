@@ -27,7 +27,6 @@ function checkPwd() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         if (data.password_error) {
           checkPasswordBtn.innerHTML = "Check Password";
           oldPasswordField.classList.add("is-invalid");

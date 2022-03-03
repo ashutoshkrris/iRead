@@ -41,13 +41,11 @@ $(".like").click(function (e) {
       id: id,
     },
     success: function (data) {
-      console.log(data);
       var ele = document.getElementById("like_dislike");
-      console.log(ele);
-      if (data.is_liked == true) {
+      if (data.is_liked) {
         ele.className = "fa fa-thumbs-up";
         ele.innerHTML = ` ${data.total_likes}`;
-      } else if (data.is_liked == false) {
+      } else if (!data.is_liked) {
         ele.className = "fa fa-thumbs-o-up";
         ele.innerHTML = ` ${data.total_likes}`;
       } else {

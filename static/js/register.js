@@ -19,12 +19,13 @@ emailField.addEventListener("keyup", (e) => {
   emailFeedBackArea.style.display = "none";
 
   if (emailVal.length > 0) {
-    fetch("/accounts/validate-email/", {
-      body: JSON.stringify({ email: emailVal }),
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    $.ajax({
+      url: "/accounts/validate-email",
+      type: "GET",
+      data: {
+        email: emailVal,
+      },
+      success: function (data) {
         if (data.email_error) {
           sendOtpBtn.disabled = true;
           emailField.classList.add("is-invalid");
@@ -33,7 +34,8 @@ emailField.addEventListener("keyup", (e) => {
         } else {
           sendOtpBtn.removeAttribute("disabled");
         }
-      });
+      },
+    });
   }
 });
 
@@ -44,12 +46,13 @@ usernameField.addEventListener("keyup", (e) => {
   usernameFeedBackArea.style.display = "none";
 
   if (usernameVal.length > 0) {
-    fetch("/accounts/validate-username/", {
-      body: JSON.stringify({ username: usernameVal }),
-      method: "POST",
-    })
-      .then((res) => res.json())
-      .then((data) => {
+    $.ajax({
+      url: "/accounts/validate-username",
+      type: "GET",
+      data: {
+        username: usernameVal,
+      },
+      success: function (data) {
         if (data.username_error) {
           sendOtpBtn.disabled = true;
           usernameField.classList.add("is-invalid");
@@ -58,7 +61,8 @@ usernameField.addEventListener("keyup", (e) => {
         } else {
           sendOtpBtn.removeAttribute("disabled");
         }
-      });
+      },
+    });
   }
 });
 
@@ -131,7 +135,6 @@ function sendOTP() {
       fname: fname,
     },
     success: function (data) {
-      console.log(data);
       sendOtpBtn.innerHTML = "Get OTP";
       if (data.otp_error) {
         otpFeedBackArea.style.display = "block";
@@ -166,12 +169,10 @@ function verifyOTP() {
         verifyOtpBtn.innerHTML =
           '<div class="spinner-border text-light" role="status"><span class="sr-only">Loading...</span></div>';
         document.getElementById("signupForm").submit();
-
       }
     },
   });
 }
-
 
 togglePassword1.addEventListener("click", function (e) {
   // toggle the type attribute

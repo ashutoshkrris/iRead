@@ -19,9 +19,9 @@ from django.views.decorators.csrf import csrf_exempt
 from .middlewares.auth import auth_middleware,login_excluded
 
 urlpatterns = [
-    path('find-email/', csrf_exempt(find_email), name='find_email'),
-    path('validate-email/', csrf_exempt(email_validation), name='email_validate'),
-    path('validate-username/', csrf_exempt(username_validation), name='username_validate'),
+    path('find-email/', find_email, name='find_email'),
+    path('validate-email', email_validation, name='email_validate'),
+    path('validate-username/', username_validation, name='username_validate'),
     path('validate-password/', csrf_exempt(password_validation),name='password_validate'),
     path('match-passwords/', csrf_exempt(match_passwords),name='password_match'),
     path('check-passwords/', csrf_exempt(check_passwords), name='password_check'),

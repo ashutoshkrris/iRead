@@ -44,21 +44,20 @@ def error_500(request):
 
 
 def email_validation(request):
-    data = json.loads(request.body)
-    email = data['email']
+    email = request.GET.get('email')
+    print(email)
     pattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     if Account.objects.filter(email=email).exists():
-        return JsonResponse({'email_error': 'You are already registered. Please login to continue.'}, status=409)
+        return JsonResponse({'email_error': 'You are already registered. Please login to continue.'})
     if not bool(re.match(pattern, email)):
         return JsonResponse({'email_error': 'Please enter a valid email address.'})
     return JsonResponse({'email_valid': True})
 
 
 def username_validation(request):
-    data = json.loads(request.body)
-    username = data['username']
+    username = request.GET.get('username')
     if Account.objects.filter(username=username).exists():
-        return JsonResponse({'username_error': 'Username is already taken. Please choose another'}, status=409)
+        return JsonResponse({'username_error': 'Username is already taken. Please choose another'})
     if len(username) < 5:
         return JsonResponse({'username_error': 'Username must be atleast 5 characters long'})
     return JsonResponse({'username_valid': True})
@@ -236,10 +235,9 @@ def logout(request):
 
 
 def find_email(request):
-    data = json.loads(request.body)
-    email = data['email']
+    email = request.GET.get('email')
     if not Account.objects.filter(email=email).exists():
-        return JsonResponse({'email_error': 'You are not registered. Please signup to continue.'}, status=404)
+        return JsonResponse({'email_error': 'You are not registered. Please signup to continue.'})
     return JsonResponse({'email_valid': True})
 
 
