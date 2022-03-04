@@ -43,6 +43,16 @@
             </div>
         </div>
         {% endfor %}
+        <div class="separator" style="margin-top: 30px; margin-bottom: 30px">
+        <h2>Total</h2>
+      </div>
+        <div class="card mb-3">
+            <div class="card-body">
+                <p class="card-text font-weight-bold"><strong>Total Published Posts:</strong> {{total_published_posts}} | <strong>Total Posts:</strong> {{total_posts}}
+                <span style="float: right;" class="font-weight-bold"><i class="fa fa-eye" aria-hidden="true" title="{{post.views}}">&nbsp;{{total_views|humanize_views}}</i>&nbsp;&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true">&nbsp;{{total_likes}}</i>&nbsp;&nbsp;<i class="fa fa-comment" aria-hidden="true">&nbsp;{{total_comments}}</i></span>
+                </p>
+            </div>
+        </div>
       </div>
     </div>
   </div>

@@ -225,7 +225,7 @@ class Login(View):
                 error_msg = "Password is incorrect."
         else:
             error_msg = "You are not registered yet."
-        return render(request, "authentication/login.html", {'error': error_msg, "title":"Log In"})
+        return render(request, "authentication/login.html", {'error': error_msg, "title": "Log In"})
 
 
 def logout(request):
@@ -272,7 +272,7 @@ def change_password(request):
 
 def profile(request, username):
     user_series = None
-    followers,followings = 0,0
+    followers, followings = 0, 0
     try:
         user = Account.objects.get(username=username)
     except Account.DoesNotExist:
@@ -483,7 +483,7 @@ def stats(request, username):
         user = Account.objects.get(id=request.session.get('user_id'))
         if not user.username == username:
             raise Http404()
-        user_posts = Post.objects.filter(author=user)    
+        user_posts = Post.objects.filter(author=user)
         sorting = request.GET.get('sort_by')
         if sorting == 'likes':
             user_posts = user_posts.order_by('-likes')
@@ -491,6 +491,23 @@ def stats(request, username):
             user_posts = user_posts.order_by('-comments')
         elif sorting == 'views':
             user_posts = user_posts.order_by('-views')
-        return render(request, 'authentication/stats.html', {'posts': user_posts, 'user': user})
+        total_views, total_likes, total_comments, total_posts, total_published_posts = 0, 0, 0, 0, 0
+        for post in user_posts:
+            total_views += post.views
+            total_likes += post.likes
+            total_comments += post.comments
+            total_posts += 1
+            total_published_posts += 1 if post.published else 0
+
+        context = {
+            'posts': user_posts,
+            'user': user,
+            'total_views': total_views,
+            'total_likes': total_likes,
+            'total_comments': total_comments,
+            'total_posts': total_posts,
+            'total_published_posts': total_published_posts
+        }
+        return render(request, 'authentication/stats.html', context)
     except Account.DoesNotExist:
         raise Http404()
