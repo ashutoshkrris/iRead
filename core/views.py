@@ -213,8 +213,7 @@ def single(request, post_id, slug):
             'comments': comments,
             'liked_posts': liked,
             'total_likes': total_likes,
-            'meta_post': True,
-            'shorty_api_key': config("SHORTY_API_KEY")
+            'meta_post': True
         }
         if post.canonical_url:
             post_original_url = urlparse(post.canonical_url).netloc
