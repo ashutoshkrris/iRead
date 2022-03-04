@@ -1,4 +1,4 @@
-
+{% load custom_tags %}
 <button
   class="btn btn-light mr-3 like"
   id="{{post.id}}"
@@ -31,5 +31,5 @@
   style="color: black"
   id="like_dislike"
   title="{{post.views}}"
-  > {{post.views}}</i
+  > {{post.views|humanize_views}}</i
   >
