@@ -483,7 +483,14 @@ def stats(request, username):
         user = Account.objects.get(id=request.session.get('user_id'))
         if not user.username == username:
             raise Http404()
-        user_posts = Post.objects.filter(author=user)
+        user_posts = Post.objects.filter(author=user)    
+        sorting = request.GET.get('sort_by')
+        if sorting == 'likes':
+            user_posts = user_posts.order_by('-likes')
+        elif sorting == 'comments':
+            user_posts = user_posts.order_by('-comments')
+        elif sorting == 'views':
+            user_posts = user_posts.order_by('-views')
         return render(request, 'authentication/stats.html', {'posts': user_posts, 'user': user})
     except Account.DoesNotExist:
         raise Http404()

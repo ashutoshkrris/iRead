@@ -10,64 +10,8 @@
       />
       <div class="bio-body">
         <h2>
-          {{user.get_full_name}} (@{{user.username}}) {% if request.session.user_id == user.id %}
-
-          <a href="{% url 'edit_profile' user.username %}"
-            ><i
-              class="fa fa-pencil-square-o ml-2"
-              aria-hidden="true"
-              style="color: black"
-            ></i
-          ></a>
-          {% else %}
-          <br />
-          {% if request.session.user_id %} {% if is_following %}
-          <a
-            type="button"
-            class="btn mb-2 mt-2 mb-md-0 btn-danger btn-round"
-            style="width: 128.5px; height: 44px; color: white"
-            id="followBtn"
-            role="button"
-            href="{% url 'follow_user' user.username %}"
-          >
-            Unfollow <i class="fa fa-user-times" aria-hidden="true"></i>
-          </a>
-          {% else %}
-          <a
-            type="button"
-            class="btn mb-2 mt-2 mb-md-0 btn-success btn-round"
-            style="width: 128.5px; height: 44px; color: white"
-            id="followBtn"
-            role="button"
-            href="{% url 'follow_user' user.username %}"
-          >
-            Follow <i class="fa fa-user-plus" aria-hidden="true"></i>
-          </a>
-          {% endif %}
-
-          <button
-            type="button"
-            class="btn mb-2 mt-2 mb-md-0 btn-primary btn-round"
-            id="msgBtn"
-          >
-            Message <i class="fa fa-envelope" aria-hidden="true"></i>
-          </button>
-
-          {% endif %} {% endif %}
+          {{user.get_full_name}} (@{{user.username}}) 
         </h2>
-        <p id="p_posts">
-          <strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong
-            >{{followers}}</strong
-          >
-          followers &nbsp;&nbsp;<strong>{{followings}}</strong> following
-        </p>
-        <small id="small_posts"
-          ><strong>{{total_posts}}</strong> posts &nbsp;&nbsp;<strong
-            >{{followers}}</strong
-          >
-          followers &nbsp;&nbsp;<strong>{{followings}}</strong> following</small
-        >
-        <p>{% if user.about %}{{user.about}}{% endif %}<br />{% if user.location %}{{user.location}}{% endif %}</p>
       </div>
     </div>
     <div class="row blog-entries">
@@ -77,6 +21,18 @@
         <h2>Your Stats</h2>
       </div>
       <div class="row">
+          <div class="col-md-4"></div>
+          <div class="col-md-4">
+            <form action="{% url 'stats' request.session.username %}" method="GET" id="sortForm">
+                <select class="form-select mb-3" aria-label="Sort by" id="sortBy" name="sort_by" onchange="selectSorting()">
+                    <option value="recent" selected>Recently Created</option>
+                    <option value="views">Most Views</option>
+                    <option value="likes">Most Likes</option>
+                    <option value="comments">Most Comments</option>
+                </select>
+            </form>
+        </div>
+          <div class="col-md-4"></div>
         {% for post in posts %}
         <div class="card mb-3">
             <div class="card-body">
@@ -91,88 +47,26 @@
     </div>
   </div>
 </section>
-{% endblock content %} {% block js_down %}
+{% endblock content %}
+{% block js_down %}
 <script>
-  function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie !== "") {
-      var cookies = document.cookie.split(";");
-      for (var i = 0; i < cookies.length; i++) {
-        var cookie = jQuery.trim(cookies[i]);
-        // Does this cookie string begin with the name we want?
-        if (cookie.substring(0, name.length + 1) === name + "=") {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
+    function selectSorting(){
+        const sortForm = document.getElementById("sortForm");
+        const sorting = document.getElementById("sortBy").value;
+        sortForm.submit();
+        setCookie('sort', sorting, 1);
     }
-    return cookieValue;
-  }
-</script>
-<script>
-  $("#msgBtn").click(function (e) {
-    Swal.fire({
-      title: "Write Your Message",
-      input: "textarea",
-      inputAttributes: {
-        autocapitalize: "off",
-      },
-      showCancelButton: true,
-      confirmButtonText: "Send",
-      showLoaderOnConfirm: true,
-      preConfirm: (message) => {
-        return fetch(`{% url 'send_message' user.username %}`, {
-          body: JSON.stringify({ message: message }),
-          method: "POST",
-          credentials: "same-origin",
-          headers: {
-            "X-CSRFToken": getCookie("csrftoken"),
-          },
-        })
-          .then((res) => res.json())
-          .then((response) => {
-            if (response.message_error) {
-              throw new Error(response.message_error);
-            } else if (response.message_success) {
-              icon: "success", Swal.fire(`${response.message_success}`);
-            }
-          })
-          .catch((error) => {
-            Swal.showValidationMessage(`${error}`);
-          });
-      },
-      allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
-      if (result.message_success) {
-        Swal.fire({
-          icon: "success",
-          title: `${result.message_success}`,
-        });
-      }
-    });
-  });
-</script>
-<script>
-  $("#followBtn").click(function (e) {
-    e.preventDefault();
-    $.ajax({
-      url: this.href,
-      success: function (response) {
-        if (response["is_following"]) {
-          $("#followBtn").html(
-            `Unfollow <i class="fa fa-user-times" aria-hidden="true"></i>`
-          );
-          $("#followBtn").removeClass("btn-success");
-          $("#followBtn").addClass("btn-danger");
+
+    function getSelectedValue(){
+        const selectedSort = getCookie('sort');
+        const sorting = document.getElementById("sortBy")
+        if(selectedSort !== null){
+            sorting.value = selectedSort;
         } else {
-          $("#followBtn").html(
-            `Follow <i class="fa fa-user-plus" aria-hidden="true"></i>`
-          );
-          $("#followBtn").removeClass("btn-danger");
-          $("#followBtn").addClass("btn-success");
+            sorting.value = 'recent';
         }
-      },
-    });
-  });
+    }
+
+    window.onload = getSelectedValue;
 </script>
 {% endblock js_down %}
