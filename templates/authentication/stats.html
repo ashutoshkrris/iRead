@@ -69,7 +69,7 @@
     function getSelectedValue(){
         const selectedSort = window.sessionStorage.getItem('sort');
         const sorting = document.getElementById("sortBy")
-        if(selectedSort == null || selectedSort == ''€){
+        if(selectedSort == null || selectedSort == ''){
             sorting.value = 'recent';
         } else {
             sorting.value = selectedSort;
