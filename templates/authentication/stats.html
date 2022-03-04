@@ -62,16 +62,17 @@
         const sortForm = document.getElementById("sortForm");
         const sorting = document.getElementById("sortBy").value;
         sortForm.submit();
-        setCookie('sort', sorting, 1);
+        window.sessionStorage.setItem('sort', sorting);
+        // setCookie('sort', sorting, 1);
     }
 
     function getSelectedValue(){
-        const selectedSort = getCookie('sort');
+        const selectedSort = window.sessionStorage.getItem('sort');
         const sorting = document.getElementById("sortBy")
-        if(selectedSort !== null){
-            sorting.value = selectedSort;
-        } else {
+        if(selectedSort == null !! selectedSort == ''€){
             sorting.value = 'recent';
+        } else {
+            sorting.value = selectedSort;
         }
     }
 
