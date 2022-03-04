@@ -42,7 +42,7 @@ class Post(models.Model):
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
     content = RichTextUploadingField()
     timestamp = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
     thumbnail = models.ImageField(upload_to="blog/thumbnails")
     published = models.BooleanField(default=True)
@@ -76,7 +76,7 @@ class Series(models.Model):
     posts = models.ManyToManyField(Post, related_name='post_series', blank=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
-    date_updated = models.DateTimeField(auto_now_add=True)
+    date_updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name_plural = 'series'

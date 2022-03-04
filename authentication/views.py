@@ -476,3 +476,14 @@ def follow_user(request, username):
             notification_type=3, to_user=to_follow, from_user=logged_user).save()
 
     return JsonResponse({'is_following': is_following})
+
+
+def stats(request, username):
+    try:
+        user = Account.objects.get(id=request.session.get('user_id'))
+        if not user.username == username:
+            raise Http404()
+        user_posts = Post.objects.filter(author=user)
+        return render(request, 'authentication/stats.html', {'posts': user_posts, 'user': user})
+    except Account.DoesNotExist:
+        raise Http404()

@@ -297,6 +297,9 @@
                     <a href="{% url 'user_post_feed' request.session.username %}" class="dropdown-item" target="_blank">
                       RSS Feed
                     </a>
+                    <a href="{% url 'stats' request.session.username %}" class="dropdown-item" target="_blank">
+                      Your Stats
+                    </a>
                     <a class="dropdown-item" href="{% url 'change_password' %}"
                       >Change Password</a
                     >

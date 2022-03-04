@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from .views import change_password, check_passwords, collect_password, edit_profile, edit_profile_image, find_email, forgot_password, password_validation, send_message, signup, email_validation, username_validation, match_passwords,send_otp,check_otp, Login, logout, profile, follow_user
+from .views import change_password, check_passwords, collect_password, edit_profile, edit_profile_image, find_email, forgot_password, password_validation, send_message, signup, email_validation, stats, username_validation, match_passwords,send_otp,check_otp, Login, logout, profile, follow_user
 from django.views.decorators.csrf import csrf_exempt
 from .middlewares.auth import auth_middleware,login_excluded
 
@@ -38,4 +38,5 @@ urlpatterns = [
     path('collect-password', collect_password, name='collect-password'),
     path('profile/<username>/send-message', auth_middleware(send_message), name='send_message'),
     path('profile/<username>/follow', auth_middleware(follow_user), name='follow_user'),
+    path('profile/<username>/stats', auth_middleware(stats), name='stats')
 ]
