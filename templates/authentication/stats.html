@@ -14,13 +14,11 @@
         </h2>
       </div>
     </div>
-    <div class="row blog-entries">
-      
 
-      <div class="separator" style="margin-top: 30px; margin-bottom: 30px">
+      <div class="separator ml-1 mr-1" style="margin-top: 30px; margin-bottom: 30px">
         <h2>Your Stats</h2>
       </div>
-      <div class="row">
+      <div class="row ml-1 mr-1">
           <div class="col-md-4"></div>
           <div class="col-md-4">
             <form action="{% url 'stats' request.session.username %}" method="GET" id="sortForm">
@@ -54,7 +52,7 @@
             </div>
         </div>
       </div>
-    </div>
+
   </div>
 </section>
 {% endblock content %}
