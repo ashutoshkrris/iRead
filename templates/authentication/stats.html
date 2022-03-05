@@ -35,7 +35,7 @@
         <div class="card mb-3">
             <div class="card-body">
                 <h5 class="card-title"><a href="{% url 'single' post.id post.slug %}"><strong>{{post.title}}</strong></a></h5>
-                <p class="card-text"><strong>Published:</strong> {{post.timestamp}} | <strong>Edited:</strong> {{post.date_updated}}
+                <p class="card-text"><strong>Published:</strong> {{post.timestamp}}
                 <span style="float: right;"><i class="fa fa-eye" aria-hidden="true" title="{{post.views}}">&nbsp;{{post.views|humanize_views}}</i>&nbsp;&nbsp;<i class="fa fa-thumbs-up" aria-hidden="true">&nbsp;{{post.likes}}</i>&nbsp;&nbsp;<i class="fa fa-comment" aria-hidden="true">&nbsp;{{post.comments}}</i></span>
                 </p>
             </div>
