@@ -126,7 +126,9 @@
         this.setHighlighter(
           new CKEDITOR.plugins.codesnippet.highlighter({
             languages: {
+              actionscript: "ActionScript",
               apache: "Apache",
+              applescript: "AppleScript",
               arduino: "Arduino",
               bash: "Bash",
               basic: "BASIC",
@@ -136,11 +138,17 @@
               cpp: "C++",
               cs: "C#",
               css: "CSS",
+              curl: "cURL",
               dart: "Dart",
               diff: "Diff",
               django: "Django",
+              dns: "DNS Zone File",
               dockerfile: "Dockerfile",
+              fortran: "Fortran",
               go: "Go",
+              gradle: "Gradle",
+              graphql: "GraphQL",
+              groovy: "Groovy",
               handlebars: "Handlebars",
               haskell: "Haskell",
               html: "HTML",
@@ -151,6 +159,7 @@
               json: "JSON",
               julia: "Julia",
               kotlin: "Kotlin",
+              lua: "Lua",
               makefile: "Makefile",
               markdown: "Markdown",
               matlab: "Matlab",
@@ -158,8 +167,11 @@
               objectivec: "Objective-C",
               perl: "Perl",
               php: "PHP",
+              pgsql: "PostgreSQL",
               powershell: "PowerShell",
+              processing: "Processing",
               python: "Python",
+              "python-repl": "Python REPL",
               r: "R",
               ruby: "Ruby",
               rust: "Rust",
@@ -167,10 +179,14 @@
               scilab: "Scilab",
               scss: "SCSS",
               shell: "Shell",
+              solidity: "Solidity",
+              terraform: "Terraform",
               sql: "SQL",
               swift: "Swift",
               typescript: "TypeScript",
+              txt: "Plaintext",
               vbscript: "VBScript",
+              vim: "Vim Script",
               xhtml: "XHTML",
               xml: "XML",
               yaml: "YAML",
@@ -214,4 +230,4 @@
   };
 })();
 CKEDITOR.config.codeSnippet_codeClass = "hljs";
-CKEDITOR.config.codeSnippet_theme = "default";
+CKEDITOR.config.codeSnippet_theme = "monokai_sublime";
