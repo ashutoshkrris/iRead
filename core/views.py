@@ -610,5 +610,5 @@ class RemoveNotification(View):
             return JsonResponse({'error': True})
 
 
-def ads(request):
-    return render(request, 'core/important-docs/ads.txt', content_type='text/plain')
+def robots(request):
+    return render(request, 'core/important-docs/robots.txt', content_type='text/plain')

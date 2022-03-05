@@ -23,7 +23,7 @@ from django.views.decorators.cache import never_cache
 from ckeditor_uploader import views
 from django.contrib.sitemaps.views import sitemap
 from core.sitemaps import PostSitemap, CategorySitemap, SeriesSitemap, TagSitemap
-from core.views import ads
+from core.views import robots
 
 sitemaps = {
     'posts': PostSitemap,
@@ -48,7 +48,7 @@ urlpatterns = [
     path('payment/', include('payment.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
          name='django.contrib.sitemaps.views.sitemap'),
-    path('ads.txt', ads, name='ads')
+    path('robots.txt', robots, name='robots')
 ]
 
 if settings.DEBUG:
