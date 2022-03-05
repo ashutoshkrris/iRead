@@ -62,12 +62,11 @@
         const sortForm = document.getElementById("sortForm");
         const sorting = document.getElementById("sortBy").value;
         sortForm.submit();
-        window.sessionStorage.setItem('sort', sorting);
-        // setCookie('sort', sorting, 1);
     }
 
     function getSelectedValue(){
-        const selectedSort = window.sessionStorage.getItem('sort');
+        const params = new URLSearchParams(window.location.search)
+        const selectedSort = params.get('sort_by')
         const sorting = document.getElementById("sortBy")
         if(selectedSort == null || selectedSort == ''){
             sorting.value = 'recent';
