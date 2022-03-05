@@ -273,7 +273,6 @@
                 <li class="nav-item dropdown">
                   <a
                     class="nav-link dropdown-toggle"
-                    id="category"
                     id="dropdown05"
                     data-toggle="dropdown"
                     aria-haspopup="true"
@@ -304,26 +303,6 @@
                   </div>
                 </li>
                 {% endif %}
-                <li class="nav-item dropdown">
-                  <a
-                    class="nav-link dropdown-toggle"
-                    id="category"
-                    id="dropdown05"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
-                    >Categories</a
-                  >
-                  <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    {% for category in categories %}
-                    <a
-                      class="dropdown-item"
-                      href="{% url 'category' category.name %}"
-                      >{{category}}</a
-                    >
-                    {% endfor %}
-                  </div>
-                </li>
                 <li class="nav-item">
                   <a class="nav-link" id="about" href="{% url 'about' %}"
                     >About</a
@@ -382,7 +361,8 @@
               <a href="{% url 'dashboard' %}">Sponsor</a> &bullet;
               <a href="{% url 'privacy_policy' %}">Privacy Policy</a> &bullet;
               <a href="{% url 'terms_conditions' %}">T&C</a> &bullet;
-              <a href="{% url 'refund_policy' %}">Refund Policy</a>
+              <a href="{% url 'refund_policy' %}">Refund Policy</a> &bullet;
+              <a href="https://github.com/ashutoshkrris/iRead#api-documentation" target="_blank">API Documentation</a>
               <center><hr width="50%" /></center>
               <a href="{{links.twitter}}" target="_blank"
                 ><span class="fa fa-twitter">&nbsp;&nbsp;</span></a
@@ -469,105 +449,6 @@
     <script src="{% static 'js/jquery.stellar.min.js' %}"></script>
 
     <script src="{% static 'js/main.js' %}"></script>
-    <script>
-      $(".bulletin").click(function (e) {
-        Swal.fire({
-          title: "Enjoy Our Bulletins",
-          html: `
-        <br>
-        <a href="http://feeds.feedburner.com/ireadblog" title="Subscribe to our feed" rel="alternate" type="application/rss+xml"><img src="https://feedburner.google.com/fb/images/pub/feed-icon32x32.png" alt="" style="border:0"/></a><a href="http://feeds.feedburner.com/ireadblog" title="Subscribe to iRead feed" rel="alternate" type="application/rss+xml"> Subscribe in a reader</a>
-        <p class="mt-3"><strong>OR</strong></p>
-        <form action="" method="POST" id="bltForm">
-          {% csrf_token %}
-          <input type="text" id="name" name="name" class="swal2-input" placeholder="Name">
-        <input type="email" id="email" name="email" class="swal2-input" placeholder="Email address">
-        <select name="category" id="category" class="swal2-input">
-          <option disabled selected>Select Category</option>
-        {% for cat in categories %}
-          <option value="{{cat.id}}">{{cat}}</option>
-        {% endfor %}
-        </select>
-        <select name="recurring" id="recurring" class="swal2-input">
-          <option disabled selected>Select Type</option>
-        {% for rec in recurrings %}
-          <option value="{{rec.id}}">{{rec}}</option>
-        {% endfor %}
-        </select>
-        </form>
-        `,
-          confirmButtonText: "Subscribe",
-          focusConfirm: false,
-          customClass: {
-            confirmButton: "btn btn-primary btn-lg",
-          },
-          preConfirm: () => {
-            const email = Swal.getPopup().querySelector("#email").value;
-            const name = Swal.getPopup().querySelector("#name").value;
-            const category = Swal.getPopup().querySelector("#category").value;
-            const recurring = Swal.getPopup().querySelector("#recurring").value;
-            const csrftoken = $("input[name=csrfmiddlewaretoken]").val();
-            var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-            if (!email) {
-              Swal.showValidationMessage(`Email address is missing.`);
-            } else if (String(email).search(pattern) == -1) {
-              Swal.showValidationMessage(`Enter a valid email address`);
-            } else if (!name) {
-              Swal.showValidationMessage(`Name is missing`);
-            } else if (!category) {
-              Swal.showValidationMessage(`Category is missing`);
-            } else if (!recurring) {
-              Swal.showValidationMessage(`Type is missing`);
-            }
-            return {
-              email: email,
-              name: name,
-              category: category,
-              recurring: recurring,
-              csrftoken: csrftoken,
-            };
-          },
-        }).then((result) => {
-          if (result.value) {
-            fetch("/bulletins/subscribe", {
-              body: JSON.stringify({
-                email: result.value.email,
-                name: result.value.name,
-                category: result.value.category,
-                recurring: result.value.recurring,
-              }),
-              headers: {
-                "X-CSRFToken": result.value.csrftoken,
-              },
-              method: "POST",
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                if (data.registration_duplicate) {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Already Subscribed",
-                    text: `You've already subscribed to our bulletins`,
-                  });
-                } else if (data.registration_success) {
-                  Swal.fire({
-                    icon: "success",
-                    title: "Subscribed",
-                    html: `We'll send you <strong>${
-                      data.category
-                    }</strong> related bulletins ${data.recurring.toLowerCase()}`,
-                  });
-                } else {
-                  Swal.fire({
-                    icon: "error",
-                    title: "Oops..",
-                    text: `We've encountered some error while subscribing. Please try again.`,
-                  });
-                }
-              });
-          }
-        });
-      });
-    </script>
     <script src="{% static 'js/notification.js' %}"></script>
     {% if error %}
     <script>
