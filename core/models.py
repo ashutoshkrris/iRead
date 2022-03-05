@@ -8,7 +8,6 @@ from authentication.models import Account
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=63)
-    desc = models.TextField(null=True)
 
     class Meta:
         verbose_name_plural = 'categories'
