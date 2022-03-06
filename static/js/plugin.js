@@ -231,3 +231,5 @@
 })();
 CKEDITOR.config.codeSnippet_codeClass = "hljs";
 CKEDITOR.config.codeSnippet_theme = "monokai_sublime";
+CKEDITOR.config.embed_provider =
+  "//iframe.ly/api/oembed?url={url}&callback={callback}&api_key=089f631630ecaaf862abd4";
