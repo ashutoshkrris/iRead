@@ -30,8 +30,9 @@ class LocationInformation:
 
     @staticmethod
     def get_location(request):
-        if request.META.get('HTTP_X_FORWARDED_FOR'):
-            ip_address = request.META.get('HTTP_X_FORWARDED_FOR')
+        x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+        if x_forwarded_for:
+            ip_address = x_forwarded_for.split(',')[0]
         else:
             ip_address = LocationInformation.get_ip()
         response = requests.get(f'https://ipapi.co/{ip_address}/json/').json()
