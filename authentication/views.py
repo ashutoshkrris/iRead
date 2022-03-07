@@ -203,7 +203,7 @@ class Login(View):
                 request.session['username'] = user.username
                 user.last_login = datetime.now()
                 user.save()
-                send_login_alert(user)
+                send_login_alert(request, user)
                 if Login.return_url:
                     return HttpResponseRedirect(Login.return_url)
                 else:
@@ -498,10 +498,10 @@ def stats(request, username):
         raise Http404()
 
 
-def send_login_alert(user):
+def send_login_alert(request, user):
     context = {
         'name': user.first_name,
-        'location_data': LocationInformation.get_location(),
+        'location_data': LocationInformation.get_location(request),
         'current_time': datetime.now()
     }
     send_custom_email(
