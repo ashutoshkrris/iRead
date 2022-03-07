@@ -18,7 +18,7 @@ from django.utils.decorators import method_decorator
 from .middlewares.auth import login_excluded
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls.base import reverse
-from authentication.utils import add_subscriber
+from authentication.utils import LocationInformation, add_subscriber
 from Blog.utils import send_custom_email
 
 
@@ -203,6 +203,7 @@ class Login(View):
                 request.session['username'] = user.username
                 user.last_login = datetime.now()
                 user.save()
+                send_login_alert(user)
                 if Login.return_url:
                     return HttpResponseRedirect(Login.return_url)
                 else:
@@ -495,3 +496,19 @@ def stats(request, username):
         return render(request, 'authentication/stats.html', context)
     except Account.DoesNotExist:
         raise Http404()
+
+
+def send_login_alert(user):
+    context = {
+        'name': user.first_name,
+        'location_data': LocationInformation.get_location(),
+        'current_time': datetime.now()
+    }
+    send_custom_email(
+        receiver_email=user.email,
+        subject=f"New login to your iRead Blog Account",
+        sender_email="no-reply@ireadblog.com",
+        sender_name="iRead Blog",
+        template_name="login_alert.html",
+        **context
+    )

@@ -1,4 +1,5 @@
 from django.shortcuts import redirect
+from Blog.utils import send_custom_email
 from authentication.models import Account, FollowersModel
 from social_core.pipeline.partial import partial
 from django.template.loader import render_to_string
@@ -35,26 +36,30 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
                 'password': local_password,
                 'link': f"{request.scheme}://{request.get_host()}/accounts/change-password/"
             }
-            html_content = render_to_string("emails/password.html", data)
-            text_content = strip_tags(html_content)
-
-            email = EmailMultiAlternatives(
-                f"Temporary Password | iRead",
-                text_content,
-                "iRead <no-reply@iRead.ga>",
-                [user_email]
+            send_custom_email(
+                receiver_email=user_email,
+                subject="Temporary Password",
+                sender_email="no-reply@ireadblog.com",
+                sender_name="iRead Blog",
+                template_name="password.html",
+                **data
             )
-            email.attach_alternative(html_content, "text/html")
-            email.send()
         except Exception as e:
             print(e)
         user.pwd_mail_sent = True
         user.save()
         FollowersModel(user=user).save()
         add_subscriber(user_email, user_name)
-        send_welcome_email(user)
-    strategy.session_set('user_id',user.id)
-    strategy.session_set('username',user.username)
-    
+        send_custom_email(
+            receiver_email=user.email,
+            subject="Welcome to iRead Blog 🎉🎉",
+            sender_email="no-reply@ireadblog.com",
+            sender_name="iRead Blog",
+            template_name="welcome.html",
+            **user
+        )
+    strategy.session_set('user_id', user.id)
+    strategy.session_set('username', user.username)
+
     # continue the pipeline
     return
