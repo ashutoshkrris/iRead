@@ -10,12 +10,10 @@ class EmailThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        print("I am sending email now!!")
         self.email.send()
 
 
 def send_custom_email(receiver_email, subject, sender_email, sender_name, template_name, **kwargs):
-    print(kwargs)
     html_content = render_to_string(f"emails/{template_name}", kwargs)
     text_content = strip_tags(html_content)
 
@@ -26,5 +24,4 @@ def send_custom_email(receiver_email, subject, sender_email, sender_name, templa
         [receiver_email]
     )
     email.attach_alternative(html_content, "text/html")
-    print("Hello Ashutosh")
     EmailThread(email).start()
