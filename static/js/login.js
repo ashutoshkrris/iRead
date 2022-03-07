@@ -24,6 +24,7 @@ emailField.addEventListener("keyup", (e) => {
           emailFeedBackArea.style.display = "block";
           emailFeedBackArea.innerHTML = `<p>${data.email_error}</p>`;
         } else {
+          emailFeedBackArea.style.display = "none";
           loginBtn.removeAttribute("disabled");
         }
       },

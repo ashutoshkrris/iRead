@@ -32,6 +32,7 @@ emailField.addEventListener("keyup", (e) => {
           emailFeedBackArea.style.display = "block";
           emailFeedBackArea.innerHTML = `<p>${data.email_error}</p>`;
         } else {
+          emailFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
       },
@@ -59,6 +60,7 @@ usernameField.addEventListener("keyup", (e) => {
           usernameFeedBackArea.style.display = "block";
           usernameFeedBackArea.innerHTML = `<p>${data.username_error}</p>`;
         } else {
+          usernameFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
       },
@@ -88,6 +90,7 @@ password1Field.addEventListener("keyup", (e) => {
           passwordFeedBackArea.innerHTML = `<p>${data.password_error}</p>`;
           password2Field.readOnly = true;
         } else {
+          passwordFeedBackArea.style.display = "none";
           password2Field.removeAttribute('readOnly');
           sendOtpBtn.removeAttribute("disabled");
         }
@@ -118,6 +121,7 @@ password2Field.addEventListener("keyup", (e) => {
           passwordFeedBackArea.style.display = "block";
           passwordFeedBackArea.innerHTML = `<p>${data.password_mismatch}</p>`;
         } else {
+          passwordFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
       });
