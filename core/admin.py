@@ -25,7 +25,8 @@ def toggle_tweeted(modeladmin, request, queryset):
 @admin.action(description="Tweet this post")
 def tweet_this_post(modeladmin, request, queryset):
     for obj in queryset:
-        tweet_new_post(obj, obj.tags.all())
+        if not obj.tweeted:
+            tweet_new_post(obj, obj.tags.all())
 
 
 @admin.register(Post)
