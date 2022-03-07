@@ -56,27 +56,3 @@ def get_latest_tweet():
     date = data["created_at"]
     return link, tweet_id, full_text, retweeted, date
 
-
-def create_new_dev_post(post, tags):
-    url = "https://dev.to/api/articles"
-    headers = {
-        "api-key": config("DEV_API_KEY")
-    }
-    if settings.DEBUG:
-        main_image = f"http://127.0.0.1:8000/static/{post.thumbnail.url}"
-    else:
-        main_image = post.thumbnail.url
-    data = {
-        "article": {
-            "title": f"{post.title}",
-            "published": True,
-            "body_markdown": f"{post.content}",
-            "tags": tags,
-            "canonical_url": f"https://ireadblog.com{post.get_absolute_url()}",
-        }
-    }
-    try:
-        x = requests.post(url=url, headers=headers, json=data)
-        print(x)
-    except Exception as e:
-        print(e)
