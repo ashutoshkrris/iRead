@@ -19,6 +19,7 @@ from .middlewares.auth import login_excluded
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.urls.base import reverse
 from authentication.utils import add_subscriber
+from Blog.utils import send_custom_email
 
 
 UPPERCASE = list(string.ascii_uppercase)
@@ -114,17 +115,14 @@ def send_otp(request):
             'receiver': user_name.capitalize(),
             'otp': otp
         }
-        html_content = render_to_string("emails/otp.html", data)
-        text_content = strip_tags(html_content)
-
-        email = EmailMultiAlternatives(
-            f"One Time Password | iRead",
-            text_content,
-            "iRead <no-reply@ireadblog.com>",
-            [user_email]
+        send_custom_email(
+            receiver_email=user_email,
+            subject="One Time Password",
+            sender_email="no-reply@ireadblog.com",
+            sender_name="iRead Blog",
+            template_name="otp.html",
+            **data
         )
-        email.attach_alternative(html_content, "text/html")
-        email.send()
         return JsonResponse({'otp_sent': f'An OTP has been sent to {user_email}.'})
     except Exception as e:
         print(e)
@@ -143,24 +141,6 @@ def check_otp(request):
         return JsonResponse({'otp_match': True})
     else:
         return JsonResponse({'otp_mismatch': 'OTP does not match.'})
-
-
-def send_welcome_email(user):
-    data = {
-        'receiver': user.first_name.capitalize(),
-        'edit_profile_url': 'https://ireadblog.com' + reverse('edit_profile', args=[user.username])
-    }
-    html_content = render_to_string("emails/welcome.html", data)
-    text_content = strip_tags(html_content)
-
-    email = EmailMultiAlternatives(
-        f"Welcome to iRead Blog 🎉🎉",
-        text_content,
-        "iRead <no-reply@ireadblog.com>",
-        [user.email]
-    )
-    email.attach_alternative(html_content, "text/html")
-    email.send()
 
 
 @login_excluded('home')
@@ -183,7 +163,14 @@ def signup(request):
         except Exception:
             pass
         try:
-            send_welcome_email(user)
+            send_custom_email(
+                receiver_email=user.email,
+                subject="Welcome to iRead Blog 🎉🎉",
+                sender_email="no-reply@ireadblog.com",
+                sender_name="iRead Blog",
+                template_name="welcome.html",
+                **user
+            )
         except Exception:
             pass
         return render(request, "authentication/login.html", {"message": "You can now login.", "title": "Log In"})
@@ -434,18 +421,15 @@ def send_message(request, username):
                 "sender_email": sender.email,
                 "message": message
             }
-            html_content = render_to_string("emails/message.html", context)
-            text_content = strip_tags(html_content)
-
-            email = EmailMultiAlternatives(
-                f"New Message Received | iRead",
-                text_content,
-                "iRead <no-reply@ireadblog.com>",
-                [receiver.email]
-            )
-            email.attach_alternative(html_content, "text/html")
             try:
-                email.send()
+                send_custom_email(
+                    receiver_email=receiver.email,
+                    subject=f"New Message Received from {sender.get_full_name()}",
+                    sender_email="no-reply@ireadblog.com",
+                    sender_name="iRead Blog",
+                    template_name="message.html",
+                    **context
+                )
                 return JsonResponse({'message_success': 'Message sent successfully.'})
             except Exception:
                 return JsonResponse({'message_error': 'Something went wrong.'})

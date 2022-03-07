@@ -86,7 +86,9 @@ password1Field.addEventListener("keyup", (e) => {
           password1Field.classList.add("is-invalid");
           passwordFeedBackArea.style.display = "block";
           passwordFeedBackArea.innerHTML = `<p>${data.password_error}</p>`;
+          password2Field.readOnly = true;
         } else {
+          password2Field.removeAttribute('readOnly');
           sendOtpBtn.removeAttribute("disabled");
         }
       });
@@ -135,7 +137,7 @@ function sendOTP() {
       fname: fname,
     },
     success: function (data) {
-      sendOtpBtn.innerHTML = "Get OTP";
+      sendOtpBtn.innerHTML = "Send OTP";
       if (data.otp_error) {
         otpFeedBackArea.style.display = "block";
         otpFeedBackArea.innerHTML = `<p class='alert alert-danger'>${data.otp_error}</p>`;

@@ -2,6 +2,7 @@ from hashlib import new
 from django.db.models.functions import Concat
 from django.db.models import Value as V
 from datetime import datetime
+from Blog.utils import send_custom_email
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
 from django.shortcuts import redirect, render
@@ -67,17 +68,14 @@ def contact(request):
             context = {
                 "name": name.split(" ")[0].capitalize()
             }
-            html_content = render_to_string("emails/email.html", context)
-            text_content = strip_tags(html_content)
-
-            email = EmailMultiAlternatives(
-                f"Thanks for contacting iRead",
-                text_content,
-                "iRead <contact@ireadblog.com>",
-                [email]
+            send_custom_email(
+                receiver_email=email,
+                subject=f"Thanks for contacting iRead Blog!",
+                sender_email="contact@ireadblog.com",
+                sender_name="iRead Blog",
+                template_name="email.html",
+                **context
             )
-            email.attach_alternative(html_content, "text/html")
-            email.send()
             return render(request, "core/contact.html", {'message': "We have received your details. We'll contact you soon.", "title": "Contact Us"})
         except Exception:
             return render(request, "core/contact.html", {'error': "We are facing error this time. Please contact later.", "title": "Contact Us"})
