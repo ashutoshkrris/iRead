@@ -1,19 +1,7 @@
 {% extends "core/base.html" %} {% load custom_tags %} {% load static %} 
-{% block title %}{{user.get_full_name}}{% endblock title %} {% block content %}
+{% block title %}Your Stats{% endblock title %} {% block content %}
 <section class="site-section pt-5" style="margin-top: 30px">
   <div class="container">
-    <div class="bio text-center">
-      <img
-        src="{{user.profile_image.url}}"
-        alt="Image Placeholder"
-        class="img-fluid"
-      />
-      <div class="bio-body">
-        <h2>
-          {{user.get_full_name}} (@{{user.username}}) 
-        </h2>
-      </div>
-    </div>
 
       <div class="separator ml-1 mr-1" style="margin-top: 30px; margin-bottom: 30px">
         <h2>Your Stats</h2>
