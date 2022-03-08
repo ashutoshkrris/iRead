@@ -39,16 +39,28 @@
     <meta name="twitter:image" content="{{series.thumbnail.url}}" />
     {% else %}
     <meta name="title" content="{{title}} | iRead" />
+    {% if 'tags' in request.get_full_path %}
+    <meta
+      name="keywords"
+      content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write,{{tag.name}}"
+    />
+    <meta name="description" content="{{tag.name}} content on iRead Blog" />
+    <meta property="og:description" content="{{tag.name}} content on iRead Blog"
+    />
+    <meta name="twitter:description" content="{{tag.name}} content on iRead Blog" />
+    {% else %}
     <meta
       name="keywords"
       content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
     />
     <meta name="description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
-    <meta property="og:title" content="{{title}} | iRead" />
     <meta
       property="og:description"
       content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
     />
+    <meta name="twitter:description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
+    {% endif %}
+    <meta property="og:title" content="{{title}} | iRead" />
     <meta property="og:image" content="{% static 'images/favicon.png' %}" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="iRead" />
@@ -56,7 +68,6 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@iRead_Blog" />
     <meta name="twitter:title" content="{{title}} | iRead" />
-    <meta name="twitter:description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
     <meta name="twitter:image" content="{% static 'images/favicon.png' %}" />
     {% endif %}
     <meta name="robots" content="index, follow">
