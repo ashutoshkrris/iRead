@@ -9,7 +9,7 @@ else:
 
 
 class PostSitemap(Sitemap):
-    changefreq = 'weekly'
+    changefreq = 'daily'
     priority = 0.9
     protocol = protocol
 
@@ -21,7 +21,7 @@ class PostSitemap(Sitemap):
 
 
 class CategorySitemap(Sitemap):
-    changefreq = 'weekly'
+    changefreq = 'daily'
     priority = 0.9
     protocol = protocol
 
@@ -30,7 +30,7 @@ class CategorySitemap(Sitemap):
 
 
 class TagSitemap(Sitemap):
-    changefreq = 'weekly'
+    changefreq = 'daily'
     priority = 0.9
     protocol = protocol
 
@@ -39,7 +39,7 @@ class TagSitemap(Sitemap):
 
 
 class SeriesSitemap(Sitemap):
-    changefreq = 'weekly'
+    changefreq = 'daily'
     priority = 0.9
     protocol = protocol
 
