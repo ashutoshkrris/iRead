@@ -486,7 +486,6 @@ def stats(request, username):
 
         context = {
             'posts': user_posts,
-            'user': user,
             'total_views': total_views,
             'total_likes': total_likes,
             'total_comments': total_comments,
