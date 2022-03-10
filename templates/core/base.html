@@ -266,10 +266,25 @@
                   <a class="nav-link" id="home" href="{% url 'home' %}">Home</a>
                 </li>
                 {% if request.session.user_id %}
-                <li class="nav-item">
-                  <a class="nav-link" id="new_post" href="{% url 'new_post' %}"
-                    >Create Post</a
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    id="dropdown04"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    >Create</a
                   >
+                  <div class="dropdown-menu" aria-labelledby="dropdown04">
+                    <a
+                      class="dropdown-item"
+                      href="{% url 'new_post' %}"
+                      >New Post</a
+                    >
+                    <a class="dropdown-item" href="{% url 'new_series' %}"
+                      >New Series</a
+                    >
+                  </div>
                 </li>
                 <li class="nav-item dropdown">
                   <a
@@ -286,14 +301,11 @@
                       href="{% url 'profile' request.session.username %}"
                       >View Profile</a
                     >
-                    <a class="dropdown-item" href="{% url 'new_series' %}"
-                      >Create New Series</a
-                    >
-                    <a href="{% url 'user_post_feed' request.session.username %}" class="dropdown-item" target="_blank">
-                      RSS Feed
-                    </a>
                     <a href="{% url 'stats' request.session.username %}" class="dropdown-item">
                       Your Stats
+                    </a>
+                    <a href="{% url 'user_post_feed' request.session.username %}" class="dropdown-item" target="_blank">
+                      Your RSS Feed
                     </a>
                     <a class="dropdown-item" href="{% url 'change_password' %}"
                       >Change Password</a
