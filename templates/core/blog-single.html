@@ -189,7 +189,7 @@
                 />
               </div>
               <div class="comment-body">
-                <h3>{{c.0.user.get_full_name}}</h3>
+                <h5><a href="{% url 'profile' c.0.user.username %}">{{c.0.user.get_full_name}}</a></h5>
                 <div class="meta">{{c.0.timestamp}}</div>
                 <p>{{c.0.message}}</p>
                 {% if request.session.user_id %}
@@ -215,7 +215,7 @@
                     />
                   </div>
                   <div class="comment-body">
-                    <h3>{{sc.user.get_full_name}}</h3>
+                    <h5><a href="{% url 'profile' sc.user.username %}">{{sc.user.get_full_name}}</a></h5>
                     <div class="meta">{{sc.timestamp}}</div>
                     <p>{{sc.message}}</p>
                   </div>
