@@ -1,7 +1,9 @@
-from hashlib import new
+from django.conf import settings
+import requests
+import urllib.parse
 from django.db.models.functions import Concat
 from django.db.models import Value as V
-from datetime import datetime
+from datetime import datetime, date
 from Blog.utils import send_custom_email
 from authentication.models import Account
 from django.http.response import Http404, HttpResponse, JsonResponse
@@ -16,7 +18,6 @@ import json
 from django.core.serializers import serialize
 from .bot import tweet_new_post
 from django.views import View
-from decouple import config
 from urllib.parse import urlparse
 
 # Create your views here.
@@ -198,7 +199,7 @@ def single(request, post_id, slug):
             total_likes = like_obj.user.count()
         except Exception:
             total_likes = 0
-        
+
         arr = []
         for t in post.tags.all():
             arr.append(t.name)
@@ -321,6 +322,23 @@ def tag(request, tag_name):
         return Http404()
 
 
+def download_blog_banner(title, user, date):
+    icon_url = 'https://i.imgur.com/prMWfoZ.png'
+    title = urllib.parse.quote(title)
+    author = urllib.parse.quote_plus(user.get_full_name())
+    icon_url = urllib.parse.quote_plus(icon_url)
+    font_size = 150 if len(title) <= 40 else 125
+    try:
+        github_url = user.social_links.github_url
+        github_username = github_url.split(".com/")[1].strip("/")
+    except Exception:
+        github_username = None
+    image_url = f"https://banners-adrianub.vercel.app/{title}.png?type=banner&theme=light&author={author}&username={github_username}&date={date}&logo={icon_url}&pattern=pixelDots&md=1&showWatermark=0&fontSize={font_size}px"
+    img_data = requests.get(image_url).content
+    with open(f'{settings.TEMP_MEDIA_DIR}/temp.png', 'wb') as handler:
+        handler.write(img_data)
+
+
 def new_post(request):
     context = {
         'categories': Category.objects.all(),
@@ -349,8 +367,11 @@ def new_post(request):
                 cat = Category(name=capitalized_category)
                 cat.save()
             user = Account.objects.get(id=request.session.get('user_id'))
+            if not banner:
+                download_blog_banner(title, user.get_full_name(), date.today().strftime("%B %d, %Y"))
+                banner = f'{settings.TEMP_MEDIA_DIR}/temp.png'
             if len(content.strip()) > 63:
-                new_post = Post(title=title, seo_overview=overview,canonical_url=canonical_url,
+                new_post = Post(title=title, seo_overview=overview, canonical_url=canonical_url,
                                 thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
                 new_post.save()
             else:
@@ -368,7 +389,7 @@ def new_post(request):
                     new_tag.save()
                     post.tags.add(new_tag)
             post.save()
-            if post.published:
+            if post.published and not settings.DEBUG:
                 tweet_new_post(post, tags)
             return redirect('single', post_id=post.id, slug=post.slug)
         except ValueError:
@@ -610,6 +631,7 @@ class RemoveNotification(View):
 
 def robots(request):
     return render(request, 'core/important-docs/robots.txt', content_type='text/plain')
+
 
 def sponsor(request):
     return render(request, "core/sponsor.html")
