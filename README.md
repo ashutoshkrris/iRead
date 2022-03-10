@@ -62,11 +62,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Sentence Rearrangement Game using Python](http://ireadblog.com/posts/104/sentence-rearrangement-game-using-python)
 - [any&lpar;&rpar; function in Python](http://ireadblog.com/posts/102/any-function-in-python)
 - [all&lpar;&rpar; function in Python](http://ireadblog.com/posts/101/all-function-in-python)
 - [aiter&lpar;&rpar; function in Python](http://ireadblog.com/posts/100/aiter-function-in-python)
 - [How to build a Contact Book Application in Python using Rich, Typer and TinyDB](http://ireadblog.com/posts/99/how-to-build-a-contact-book-application-in-python-using-rich-typer-and-tinydb)
-- [The question is not can you build it, but rather should you build it](http://ireadblog.com/posts/97/the-question-is-not-can-you-build-it-but-rather-should-you-build-it)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
