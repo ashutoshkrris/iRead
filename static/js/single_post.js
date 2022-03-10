@@ -1,3 +1,75 @@
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, "-") // Replace spaces with -
+    .replace(/[^\w\-]+/g, "") // Remove all non-word chars
+    .replace(/\-\-+/g, "-") // Replace multiple - with single -
+    .replace(/^-+/, "") // Trim - from start of text
+    .replace(/-+$/, ""); // Trim - from end of text
+}
+
+function mbtTOC() {
+  var mbtTOC = (i = headlength1 = headlength2 = gethead = 0);
+  headlength1 = document
+    .getElementById("post-toc")
+    .getElementsByTagName("h1").length;
+
+  headlength2 = document
+    .getElementById("post-toc")
+    .getElementsByTagName("h2").length;
+  if (headlength1 > 0) {
+    for (i = 0; i < headlength1; i++) {
+      gethead = document.getElementById("post-toc").getElementsByTagName("h1")[
+        i
+      ].textContent;
+      gethead2 = document.getElementById("post-toc").getElementsByTagName("h1")[
+        i
+      ].innerHTML;
+      if (gethead2 != "&nbsp;") {
+        var link = slugify(gethead);
+        document
+          .getElementById("post-toc")
+          .getElementsByTagName("h1")
+          [i].setAttribute("id", link);
+        mbtTOC = "<li><a href='#" + link + "'>" + gethead + "</a></li>";
+        document.getElementById("mbtTOC").innerHTML += mbtTOC;
+      }
+    }
+  }
+  if (headlength2 > 0) {
+    for (i = 0; i < headlength2; i++) {
+      gethead = document.getElementById("post-toc").getElementsByTagName("h2")[
+        i
+      ].textContent;
+      gethead2 = document.getElementById("post-toc").getElementsByTagName("h2")[
+        i
+      ].innerHTML;
+      if (gethead2 != "&nbsp;") {
+        var link = slugify(gethead);
+        document
+          .getElementById("post-toc")
+          .getElementsByTagName("h2")
+          [i].setAttribute("id", link);
+        mbtTOC = "<li><a href='#" + link + "'>" + gethead + "</a></li>";
+        document.getElementById("mbtTOC").innerHTML += mbtTOC;
+      }
+    }
+  }
+  if (headlength1 <= 0 && headlength2 <= 0) {
+    var toc = document.getElementById("toc");
+    toc.style.display = "none";
+  }
+}
+function mbtToggle() {
+  var mbt = document.getElementById("mbtTOC");
+  if (mbt.style.display === "none") {
+    mbt.style.display = "block";
+  } else {
+    mbt.style.display = "none";
+  }
+}
+
 const facebookBtn = document.querySelector(".facebook-btn");
 const twitterBtn = document.querySelector(".twitter-btn");
 const linkedinBtn = document.querySelector(".linkedin-btn");
@@ -5,7 +77,9 @@ const whatsappBtn = document.querySelector(".whatsapp-btn");
 
 function init() {
   let postUrl = encodeURI(document.location.href);
-  let postTitle = encodeURI("Hi everyone, please check this post on @iRead_Blog: ");
+  let postTitle = encodeURI(
+    "Hi everyone, please check this post on @iRead_Blog: "
+  );
 
   facebookBtn.setAttribute(
     "href",
@@ -56,7 +130,7 @@ $(".like").click(function (e) {
   });
 });
 
-function copyLink(link,) {
+function copyLink(link) {
   Swal.fire({
     html:
       `<input id="text_to_be_copied" class="swal2-input" readonly value='${link}'>` +
