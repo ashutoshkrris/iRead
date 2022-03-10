@@ -34,6 +34,7 @@ function checkPwd() {
           oldPasswordFeedBackArea.innerHTML = `<p>Incorrect Password</p>`;
         } else {
           oldPasswordFeedBackArea.style.display = "none";
+          oldPasswordField.classList.remove("is-invalid");
           checkPasswordBtn.removeAttribute("disabled");
           $("#beforeOldPassword").hide();
           checkPasswordBtn.hidden = true;
@@ -64,6 +65,7 @@ password1Field.addEventListener("keyup", (e) => {
           newPassword1FeedBackArea.style.display = "block";
           newPassword1FeedBackArea.innerHTML = `<p>${data.password_error}</p>`;
         } else {
+          password2Field.classList.remove("is-invalid");
           newPassword1FeedBackArea.style.display = "none";
           changePasswordBtn.removeAttribute("disabled");
         }
@@ -94,6 +96,7 @@ password2Field.addEventListener("keyup", (e) => {
           newPassword2FeedBackArea.style.display = "block";
           newPassword2FeedBackArea.innerHTML = `<p>${data.password_mismatch}</p>`;
         } else {
+          password2Field.classList.remove("is-invalid");
           newPassword2FeedBackArea.style.display = "none";
           changePasswordBtn.removeAttribute("disabled");
         }

@@ -26,6 +26,7 @@ emailField.addEventListener("keyup", (e) => {
           emailFeedBackArea.style.display = "block";
           emailFeedBackArea.innerHTML = `<p>${data.email_error}</p>`;
         } else {
+          emailField.classList.remove("is-invalid");
           emailFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
@@ -108,6 +109,7 @@ passwordField.addEventListener("keyup", (e) => {
           passwordFeedBackArea.style.display = "block";
           passwordFeedBackArea.innerHTML = `<p>${data.password_error}</p>`;
         } else {
+          passwordField.classList.remove("is-invalid");
           passwordFeedBackArea.style.display = "none";
           changePasswordBtn.removeAttribute("disabled");
         }

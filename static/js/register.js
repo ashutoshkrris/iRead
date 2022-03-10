@@ -32,6 +32,7 @@ emailField.addEventListener("keyup", (e) => {
           emailFeedBackArea.style.display = "block";
           emailFeedBackArea.innerHTML = `<p>${data.email_error}</p>`;
         } else {
+          emailField.classList.remove("is-invalid");
           emailFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
@@ -60,6 +61,7 @@ usernameField.addEventListener("keyup", (e) => {
           usernameFeedBackArea.style.display = "block";
           usernameFeedBackArea.innerHTML = `<p>${data.username_error}</p>`;
         } else {
+          usernameField.classList.remove("is-invalid");
           usernameFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
@@ -90,6 +92,7 @@ password1Field.addEventListener("keyup", (e) => {
           passwordFeedBackArea.innerHTML = `<p>${data.password_error}</p>`;
           password2Field.readOnly = true;
         } else {
+          password1Field.classList.remove("is-invalid");
           passwordFeedBackArea.style.display = "none";
           password2Field.removeAttribute('readOnly');
           sendOtpBtn.removeAttribute("disabled");
@@ -121,6 +124,7 @@ password2Field.addEventListener("keyup", (e) => {
           passwordFeedBackArea.style.display = "block";
           passwordFeedBackArea.innerHTML = `<p>${data.password_mismatch}</p>`;
         } else {
+          password2Field.classList.remove("is-invalid");
           passwordFeedBackArea.style.display = "none";
           sendOtpBtn.removeAttribute("disabled");
         }
