@@ -175,7 +175,7 @@ if not DEBUG:
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
-TEMP_MEDIA_DIR = BASE_DIR / 'media/blog/thumbnails'
+TEMP_MEDIA_DIR = BASE_DIR / 'samples'
 
 # CKEditor Configurations
 if not DEBUG:
