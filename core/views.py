@@ -1,3 +1,4 @@
+from django.core.files import File
 from django.conf import settings
 import requests
 import urllib.parse
@@ -333,7 +334,10 @@ def download_blog_banner(title, user, date):
         github_username = github_url.split(".com/")[1].strip("/")
     except Exception:
         github_username = None
-    image_url = f"https://banners-adrianub.vercel.app/{title}.png?type=banner&theme=light&author={author}&username={github_username}&date={date}&logo={icon_url}&pattern=pixelDots&md=1&showWatermark=0&fontSize={font_size}px"
+    if github_username:
+        image_url = f"https://banners-adrianub.vercel.app/{title}.png?type=banner&theme=light&author={author}&username={github_username}&date={date}&logo={icon_url}&pattern=pixelDots&md=1&showWatermark=0&fontSize={font_size}px"
+    else:
+        image_url = f"https://banners-adrianub.vercel.app/{title}.png?type=banner&theme=light&author={author}&date={date}&logo={icon_url}&pattern=pixelDots&md=1&showWatermark=0&fontSize={font_size}px"
     img_data = requests.get(image_url).content
     with open(f'{settings.TEMP_MEDIA_DIR}/temp.png', 'wb') as handler:
         handler.write(img_data)
@@ -367,12 +371,17 @@ def new_post(request):
                 cat = Category(name=capitalized_category)
                 cat.save()
             user = Account.objects.get(id=request.session.get('user_id'))
-            if not banner:
-                download_blog_banner(title, user, date.today().strftime("%B %d, %Y"))
-                banner = f'{settings.TEMP_MEDIA_DIR}/temp.png'
+
             if len(content.strip()) > 63:
                 new_post = Post(title=title, seo_overview=overview, canonical_url=canonical_url,
-                                thumbnail=banner, content=content, author=user, categories=cat, published=bool(published))
+                                content=content, author=user, categories=cat, published=bool(published))
+                if not banner:
+                    download_blog_banner(
+                        title, user, date.today().strftime("%B %d, %Y"))
+                    new_post.thumbnail.save(f"{datetime.now().strftime('%Y%m%d%H%M%S')}.png", File(
+                        open(f'{settings.TEMP_MEDIA_DIR}/temp.png', 'rb')))
+                else:
+                    new_post.thumbnail = banner
                 new_post.save()
             else:
                 context['error'] = 'Please enter at least 64 characters in the post content.'
