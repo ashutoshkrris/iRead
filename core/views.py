@@ -368,7 +368,7 @@ def new_post(request):
                 cat.save()
             user = Account.objects.get(id=request.session.get('user_id'))
             if not banner:
-                download_blog_banner(title, user.get_full_name(), date.today().strftime("%B %d, %Y"))
+                download_blog_banner(title, user, date.today().strftime("%B %d, %Y"))
                 banner = f'{settings.TEMP_MEDIA_DIR}/temp.png'
             if len(content.strip()) > 63:
                 new_post = Post(title=title, seo_overview=overview, canonical_url=canonical_url,
