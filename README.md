@@ -45,8 +45,7 @@ iRead is an open platform where readers find dynamic thinking, and where expert 
 * Follow/Unfollow Users
 * Show Notifications on Follow, Like and Comment
 * Twitter Bot to tweet about posts published on website as well as retweet and like user's post (if they share it on Twitter)
-* Bulletins(Newsletter) Subscription/Unsubscription
-* Payment Integration using Paytm and Razorpay
+* Digests(Newsletter) Subscription/Unsubscription
 * Public API and RSS Feed Support 
 
 ## Technology Stack
@@ -152,11 +151,8 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
     TWITTER_API_SECRET_KEY='twitter-api-secret-key'
     TWITTER_ACCESS_TOKEN='twitter-access-token'
     TWITTER_ACCESS_TOKEN_SECRET='twitter-access-token-secret'
-    PAYTM_MERCHANT_ID='paytm-merchant-id'
-    PAYTM_MERCHANT_KEY='paytm-merchant-key'
-    RAZORPAY_KEY_ID='rzp-key-id'
-    RAZORPAY_KEY_SECRET='rzp-key-secret'
     REDIS_URL=redis://127.0.0.1:6379/1
+    REVUE_API_KEY='revue-api-here'
     ```  
     or, just copy the `.env.save` file from `samples` directory to the root directory (`iRead`) and rename it to `.env` (only `.env` and not `.env.txt`)  
     

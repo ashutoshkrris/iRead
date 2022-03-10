@@ -610,3 +610,6 @@ class RemoveNotification(View):
 
 def robots(request):
     return render(request, 'core/important-docs/robots.txt', content_type='text/plain')
+
+def sponsor(request):
+    return render(request, "core/sponsor.html")

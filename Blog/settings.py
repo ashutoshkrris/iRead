@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'cloudinary',
     'authentication.apps.AuthenticationConfig',
     'core',
-    'payment',
     'social_django',
     'django.contrib.sites',
     'django.contrib.sitemaps',
