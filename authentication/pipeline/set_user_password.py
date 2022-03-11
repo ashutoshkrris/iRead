@@ -2,11 +2,8 @@ from django.shortcuts import redirect
 from Blog.utils import send_custom_email
 from authentication.models import Account, FollowersModel
 from social_core.pipeline.partial import partial
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.core.mail import EmailMultiAlternatives
 from authentication.utils import add_subscriber
-from authentication.views import send_welcome_email
+from django.urls.base import reverse
 
 # partial says "we may interrupt, but we will come back here again"
 
@@ -50,13 +47,18 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
         user.save()
         FollowersModel(user=user).save()
         add_subscriber(user_email, user_name)
+        data = {
+            "receiver": user_name,
+            'edit_profile_url': 'https://ireadblog.com' + reverse('edit_profile', args=[user.username])
+        }
+        print(data['edit_profile_url'])
         send_custom_email(
             receiver_email=user.email,
             subject="Welcome to iRead Blog 🎉🎉",
             sender_email="no-reply@ireadblog.com",
             sender_name="iRead Blog",
             template_name="welcome.html",
-            **user
+            **data
         )
     strategy.session_set('user_id', user.id)
     strategy.session_set('username', user.username)

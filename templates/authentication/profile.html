@@ -321,6 +321,23 @@
           </div>
         </div>
         {% endif %}
+
+        {% if request.session.user_id == user.id %}
+        <div class="row">
+          <div class="separator" style="margin-top: 30px; margin-bottom: 30px; color:red;">
+            <h2 style="color:red;">Danger Zone</h2>
+          </div>
+        <div>
+          <p>Deleting your account will:</p>
+          <ul>
+            <li>Delete your profile, along with your authentication associations.</li>
+            <li>Delete any and all content you have, such as posts, comments, or your blog series.</li>
+            <li>Allow your username to become available to anyone.</li>
+          </ul>
+          <button id="delAccBtn" class="btn btn-danger">Delete Account</button>
+        </div>
+        </div>
+        {% endif %}
       </div>
     </div>
   </div>
@@ -406,6 +423,17 @@
           $("#followBtn").addClass("btn-success");
         }
       },
+    });
+  });
+</script>
+<script>
+  $("#delAccBtn").click(function (e) {
+    Swal.fire({
+      title: "Are you sure ?",
+      // text: 'Do you want to continue ?',
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonText: `<a href="{% url 'delete_account' user.username %}" style="color: white;">Yeah!</a>`,
     });
   });
 </script>

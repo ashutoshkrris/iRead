@@ -1,17 +1,13 @@
+from random import choice, randint
 from django.http.response import Http404
 from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.http import JsonResponse
 import json
 import re
 from datetime import datetime
-from django.views.decorators.csrf import csrf_exempt
 from .models import Account, FollowersModel, OTPModel, SocialLinks, Work
 from core.models import Notification, Post, Series
 import string
-from random import randint, choice
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.hashers import make_password, check_password
 from django.views import View
 from django.utils.decorators import method_decorator
@@ -163,13 +159,17 @@ def signup(request):
         except Exception:
             pass
         try:
+            data = {
+                "receiver": user.first_name,
+                'edit_profile_url': 'https://ireadblog.com' + reverse('edit_profile', args=[user.username])
+            }
             send_custom_email(
                 receiver_email=user.email,
                 subject="Welcome to iRead Blog 🎉🎉",
                 sender_email="no-reply@ireadblog.com",
                 sender_name="iRead Blog",
                 template_name="welcome.html",
-                **user
+                **data
             )
         except Exception:
             pass
@@ -511,3 +511,9 @@ def send_login_alert(request, user):
         template_name="login_alert.html",
         **context
     )
+
+def delete_account(request, username):
+    user = Account.objects.get(username=username)
+    user.delete()
+    request.session.clear()
+    return redirect('login')

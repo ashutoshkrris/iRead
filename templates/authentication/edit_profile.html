@@ -17,7 +17,7 @@
                 </div>
                 <div class="bio-body">
                   <h2>{{user.get_full_name}} (@{{user.username}})</h2>
-                  <p>{{user.about}}<br>{{user.location}}</p>
+                  <p>{% if user.about %}{{user.about}}{% endif %}<br />{% if user.location %}{{user.location}}{% endif %}</p>
                 </div>
             </div>
             <form action="{% url 'edit_profile' user.username %}" method="post">
