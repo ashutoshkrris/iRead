@@ -5,6 +5,7 @@
 __pycache__
 db.sqlite3
 media
+samples/*.png
 
 # Backup files # 
 *.bak 

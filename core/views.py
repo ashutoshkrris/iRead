@@ -409,9 +409,16 @@ def new_post(request):
 
 def update_post(request, post_id, slug):
     post = Post.objects.get(id=post_id, slug=slug)
+    series = None
+    try:
+        selected_series = Series.objects.filter(posts__id=post_id).first()
+    except Exception:
+        pass
     context = {
         'post': post,
-        'title': post.title
+        'title': post.title,
+        'series': Series.objects.filter(user__id=request.session.get('user_id')),
+        'selected_series': selected_series.id
     }
     if request.method == 'POST':
         try:
@@ -425,15 +432,48 @@ def update_post(request, post_id, slug):
             overview = request.POST.get('overview')
             canonical_url = request.POST.get('canonical_url')
             content = request.POST.get('editor1')
+            category = request.POST.get('category')
+            tags = request.POST.getlist('tags')
             published = request.POST.get('published')
+            series_id = request.POST.get('series')
             post.title = title
             post.seo_overview = overview
             post.canonical_url = canonical_url
             post.content = content
             post.published = bool(published)
             post.date_updated = datetime.now()
+
+            # Change category
+            try:
+                cat = Category.objects.get(name=category)
+            except Category.DoesNotExist:
+                capitalized_category = " ".join([
+                    word.capitalize()
+                    for word in category.split(" ")
+                ])
+                cat = Category(name=capitalized_category)
+                cat.save()
+            post.categories = cat
+
+            # Change Tags
+            post.tags.clear()
+            for tag in tags:
+                try:
+                    post.tags.add(Tag.objects.get(name=tag))
+                except Tag.DoesNotExist:
+                    new_tag = Tag(name=tag)
+                    new_tag.save()
+                    post.tags.add(new_tag)
+
+            # Change series
+            if(series_id):
+                if selected_series:
+                    selected_series.posts.remove(post)
+                series = Series.objects.get(id=series_id)
+                series.posts.add(post)
+
             post.save()
-            if post.published and not post.tweeted:
+            if post.published and not post.tweeted and not settings.DEBUG:
                 tweet_new_post(post, post.tags.all())
             return redirect('single', post_id=post.id,  slug=post.slug)
         except ValueError:

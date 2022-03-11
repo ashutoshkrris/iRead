@@ -41,6 +41,23 @@
                             <label for="content">Content</label>
                             <textarea cols="80" id="editor1" name="editor1" rows="20" data-sample-short required>{{post.content}}</textarea>
                         </div>
+                        <div class="col-md-6 form-group" id="cat_select">
+                            <label for="category">Category</label>
+                            <select class="js-example-basic-single" name="category" id="category" style="width: 200px;" required>
+                                <option disabled value selected>Select Category</option>
+                                {% for category in categories %}
+                                    <option value="{{category}}">{{category}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="col-md-6 form-group" id="tag_select">
+                            <label for="tags">Tags</label>
+                            <select name="tags" id="tags" class="js-example-basic-multiple" multiple="multiple" style="width:300px;">
+                                {% for tag in tags %}
+                                    <option value="{{tag}}">{{tag}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                         {% if post.published %}
                           <div class="col-md-6 form-group">
                             <input type="checkbox" id="published" name="published" value="{{post.published}}" checked>
@@ -52,7 +69,14 @@
                             <label for="published"> Published</label><br>
                           </div>
                         {% endif %}
-                        
+                        <div class="col-md-6 form-group" id="series_select">
+                            <label for="series">Series</label>
+                            <select name="series" class="js-series-basic-single" id="series" style="width: 200px;">
+                                {% for ser in series %}
+                                    <option value="{{ser.id}}">{{ser}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-md-4"></div>
@@ -71,12 +95,39 @@
 
 {% block js_down %}
 <script>
+    //Initialise Category
     $(document).ready(function() {
-        $('.js-example-basic-single').select2();
+        $('.js-example-basic-single').select2({
+            tags: true,
+            placeholder: "Select Category"
+        });
+        
     });
+    $('#category').val('{{post.categories.name|escapejs}}');
+    $('#category').trigger('change');
+
+    // Initialise tags
     $(document).ready(function() {
-        $('.js-example-basic-multiple').select2();
-    });
+        $('.js-example-basic-multiple').select2({
+            tags: true,
+            tokenSeparators: [',', ' ']
+        });
+    })
+    console.log('{{post.tags.all|escapejs}}')
+    let tagsArray = [];
+    {% for tag in post.tags.all %}
+    tagsArray.push('{{tag.name|escapejs}}');
+    {% endfor %}
+
+    $('#tags').val(tagsArray);
+    $('#tags').trigger('change');
+
+    // Initialise series
+    $(document).ready(function() {
+        $('.js-series-basic-single').select2();
+    })
+    $('#series').val('{{selected_series|escapejs}}');
+    $('#series').trigger('change');
 </script>
 <script>
     function fasterPreview( uploader ) {
