@@ -51,7 +51,6 @@ def collect_password(strategy, backend, request, details, *args, **kwargs):
             "receiver": user_name,
             'edit_profile_url': 'https://ireadblog.com' + reverse('edit_profile', args=[user.username])
         }
-        print(data['edit_profile_url'])
         send_custom_email(
             receiver_email=user.email,
             subject="Welcome to iRead Blog 🎉🎉",
