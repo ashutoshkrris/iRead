@@ -9,66 +9,94 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
     {% if meta_post %}
-    {% if post.canonical_url %}
-    <link rel="canonical" href="{{post.canonical_url}}" />
-    {% endif %}
-    <meta name="title" content="{{post.title}} | iRead" />
-    <meta name="description" content="{{post.seo_overview}}" />
-    <meta property="og:title" content="{{post.title}} | iRead" />
-    <meta property="og:description" content="{{post.seo_overview}}" />
-    <meta property="og:image" content="{{post.thumbnail.url}}" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@iRead_Blog" />
-    <meta name="twitter:title" content="{{post.title}} | iRead" />
-    <meta name="twitter:description" content="{{post.seo_overview}}" />
-    <meta name="twitter:image" content="{{post.thumbnail.url}}" />
-    <meta
-      name="keywords"
-      content="iread,blog,iread blog,{{meta_keywords}}"
-    />
+      {% if post.canonical_url %}
+      <link rel="canonical" href="{{post.canonical_url}}" />
+      {% endif %}
+      <meta name="title" content="{{post.title}} | iRead" />
+      <meta name="description" content="{{post.seo_overview}}" />
+      <meta property="og:title" content="{{post.title}} | iRead" />
+      <meta property="og:description" content="{{post.seo_overview}}" />
+      <meta property="og:image" content="{{post.thumbnail.url}}" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@iRead_Blog" />
+      <meta name="twitter:title" content="{{post.title}} | iRead" />
+      <meta name="twitter:description" content="{{post.seo_overview}}" />
+      <meta name="twitter:image" content="{{post.thumbnail.url}}" />
+      <meta
+        name="keywords"
+        content="iread,blog,iread blog,{{meta_keywords}}"
+      />
     {% elif meta_series %}
-    <meta name="title" content="{{series.name}} | iRead" />
-    <meta name="description" content="{{series.desc}}" />
-    <meta property="og:title" content="{{series.name}} | iRead" />
-    <meta property="og:description" content="{{series.desc}}" />
-    <meta property="og:image" content="{{series.thumbnail.url}}" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@iRead_Blog" />
-    <meta name="twitter:title" content="{{series.name}} | iRead" />
-    <meta name="twitter:description" content="{{series.desc}}" />
-    <meta name="twitter:image" content="{{series.thumbnail.url}}" />
+      <meta name="title" content="{{series.name}} | iRead" />
+      <meta name="description" content="{{series.desc}}" />
+      <meta property="og:title" content="{{series.name}} | iRead" />
+      <meta property="og:description" content="{{series.desc}}" />
+      <meta property="og:image" content="{{series.thumbnail.url}}" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@iRead_Blog" />
+      <meta name="twitter:title" content="{{series.name}} | iRead" />
+      <meta name="twitter:description" content="{{series.desc}}" />
+      <meta name="twitter:image" content="{{series.thumbnail.url}}" />
+      <meta
+        name="keywords"
+        content="iread,blog,iread blog,{{series.name}}"
+      />
+    {% elif 'accounts/profile' in request.get_full_path %}
+      <meta name="title" content="{{user.get_full_name}} | iRead" />
+      <meta name="description" content="{{user.about}}" />
+      <meta property="og:title" content="{{user.get_full_name}} | iRead" />
+      <meta property="og:description" content="{{user.about}}" />
+      <meta property="og:image" content="{{user.profile_image.url}}" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@iRead_Blog" />
+      <meta name="twitter:title" content="{{user.get_full_name}} | iRead" />
+      <meta name="twitter:description" content="{{user.about}}" />
+      <meta name="twitter:image" content="{{user.profile_image.url}}" />
+      <meta
+        name="keywords"
+        content="iread,blog,iread blog,{{user.first_name}},{{user.last_name}},{{user.get_full_name}},{{user.username}}"
+      />
     {% else %}
     <meta name="title" content="{{title}} | iRead" />
-    {% if 'tags' in request.get_full_path %}
-    <meta
-      name="keywords"
-      content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write,{{tag.name}}"
-    />
-    <meta name="description" content="{{tag.name}} content on iRead Blog" />
-    <meta property="og:description" content="{{tag.name}} content on iRead Blog"
-    />
-    <meta name="twitter:description" content="{{tag.name}} content on iRead Blog" />
-    {% else %}
-    <meta
-      name="keywords"
-      content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
-    />
-    <meta name="description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
-    <meta
-      property="og:description"
-      content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
-    />
-    <meta name="twitter:description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
-    {% endif %}
-    <meta property="og:title" content="{{title}} | iRead" />
-    <meta property="og:image" content="{% static 'images/favicon.png' %}" />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="iRead" />
-    <meta property="og:image:type" content="image/jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@iRead_Blog" />
-    <meta name="twitter:title" content="{{title}} | iRead" />
-    <meta name="twitter:image" content="{% static 'images/favicon.png' %}" />
+      {% if 'tags' in request.get_full_path %}
+        <meta
+          name="keywords"
+          content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write,{{tag.name}}"
+        />
+        <meta name="description" content="{{tag.name}} content on iRead Blog" />
+        <meta property="og:description" content="{{tag.name}} content on iRead Blog"
+        />
+        <meta name="twitter:description" content="{{tag.name}} content on iRead Blog" />
+      {% elif 'categories' in request.get_full_path %}
+        <meta
+          name="keywords"
+          content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write,{{category.name}}"
+        />
+        <meta name="description" content="{{category.name}} content on iRead Blog" />
+        <meta property="og:description" content="{{category.name}} content on iRead Blog"
+        />
+        <meta name="twitter:description" content="{{category.name}} content on iRead Blog" />
+      {% else %}
+        <meta
+          name="keywords"
+          content="iread,blog,iread blog,Python,software development, engineering, rails, javascript, ruby, django, flask, git, github,write"
+        />
+        <meta name="description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
+        <meta
+          property="og:description"
+          content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic."
+        />
+        <meta name="twitter:description" content="iRead is an open platform where readers find dynamic thinking, and where expert and undiscovered voices can share their writing on any topic." />
+      {% endif %}
+      <meta property="og:title" content="{{title}} | iRead" />
+      <meta property="og:image" content="{% static 'images/favicon.png' %}" />
+      <meta property="og:type" content="website" />
+      <meta property="og:site_name" content="iRead" />
+      <meta property="og:image:type" content="image/jpg" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:site" content="@iRead_Blog" />
+      <meta name="twitter:title" content="{{title}} | iRead" />
+      <meta name="twitter:image" content="{% static 'images/favicon.png' %}" />
     {% endif %}
     <meta name="robots" content="index, follow">
     <meta
