@@ -14,20 +14,20 @@ class PublicAPI:
 
         # If we get tag anc category in query parameter
         if tag and category:
-            tag = Tag.objects.filter(name=tag).first()
-            category = Category.objects.filter(slug=category).first()
+            tag = Tag.objects.filter(name__iexact=tag).first()
+            category = Category.objects.filter(slug__iexact=category).first()
             posts = Post.objects.filter(
                 published=True, tags__name=tag, categories__name=category.name)
 
         # If we get tag in query parameter
         elif tag and not category:
-            tag = Tag.objects.filter(name=tag).first()
+            tag = Tag.objects.filter(name__iexact=tag).first()
             posts = Post.objects.filter(
                 published=True, tags__name=tag)
 
         # If we get category in query parameter
         elif category and not tag:
-            category = Category.objects.filter(slug=category).first()
+            category = Category.objects.filter(slug__iexact=category).first()
             posts = Post.objects.filter(
                 published=True, categories__name=category.name)
         else:
