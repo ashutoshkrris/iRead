@@ -106,6 +106,9 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, app_label):
         return True
 
+    def natural_key(self):
+        return (self.get_full_name())
+
 
 # For OTP
 class OTPModel(models.Model):

@@ -24,6 +24,9 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse('category', args=[self.slug])
 
+    def natural_key(self):
+        return (self.name)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=63)
@@ -37,6 +40,9 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         return reverse('tag', args=[self.name])
+
+    def natural_key(self):
+        return (self.name)
 
 
 class Post(models.Model):
