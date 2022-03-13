@@ -107,7 +107,7 @@
         {% if post.canonical_url %}
         <small>Originally published at <a href="{{post.canonical_url}}">{{post_original_url}}</a></small><br>
         {% endif %}
-        <a class="category mb-5 mt-3" href="{% url 'category' post.categories.name %}">{{post.categories.name}}</a>
+        <a class="category mb-5 mt-3" href="{% url 'category' post.categories.slug %}">{{post.categories.name}}</a>
         {% if series %}
         <a class="category mb-5" style="background-color:#0080ff" href="{% url 'series' series.id series.slug %}">{{series.name|upper}} SERIES</a>
         {% endif %}

@@ -63,7 +63,7 @@
       {% for category in categories %}
 
       <li>
-        <a href="{% url 'category' category.name %}"
+        <a href="{% url 'category' category.slug %}"
           >{{category.name}} <span></span
         ></a>
       </li>

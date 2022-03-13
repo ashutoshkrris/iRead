@@ -84,11 +84,11 @@ def contact(request):
     return render(request, "core/contact.html", {"title": "Contact Us"})
 
 
-def category(request, category_name):
+def category(request, category_slug):
     try:
-        category = Category.objects.filter(name=category_name).first()
+        category = Category.objects.filter(slug=category_slug).first()
         posts = Post.objects.filter(
-            published=True, categories__name=category_name)
+            published=True, categories__name=category.name)
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
             page = request.GET.get('page', 1)
@@ -563,81 +563,6 @@ def terms_conditions(request):
 
 def refund_policy(request):
     return render(request, "core/important-docs/refund-policy.html", {"title": "Refund Policy"})
-
-# Public API to fetch all posts
-
-
-def pub_api(request):
-    posts = Post.objects.filter(published=True)
-    data = serialize("json", posts, fields=(
-        'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
-    return HttpResponse(data, content_type="application/json")
-
-
-def pub_user_posts_api(request, username):
-    posts = Post.objects.filter(author__username=username, published=True)
-    data = serialize("json", posts, fields=(
-        'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
-    return HttpResponse(data, content_type="application/json")
-
-
-def pub_single_post_api(request, post_id, slug):
-    post = Post.objects.filter(id=post_id, slug=slug, published=True)
-    data = serialize("json", post, fields=(
-        'title', 'slug', 'thumbnail', 'seo_overview', 'content', 'timestamp',))
-    return HttpResponse(data, content_type="application/json")
-
-
-TODAY_DATE = datetime.today().day
-TODAY_DAY = datetime.now().strftime("%A")
-
-
-def bulletin_email():
-    subscribers = BulletinSubscriber.objects.all()
-    for sub in subscribers:
-        sub_type = sub.subs_type.name
-        latest_posts = Post.objects.filter(
-            categories__id=sub.category.id).order_by('-timestamp')[:2]
-        lp1, lp2 = latest_posts[0], latest_posts[1]
-
-        popular_posts = Post.objects.filter(
-            categories__id=sub.category.id).order_by('-likes')[:2]
-        pp1, pp2 = popular_posts[0], popular_posts[1]
-
-        context = {
-            'lp1': lp1,
-            'lp2': lp2,
-            'pp1': pp1,
-            'pp2': pp2,
-            'category': sub.category.name,
-            'sub_type': sub_type,
-            'email': sub.email
-        }
-
-        html_content = render_to_string("emails/bulletins.html", context)
-        text_content = strip_tags(html_content)
-
-        email = EmailMultiAlternatives(
-            f"{sub_type.capitalize()} Bulletins For You | iRead",
-            text_content,
-            "iRead <bulletins@ireadblog.com>",
-            [sub.email]
-        )
-        email.attach_alternative(html_content, "text/html")
-        if (sub_type == 'Weekly' and TODAY_DAY == 'Monday'):
-            email.send()
-        if (sub_type == 'Monthly' and TODAY_DATE == 1):
-            email.send()
-        if sub_type == 'Daily':
-            email.send()
-
-
-def send_bulletin_email(request):
-    try:
-        bulletin_email()
-        return JsonResponse({'success': True})
-    except Exception:
-        return JsonResponse({'success': False})
 
 
 class PostNotification(View):

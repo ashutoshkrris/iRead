@@ -8,10 +8,15 @@ from authentication.models import Account
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=63)
+    slug = models.SlugField(unique=True, blank=True, null=True, max_length=127)
 
     class Meta:
         verbose_name_plural = 'categories'
         ordering = ['-id']
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super(Category, self).save(*args, **kwargs)
 
     def __str__(self) -> str:
         return f"{self.name}"
@@ -37,7 +42,7 @@ class Tag(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=127)
     seo_overview = models.TextField()
-    canonical_url = models.URLField(blank=True,null=True)
+    canonical_url = models.URLField(blank=True, null=True)
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
     content = RichTextUploadingField()
     timestamp = models.DateTimeField(auto_now_add=True)
@@ -72,7 +77,8 @@ class Series(models.Model):
     desc = models.TextField(null=True)
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
     thumbnail = models.ImageField(upload_to="blog/series")
-    posts = models.ManyToManyField(Post, related_name='post_series', blank=True)
+    posts = models.ManyToManyField(
+        Post, related_name='post_series', blank=True)
     user = models.ForeignKey(Account, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
@@ -90,7 +96,6 @@ class Series(models.Model):
 
     def get_absolute_url(self):
         return reverse('series', args=[self.id, self.slug])
-
 
 
 class Like(models.Model):
