@@ -54,7 +54,7 @@ class SeriesAdmin(ModelAdmin):
     search_fields = ('name',)
     ordering = ('-id',)
     readonly_fields = ('slug',)
-    actions = [tweet_series]
+    actions = [tweet_this_series]
 
 
 admin.site.register(Category)
