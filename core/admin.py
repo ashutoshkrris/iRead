@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.options import ModelAdmin
 
-from core.bot import tweet_new_post
+from core.bot import tweet_new_post, tweet_series
 from .models import BulletinSubscriber, Category, Like, Notification, Recurring, Series, Tag, Post, Comment, SubComment, Contact
 
 
@@ -16,17 +16,25 @@ def toggle_published(modeladmin, request, queryset):
 
         obj.save()
 
+
 @admin.action(description="Toggle the tweeted status of posts")
 def toggle_tweeted(modeladmin, request, queryset):
     for obj in queryset:
         obj.tweeted = not obj.tweeted
         obj.save()
 
+
 @admin.action(description="Tweet this post")
 def tweet_this_post(modeladmin, request, queryset):
     for obj in queryset:
         if not obj.tweeted:
             tweet_new_post(obj, obj.tags.all())
+
+
+@admin.action(description="Tweet this series")
+def tweet_this_series(modeladmin, request, queryset):
+    for obj in queryset:
+        tweet_series(obj)
 
 
 @admin.register(Post)
@@ -46,6 +54,7 @@ class SeriesAdmin(ModelAdmin):
     search_fields = ('name',)
     ordering = ('-id',)
     readonly_fields = ('slug',)
+    actions = [tweet_series]
 
 
 admin.site.register(Category)

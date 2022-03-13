@@ -41,6 +41,19 @@ def tweet_new_post(post, tags):
         print(e)
 
 
+def tweet_series(series):
+    iread_bot = authenticate()
+    try:
+        author = f'@{series.user.social_links.twitter_username}'
+    except Exception:
+        author = f'{series.user.get_full_name()}'
+    tweet = f"'{series.name}' by {author} : https://ireadblog.com{series.get_absolute_url()}"
+    try:
+        iread_bot.update_status(tweet)
+    except Exception as e:
+        print(e)
+
+
 def get_latest_tweet():
     iread_bot = authenticate()
     response = iread_bot.user_timeline(
