@@ -411,15 +411,17 @@ def update_post(request, post_id, slug):
     post = Post.objects.get(id=post_id, slug=slug)
     series = None
     selected_series = None
+    selected_series_id = None
     try:
         selected_series = Series.objects.filter(posts__id=post_id).first()
+        selected_series_id = selected_series.id
     except Exception:
         pass
     context = {
         'post': post,
         'title': post.title,
         'series': Series.objects.filter(user__id=request.session.get('user_id')),
-        'selected_series': selected_series.id
+        'selected_series': selected_series_id
     }
     if request.method == 'POST':
         try:
