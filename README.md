@@ -61,7 +61,9 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [ascii&lpar;&rpar; function in Python](http://ireadblog.com/posts/106/ascii-function-in-python)
 - [anext&lpar;&rpar; function in Python](http://ireadblog.com/posts/105/anext-function-in-python)
+- [Sentence Rearrangement Game using Python](http://ireadblog.com/posts/104/sentence-rearrangement-game-using-python)
 - [any&lpar;&rpar; function in Python](http://ireadblog.com/posts/102/any-function-in-python)
 - [all&lpar;&rpar; function in Python](http://ireadblog.com/posts/101/all-function-in-python)
 <!-- BLOG-POST-LIST:END -->
