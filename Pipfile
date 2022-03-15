@@ -17,6 +17,7 @@ pycryptodome = "*"
 django-redis = "*"
 social-auth-app-django = "*"
 readtime = "*"
+django-cors-headers = "*"
 
 [dev-packages]
 autopep8 = "*"
