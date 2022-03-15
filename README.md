@@ -71,6 +71,12 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## API Documentation
 
 - Base URL: `https://ireadblog.com/api/v1`
+- `pk` refers to the Post ID.
+- Base URL for `thumbnail` is: `https://res.cloudinary.com/dlomjljb6/image/upload/v1/`
+- Post URL can be built as: `https://ireadblog.com/posts/<post_id>/<post_slug>`
+
+#### Endpoints
+
 - Endpoint for all posts: `/posts`
 
   - Accepts GET Request
@@ -94,15 +100,28 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
       }
     ]
     ```
-  - `pk` refers to the Post ID.
-  - Base URL for `thumbnail` is: `https://res.cloudinary.com/dlomjljb6/image/upload/v1/`
-  - Post URL can be built as: `https://ireadblog.com/posts/<post_id>/<post_slug>`
+  - To limit the number of posts, use `?limit=x` in the URL. <br> e.g. `https://ireadblog.com/api/v1/posts?limit=3` returns the latest 3 posts on iRead.
+
+- Endpoint for posts for specific category: `/posts?category=<category-slug>`
+  - Accepts GET Request
+  - Replace `<category-slug>` with correct category slug
+  -  Category Slug can be found on any category page. For example, when you visit the **Web Development** category page, the URL of the page is: `https://ireadblog.com/categories/web-development`. So the `<category-slug>` is `web-development`. 
+  - JSON response looks same as above.
+  - To limit the number of posts for a category, use `?category=<category-slug>&limit=x` in the URL. <br> e.g. `https://ireadblog.com/api/v1/posts?category=web-development&limit=3` returns the latest 3 Web Development posts on iRead.
+
+- Endpoint for posts for specific tag: `/posts?tag=<tag-name>`
+  - Accepts GET Request
+  - Replace `<tag-slug>` with correct tag name
+  -  Tag Name can be found on any Tag page. For example, when you visit the **DevInceptCommunity** tag page, the URL of the page is: `https://ireadblog.com/tags/DevInceptCommunity`. So the `<tag-name>` is `DevInceptCommunity`. 
+  - JSON response looks same as above.
+  - To limit the number of posts for a tag, use `?tag=<tag-name>&limit=x` in the URL. <br> e.g. `https://ireadblog.com/api/v1/posts?tag=DevInceptCommunity&limit=3` returns the latest 3 posts on iRead with the tag #DevInceptCommunity.
 
 - Endpoint for posts for a user: `/<username>/posts`
 
   - Accepts GET Request
   - Replace `<username>` with your username.
   - JSON response looks same as above.
+  - To limit the number of posts by user, use `?limit=x` in the URL. <br> e.g. `https://ireadblog.com/api/v1/posts?limit=3` returns the latest 3 posts by that user on iRead.
 
 - Endpoint for a single post: `/post/<post_id>/<slug>`
   - Accepts GET request

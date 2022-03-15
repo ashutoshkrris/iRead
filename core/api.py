@@ -11,6 +11,7 @@ class PublicAPI:
     def all_posts(self, request):
         tag = request.GET.get('tag')
         category = request.GET.get('category')
+        limit = request.GET.get('limit')
 
         # If we get tag anc category in query parameter
         if tag and category:
@@ -33,12 +34,23 @@ class PublicAPI:
         else:
             posts = Post.objects.filter(published=True)
 
+        # If user has given limit
+        if limit:
+            posts = posts[:int(limit)]
+
         data = serialize("json", posts, fields=self.fields,
                          use_natural_foreign_keys=True)
         return HttpResponse(data, content_type=self.content_type)
 
     def user_posts(self, request, username):
+        limit = request.GET.get('limit')
+
         posts = Post.objects.filter(author__username=username, published=True)
+
+        # If user has given limit
+        if limit:
+            posts = posts[:int(limit)]
+
         data = serialize("json", posts, fields=self.fields,
                          use_natural_foreign_keys=True)
         return HttpResponse(data, content_type=self.content_type)
