@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Play with some Unique and Fun APIs](http://ireadblog.com/posts/120/play-with-some-unique-and-fun-apis)
+- [Flutter: Toggle Password Visibility](http://ireadblog.com/posts/119/flutter-toggle-password-visibility)
+- [5 Quick Python Projects](http://ireadblog.com/posts/118/5-quick-python-projects)
 - [ascii&lpar;&rpar; function in Python](http://ireadblog.com/posts/117/ascii-function-in-python)
 - [anext&lpar;&rpar; function in Python](http://ireadblog.com/posts/116/anext-function-in-python)
-- [any&lpar;&rpar; function in Python](http://ireadblog.com/posts/115/any-function-in-python)
-- [all&lpar;&rpar; function in Python](http://ireadblog.com/posts/114/all-function-in-python)
-- [aiter&lpar;&rpar; function in Python](http://ireadblog.com/posts/113/aiter-function-in-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
