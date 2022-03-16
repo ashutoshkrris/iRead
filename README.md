@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Buzz of the Dev Community: Bhailang](http://ireadblog.com/posts/136/buzz-of-the-dev-community-bhailang)
 - [How to Create a Horoscope API with Beautiful Soup and Flask](http://ireadblog.com/posts/135/how-to-create-a-horoscope-api-with-beautiful-soup-and-flask)
 - [Prime Numbers using Sieve of Eratosthenes in Python](http://ireadblog.com/posts/134/prime-numbers-using-sieve-of-eratosthenes-in-python)
 - [How to display numbers with leading zeros using Python?](http://ireadblog.com/posts/133/how-to-display-numbers-with-leading-zeros-using-python)
 - [How to know your horoscope using Python?](http://ireadblog.com/posts/132/how-to-know-your-horoscope-using-python)
-- [Do You Really Need Environment Variables in Python?](http://ireadblog.com/posts/131/do-you-really-need-environment-variables-in-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
