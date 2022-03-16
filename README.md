@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Exception Handling in Python](http://ireadblog.com/posts/130/exception-handling-in-python)
-- [Object-Oriented Programming in Python](http://ireadblog.com/posts/129/object-oriented-programming-in-python)
-- [abstract Modifier in Java](http://ireadblog.com/posts/128/abstract-modifier-in-java)
-- [Everything you need to know about Python Dictionaries](http://ireadblog.com/posts/127/everything-you-need-to-know-about-python-dictionaries)
-- [How to Merge Dictionaries in Python](http://ireadblog.com/posts/126/how-to-merge-dictionaries-in-python)
+- [How to Create a Horoscope API with Beautiful Soup and Flask](http://ireadblog.com/posts/135/how-to-create-a-horoscope-api-with-beautiful-soup-and-flask)
+- [Prime Numbers using Sieve of Eratosthenes in Python](http://ireadblog.com/posts/134/prime-numbers-using-sieve-of-eratosthenes-in-python)
+- [How to display numbers with leading zeros using Python?](http://ireadblog.com/posts/133/how-to-display-numbers-with-leading-zeros-using-python)
+- [How to know your horoscope using Python?](http://ireadblog.com/posts/132/how-to-know-your-horoscope-using-python)
+- [Do You Really Need Environment Variables in Python?](http://ireadblog.com/posts/131/do-you-really-need-environment-variables-in-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
