@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [ascii&lpar;&rpar; function in Python](http://ireadblog.com/posts/106/ascii-function-in-python)
-- [anext&lpar;&rpar; function in Python](http://ireadblog.com/posts/105/anext-function-in-python)
-- [Sentence Rearrangement Game using Python](http://ireadblog.com/posts/104/sentence-rearrangement-game-using-python)
-- [any&lpar;&rpar; function in Python](http://ireadblog.com/posts/102/any-function-in-python)
-- [all&lpar;&rpar; function in Python](http://ireadblog.com/posts/101/all-function-in-python)
+- [The question is not can you build it, but rather should you build it](http://ireadblog.com/posts/97/the-question-is-not-can-you-build-it-but-rather-should-you-build-it)
+- [Reading Console Inputs in JavaScript](http://ireadblog.com/posts/94/reading-console-inputs-in-javascript)
+- [Update - Download Slides from SlideShare](http://ireadblog.com/posts/63/update-download-slides-from-slideshare)
+- [Review by Fidel Navamuel](http://ireadblog.com/posts/61/review-by-fidel-navamuel)
+- [Let&#39;s launch EazyLoader](http://ireadblog.com/posts/59/lets-launch-eazyloader)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
