@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Play with some Unique and Fun APIs](http://ireadblog.com/posts/120/play-with-some-unique-and-fun-apis)
-- [Flutter: Toggle Password Visibility](http://ireadblog.com/posts/119/flutter-toggle-password-visibility)
-- [5 Quick Python Projects](http://ireadblog.com/posts/118/5-quick-python-projects)
-- [ascii&lpar;&rpar; function in Python](http://ireadblog.com/posts/117/ascii-function-in-python)
-- [anext&lpar;&rpar; function in Python](http://ireadblog.com/posts/116/anext-function-in-python)
+- [How to Merge Dictionaries in Python](http://ireadblog.com/posts/126/how-to-merge-dictionaries-in-python)
+- [How to add subscribers to your Revue newsletter programmatically?](http://ireadblog.com/posts/125/how-to-add-subscribers-to-your-revue-newsletter-programmatically)
+- [Hangman Game using Python](http://ireadblog.com/posts/124/hangman-game-using-python)
+- [Get Location Information of IP Address Using Python](http://ireadblog.com/posts/123/get-location-information-of-ip-address-using-python)
+- [Encrypt and Decrypt PDF Files using Python](http://ireadblog.com/posts/122/encrypt-and-decrypt-pdf-files-using-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
