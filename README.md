@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [all&lpar;&rpar; function in Python](http://ireadblog.com/posts/114/all-function-in-python)
+- [aiter&lpar;&rpar; function in Python](http://ireadblog.com/posts/113/aiter-function-in-python)
+- [abs&lpar;&rpar; function in Python](http://ireadblog.com/posts/112/abs-function-in-python)
+- [How to build a Contact Book Application in Python using Rich, Typer and TinyDB](http://ireadblog.com/posts/111/how-to-build-a-contact-book-application-in-python-using-rich-typer-and-tinydb)
 - [Getting Started With TinyDB](http://ireadblog.com/posts/109/getting-started-with-tinydb)
-- [Getting Rich with Python](http://ireadblog.com/posts/108/getting-rich-with-python)
-- [Sentence Rearrangement Game using Python](http://ireadblog.com/posts/107/sentence-rearrangement-game-using-python)
-- [The question is not can you build it, but rather should you build it](http://ireadblog.com/posts/97/the-question-is-not-can-you-build-it-but-rather-should-you-build-it)
-- [Reading Console Inputs in JavaScript](http://ireadblog.com/posts/94/reading-console-inputs-in-javascript)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
