@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [How to Authenticate a User in Password Manager Using Tkinter &lpar;Part-II&rpar;](http://ireadblog.com/posts/144/how-to-authenticate-a-user-in-password-manager-using-tkinter-part-ii)
+- [Password Generator using Python and Tkinter &lpar;Part-I&rpar;](http://ireadblog.com/posts/143/password-generator-using-python-and-tkinter-part-i)
 - [How to Implement Functionality to Your Personal AI Assistant Using Python](http://ireadblog.com/posts/142/how-to-implement-functionality-to-your-personal-ai-assistant-using-python)
 - [How to Build Your Personal AI Assistant Using Python](http://ireadblog.com/posts/141/how-to-build-your-personal-ai-assistant-using-python)
 - [How to Create a URL Shortener using Flask](http://ireadblog.com/posts/140/how-to-create-a-url-shortener-using-flask)
-- [Create Your First Web Application With Flask](http://ireadblog.com/posts/139/create-your-first-web-application-with-flask)
-- [Getting Started With Flask](http://ireadblog.com/posts/138/getting-started-with-flask)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
