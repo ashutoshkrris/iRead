@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Buzz of the Dev Community: Bhailang](http://ireadblog.com/posts/136/buzz-of-the-dev-community-bhailang)
-- [How to Create a Horoscope API with Beautiful Soup and Flask](http://ireadblog.com/posts/135/how-to-create-a-horoscope-api-with-beautiful-soup-and-flask)
-- [Prime Numbers using Sieve of Eratosthenes in Python](http://ireadblog.com/posts/134/prime-numbers-using-sieve-of-eratosthenes-in-python)
-- [How to display numbers with leading zeros using Python?](http://ireadblog.com/posts/133/how-to-display-numbers-with-leading-zeros-using-python)
-- [How to know your horoscope using Python?](http://ireadblog.com/posts/132/how-to-know-your-horoscope-using-python)
+- [Deployment of Grocery Bag App on Heroku](http://ireadblog.com/posts/152/deployment-of-grocery-bag-app-on-heroku)
+- [Filter Grocery Bag Items by Date &lpar;Part-V&rpar;](http://ireadblog.com/posts/151/filter-grocery-bag-items-by-date-part-v)
+- [CRUD Operations on Grocery Bag &lpar;Part-IV&rpar;](http://ireadblog.com/posts/150/crud-operations-on-grocery-bag-part-iv)
+- [User Authentication for Grocery Bag Using Django &lpar;Part-III&rpar;](http://ireadblog.com/posts/149/user-authentication-for-grocery-bag-using-django-part-iii)
+- [Fix Templates and Static Files of the Grocery Bag App &lpar;Part-II&rpar;](http://ireadblog.com/posts/148/fix-templates-and-static-files-of-the-grocery-bag-app-part-ii)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
