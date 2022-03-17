@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Search Algorithms – Linear Search and Binary Search Code Implementation and Complexity Analysis](http://ireadblog.com/posts/146/search-algorithms-linear-search-and-binary-search-code-implementation-and-complexity-analysis)
-- [Password Vault Screen using Tkinter &lpar;Part-III&rpar;](http://ireadblog.com/posts/145/password-vault-screen-using-tkinter-part-iii)
-- [How to Authenticate a User in Password Manager Using Tkinter &lpar;Part-II&rpar;](http://ireadblog.com/posts/144/how-to-authenticate-a-user-in-password-manager-using-tkinter-part-ii)
-- [Password Generator using Python and Tkinter &lpar;Part-I&rpar;](http://ireadblog.com/posts/143/password-generator-using-python-and-tkinter-part-i)
-- [How to Implement Functionality to Your Personal AI Assistant Using Python](http://ireadblog.com/posts/142/how-to-implement-functionality-to-your-personal-ai-assistant-using-python)
+- [Deployment of Grocery Bag App on Heroku](http://ireadblog.com/posts/152/deployment-of-grocery-bag-app-on-heroku)
+- [Filter Grocery Bag Items by Date &lpar;Part-V&rpar;](http://ireadblog.com/posts/151/filter-grocery-bag-items-by-date-part-v)
+- [CRUD Operations on Grocery Bag &lpar;Part-IV&rpar;](http://ireadblog.com/posts/150/crud-operations-on-grocery-bag-part-iv)
+- [User Authentication for Grocery Bag Using Django &lpar;Part-III&rpar;](http://ireadblog.com/posts/149/user-authentication-for-grocery-bag-using-django-part-iii)
+- [Fix Templates and Static Files of the Grocery Bag App &lpar;Part-II&rpar;](http://ireadblog.com/posts/148/fix-templates-and-static-files-of-the-grocery-bag-app-part-ii)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
