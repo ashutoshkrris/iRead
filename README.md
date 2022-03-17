@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [How to Build a GUI Quiz Application using Tkinter and Open Trivia DB](http://ireadblog.com/posts/137/how-to-build-a-gui-quiz-application-using-tkinter-and-open-trivia-db)
-- [Buzz of the Dev Community: Bhailang](http://ireadblog.com/posts/136/buzz-of-the-dev-community-bhailang)
-- [How to Create a Horoscope API with Beautiful Soup and Flask](http://ireadblog.com/posts/135/how-to-create-a-horoscope-api-with-beautiful-soup-and-flask)
-- [Prime Numbers using Sieve of Eratosthenes in Python](http://ireadblog.com/posts/134/prime-numbers-using-sieve-of-eratosthenes-in-python)
-- [How to display numbers with leading zeros using Python?](http://ireadblog.com/posts/133/how-to-display-numbers-with-leading-zeros-using-python)
+- [How to Implement Functionality to Your Personal AI Assistant Using Python](http://ireadblog.com/posts/142/how-to-implement-functionality-to-your-personal-ai-assistant-using-python)
+- [How to Build Your Personal AI Assistant Using Python](http://ireadblog.com/posts/141/how-to-build-your-personal-ai-assistant-using-python)
+- [How to Create a URL Shortener using Flask](http://ireadblog.com/posts/140/how-to-create-a-url-shortener-using-flask)
+- [Create Your First Web Application With Flask](http://ireadblog.com/posts/139/create-your-first-web-application-with-flask)
+- [Getting Started With Flask](http://ireadblog.com/posts/138/getting-started-with-flask)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
