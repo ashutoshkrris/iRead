@@ -4,11 +4,10 @@ let speech = new SpeechSynthesisUtterance();
 // Set Speech Language
 speech.lang = "en";
 
-let voices = []; // global array of available voices
+// Get List of Voices
+let voices = window.speechSynthesis.getVoices(); // global array of available voices
 
 window.speechSynthesis.onvoiceschanged = () => {
-  // Get List of Voices
-  voices = window.speechSynthesis.getVoices();
   
   // Initially set the First Voice in the Array.
   speech.voice = voices[0];
