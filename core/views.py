@@ -7,22 +7,19 @@ from django.db.models import Value as V
 from datetime import datetime, date
 from Blog.utils import send_custom_email
 from authentication.models import Account
-from django.http.response import Http404, HttpResponse, JsonResponse
+from django.http.response import Http404, JsonResponse
 from django.shortcuts import redirect, render
 from .models import BulletinSubscriber, Contact, Notification, Post, Category, Recurring, Series, Tag, Comment, SubComment, Like
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.core.mail import EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 import json
-from django.core.serializers import serialize
 from .bot import tweet_new_post
 from django.views import View
 from urllib.parse import urlparse
+from django.contrib.postgres.search import SearchVector
+
 
 # Create your views here.
-
 
 def index(request):
     posts = Post.objects.filter(published=True).order_by('-timestamp')
@@ -251,13 +248,14 @@ def search(request):
         return redirect('signup')
     if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
         return redirect('login')
-    users = Account.objects.annotate(full_name=Concat('first_name', V(' '), 'last_name')).filter(
-        Q(full_name__icontains=query) | Q(first_name__icontains=query) | Q(last_name__icontains=query))
-    categories = Category.objects.filter(Q(name__icontains=query)).distinct()
-    tags = Tag.objects.filter(Q(name__icontains=query)).distinct()
-    series = Series.objects.filter(Q(name__icontains=query)).distinct()
-    results = Post.objects.filter(Q(title__icontains=query) | Q(
-        seo_overview__icontains=query) | Q(content__icontains=query)).distinct()
+    users = Account.objects.annotate(search=SearchVector(
+        "first_name", "last_name")).filter(search=query)
+    categories = Category.objects.filter(name__search=query)
+    tags = Tag.objects.filter(name__search=query).distinct()
+    series = Series.objects.filter(name__search=query).distinct()
+    results = Post.objects.annotate(search=SearchVector(
+        "title", "seo_overview", "content")).filter(search=query)
+
     if len(results) > 3:
         all_posts = Paginator(results, 5)
         page = request.GET.get('page', 1)
