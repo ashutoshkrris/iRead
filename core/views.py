@@ -249,12 +249,12 @@ def search(request):
     if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
         return redirect('login')
     users = Account.objects.annotate(search=SearchVector(
-        "first_name", "last_name")).filter(search=query)
-    categories = Category.objects.filter(name__search=query)
+        "first_name", "last_name")).filter(search__icontains=query)
+    categories = Category.objects.filter(name__search=query).distinct()
     tags = Tag.objects.filter(name__search=query).distinct()
     series = Series.objects.filter(name__search=query).distinct()
     results = Post.objects.annotate(search=SearchVector(
-        "title", "seo_overview", "content")).filter(search=query)
+        "title", "seo_overview", "content")).filter(search__icontains=query)
 
     if len(results) > 3:
         all_posts = Paginator(results, 5)
