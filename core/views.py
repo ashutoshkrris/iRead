@@ -243,7 +243,7 @@ def like_dislike_post(request):
 
 
 def search(request):
-    query = request.GET.get('query')
+    query = request.GET.get('query').strip()
     if 'signup' in query or 'sign up' in query or 'register' in query:
         return redirect('signup')
     if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
