@@ -244,6 +244,7 @@ def like_dislike_post(request):
 
 def search(request):
     query = request.GET.get('query').strip()
+    print(query, len(query))
     if 'signup' in query or 'sign up' in query or 'register' in query:
         return redirect('signup')
     if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
@@ -254,7 +255,7 @@ def search(request):
     tags = Tag.objects.filter(name__search=query).distinct()
     series = Series.objects.filter(name__search=query).distinct()
     results = Post.objects.annotate(search=SearchVector(
-        "title", "seo_overview", "content")).filter(search__icontains=query)
+        "title", "seo_overview", "content")).filter(search=query)
 
     if len(results) > 3:
         all_posts = Paginator(results, 5)
