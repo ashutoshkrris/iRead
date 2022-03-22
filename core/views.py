@@ -272,7 +272,7 @@ def search(request):
             'pagination': True,
             'users': users[:3],
             'categories_res': categories,
-            'tags': tags,
+            'tags_res': tags,
             'series': series,
             'page_range': all_posts.get_elided_page_range(number=page),
             'title': query
@@ -283,7 +283,7 @@ def search(request):
             'results': results,
             'users': users[:3],
             'categories_res': categories,
-            'tags': tags,
+            'tags_res': tags,
             'series': series,
             'title': query
         }
