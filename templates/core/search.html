@@ -8,7 +8,7 @@
 <section class="site-section">
       <div class="container">
         <div class="row mb-4">
-            {% if results|length < 1 and users|length < 1 and categories_res|length < 1 and tags|length < 1 and series|length < 1 %}
+            {% if results|length < 1 and users|length < 1 and categories_res|length < 1 and tags_res|length < 1 and series|length < 1 %}
               <div class="col-md-6">
             <h2 class="mb-4">Your search - <strong>{{query}}</strong> - did not match any documents.</h2>
             <p>Suggestions:</p>
@@ -125,11 +125,11 @@
             </ul>
 
               {% endfor %}
-              {% if tags %}
+              {% if tags_res %}
                   <div class="separator" style="margin-top: 10px; margin-bottom: 10px;"><h2>Tags</h2></div>
               {% endif %}
               <ul class="tags">
-                {% for tag in tags %}
+                {% for tag in tags_res %}
 
                 <li><a href="{% url 'tag' tag.name %}">{{tag.name}}</a></li>
 
