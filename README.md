@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [*args and **kwargs in Python](http://ireadblog.com/posts/155/args-and-kwargs-in-python)
 - [bin&lpar;&rpar; function in Python](http://ireadblog.com/posts/154/bin-function-in-python)
 - [Text to Speech using Web Speech API](http://ireadblog.com/posts/153/text-to-speech-using-web-speech-api)
 - [Deployment of Grocery Bag App on Heroku](http://ireadblog.com/posts/152/deployment-of-grocery-bag-app-on-heroku)
 - [Filter Grocery Bag Items by Date &lpar;Part-V&rpar;](http://ireadblog.com/posts/151/filter-grocery-bag-items-by-date-part-v)
-- [CRUD Operations on Grocery Bag &lpar;Part-IV&rpar;](http://ireadblog.com/posts/150/crud-operations-on-grocery-bag-part-iv)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
