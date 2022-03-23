@@ -27,10 +27,10 @@ def tweet_new_post(post, tags):
         author = f'@{post.author.social_links.twitter_username}'
     except Exception:
         author = f'{post.author.get_full_name()}'
-    tweet = f"'{post.title}' by {author} : https://ireadblog.com{post.get_absolute_url()}"
+    tweet = f"'{post.title}' by {author} 😀: https://ireadblog.com{post.get_absolute_url()}"
     if type(tags) != list:
         tags = list(tags)
-    tags.append("ireadblog")
+    tags.append("iReadBlog")
     for tag in tags:
         tweet += f" #{tag}"
     try:
@@ -47,7 +47,7 @@ def tweet_series(series):
         author = f'@{series.user.social_links.twitter_username}'
     except Exception:
         author = f'{series.user.get_full_name()}'
-    tweet = f"'{series.name}' by {author} : https://ireadblog.com{series.get_absolute_url()}"
+    tweet = f"'{series.name}' by {author} 😀 : https://ireadblog.com{series.get_absolute_url()}"
     try:
         iread_bot.update_status(tweet)
     except Exception as e:
