@@ -1,82 +1,25 @@
+{% extends "core/base.html" %}
 {% load static %}
+{% block title %}Contact{% endblock title %}
 
-<head>
-    <title>404 - Not Found</title>
-    <link rel="stylesheet" href="{% static 'css/404.css' %}">
-    <script src="{% static 'js/404.js' %}"></script>
-</head>
-
-<!-- about -->
-<div class="about">
-   <a class="bg_links social portfolio" href="https://www.rafaelalucas.com" target="_blank">
-      <span class="icon"></span>
-   </a>
-   <a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
-      <span class="icon"></span>
-   </a>
-   <a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
-      <span class="icon"></span>
-   </a>
-   <a class="bg_links logo"></a>
-</div>
-<!-- end about -->
-
-    <nav>
-        <div class="menu">
-            <p class="website_name">iRead</p>
-            <div class="menu_links">
-                <a href="{% url 'home' %}" class="link">Home</a>
-            </div>
-            <div class="menu_icon">
-                <span class="icon"></span>
-            </div>
+    {% block content %}
+    <section class="site-section">
+      <div class="container">
+        <div class="row mb-4">
+          <div class="col-md-6">
+            <h1>404 Not Found !!</h1>
+          </div>
         </div>
-    </nav>
-
-    <section class="wrapper">
-
-        <div class="container">
-
-            <div id="scene" class="scene" data-hover-only="false">
-
-
-                <div class="circle" data-depth="1.2"></div>
-
-                <div class="one" data-depth="0.9">
-                    <div class="content">
-                        <span class="piece"></span>
-                        <span class="piece"></span>
-                        <span class="piece"></span>
-                    </div>
-                </div>
-
-                <div class="two" data-depth="0.60">
-                    <div class="content">
-                        <span class="piece"></span>
-                        <span class="piece"></span>
-                        <span class="piece"></span>
-                    </div>
-                </div>
-
-                <div class="three" data-depth="0.40">
-                    <div class="content">
-                        <span class="piece"></span>
-                        <span class="piece"></span>
-                        <span class="piece"></span>
-                    </div>
-                </div>
-
-                <p class="p404" data-depth="0.50">404</p>
-                <p class="p404" data-depth="0.10">404</p>
-
-            </div>
-
-            <div class="text">
-                <article>
-                    <p>Uh oh! Looks like you got lost. <br>Go back to the homepage if you dare!</p>
-                    <a href="{% url 'home' %}"><button>i dare!</button></a>
-                </article>
-            </div>
-
+        <div class="row blog-entries">
+          <div class="col-md-12 col-lg-8 main-content">
+              <img src="{% static 'images/404.gif' %}" class="mb-3" alt="">
+            <p>Many be this page moved? Got deleted?</p>
+            <p>Is hiding out in quarantine? Never existed in the first place?</p>
+            <p>You can try searching for the article using the search bar 😉</p>
+          </div>
+          {% include "partials/sidebar.html" %}
         </div>
+      </div>
     </section>
+  
+{% endblock content %}
