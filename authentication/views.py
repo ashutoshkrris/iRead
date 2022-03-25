@@ -30,13 +30,13 @@ SYMBOLS = ['@', '#', '$', '%', '&', '_']
 # exception 404 view
 def error_404(request, exception):
 
-    data = {}
+    data = {{"title": "Page Not Found"}}
     return render(request, 'error/404.html', data)
 
 
 # exception 500 view
 def error_500(request):
-    data = {}
+    data = {{"title": "Server Error"}}
     return render(request, 'error/500.html', data)
 
 
