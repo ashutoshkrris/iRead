@@ -29,8 +29,14 @@ def recurrings(request):
 
 
 def popular_posts(request):
-    popular_posts = Post.objects.filter(published=True).order_by('-likes')[:3]
+    popular_posts = Post.objects.filter(published=True).order_by('-views')[:3]
     return {'popular_posts': popular_posts}
+
+
+def recently_viewed_posts(request):
+    recently_viewed_posts = Post.objects.filter(
+        published=True).order_by('-date_updated')[:3]
+    return {'recently_viewed_posts': recently_viewed_posts}
 
 
 def social_links(request):

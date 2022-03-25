@@ -36,6 +36,37 @@
   </div>
   <!-- END sidebar-box -->
 
+  <!-- Recently Viewed Posts -->
+  <div class="sidebar-box">
+    <h3 class="heading">Recently Viewed Posts</h3>
+    <div class="post-entry-sidebar">
+      <ul>
+        {% for post in recently_viewed_posts %}
+
+        <li>
+          <a href="{% url 'single' post.id post.slug %}">
+            <img
+              src="{{post.thumbnail.url}}"
+              alt="Image placeholder"
+              class="mr-4"
+            />
+            <div class="text">
+              <h4>{{post.title}}</h4>
+              <div class="post-meta">
+                <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span
+                >&bullet;
+                <span class="mr-2">{{post.categories.name}}</span>&bullet;
+                <span class="mr-2">{{post.content|readtime}}</span>
+              </div>
+            </div>
+          </a>
+        </li>
+
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+
   <div class="sidebar-box" id="">
     <h3 class="heading">
       Series<a href="{% url 'new_series' %}" style="color: black"
