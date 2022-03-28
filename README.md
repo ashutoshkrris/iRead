@@ -65,7 +65,7 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 - [*args and **kwargs in Python](http://ireadblog.com/posts/155/args-and-kwargs-in-python)
 - [bin&lpar;&rpar; function in Python](http://ireadblog.com/posts/154/bin-function-in-python)
 - [Text to Speech using Web Speech API](http://ireadblog.com/posts/153/text-to-speech-using-web-speech-api)
-- [Deployment of Grocery Bag App on Heroku](http://ireadblog.com/posts/152/deployment-of-grocery-bag-app-on-heroku)
+- [Deployment of Grocery Bag App on Heroku &lpar;Part-VI&rpar;](http://ireadblog.com/posts/152/deployment-of-grocery-bag-app-on-heroku-part-vi)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
