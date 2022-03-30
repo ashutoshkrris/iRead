@@ -15,10 +15,6 @@ def convert_to_audio(post):
         'hl': 'en-us',
         'v': 'Mike',
         'src': content,
-        'r': '0',
-        'c': 'wav',
-        'f': '8khz_8bit_mono',
-        'ssml': 'false',
         'b64': 'true'
     })
     if settings.DEBUG:
