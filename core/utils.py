@@ -9,8 +9,6 @@ from decouple import config
 
 
 def convert_to_audio(post):
-    if post.audio_url:
-        return
     content = strip_tags(html.unescape(post.content))
     voice = voicerss_tts.speech({
         'key': config("VOICERSS_API"),
