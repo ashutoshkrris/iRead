@@ -18,6 +18,7 @@ django-redis = "*"
 social-auth-app-django = "*"
 readtime = "*"
 django-cors-headers = "*"
+lxml = "*"
 
 [dev-packages]
 autopep8 = "*"

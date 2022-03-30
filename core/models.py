@@ -51,6 +51,7 @@ class Post(models.Model):
     canonical_url = models.URLField(blank=True, null=True)
     slug = models.SlugField(unique=True, null=True, blank=True, max_length=255)
     content = RichTextUploadingField()
+    audio_url = models.URLField(blank=True, null=True)
     timestamp = models.DateTimeField(auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     author = models.ForeignKey(Account, on_delete=models.CASCADE)
