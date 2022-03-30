@@ -244,7 +244,6 @@ def like_dislike_post(request):
 
 def search(request):
     query = request.GET.get('query').strip()
-    print(query, len(query))
     if 'signup' in query or 'sign up' in query or 'register' in query:
         return redirect('signup')
     if 'login' in query or 'log in' in query or 'signin' in query or 'sign in' in query:
@@ -496,7 +495,6 @@ def new_series(request):
             series_name = request.POST.get('series_name')
             series_desc = request.POST.get('series_desc')
             thumbnail = request.FILES.get('thumbnail')
-            print(thumbnail)
             capitalized_series = " ".join([
                 word.capitalize()
                 for word in series_name.split(" ")

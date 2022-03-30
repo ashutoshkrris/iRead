@@ -1,31 +1,42 @@
 import cloudinary
-from core import voicerss_tts
-import base64
 from django.conf import settings
 import html
 from django.utils.html import strip_tags
 import os
 from decouple import config
+import requests
+
+BASE_URL = "http://api.voicerss.org/"
 
 
 def convert_to_audio(post):
     content = strip_tags(html.unescape(post.content))
-    voice = voicerss_tts.speech({
-        'key': config("VOICERSS_API"),
-        'hl': 'en-us',
-        'v': 'Mike',
-        'src': content,
-        'b64': 'true'
-    })
+
     if settings.DEBUG:
         if not os.path.exists(f"{settings.MEDIA_ROOT}/blog/audio/"):
             os.mkdir(f"{settings.MEDIA_ROOT}/blog/audio/")
         filename = f"{settings.MEDIA_ROOT}/blog/audio/audio_{post.id}.wav"
     else:
         filename = f"{settings.TEMP_MEDIA_DIR}/audio_{post.id}.wav"
-    with open(filename, "wb") as wav_file:
-        decode_string = base64.b64decode(voice["response"])
-        wav_file.write(decode_string)
+
+    params = {
+        'key': config("VOICERSS_API"),
+        'hl': 'en-us',
+        'v': 'Mike',
+        'c': 'wav',
+        'f': '8khz_8bit_mono'
+    }
+
+    data = {
+        'src': content,
+    }
+
+    response = requests.post(BASE_URL, data=data, params=params)
+
+    if response.status_code == 200:
+        with open(filename, "bx") as f:
+            f.write(response.content)
+
     post.audio_url = f"{settings.MEDIA_URL}blog/audio/audio_{post.id}.wav"
     if not settings.DEBUG:
         response = upload_to_cloudinary(filename, post)

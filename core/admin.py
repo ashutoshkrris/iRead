@@ -40,11 +40,12 @@ def tweet_this_series(modeladmin, request, queryset):
 @admin.action(description="Save Audio")
 def save_audio(modeladmin, request, queryset):
     for obj in queryset:
-        try:
-            convert_to_audio(obj)
-        except Exception as e:
-            print(e)
-            pass
+        # try:
+        #     convert_to_audio(obj)
+        # except Exception as e:
+        #     print(e)
+        #     pass
+        convert_to_audio(obj)
 
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
