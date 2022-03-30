@@ -18,8 +18,8 @@ def convert_to_audio(post):
         'v': 'Mike',
         'src': content,
         'r': '0',
-        'c': 'mp3',
-        'f': '44khz_16bit_stereo',
+        'c': 'wav',
+        'f': '8khz_8bit_mono',
         'ssml': 'false',
         'b64': 'true'
     })
