@@ -23,9 +23,12 @@ def convert_to_audio(post):
         'ssml': 'false',
         'b64': 'true'
     })
-    if not os.path.exists(f"{settings.MEDIA_ROOT}/blog/audio/"):
-        os.mkdir(f"{settings.MEDIA_ROOT}/blog/audio/")
-    filename = f"{settings.MEDIA_ROOT}/blog/audio/audio_{post.id}.wav"
+    if settings.DEBUG:
+        if not os.path.exists(f"{settings.MEDIA_ROOT}/blog/audio/"):
+            os.mkdir(f"{settings.MEDIA_ROOT}/blog/audio/")
+        filename = f"{settings.MEDIA_ROOT}/blog/audio/audio_{post.id}.wav"
+    else:
+        filename = f"{settings.MEDIA_ROOT}/audio_{post.id}.wav"
     with open(filename, "wb") as wav_file:
         decode_string = base64.b64decode(voice["response"])
         wav_file.write(decode_string)
