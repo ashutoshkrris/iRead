@@ -112,25 +112,19 @@
         <a class="category mb-5" style="background-color:#0080ff" href="{% url 'series' series.id series.slug %}">{{series.name|upper}} SERIES</a>
         {% endif %}
         <img src="{{post.thumbnail.url}}" alt="Image" class="img-fluid mb-5" />
-      <div class="accordion mb-3" id="accordionFlushExample">
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingOne">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
-              Listen to the post
-            </button>
-          </h2>
-          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              <select id="voices" class="form-select mt-3 mb-3"></select>
-              <button id="start" class="btn btn-success mt-2 me-3">Start</button>
-              <button id="pause" class="btn btn-warning mt-2 me-3">Pause</button>
-              <button id="resume" class="btn btn-info mt-2 me-3">Resume</button>
-              <button id="cancel" class="btn btn-danger mt-2 me-3">Cancel</button>
-              <p class="text-muted mt-2">Note: Click on Cancel Button after you change the voice. Then start again.</p>
-            </div>
+        
+        {% if post.audio_url %}
+        <div class="row mt-2 mb-2">
+          <div class="col-md-6 mb-1">
+            <h4>Listen to the post</h4>
+          </div>
+          <div class="col-md-6">
+            <audio controls>
+              <source src="{{post.audio_url}}" type="audio/wav">
+            </audio>
           </div>
         </div>
-      </div>
+        {% endif %}
         <div id="toc" class="mbtTOC">
           <button onclick="mbtToggle()">Table of Contents</button>
           <ol id="mbtTOC"></ol>
@@ -357,7 +351,6 @@
 </section>
 {% endblock content %} {% block js_down %}
 <script src="{% static 'js/single_post.js' %}"></script>
-<script src="{% static 'js/tts.js' %}"></script>
 <script>
   $(".post-content-body img").addClass("img-fluid");
 </script>
