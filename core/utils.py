@@ -14,8 +14,8 @@ def convert_to_audio(post):
     content = strip_tags(html.unescape(post.content))
     voice = voicerss_tts.speech({
         'key': config("VOICERSS_API"),
-        'hl': 'en-in',
-        'v': 'Ajit',
+        'hl': 'en-us',
+        'v': 'Mike',
         'src': content,
         'r': '0',
         'c': 'mp3',
