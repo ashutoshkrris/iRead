@@ -174,6 +174,20 @@
     text-transform: uppercase;
   }
   
+  .card-img {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+  }
+
+  .card-img-overlay {
+    border-radius: 10px;
+  }
+
+  .card-title {
+    margin-bottom: 0.3rem;
+    font-size: 16px;
+    word-break: break-word;
+  }
 
 </style>
 {% endblock js_up %}
@@ -412,43 +426,40 @@
                 })();
             </script>
             <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-          </div>
-      </div>
+        </div>
+        {% if related_posts|length > 0 %}
 
-      {% include "partials/sidebar.html" %} {% if related_posts|length > 0 %}
-
-      <section class="py-5">
-        <div class="container">
+        <div class="container py-4 px-4 mt-5" style="background-color: #f2f5f7;">
           <div class="row">
             <div class="col-md-12">
-              <h2 class="mb-3">Related Posts</h2>
+              <h2 class="mb-3" style="color: #4d3e50; font-weight: 700;">Related Posts</h2>
             </div>
           </div>
           <div class="row">
             {% for post in related_posts %}
 
-            <div class="col-md-6 col-lg-4">
-              <a
-                href="{% url 'single' post.id post.slug %}"
-                class="a-block sm d-flex align-items-center height-md"
-                style="background-image: url('{{post.thumbnail.url}}');"
-              >
-                <div class="text">
-                  <div class="post-meta">
-                    <span class="category">{{post.categories.name}}</span>
-                    <span class="mr-2">{{post.timestamp|date:"F d Y"}} </span>
-                  </div>
-                  <h3>{{post.title}}</h3>
+            <div class="col-12 col-sm-8 col-md-6 col-lg-4 mb-4">
+            
+              <a href="{{post.get_absolute_url}}">
+                <div class="card">
+                <img class="card-img" src="{{post.thumbnail.url}}" alt="thumbnail">
+                <div class="card-body">
+                  <h4 class="card-title">{{post.title}}</h4>
+                  <small>{{post.timestamp|date:"F d, Y"}}
+                  </small>
                 </div>
-              </a>
+              </div>
+              </a>  
             </div>
 
             {% endfor %}
           </div>
         </div>
-      </section>
 
-      {% endif %}
+        {% endif %}
+      </div>
+
+      {% include "partials/sidebar.html" %}
       <!-- END section -->
     </div>
   </div>
