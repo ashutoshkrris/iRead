@@ -37,15 +37,15 @@ def tweet_this_series(modeladmin, request, queryset):
     for obj in queryset:
         tweet_series(obj)
 
-@admin.action(description="Save Audio")
-def save_audio(modeladmin, request, queryset):
-    for obj in queryset:
-        if not obj.audio_data:
-            try:
-                convert_to_audio(obj)
-            except Exception as e:
-                print(e)
-                pass
+# @admin.action(description="Save Audio")
+# def save_audio(modeladmin, request, queryset):
+#     for obj in queryset:
+#         if not obj.audio_data:
+#             try:
+#                 convert_to_audio(obj)
+#             except Exception as e:
+#                 print(e)
+#                 pass
 
 @admin.register(Post)
 class PostAdmin(ModelAdmin):
@@ -55,7 +55,7 @@ class PostAdmin(ModelAdmin):
     ordering = ('-timestamp',)
     readonly_fields = ('slug', 'views',)
     list_filter = ('categories', 'tags', 'published')
-    actions = [toggle_published, toggle_tweeted, tweet_this_post, save_audio]
+    actions = [toggle_published, toggle_tweeted, tweet_this_post,]
 
 
 @admin.register(Series)

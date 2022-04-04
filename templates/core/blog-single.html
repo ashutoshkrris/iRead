@@ -243,9 +243,9 @@
           <button onclick="mbtToggle()">Table of Contents</button>
           <ol id="mbtTOC"></ol>
         </div>
-        {% if post.audio_data %}
-        <div class="css-7kdauc"><div class="css-ddoyzk mb-2"><i class="fa fa-headphones" aria-hidden="true"></i><span style="text-transform: uppercase;">&nbsp;Listen to this article</span></div><div class="css-1fftg42"><audio controls="" controlslist="nodownload" class="css-12jyqtu"><source src="{{post.audio_data}}">Your browser does not support the audio element.</audio></div></div>
-        {% endif %}
+        <!-- {% if post.audio_data %} -->
+        <!-- <div class="css-7kdauc"><div class="css-ddoyzk mb-2"><i class="fa fa-headphones" aria-hidden="true"></i><span style="text-transform: uppercase;">&nbsp;Listen to this article</span></div><div class="css-1fftg42"><audio controls="" controlslist="nodownload" class="css-12jyqtu"><source src="{{post.audio_data}}">Your browser does not support the audio element.</audio></div></div> -->
+        <!-- {% endif %} -->
 
         <div class="post-content-body" id="post-toc">{{post.content|safe}}</div>
 
