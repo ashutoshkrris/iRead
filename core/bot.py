@@ -25,6 +25,8 @@ def tweet_new_post(post, tags):
     iread_bot = authenticate()
     try:
         author = f'@{post.author.social_links.twitter_username}'
+        if not author or author == '':
+            author = f'{post.author.get_full_name()}'
     except Exception:
         author = f'{post.author.get_full_name()}'
     tweet = f"'{post.title}' by {author} 😀: https://ireadblog.com{post.get_absolute_url()}"
@@ -45,6 +47,8 @@ def tweet_series(series):
     iread_bot = authenticate()
     try:
         author = f'@{series.user.social_links.twitter_username}'
+        if not author or author == '':
+            author = f'{series.user.get_full_name()}'
     except Exception:
         author = f'{series.user.get_full_name()}'
     tweet = f"'{series.name}' by {author} 😀 : https://ireadblog.com{series.get_absolute_url()}"
