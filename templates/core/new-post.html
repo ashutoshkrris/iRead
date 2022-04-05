@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row blog-entries">
             <div class="col-md-12 col-lg-8 main-content">
-                <form action="{% url 'new_post' %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'new_post' %}" method="post" enctype="multipart/form-data" onsubmit="window.localStorage.removeItem('content_newpost')">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-12 form-group">
@@ -132,13 +132,25 @@
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/plugin.js' %}"></script>
 <script>
-    CKEDITOR.replace('editor1', {
+    var editor = CKEDITOR.replace('editor1', {
       height: 500,
-      extraPlugins: 'filebrowser, codesnippet, markdown, wordcount, embed, autoembed, image2',
+      extraPlugins: 'filebrowser, codesnippet, markdown, wordcount, embed, autoembed, image',
       filebrowserBrowseUrl: '{% url "ckeditor_browse" %}',
       filebrowserUploadMethod: 'form',
       filebrowserUploadUrl: '{% url "ckeditor_upload" %}'
     });
+
+    // Handle change
+    $(function () {
+          var content = CKEDITOR.instances.editor1.getData();
+          editor.on("change", function(evt){
+              if(evt.editor.getData() != content){
+                content = evt.editor.getData();
+                localStorage.setItem("content_newpost", content);
+              }
+          })
+        })
+
   </script>
   <script>
     var element = document.getElementById("new_post")
@@ -150,5 +162,11 @@
         title: 'Tip',
         html: 'Use <strong>h1</strong> or <strong>h2</strong> for heading to auto-generate <strong>Table of Contents</strong>',
     })
+  </script>
+  <script>
+      var content = localStorage.getItem("content_newpost");
+        if (content) {
+            CKEDITOR.instances.editor1.setData(content);
+        }
   </script>
 {% endblock js_down %}

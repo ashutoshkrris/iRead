@@ -4,7 +4,7 @@
       <div class="container">
         <div class="row blog-entries">
             <div class="col-md-12 col-lg-8 main-content">
-                <form action="{% url 'update_post' post.id post.slug %}" method="post" enctype="multipart/form-data">
+                <form action="{% url 'update_post' post.id post.slug %}" method="post" enctype="multipart/form-data" onsubmit="window.localStorage.removeItem('updated_content')">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-12 form-group">
@@ -113,7 +113,6 @@
             tokenSeparators: [',', ' ']
         });
     })
-    console.log('{{post.tags.all|escapejs}}')
     let tagsArray = [];
     {% for tag in post.tags.all %}
     tagsArray.push('{{tag.name|escapejs}}');
@@ -145,13 +144,31 @@
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/plugin.js' %}"></script>
 <script>
-    CKEDITOR.replace('editor1', {
+    var editor = CKEDITOR.replace('editor1', {
       height: 500,
-      extraPlugins: 'filebrowser, codesnippet, markdown, wordcount, embed, autoembed, image2',
+      extraPlugins: 'filebrowser, codesnippet, markdown, wordcount, embed, autoembed, image',
       filebrowserBrowseUrl: '{% url "ckeditor_browse" %}',
       filebrowserUploadMethod: 'form',
       filebrowserUploadUrl: '{% url "ckeditor_upload" %}'
     });
-  </script>
 
+    // Handle change
+    $(function () {
+          var content = CKEDITOR.instances.editor1.getData();
+          editor.on("change", function(evt){
+              if(evt.editor.getData() != content){
+                content = evt.editor.getData();
+                localStorage.setItem("updated_content", content);
+              }
+          })
+        })
+
+  </script>
+<script>
+    var precontent = `{{post.content}}`;
+      var content = localStorage.getItem("updated_content");
+        if (content!==null && precontent!==content) {
+            CKEDITOR.instances.editor1.setData(content);
+        }
+  </script>
 {% endblock js_down %}
