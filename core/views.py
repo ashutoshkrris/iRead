@@ -17,6 +17,7 @@ from .bot import tweet_new_post
 from django.views import View
 from urllib.parse import urlparse
 from django.contrib.postgres.search import SearchVector
+from django.db.models import Count
 
 
 # Create your views here.
@@ -165,8 +166,12 @@ def single(request, post_id, slug):
         post = Post.objects.get(id=post_id, slug=slug)
         if not post.published and post.author.id != request.session.get('user_id'):
             raise Http404()
+        post_tags_ids = post.tags.values_list('id', flat=True)
         related_posts = Post.objects.filter(
-            Q(categories__name__icontains=post.categories)).exclude(id=post.id).distinct()[:3]
+            tags__in=post_tags_ids, published=True).exclude(id=post.id)
+        related_posts = related_posts.annotate(same_tags=Count(
+            'tags')).order_by('-same_tags', '-timestamp')[:3]
+        print(related_posts)
         post.views += 1
         post.save()
         if request.method == 'POST':
