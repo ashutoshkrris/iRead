@@ -171,7 +171,6 @@ def single(request, post_id, slug):
             tags__in=post_tags_ids, published=True).exclude(id=post.id)
         related_posts = related_posts.annotate(same_tags=Count(
             'tags')).order_by('-same_tags', '-timestamp')[:3]
-        print(related_posts)
         post.views += 1
         post.save()
         if request.method == 'POST':
