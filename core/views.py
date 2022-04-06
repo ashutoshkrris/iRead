@@ -220,7 +220,7 @@ def single(request, post_id, slug):
             post_original_url = urlparse(post.canonical_url).netloc
             context['post_original_url'] = post_original_url
         return render(request, "core/blog-single.html", context)
-    except Exception as e:
+    except Post.DoesNotExist:
         raise Http404()
 
 

@@ -15,6 +15,9 @@
         <a href="{% url 'profile' post.author.username %}" class="btn btn-primary btn-sm rounded"
           >Read my bio</a
         >
+        {% if post.author.social_links.buymeacoffee_url %}
+        <a href="{{post.author.social_links.buymeacoffee_url}}" class="btn btn-primary btn-sm rounded" target="_blank">Sponsor</a>
+        {% endif %}
       </p>
       <p class="social">
           {% if post.author.social_links.facebook_url %}
