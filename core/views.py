@@ -117,7 +117,7 @@ def category(request, category_slug):
 def series(request, series_id, series_slug):
     try:
         series = Series.objects.filter(id=series_id, slug=series_slug).first()
-        posts = series.posts.all()
+        posts = series.posts.filter(published=True)
         if len(posts) > 3:
             all_posts = Paginator(posts, 8)
             page = request.GET.get('page', 1)
@@ -150,8 +150,10 @@ def series(request, series_id, series_slug):
 def single(request, post_id, slug):
     posts = Post.objects.filter(published=True)
     series = None
+    series_posts = None
     try:
         series = Series.objects.filter(posts__id=post_id).first()
+        series_posts = series.posts.filter(published=True)
     except Exception:
         pass
     liked = []
@@ -210,6 +212,7 @@ def single(request, post_id, slug):
             'post': post,
             'meta_keywords': tags_text,
             'series': series,
+            'series_posts': series_posts,
             'related_posts': related_posts,
             'comments': comments,
             'liked_posts': liked,

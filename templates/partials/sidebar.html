@@ -5,12 +5,12 @@
 
   {% if 'posts' in request.path %} {% include "partials/author.html" %} {% endif %}
 
-  {% if series %}
+  {% if series_posts %}
   <div class="sidebar-box">
     <h3 class="heading">More From This Series</h3>
     <div class="post-entry-sidebar">
       <div class="list-group" style="height: 300px; overflow-y: scroll">
-        {% for ser_post in series.posts.all %}
+        {% for ser_post in series_posts %}
 
         {% if post.id == ser_post.id %}
         <a href="{{ser_post.get_absolute_url}}" class="list-group-item list-group-item-action active disabled" aria-disabled="true" aria-current="true">
