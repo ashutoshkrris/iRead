@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Introduction to Data Structures and Algorithms](http://ireadblog.com/posts/162/introduction-to-data-structures-and-algorithms)
 - [How to unpack Python list or tuple the better way?](http://ireadblog.com/posts/161/how-to-unpack-python-list-or-tuple-the-better-way)
 - [Python Rich is getting richer](http://ireadblog.com/posts/160/python-rich-is-getting-richer)
 - [Getting Started With PysonDB](http://ireadblog.com/posts/159/getting-started-with-pysondb)
 - [bool&lpar;&rpar; function in Python](http://ireadblog.com/posts/158/bool-function-in-python)
-- [Update - PDF Tools and Download Slides as PPTX](http://ireadblog.com/posts/157/update-pdf-tools-and-download-slides-as-pptx)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
