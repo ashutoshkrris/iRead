@@ -62,10 +62,10 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 
 <!-- BLOG-POST-LIST:START -->
 - [What are Lists in Python?](http://ireadblog.com/posts/164/what-are-lists-in-python)
+- [breakpoint&lpar;&rpar; function in Python](http://ireadblog.com/posts/163/breakpoint-function-in-python)
 - [Introduction to Data Structures and Algorithms](http://ireadblog.com/posts/162/introduction-to-data-structures-and-algorithms)
 - [How to unpack Python list or tuple the better way?](http://ireadblog.com/posts/161/how-to-unpack-python-list-or-tuple-the-better-way)
 - [Python Rich is getting richer](http://ireadblog.com/posts/160/python-rich-is-getting-richer)
-- [Getting Started With PysonDB](http://ireadblog.com/posts/159/getting-started-with-pysondb)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
