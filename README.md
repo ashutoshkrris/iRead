@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [bytearray&lpar;&rpar; function in Python](http://ireadblog.com/posts/168/bytearray-function-in-python)
 - [Who Are The Top Richest Persons Around The World?](http://ireadblog.com/posts/167/who-are-the-top-richest-persons-around-the-world)
 - [COVID-19 Analysis](http://ireadblog.com/posts/166/covid-19-analysis)
 - [Guess The Number Game using Python](http://ireadblog.com/posts/165/guess-the-number-game-using-python)
 - [What are Lists in Python?](http://ireadblog.com/posts/164/what-are-lists-in-python)
-- [breakpoint&lpar;&rpar; function in Python](http://ireadblog.com/posts/163/breakpoint-function-in-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
