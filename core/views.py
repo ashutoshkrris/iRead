@@ -18,6 +18,11 @@ from django.views import View
 from urllib.parse import urlparse
 from django.contrib.postgres.search import SearchVector
 from django.db.models import Count
+from decouple import config
+
+
+RECAPTCHA_SITE_KEY = config('RECAPTCHA_SITE_KEY', default=None)
+RECAPTCHA_SECRET_KEY = config('RECAPTCHA_SECRET_KEY', default=None)
 
 
 # Create your views here.
@@ -55,12 +60,26 @@ def about(request):
     return render(request, "core/about.html", {"title": "About"})
 
 
+def is_human(captcha_response):
+    """ Validating recaptcha response from google server
+        Returns True captcha test passed for submitted form else returns False.
+    """
+    payload = {'response': captcha_response, 'secret': RECAPTCHA_SECRET_KEY}
+    response = requests.post(
+        "https://www.google.com/recaptcha/api/siteverify", payload).json()
+    return response['success']
+
+
 def contact(request):
     if request.method == "POST":
         name = request.POST.get('name')
         email = request.POST.get('email')
         subject = request.POST.get('subject')
         message = request.POST.get('message')
+        captcha_response = request.POST.get('g-recaptcha-response')
+
+        if not is_human(captcha_response):
+            return render(request, "core/contact.html", {'error': "Bots are not allowed.😡", "title": "Contact Us"})
         new_contact = Contact(name=name, email=email,
                               subject=subject, message=message)
         new_contact.save()
