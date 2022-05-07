@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Docker For Production Build](http://ireadblog.com/posts/171/docker-for-production-build)
 - [Guido&#39;s Gorgeous Lasagna](http://ireadblog.com/posts/170/guidos-gorgeous-lasagna)
 - [Create a Dapp with ReactJS, Ethers and Solidity](http://ireadblog.com/posts/169/create-a-dapp-with-reactjs-ethers-and-solidity)
 - [bytearray&lpar;&rpar; function in Python](http://ireadblog.com/posts/168/bytearray-function-in-python)
 - [Who Are The Top Richest Persons Around The World?](http://ireadblog.com/posts/167/who-are-the-top-richest-persons-around-the-world)
-- [COVID-19 Analysis](http://ireadblog.com/posts/166/covid-19-analysis)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
