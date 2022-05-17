@@ -1,3 +1,4 @@
+import smtplib
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 from django.core.mail import EmailMultiAlternatives
@@ -10,8 +11,10 @@ class EmailThread(threading.Thread):
         threading.Thread.__init__(self)
 
     def run(self):
-        self.email.send()
-
+        try:
+            self.email.send()
+        except smtplib.SMTPDataError:
+            pass
 
 def send_custom_email(receiver_email, subject, sender_email, sender_name, template_name, **kwargs):
     html_content = render_to_string(f"emails/{template_name}", kwargs)
