@@ -57,7 +57,7 @@ py==1.10.0
 pycodestyle==2.6.0
 pycparser==2.21
 pycryptodome==3.14.1
-PyJWT==2.3.0
+PyJWT==2.4.0
 pyparsing==3.0.7
 pyquery==1.4.3
 PySocks==1.7.1
