@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Stack Data Structure in Python](http://ireadblog.com/posts/178/stack-data-structure-in-python)
 - [How to check Balanced Brackets using Python](http://ireadblog.com/posts/177/how-to-check-balanced-brackets-using-python)
 - [Currency Exchange](http://ireadblog.com/posts/176/currency-exchange)
 - [How to use Ternary Operator in Python?](http://ireadblog.com/posts/175/how-to-use-ternary-operator-in-python)
 - [Ghost Gobble Arcade Game](http://ireadblog.com/posts/174/ghost-gobble-arcade-game)
-- [Find Vulnerabilities using Snyk](http://ireadblog.com/posts/173/find-vulnerabilities-using-snyk)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
