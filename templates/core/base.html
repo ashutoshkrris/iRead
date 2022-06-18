@@ -11,6 +11,8 @@
     {% if meta_post %}
       {% if post.canonical_url %}
       <link rel="canonical" href="{{post.canonical_url}}" />
+      {% else %}
+      <link rel="canonical" href="https://ireadblog.com{{post.get_absolute_url}}" />
       {% endif %}
       <meta name="title" content="{{post.title}} | iRead" />
       <meta name="description" content="{{post.seo_overview}}" />
