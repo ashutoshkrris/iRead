@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Meltdown Mitigation](http://ireadblog.com/posts/184/meltdown-mitigation)
 - [Introduction to FastAPI](http://ireadblog.com/posts/182/introduction-to-fastapi)
 - [Python for everyone: Mastering Python the Right Way](http://ireadblog.com/posts/180/python-for-everyone-mastering-python-the-right-way)
 - [Stack Data Structure in Python](http://ireadblog.com/posts/178/stack-data-structure-in-python)
 - [How to check Balanced Brackets using Python](http://ireadblog.com/posts/177/how-to-check-balanced-brackets-using-python)
-- [Currency Exchange](http://ireadblog.com/posts/176/currency-exchange)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
