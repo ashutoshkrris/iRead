@@ -5,7 +5,7 @@
       <div class="container">
         <div class="row blog-entries">
             <div class="col-md-12 col-lg-8 main-content">
-                <form action="{% url 'update_post' post.id post.slug %}" method="post" enctype="multipart/form-data" onsubmit="window.localStorage.removeItem('updated_content')">
+                <form action="{% url 'update_post' post.id post.slug %}" method="post" enctype="multipart/form-data" onsubmit=clearUpdatedContent>
                     {% csrf_token %}
                     <div class="row">
                         <div class="col-md-12 form-group">
@@ -145,6 +145,7 @@
 <script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/plugin.js' %}"></script>
 <script>
+    var postId = `{{post.id}}`
     var editor = CKEDITOR.replace('editor1', {
       height: 500,
       extraPlugins: 'filebrowser, codesnippet, markdown, wordcount, embed, autoembed, image',
@@ -159,7 +160,7 @@
           editor.on("change", function(evt){
               if(evt.editor.getData() != content){
                 content = evt.editor.getData();
-                localStorage.setItem("updated_content", content);
+                localStorage.setItem(`updated_content_${postId}`, content);
               }
           })
         })
@@ -167,9 +168,14 @@
   </script>
 <script>
     var precontent = `{{post.content}}`;
-      var content = localStorage.getItem("updated_content");
+    var postId = `{{post.id}}`
+      var content = localStorage.getItem(`updated_content_${postId}`);
         if (content!==null && precontent!==content) {
             CKEDITOR.instances.editor1.setData(content);
         }
+
+    function clearUpdatedContent() {
+        window.localStorage.removeItem(`updated_content_${postId}`)
+    }
   </script>
 {% endblock js_down %}
