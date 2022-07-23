@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Virtusa Interview Experience | On campus](http://ireadblog.com/posts/190/virtusa-interview-experience-on-campus)
+- [TCS NQT Interview Experience 2022](http://ireadblog.com/posts/189/tcs-nqt-interview-experience-2022)
 - [Introduction to C++](http://ireadblog.com/posts/188/introduction-to-c)
 - [Introduction to Linked Lists](http://ireadblog.com/posts/187/introduction-to-linked-lists)
 - [bytes&lpar;&rpar; function in Python](http://ireadblog.com/posts/186/bytes-function-in-python)
-- [How to convert Decimal Integer to Binary in Python?](http://ireadblog.com/posts/185/how-to-convert-decimal-integer-to-binary-in-python)
-- [Meltdown Mitigation](http://ireadblog.com/posts/184/meltdown-mitigation)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
