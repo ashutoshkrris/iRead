@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [callable&lpar;&rpar; function in Python](http://ireadblog.com/posts/224/callable-function-in-python)
 - [How to Improve Productivity in Customer Support with AI](http://ireadblog.com/posts/191/how-to-improve-productivity-in-customer-support-with-ai)
 - [Virtusa Interview Experience | On campus](http://ireadblog.com/posts/190/virtusa-interview-experience-on-campus)
 - [TCS NQT Interview Experience 2022](http://ireadblog.com/posts/189/tcs-nqt-interview-experience-2022)
 - [Introduction to C++](http://ireadblog.com/posts/188/introduction-to-c)
-- [Introduction to Linked Lists](http://ireadblog.com/posts/187/introduction-to-linked-lists)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
