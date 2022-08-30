@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Use DMI PDDM PDF Questions For Better Preparation](http://ireadblog.com/posts/229/use-dmi-pddm-pdf-questions-for-better-preparation)
 - [VMware VCAP-DCV 3V0-21.21 Practice Test - To Gain Brilliant Result &lpar;2022&rpar;](http://ireadblog.com/posts/228/vmware-vcap-dcv-3v0-2121-practice-test-to-gain-brilliant-result-2022)
 - [How To Succeed In VMware vSphere 6.7 Foundations 2019 2V0-01.19 Exam](http://ireadblog.com/posts/227/how-to-succeed-in-vmware-vsphere-67-foundations-2019-2v0-0119-exam)
 - [How Studying For The Fortinet NSE 4 - FortiOS 6.4 NSE4_FGT-6.4 Exam Can Help You In Your Career](http://ireadblog.com/posts/226/how-studying-for-the-fortinet-nse-4-fortios-64-nse4_fgt-64-exam-can-help-you-in-your-career)
 - [How to send automatic birthday wishes on WhatsApp?](http://ireadblog.com/posts/225/how-to-send-automatic-birthday-wishes-on-whatsapp)
-- [callable&lpar;&rpar; function in Python](http://ireadblog.com/posts/224/callable-function-in-python)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
