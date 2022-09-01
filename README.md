@@ -63,9 +63,9 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 <!-- BLOG-POST-LIST:START -->
 - [Why PRINCE2-Foundation Questions Better in PRINCE2-Foundation Exam Preparation?](http://ireadblog.com/posts/243/why-prince2-foundation-questions-better-in-prince2-foundation-exam-preparation)
 - [Use PMI-ACP PDF Questions To Prepare Well For Exam](http://ireadblog.com/posts/242/use-pmi-acp-pdf-questions-to-prepare-well-for-exam)
-- [Real SAP C_HCMOD_02 PDF Dumps Will Lead you to prepare for the Exam [LabourDay-2022]](http://ireadblog.com/posts/241/real-sap-c_hcmod_02-pdf-dumps-will-lead-you-to-prepare-for-the-exam-labourday-2022)
-- [Pass SAP C_HANAIMP_18 Exam In First Attempt [LabourDay-2022]](http://ireadblog.com/posts/240/pass-sap-c_hanaimp_18-exam-in-first-attempt-labourday-2022)
-- [SAP C_LCNC_01 PDF Dumps - Pass In First Attempt [LabourDay-2022]](http://ireadblog.com/posts/239/sap-c_lcnc_01-pdf-dumps-pass-in-first-attempt-labourday-2022)
+- [Prepare Exam With Real Huawei H13-629_V2.0 PDF Questions](http://ireadblog.com/posts/230/prepare-exam-with-real-huawei-h13-629_v20-pdf-questions)
+- [Use DMI PDDM PDF Questions For Better Preparation](http://ireadblog.com/posts/229/use-dmi-pddm-pdf-questions-for-better-preparation)
+- [VMware VCAP-DCV 3V0-21.21 Practice Test - To Gain Brilliant Result &lpar;2022&rpar;](http://ireadblog.com/posts/228/vmware-vcap-dcv-3v0-2121-practice-test-to-gain-brilliant-result-2022)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
