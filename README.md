@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Get Hitachi Vantara HQT-4120 PDF Question 2022 From P2PExams](http://ireadblog.com/posts/244/get-hitachi-vantara-hqt-4120-pdf-question-2022-from-p2pexams)
 - [Why PRINCE2-Foundation Questions Better in PRINCE2-Foundation Exam Preparation?](http://ireadblog.com/posts/243/why-prince2-foundation-questions-better-in-prince2-foundation-exam-preparation)
 - [Use PMI-ACP PDF Questions To Prepare Well For Exam](http://ireadblog.com/posts/242/use-pmi-acp-pdf-questions-to-prepare-well-for-exam)
 - [Prepare Exam With Real Huawei H13-629_V2.0 PDF Questions](http://ireadblog.com/posts/230/prepare-exam-with-real-huawei-h13-629_v20-pdf-questions)
 - [Use DMI PDDM PDF Questions For Better Preparation](http://ireadblog.com/posts/229/use-dmi-pddm-pdf-questions-for-better-preparation)
-- [VMware VCAP-DCV 3V0-21.21 Practice Test - To Gain Brilliant Result &lpar;2022&rpar;](http://ireadblog.com/posts/228/vmware-vcap-dcv-3v0-2121-practice-test-to-gain-brilliant-result-2022)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
