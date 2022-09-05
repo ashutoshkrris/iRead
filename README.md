@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [CloudBees CCJE PDF Questions - Perpare Well To Take Exam](http://ireadblog.com/posts/247/cloudbees-ccje-pdf-questions-perpare-well-to-take-exam)
 - [Prepare with Arcitura Education S90.05A PDF Question 2022](http://ireadblog.com/posts/246/prepare-with-arcitura-education-s9005a-pdf-question-2022)
 - [Why PRINCE2-Foundation Questions Better in PRINCE2-Foundation Exam Preparation?](http://ireadblog.com/posts/243/why-prince2-foundation-questions-better-in-prince2-foundation-exam-preparation)
 - [Use PMI-ACP PDF Questions To Prepare Well For Exam](http://ireadblog.com/posts/242/use-pmi-acp-pdf-questions-to-prepare-well-for-exam)
 - [Use DMI PDDM PDF Questions For Better Preparation](http://ireadblog.com/posts/229/use-dmi-pddm-pdf-questions-for-better-preparation)
-- [VMware VCAP-DCV 3V0-21.21 Practice Test - To Gain Brilliant Result &lpar;2022&rpar;](http://ireadblog.com/posts/228/vmware-vcap-dcv-3v0-2121-practice-test-to-gain-brilliant-result-2022)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
