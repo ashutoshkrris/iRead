@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Go With CIMA CIMAPRA19-F01-1 PDF Questions [2022] For Instant Success](http://ireadblog.com/posts/250/go-with-cima-cimapra19-f01-1-pdf-questions-2022-for-instant-success)
 - [Microsoft AZ-800 Exam Questions - Free Updates &amp; 100% Accurate [2022]](http://ireadblog.com/posts/249/microsoft-az-800-exam-questions-free-updates-100-accurate-2022)
 - [Prepare with Arcitura Education C90.06 PDF Question [2022]-Quick Study Tips](http://ireadblog.com/posts/248/prepare-with-arcitura-education-c9006-pdf-question-2022-quick-study-tips)
 - [CloudBees CCJE PDF Questions - Perpare Well To Take Exam](http://ireadblog.com/posts/247/cloudbees-ccje-pdf-questions-perpare-well-to-take-exam)
 - [Prepare with Arcitura Education S90.05A PDF Question 2022](http://ireadblog.com/posts/246/prepare-with-arcitura-education-s9005a-pdf-question-2022)
-- [Why PRINCE2-Foundation Questions Better in PRINCE2-Foundation Exam Preparation?](http://ireadblog.com/posts/243/why-prince2-foundation-questions-better-in-prince2-foundation-exam-preparation)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
