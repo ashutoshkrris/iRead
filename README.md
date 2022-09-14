@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [HCIE-Storage V2.5 Certification H13-629_V2.5 Dumps](http://ireadblog.com/posts/294/hcie-storage-v25-certification-h13-629_v25-dumps)
+- [Fortinet NSE 6 - FortiWeb 6.4 NSE6_FWB-6.4 Dumps](http://ireadblog.com/posts/293/fortinet-nse-6-fortiweb-64-nse6_fwb-64-dumps)
 - [Actual SAP C_TS422_2020 PDF Questions - Forget About Failure](http://ireadblog.com/posts/292/actual-sap-c_ts422_2020-pdf-questions-forget-about-failure)
 - [iSQI CTFL-PT PDF Questions [2022]-Tips To Pass](http://ireadblog.com/posts/259/isqi-ctfl-pt-pdf-questions-2022-tips-to-pass)
 - [HPE Compute Solutions HPE0-S59 Dumps](http://ireadblog.com/posts/258/hpe-compute-solutions-hpe0-s59-dumps)
-- [Newly H35-480_V3.0-ENU HCIA-5G-RAN V3.0 Exam Questions](http://ireadblog.com/posts/257/newly-h35-480_v30-enu-hcia-5g-ran-v30-exam-questions)
-- [CompTIA A+ Core 2 220-1102 Questions and Answers](http://ireadblog.com/posts/256/comptia-a-core-2-220-1102-questions-and-answers)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
