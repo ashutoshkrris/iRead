@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Best Tips To Get The Certified Fraud Examiner &lpar;CFE&rpar; Certification](http://ireadblog.com/posts/296/best-tips-to-get-the-certified-fraud-examiner-cfe-certification)
+- [Salesforce Certified Sharing and Visibility Architect Dumps](http://ireadblog.com/posts/295/salesforce-certified-sharing-and-visibility-architect-dumps)
 - [HCIE-Storage V2.5 Certification H13-629_V2.5 Dumps](http://ireadblog.com/posts/294/hcie-storage-v25-certification-h13-629_v25-dumps)
 - [Fortinet NSE 6 - FortiWeb 6.4 NSE6_FWB-6.4 Dumps](http://ireadblog.com/posts/293/fortinet-nse-6-fortiweb-64-nse6_fwb-64-dumps)
 - [Actual SAP C_TS422_2020 PDF Questions - Forget About Failure](http://ireadblog.com/posts/292/actual-sap-c_ts422_2020-pdf-questions-forget-about-failure)
-- [iSQI CTFL-PT PDF Questions [2022]-Tips To Pass](http://ireadblog.com/posts/259/isqi-ctfl-pt-pdf-questions-2022-tips-to-pass)
-- [HPE Compute Solutions HPE0-S59 Dumps](http://ireadblog.com/posts/258/hpe-compute-solutions-hpe0-s59-dumps)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
