@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [CCSE R81 156-315.81 Practice Test Questions](http://ireadblog.com/posts/299/ccse-r81-156-31581-practice-test-questions)
 - [What Happened to Art of Zoo Meaning Urban Dictionary](http://ireadblog.com/posts/298/what-happened-to-art-of-zoo-meaning-urban-dictionary)
 - [An Information Discussion About Dogelon Mars Price Prediction 2030](http://ireadblog.com/posts/297/an-information-discussion-about-dogelon-mars-price-prediction-2030)
 - [Best Tips To Get The Certified Fraud Examiner &lpar;CFE&rpar; Certification](http://ireadblog.com/posts/296/best-tips-to-get-the-certified-fraud-examiner-cfe-certification)
 - [Salesforce Certified Sharing and Visibility Architect Dumps](http://ireadblog.com/posts/295/salesforce-certified-sharing-and-visibility-architect-dumps)
-- [HCIE-Storage V2.5 Certification H13-629_V2.5 Dumps](http://ireadblog.com/posts/294/hcie-storage-v25-certification-h13-629_v25-dumps)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
