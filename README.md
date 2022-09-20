@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Pass Microsoft AZ-303 Exam with Microsoft SK0-005 Dumps PDF](http://ireadblog.com/posts/318/pass-microsoft-az-303-exam-with-microsoft-sk0-005-dumps-pdf)
-- [Approved Microsoft AZ-220 Exam Questions with Latest Dumps Guide](http://ireadblog.com/posts/317/approved-microsoft-az-220-exam-questions-with-latest-dumps-guide)
-- [Dumps New Microsoft AZ-140 PDF Questions 2022](http://ireadblog.com/posts/316/dumps-new-microsoft-az-140-pdf-questions-2022)
-- [Authentic Microsoft AZ-120 Dumps PDF – Get Good Marks in Exam](http://ireadblog.com/posts/315/authentic-microsoft-az-120-dumps-pdf-get-good-marks-in-exam)
-- [New Microsoft AZ-104 &lpar;2022&rpar; Dumps Questions Answers](http://ireadblog.com/posts/314/new-microsoft-az-104-2022-dumps-questions-answers)
+- [New Microsoft MB-240 PDF &lpar;2022&rpar; Dumps Questions Answers](http://ireadblog.com/posts/342/new-microsoft-mb-240-pdf-2022-dumps-questions-answers)
+- [Approved Microsoft MB-230 Exam Questions with Latest Dumps Guide](http://ireadblog.com/posts/341/approved-microsoft-mb-230-exam-questions-with-latest-dumps-guide)
+- [Dumps New Microsoft MB-220 PDF Questions 2022](http://ireadblog.com/posts/340/dumps-new-microsoft-mb-220-pdf-questions-2022)
+- [Microsoft MB-210 PDF Dumps - Realize Your Dream with Less Effort](http://ireadblog.com/posts/339/microsoft-mb-210-pdf-dumps-realize-your-dream-with-less-effort)
+- [Approved Microsoft DP-900 Exam Questions with Latest Dumps Guide](http://ireadblog.com/posts/338/approved-microsoft-dp-900-exam-questions-with-latest-dumps-guide)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
