@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [New Adobe 9A0-408 Dumps PDF is Available &lpar;2022&rpar;](http://ireadblog.com/posts/305/new-adobe-9a0-408-dumps-pdf-is-available-2022)
-- [New Adobe 9A0-407  dumps PDF](http://ireadblog.com/posts/304/new-adobe-9a0-407-dumps-pdf)
-- [Adobe 9A0-406 dumps PDF Questions and Answers](http://ireadblog.com/posts/303/adobe-9a0-406-dumps-pdf-questions-and-answers)
-- [Latest Adobe 9A0-405 dumps PDF Questions](http://ireadblog.com/posts/302/latest-adobe-9a0-405-dumps-pdf-questions)
-- [Download Adobe 9A0-095 dumps PDF](http://ireadblog.com/posts/301/download-adobe-9a0-095-dumps-pdf)
+- [Pass Microsoft AZ-303 Exam with Microsoft SK0-005 Dumps PDF](http://ireadblog.com/posts/318/pass-microsoft-az-303-exam-with-microsoft-sk0-005-dumps-pdf)
+- [Approved Microsoft AZ-220 Exam Questions with Latest Dumps Guide](http://ireadblog.com/posts/317/approved-microsoft-az-220-exam-questions-with-latest-dumps-guide)
+- [Dumps New Microsoft AZ-140 PDF Questions 2022](http://ireadblog.com/posts/316/dumps-new-microsoft-az-140-pdf-questions-2022)
+- [Authentic Microsoft AZ-120 Dumps PDF – Get Good Marks in Exam](http://ireadblog.com/posts/315/authentic-microsoft-az-120-dumps-pdf-get-good-marks-in-exam)
+- [New Microsoft AZ-104 &lpar;2022&rpar; Dumps Questions Answers](http://ireadblog.com/posts/314/new-microsoft-az-104-2022-dumps-questions-answers)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
