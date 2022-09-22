@@ -19,7 +19,7 @@ def tags(request):
 
 
 def all_series(request):
-    series = Series.objects.all()
+    series = Series.objects.all().order_by('-date_updated')
     return {'all_series': series}
 
 
