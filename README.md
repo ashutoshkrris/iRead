@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Can you test positive for covid from the vaccine?](http://ireadblog.com/posts/353/can-you-test-positive-for-covid-from-the-vaccine)
 - [chr&lpar;&rpar; function in Python](http://ireadblog.com/posts/319/chr-function-in-python)
 - [FastAPI Headers implementation](http://ireadblog.com/posts/255/fastapi-headers-implementation)
 - [How to send automatic birthday wishes on WhatsApp?](http://ireadblog.com/posts/225/how-to-send-automatic-birthday-wishes-on-whatsapp)
 - [callable&lpar;&rpar; function in Python](http://ireadblog.com/posts/224/callable-function-in-python)
-- [How to Improve Productivity in Customer Support with AI](http://ireadblog.com/posts/191/how-to-improve-productivity-in-customer-support-with-ai)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
