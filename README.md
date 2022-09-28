@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [American College HS330 PDF Questions [2022]-Tips To Pass](http://ireadblog.com/posts/357/american-college-hs330-pdf-questions-2022-tips-to-pass)
 - [Newly Released CompTIA Linux+ XK0-005 Study Guide](http://ireadblog.com/posts/356/newly-released-comptia-linux-xk0-005-study-guide)
 - [Aruba Certified Switching Professional Exam HPE6-A73 Dumps](http://ireadblog.com/posts/355/aruba-certified-switching-professional-exam-hpe6-a73-dumps)
 - [chr&lpar;&rpar; function in Python](http://ireadblog.com/posts/319/chr-function-in-python)
 - [FastAPI Headers implementation](http://ireadblog.com/posts/255/fastapi-headers-implementation)
-- [How to send automatic birthday wishes on WhatsApp?](http://ireadblog.com/posts/225/how-to-send-automatic-birthday-wishes-on-whatsapp)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
