@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
+- [Real Exin TMPTE PDF Questions [2022]-The Greatest Shortcut Towards Success](http://ireadblog.com/posts/361/real-exin-tmpte-pdf-questions-2022-the-greatest-shortcut-towards-success)
 - [Black Jack - Exercism Solution](http://ireadblog.com/posts/360/black-jack-exercism-solution)
 - [Prepare with MuleSoft MCD-Assoc PDF Questions [2022]-Best Preparation Materials](http://ireadblog.com/posts/359/prepare-with-mulesoft-mcd-assoc-pdf-questions-2022-best-preparation-materials)
 - [Statistically Proven Ways to Improve Your Website Conversion Rate](http://ireadblog.com/posts/358/statistically-proven-ways-to-improve-your-website-conversion-rate)
 - [American College HS330 PDF Questions [2022]-Tips To Pass](http://ireadblog.com/posts/357/american-college-hs330-pdf-questions-2022-tips-to-pass)
-- [Newly Released CompTIA Linux+ XK0-005 Study Guide](http://ireadblog.com/posts/356/newly-released-comptia-linux-xk0-005-study-guide)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
