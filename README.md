@@ -61,11 +61,11 @@ And additional requirements are in [**requirements.txt**](https://github.com/ash
 ## Latest Posts
 
 <!-- BLOG-POST-LIST:START -->
-- [Delta - Building HPE Hybrid IT Solutions HPE0-V15 Dumps](http://ireadblog.com/posts/362/delta-building-hpe-hybrid-it-solutions-hpe0-v15-dumps)
-- [Real Exin TMPTE PDF Questions [2022]-The Greatest Shortcut Towards Success](http://ireadblog.com/posts/361/real-exin-tmpte-pdf-questions-2022-the-greatest-shortcut-towards-success)
 - [Black Jack - Exercism Solution](http://ireadblog.com/posts/360/black-jack-exercism-solution)
-- [Prepare with MuleSoft MCD-Assoc PDF Questions [2022]-Best Preparation Materials](http://ireadblog.com/posts/359/prepare-with-mulesoft-mcd-assoc-pdf-questions-2022-best-preparation-materials)
 - [Statistically Proven Ways to Improve Your Website Conversion Rate](http://ireadblog.com/posts/358/statistically-proven-ways-to-improve-your-website-conversion-rate)
+- [chr&lpar;&rpar; function in Python](http://ireadblog.com/posts/319/chr-function-in-python)
+- [FastAPI Headers implementation](http://ireadblog.com/posts/255/fastapi-headers-implementation)
+- [How to send automatic birthday wishes on WhatsApp?](http://ireadblog.com/posts/225/how-to-send-automatic-birthday-wishes-on-whatsapp)
 <!-- BLOG-POST-LIST:END -->
 
 ## API Documentation
