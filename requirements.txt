@@ -9,7 +9,7 @@
 asgiref==3.5.2; python_version >= '3.7'
 async-timeout==4.0.2; python_version >= '3.6'
 beautifulsoup4==4.11.1; python_version >= '3.6'
-certifi==2022.9.14; python_version >= '3.6'
+certifi==2023.7.22; python_version >= '3.6'
 cffi==1.15.1
 charset-normalizer==2.1.1; python_version >= '3.6'
 cloudinary==1.30.0
