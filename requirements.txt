@@ -49,6 +49,6 @@ soupsieve==2.3.2.post1; python_version >= '3.6'
 sqlparse==0.4.2; python_version >= '3.5'
 tweepy==4.10.1
 tzdata==2022.2; sys_platform == 'win32'
-urllib3==1.26.12; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_version < '4'
+urllib3==1.26.17; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4, 3.5' and python_version < '4'
 whitenoise==6.2.0
 wrapt==1.14.1; python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3, 3.4'
