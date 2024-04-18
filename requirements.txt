@@ -23,7 +23,7 @@ django-cors-headers==3.13.0
 django-js-asset==2.0.0; python_version >= '3.6'
 django-redis==5.2.0
 django==4.1.1
-gunicorn==20.1.0
+gunicorn==22.0.0
 idna==3.4; python_version >= '3.5'
 lxml==4.9.1
 markdown2==2.4.3; python_version >= '3.5' and python_version < '4'
